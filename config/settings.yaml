@@ -1,0 +1,35 @@
+# ============================================================
+# 股票篩選設定
+# ============================================================
+screener:
+  mode: "mixed"               # auto / manual / mixed
+
+  auto:
+    market: "twse"
+    min_market_cap_billion: 500
+    min_avg_volume_thousand: 500
+    exclude_etf: true
+    exclude_sectors: []
+    limit: 20
+    sort_by: "market_cap"
+
+  manual_add:
+    - "1301"                  # 台塑（測試用）
+
+  manual_exclude: []
+
+# ============================================================
+# 資料下載設定
+# ============================================================
+download:
+  start_date: "2010-01-01"
+  end_date: "today"
+  batch_size: 10
+  sleep_seconds: 3
+  max_retries: 3              # API 請求失敗時的重試次數
+
+# ============================================================
+# 輸出設定
+# ============================================================
+output:
+  log_level: "INFO"

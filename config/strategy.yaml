@@ -1,0 +1,107 @@
+# ============================================================
+# 策略系統設定（v1）
+# 由 Opus 設計、Sonnet 實作。所有 magic number 集中在此。
+# 參數來源依據見 docs/SPEC_strategy_system.md
+# ============================================================
+
+# ── 共用：成本模型 ─────────────────────────────────────────
+fees:
+  buy_commission_rate: 0.001425    # 買進手續費率
+  sell_commission_rate: 0.001425   # 賣出手續費率
+  sell_tax_rate: 0.003             # 賣方證交稅
+  min_commission: 20               # 最低手續費 NT$
+  slippage_rate: 0.003             # 買賣各 0.3% 滑價
+
+# ── 共用：Regime Detection ──────────────────────────────
+regime:
+  market_proxy: "0050"             # 大盤代理
+  ma_long: 200
+  ma_short: 50
+
+# ── 風格 1：趨勢過濾 + 回檔進場 ──────────────────────────
+style1_pullback:
+  # 趨勢過濾
+  ma_long: 200
+  ma_short: 50
+
+  # 回檔判斷
+  rsi_period: 14
+  rsi_oversold: 40                  # RSI < 40 視為回檔
+  bollinger_period: 20
+  bollinger_k: 2.0
+
+  # 量能門檻
+  volume_ma_period: 20
+  volume_min_ratio: 0.8             # Volume > MA20 × 0.8
+
+  # 出場
+  atr_period: 14
+  atr_stop_k: 2.5                   # ATR 移動停損係數
+  trend_break_days: 2               # Close < MA200 連續幾日才出場
+  rsi_overbought: 80
+  max_hold_days: 120                # 持倉超過 N 天且未獲利 → 出場
+
+# ── 風格 2：動量排序 + Top-N 配置（組合模式專用）────────
+style2_momentum:
+  lookback_months: 12               # 12月-1月動量
+  skip_recent_months: 1
+  top_n: 5                          # 持有前 N 檔
+  rebalance_freq: "monthly"         # monthly / weekly
+  weight_method: "equal"            # equal weight 等權
+  cash_reserve_pct: 0.20            # P0-8：保留 20% 現金緩衝
+
+# ── 回測引擎 ─────────────────────────────────────────────
+backtest:
+  start_date: "2010-01-01"          # 預設回測起點（含 2010-2016 OOS 段，更多樣本）
+  end_date: "today"
+  initial_capital_signal: 30000     # Takeshi 訊號模式預設
+  initial_capital_portfolio: 100000 # Katie 組合模式預設
+  max_position_pct: 0.25            # 單檔最高佔比
+  execution_lag_days: 1             # T+1 成交
+
+# ── 分批出場（scaling-out） ──────────────────────────────
+# P0：把贏家騎更久、輸家分批出，降低 MaxDD
+# enabled: false → 走原本 BUY/SELL 全進全出邏輯（A/B 對比用）
+scaling:
+  enabled: false                    # AUTO_ITER: 關閉 P0 scaling（dumb % thresholds 摧毀強策略）
+  pattern: "P2_scale_out"           # 目前只支援 P2_scale_out，預留欄位
+  P2_scale_out:
+    legs:
+      - profit_pct: 0.10            # 漲 10% 出原始部位的 1/3
+        sell_fraction: 0.333        # 持倉的 33.3%
+      - profit_pct: 0.20            # 漲 20% 再出原始部位的 1/3
+        sell_fraction: 0.500        # 剩餘 2/3 的一半 = 原始 1/3
+    trailing:
+      method: "chandelier"          # high - k * ATR
+      atr_period: 22
+      atr_mult: 3.0
+    sell_signal_mode: "exit_all"    # 一般 SELL 訊號 → 剩餘部位全出
+
+# ── 評價門檻（單股層） ───────────────────────────────────
+eval_per_stock:
+  min_trades: 10                    # 樣本不足不給結論
+  min_profit_factor: 1.5
+  min_expectancy: 0                 # 期望值 > 0
+  max_drawdown: 0.30                # ≤ 30%
+
+# ── 評價門檻（組合層） ───────────────────────────────────
+eval_portfolio:
+  benchmark: "0050"
+  min_alpha: 0                      # 至少打平 0050
+  max_drawdown: 0.30
+  min_sharpe: 0.5
+
+# ── 報表 ─────────────────────────────────────────────────
+reports:
+  output_dir: "output/reports"
+  backtest_dir: "output/backtest"
+  date_format: "%Y-%m-%d"
+
+# ── 帳戶與起始資金（依名稱對應 watchlists.yaml） ────────
+accounts:
+  Takeshi:
+    mode: "signal"                  # signal / portfolio
+    initial_capital: 30000
+  Katie:
+    mode: "portfolio"
+    initial_capital: 100000

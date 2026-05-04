@@ -1,0 +1,23 @@
+# 台股個股策略系統 — Python 相依套件
+#
+# 安裝方式：
+#   pip install -r requirements.txt
+#
+# 推薦 Python 版本：3.11 或 3.12
+
+# 資料處理
+pandas>=2.0
+numpy>=1.24
+
+# YAML config
+PyYAML>=6.0
+
+# 日期工具
+python-dateutil>=2.8
+
+# 網路抓取（TWSE / TPEX / FinMind）
+requests>=2.31
+urllib3>=1.26
+
+# 參數優化（auto_iterate / optimize 才用，每日 update 不需要）
+optuna>=3.4

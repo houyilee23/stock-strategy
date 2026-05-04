@@ -1,0 +1,113 @@
+# 台股個股策略系統
+
+## 環境
+
+**家裡 PC（D:\stock，目前位置）**：Python 3.13.13 from Microsoft Store，已在 PATH 中。
+直接用 `python` 即可，不需指定絕對路徑（Microsoft Store Python 路徑含版本 hash 不穩定）。
+
+**公司 PC（C:\TronFuture\lee\stock）舊設定（保留供參）**：
+```
+C:\Users\houyi.lee\AppData\Local\anaconda3\python.exe
+```
+
+注意：Python 3.13 比 requirements.txt 推薦的 3.11/3.12 新，少數套件版本相容性需注意（特別是 optuna）。
+
+**執行指令請用 Bash 工具，不要用 PowerShell 工具**：
+- Bash 工具在 Windows 走 Git Bash，不會觸發 Windows 安全確認
+- PowerShell 每次新指令都會跳確認鈕，干擾自動化
+- 路徑用 forward slash 或單引號包覆 backslash 即可
+- 範例：`'C:/Users/houyi.lee/AppData/Local/anaconda3/python.exe' main.py signals --list Takeshi`
+
+## 專案定位
+
+雙模式策略系統：訊號模式（Takeshi 用，每股給進出建議）+ 組合模式（Katie 用，top-N 配置）。
+目標：7~10 年年化打贏 0050，MaxDD ≤ 30%。
+
+## CLI 入口
+
+```
+python main.py screen | fetch | fetch-adjusted | fetch-revenue | update
+              | positions [list/history/open/close]
+              | signals | backtest | evaluate | optimize | auto_iterate
+```
+完整用法：`python main.py --help`
+
+## 每日自動更新（家裡 PC）
+
+`scripts/daily_update.bat` 是排程入口。流程：
+```
+[1] git pull                            ← Phase B 才啟用
+[2] update --all                        ← fetch raw + adjusted
+[3] signals --list Takeshi/Katie/research
+[4] build_per_stock_reports.py          ← 產 output/reports/per_stock/{sid}.md
+[5] update_readme.py                    ← 產 README.md（手機 GitHub App 入口）
+[6] build_html.py                       ← 產 docs/index.html + docs/stock/*.html（GitHub Pages 手機 web UI）
+[7] git add commit push                 ← Phase B 才啟用
+```
+
+**Phase A vs Phase B 的差異**：
+- Phase A：本地端跑 update + 產報告，**不 push GitHub**（手機暫時看不到，PC 本機可看 docs/index.html）
+- Phase B：取消 daily_update.bat 中 [1] 與 [7] 的 REM 註解，加上 GitHub Pages 設定，手機就能看 `houyilee23.github.io/stock-strategy`
+
+## 重要文件
+
+### 設計規格（不要動，主要參考）
+- `docs/SPEC_strategy_system.md` — 設計規格（single source of truth）
+- `docs/SONNET_BUILD_PLAN.md` — 實作四階段計畫 + 自我驗證
+- `docs/CHECKPOINTS.md` — Opus 審查節點
+
+### 遷移與部署
+- `docs/MIGRATION_GUIDE.md` — 從公司 PC 搬到家裡 PC + Windows 排程器設定 + GitHub Pages 啟用
+- `docs/SESSION_HANDOFF_2026-05-04.md` — 5/4 整理 + web UI 那輪 session 的紀要（家裡 PC 第一次 Claude session 必讀）
+- `docs/TODO_RETRAIN.md` — **待辦**：重訓 auto_iterate 用 2010+ 完整資料，重評 Tier
+- `docs/TODO_AUDIT_TEMPLATES.md` — **待辦（先做這個）**：限價單機制下 audit 其他 templates 是否反勝目前 best
+- `docs/LIMIT_ORDER_V0_1.md` — 限價單機制設計與實作（5/4 完成 7 templates）
+
+### 配置
+- `config/strategy.yaml` — 所有策略參數（不要 hardcode 數值）
+- `config/per_stock_recommendations.yaml` — auto_iterate 產出的每檔最佳 template + tier
+- `config/watchlists.yaml` — **個人觀察清單（gitignore，公開 repo 中不存在）**
+- `config/watchlists.example.yaml` — 範本，家裡 PC 第一次設定要 copy 一份
+
+## 重要約束
+
+1. **時間防穿越**：所有訊號只能用 T 日及之前資料；成交在 T+1 開盤
+2. **不引入回測框架**（vectorbt/backtrader/zipline）— 用 pandas 自刻
+3. **參數集中** `config/strategy.yaml`，禁止 hardcode magic number
+4. **錯誤落** `output/errors/{date}.csv`（用 `src/utils.log_error()`），不要 silent fail
+5. **CSV 編碼** 一律 `utf-8-sig`
+6. **敏感資料 gitignore**：`watchlists.yaml`、`trades_*.csv`、`positions_snapshot_*.csv` 已被 .gitignore 排除，**不要嘗試把它們加進 git**
+
+## 報告輸出結構
+
+```
+output/reports/
+├── latest/                          ← 永遠最新的訊號（README + web UI 讀這裡）
+│   └── signals_{account}.md
+├── 2026/05/                         ← 歷史歸檔（年/月）
+│   └── 04_signals_{account}.md
+└── per_stock/                       ← 個股回測 markdown（手機 GitHub App 點進去看）
+    └── {sid}.md
+
+docs/                                ← GitHub Pages 入口（手機 web UI）
+├── index.html                       ← 主頁（3 帳戶 tab + 訊號表 + 搜尋 + 排序）
+└── stock/
+    └── {sid}.html                   ← 個股頁（多時段績效 + 年度交易 + 最近 10 筆）
+```
+
+## 過往 bug 警告（必讀）
+
+詳見 `~/.claude/projects/C--TronFuture-lee-stock/memory/bugs_fixed.md`，重點：
+- ADX 計算：`wilder()` 不能用在最終 ADX 平滑（用 EMA 即可），否則值會 ~14× 放大
+- Risk/Reward 用 entry 價而非 close 價
+- 日期字串比較：`"today"` 字串不能直接和 `"YYYYMMDD"` 比
+- **fetcher 增量更新漏洞（2026-05-04 修）**：`get_missing_months()` 對歷史月份只看「該月是否有任何一天的資料」，會漏抓月底；現已加入「本地最後一筆所在月份」也納入 missing
+
+## 使用者偏好
+
+- 繁體中文回應
+- 終端輸出簡潔，不要冗長 log
+- 不會自動下單，所有訊號是給人手動執行
+- watchlist 會擴張，但靠手動加，不要自動篩
+- print 含 unicode 符號（✓/✗/✅）→ 在 Windows cp950 console 會壞，腳本要 `sys.stdout.reconfigure(encoding="utf-8")`
+- markdown / HTML 表頭的 CJK 字元寬度問題：用 `unicodedata.east_asian_width` 算 padding，不要靠 Python `:<6` 字元數

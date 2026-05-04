@@ -1,0 +1,37 @@
+# ============================================================
+# 關注清單範本（範例）
+#
+# 使用方式：
+#   1. 複製此檔為 watchlists.yaml（git 不會追蹤 watchlists.yaml）
+#   2. 編輯 watchlists.yaml，填入自己的清單
+#
+# 格式說明：
+# ── 個人帳戶清單（名稱對應 config/strategy.yaml 的 accounts 鍵）──
+#   python main.py signals --list Takeshi
+#   python main.py optimize --list Katie --trials 300
+#   python main.py backtest --list Takeshi
+# ── research：研究用清單，不是真實帳戶 ──
+# ── exception：資料有問題的代號，--all 時絕對排除 ──
+# ============================================================
+
+# 範例個人帳戶 1
+Takeshi:
+  - "2330"   # 台積電
+  - "2317"   # 鴻海
+  - "0050"   # 元大台灣50
+
+# 範例個人帳戶 2
+Katie:
+  - "2412"   # 中華電
+  - "0056"   # 元大高股息
+
+# 研究用清單（觀察名單，未必持有）
+research:
+  - "2454"   # 聯發科
+  - "2308"   # 台達電
+  - "0050"   # 元大台灣50
+
+# 排除清單（資料有問題或不想列入 --all 範圍）
+exception:
+  - "3227"   # 原相（TPEX 資料問題）
+  - "3323"   # 加百裕（TPEX 資料問題）

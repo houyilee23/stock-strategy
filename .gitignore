@@ -1,0 +1,64 @@
+# =====================================================
+# 敏感個人資料（個人持倉、watchlist、快照）— 包含任何路徑
+# =====================================================
+config/watchlists.yaml
+**/trades_*.csv
+**/positions_*.csv
+**/positions_snapshot_*.csv
+trash/
+**/*.xlsx
+**/*.xls
+
+# Claude Code IDE/工作目錄狀態（含舊 PC 路徑、PID lock 等）
+.claude/
+
+# =====================================================
+# Python / IDE 自動產物
+# =====================================================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.venv/
+venv/
+env/
+.env
+
+# =====================================================
+# 日誌（每天累積，不適合 git 追蹤；保留本機）
+# =====================================================
+logs/
+output/logs/
+output/errors/
+
+# =====================================================
+# Backtest / Optimize 暫存產物（每次跑會重新生成）
+# =====================================================
+output/backtest/per_stock_*.csv
+output/backtest/portfolio_*.csv
+output/backtest/equity_*.csv
+output/backtest/*_summary.md
+output/optimize/*/
+
+# Auto-iterate 中間 runs（只保留 merged_*）
+output/auto_iterate/[0-9]*/
+
+# 其他散落 CSV 中間產物
+output/portfolio_backtest_*.csv
+output/signals_phase2_check.csv
+
+# =====================================================
+# IDE 設定 / OS 雜訊
+# =====================================================
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
