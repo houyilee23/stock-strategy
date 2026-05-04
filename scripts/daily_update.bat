@@ -2,14 +2,12 @@
 REM ============================================================
 REM 台股個股策略系統 — 每日自動更新
 REM
-REM 目前模式：Phase A（本地自動更新，不 push GitHub）
-REM   ↓ 跑 1~2 週驗證穩定後可切到 Phase B
-REM Phase B 切換方式：
-REM   把下面標 [Phase B] 的兩段 REM 註解拿掉即可
+REM 目前模式：Phase B（本地自動更新 + 推送 GitHub）
+REM   切回 Phase A：把下面 git pull / git commit-push 兩段加 REM 註解
 REM ============================================================
 REM
 REM 工作排程器設定：
-REM   觸發程序：每天 21:00
+REM   觸發程序：每天 18:00（盤後資料穩定後 + 晚餐前）
 REM   動作：執行此 .bat
 REM   條件：勾「啟動工作以喚醒電腦」
 REM
@@ -42,10 +40,9 @@ echo ============================================================ >> "%LOG%"
 echo  Daily update %DATE% %TIME% >> "%LOG%"
 echo ============================================================ >> "%LOG%"
 
-REM ---- Step 1 [Phase B]: git pull ----
-REM 取消下三行註解以啟用 Phase B
-REM echo [1/7] git pull >> "%LOG%"
-REM git pull --rebase --autostash >> "%LOG%" 2>&1
+REM ---- Step 1: git pull ----
+echo [1/7] git pull >> "%LOG%"
+git pull --rebase --autostash >> "%LOG%" 2>&1
 
 REM ---- Step 2: fetch raw + adjusted ----
 echo [2/7] update --all >> "%LOG%"
@@ -69,18 +66,17 @@ REM ---- Step 6: Web UI (HTML for mobile) ----
 echo [6/7] build_html >> "%LOG%"
 "%PYTHON%" scripts\build_html.py >> "%LOG%" 2>&1
 
-REM ---- Step 7 [Phase B]: git commit + push ----
-REM 取消下方 IF 區塊註解以啟用 Phase B
-REM echo [7/7] git commit + push >> "%LOG%"
-REM git add -A >> "%LOG%" 2>&1
-REM git diff --cached --quiet
-REM if errorlevel 1 (
-REM     git commit -m "daily update %TODAY%" >> "%LOG%" 2>&1
-REM     git push >> "%LOG%" 2>&1
-REM     echo committed and pushed >> "%LOG%"
-REM ) else (
-REM     echo no changes to commit >> "%LOG%"
-REM )
+REM ---- Step 7: git commit + push ----
+echo [7/7] git commit + push >> "%LOG%"
+git add -A >> "%LOG%" 2>&1
+git diff --cached --quiet
+if errorlevel 1 (
+    git commit -m "daily update %TODAY%" >> "%LOG%" 2>&1
+    git push >> "%LOG%" 2>&1
+    echo committed and pushed >> "%LOG%"
+) else (
+    echo no changes to commit >> "%LOG%"
+)
 
 echo Done at %TIME% >> "%LOG%"
 endlocal

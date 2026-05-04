@@ -1,0 +1,458 @@
+benchmark_0050:
+  test_cagr: 0.26994592362493
+  train_cagr: 0.10703765388070008
+generated_at: '2026-05-05T02:33:16.812526'
+per_stock:
+  '1301':
+    best_params:
+      atr_stop_k: 4.0
+      donchian_entry_n: 55
+      donchian_exit_n: 20
+      trend_ma: 100
+      volume_min_ratio: 0.75
+    test:
+      alpha_vs_0050: -0.38657307239904626
+      alpha_vs_bnh: -0.03345254525748609
+      avg_loss: -0.05233149999185886
+      avg_win: 0.011192871947916823
+      bnh_cagr: -0.0831746035166302
+      cagr: -0.11662714877411628
+      expectancy: -0.04703780233021088
+      max_drawdown: -0.5095253692065935
+      n_trades: 12
+      profit_factor: 0.022185808229185696
+      win_rate: 0.08333333333333333
+    train:
+      avg_loss: -0.03515534542999106
+      avg_win: 0.06598085747084109
+      bnh_cagr: 0.08439555579135627
+      cagr: 0.009661707432699007
+      expectancy: 0.0023025074962430697
+      max_drawdown: -0.3247641364909715
+      n_trades: 27
+      profit_factor: 0.9823893734184691
+      win_rate: 0.37037037037037035
+    verdict: DD_BREACH
+  '1303':
+    best_params:
+      atr_stop_k: 4.0
+      donchian_entry_n: 20
+      donchian_exit_n: 55
+      trend_ma: 50
+      volume_min_ratio: 0.75
+    test:
+      alpha_vs_0050: -0.23465218561855616
+      alpha_vs_bnh: -0.046254663467462764
+      avg_loss: -0.06970291781988878
+      avg_win: 0.16051159254051386
+      bnh_cagr: 0.08154840147383657
+      cagr: 0.03529373800637381
+      expectancy: 0.022382886324272273
+      max_drawdown: -0.509647727177421
+      n_trades: 15
+      profit_factor: 1.3997326025461696
+      win_rate: 0.4
+    train:
+      avg_loss: -0.0339754777738224
+      avg_win: 0.06402348884729173
+      bnh_cagr: 0.06619495872392123
+      cagr: 0.04782673036987806
+      expectancy: 0.016983984869156945
+      max_drawdown: -0.20823533282119625
+      n_trades: 25
+      profit_factor: 1.897248597749151
+      win_rate: 0.52
+    verdict: DD_BREACH
+  '1326':
+    best_params:
+      atr_stop_k: 3.0
+      donchian_entry_n: 120
+      donchian_exit_n: 20
+      trend_ma: 100
+      volume_min_ratio: 1.0
+    test:
+      alpha_vs_0050: -0.363387518199505
+      alpha_vs_bnh: -0.02872720741736501
+      avg_loss: -0.052633616409156835
+      avg_win: 0.0
+      bnh_cagr: -0.06471438715721001
+      cagr: -0.09344159457457502
+      expectancy: -0.052633616409156835
+      max_drawdown: -0.43584198923143747
+      n_trades: 8
+      profit_factor: 0.0
+      win_rate: 0.0
+    train:
+      avg_loss: -0.030758455541012208
+      avg_win: 0.05948614558596296
+      bnh_cagr: 0.0703717061014133
+      cagr: 0.017893262293551704
+      expectancy: 0.01198898709808129
+      max_drawdown: -0.15213034756213284
+      n_trades: 19
+      profit_factor: 1.581196743277816
+      win_rate: 0.47368421052631576
+    verdict: DD_BREACH
+  '1809':
+    best_params:
+      atr_stop_k: 2.0
+      donchian_entry_n: 120
+      donchian_exit_n: 10
+      trend_ma: 200
+      volume_min_ratio: 0.5
+    test:
+      alpha_vs_0050: -0.34254107179400495
+      alpha_vs_bnh: -0.25292058619528746
+      avg_loss: -0.05065594943202073
+      avg_win: 0.07887705231048307
+      bnh_cagr: 0.18032543802621248
+      cagr: -0.07259514816907497
+      expectancy: -0.024749349083519973
+      max_drawdown: -0.41186609940549174
+      n_trades: 15
+      profit_factor: 0.37800901481601995
+      win_rate: 0.2
+    train:
+      avg_loss: -0.04389786592443326
+      avg_win: 0.07523401727230555
+      bnh_cagr: -0.028620867413228113
+      cagr: -0.001980297972609346
+      expectancy: 0.0007765902743437948
+      max_drawdown: -0.2414343486666183
+      n_trades: 16
+      profit_factor: 0.9455313744206901
+      win_rate: 0.375
+    verdict: DD_BREACH
+  '2002':
+    best_params:
+      atr_stop_k: 2.5
+      donchian_entry_n: 20
+      donchian_exit_n: 20
+      trend_ma: 50
+      volume_min_ratio: 1.25
+    test:
+      alpha_vs_0050: -0.40495995912062566
+      alpha_vs_bnh: -0.11370328320745215
+      avg_loss: -0.04597079645180919
+      avg_win: 0.02630390880862048
+      bnh_cagr: -0.02131075228824353
+      cagr: -0.13501403549569568
+      expectancy: -0.035645838557462096
+      max_drawdown: -0.5738506849467658
+      n_trades: 21
+      profit_factor: 0.06854328629867663
+      win_rate: 0.14285714285714285
+    train:
+      avg_loss: -0.024176619922467942
+      avg_win: 0.04015358899725174
+      bnh_cagr: 0.016312393471291653
+      cagr: -0.00043426245380651096
+      expectancy: 0.0012168835984740414
+      max_drawdown: -0.25582540602731896
+      n_trades: 38
+      profit_factor: 1.018662769035607
+      win_rate: 0.39473684210526316
+    verdict: DD_BREACH
+  '2337':
+    best_params:
+      atr_stop_k: 2.5
+      donchian_entry_n: 120
+      donchian_exit_n: 20
+      trend_ma: 50
+      volume_min_ratio: 0.5
+    test:
+      alpha_vs_0050: -0.2560639286894111
+      alpha_vs_bnh: -0.30932921247407497
+      avg_loss: -0.060483880189500856
+      avg_win: 0.16068287854941046
+      bnh_cagr: 0.32321120740959386
+      cagr: 0.013881994935518893
+      expectancy: 0.02798282330606367
+      max_drawdown: -0.25923270790917313
+      n_trades: 10
+      profit_factor: 1.6121793982753636
+      win_rate: 0.4
+    train:
+      avg_loss: -0.04795129327336306
+      avg_win: 0.11239572100740776
+      bnh_cagr: 0.04934164422994747
+      cagr: 0.06034582718068471
+      expectancy: 0.03603999992132642
+      max_drawdown: -0.27329463863846126
+      n_trades: 21
+      profit_factor: 2.46975622680964
+      win_rate: 0.5238095238095238
+    verdict: WEAK
+  '2369':
+    best_params:
+      atr_stop_k: 4.0
+      donchian_entry_n: 55
+      donchian_exit_n: 20
+      trend_ma: 50
+      volume_min_ratio: 1.0
+    test:
+      alpha_vs_0050: -0.2642963318439948
+      alpha_vs_bnh: -0.17648457874552181
+      avg_loss: -0.08076911265242749
+      avg_win: 0.13826980512148815
+      bnh_cagr: 0.18213417052645697
+      cagr: 0.005649591780935159
+      expectancy: 0.010497103086704034
+      max_drawdown: -0.4496507203636101
+      n_trades: 12
+      profit_factor: 1.047673379864302
+      win_rate: 0.4166666666666667
+    train:
+      avg_loss: -0.04666716216942309
+      avg_win: 0.07109895420304667
+      bnh_cagr: 0.02811442125859176
+      cagr: 0.0005070326498259892
+      expectancy: -0.003843119852161358
+      max_drawdown: -0.4206475439631726
+      n_trades: 22
+      profit_factor: 0.824296249243616
+      win_rate: 0.36363636363636365
+    verdict: DD_BREACH
+  '2382':
+    best_params:
+      atr_stop_k: 3.5
+      donchian_entry_n: 120
+      donchian_exit_n: 20
+      trend_ma: 50
+      volume_min_ratio: 1.25
+    test:
+      alpha_vs_0050: -0.31794643133427714
+      alpha_vs_bnh: -0.4122069666253595
+      avg_loss: -0.06199714994120833
+      avg_win: 0.040254236408800076
+      bnh_cagr: 0.36420645891601233
+      cagr: -0.04800050770934716
+      expectancy: -0.02791335449120553
+      max_drawdown: -0.34279482462724226
+      n_trades: 9
+      profit_factor: 0.3355045911868241
+      win_rate: 0.3333333333333333
+    train:
+      avg_loss: -0.04014101097969407
+      avg_win: 0.04923257386158985
+      bnh_cagr: 0.0673774472096429
+      cagr: 0.0006563318543424401
+      expectancy: 0.0019171465926748343
+      max_drawdown: -0.3067195865945534
+      n_trades: 17
+      profit_factor: 1.0190573233828384
+      win_rate: 0.47058823529411764
+    verdict: DD_BREACH
+  '2408':
+    best_params:
+      atr_stop_k: 3.0
+      donchian_entry_n: 55
+      donchian_exit_n: 10
+      trend_ma: 100
+      volume_min_ratio: 1.0
+    test:
+      alpha_vs_0050: -0.18963502680309197
+      alpha_vs_bnh: -0.14318343474720985
+      avg_loss: -0.062334631871770387
+      avg_win: 0.2010075713239697
+      bnh_cagr: 0.22349433156904785
+      cagr: 0.08031089682183801
+      expectancy: 0.034686179831923326
+      max_drawdown: -0.47109127636869724
+      n_trades: 19
+      profit_factor: 1.8739822765241017
+      win_rate: 0.3684210526315789
+    train:
+      avg_loss: -0.052760979165268666
+      avg_win: 0.15900257101509885
+      bnh_cagr: -0.08382900255146764
+      cagr: 0.10971559846270784
+      expectancy: 0.05312079592491509
+      max_drawdown: -0.25659295479591965
+      n_trades: 26
+      profit_factor: 2.352674092486613
+      win_rate: 0.5
+    verdict: DD_BREACH
+  '3189':
+    best_params:
+      atr_stop_k: 3.0
+      donchian_entry_n: 120
+      donchian_exit_n: 10
+      trend_ma: 100
+      volume_min_ratio: 0.75
+    test:
+      alpha_vs_0050: -0.13706441365800348
+      alpha_vs_bnh: -0.3086834396429452
+      avg_loss: -0.06544260790601909
+      avg_win: 0.3218973517941565
+      bnh_cagr: 0.4415649496098717
+      cagr: 0.1328815099669265
+      expectancy: 0.06367071199403943
+      max_drawdown: -0.33440526776915297
+      n_trades: 12
+      profit_factor: 1.9187197492831694
+      win_rate: 0.3333333333333333
+    train:
+      avg_loss: -0.052984598122613226
+      avg_win: 0.050499971968333154
+      bnh_cagr: 0.03226040432149557
+      cagr: -0.009939081522057691
+      expectancy: -0.003965591237428102
+      max_drawdown: -0.28452378299726677
+      n_trades: 19
+      profit_factor: 0.8029851626795949
+      win_rate: 0.47368421052631576
+    verdict: DD_BREACH
+  '4958':
+    best_params:
+      atr_stop_k: 3.0
+      donchian_entry_n: 55
+      donchian_exit_n: 55
+      trend_ma: 200
+      volume_min_ratio: 1.5
+    test:
+      alpha_vs_0050: -0.144065712660008
+      alpha_vs_bnh: -0.20068759823251003
+      avg_loss: -0.05721397838834373
+      avg_win: 0.3310185000953598
+      bnh_cagr: 0.326567809197432
+      cagr: 0.12588021096492197
+      expectancy: 0.007491434692273528
+      max_drawdown: -0.3312934800977394
+      n_trades: 12
+      profit_factor: 0.8732263084336268
+      win_rate: 0.16666666666666666
+    train:
+      avg_loss: -0.05480404831211313
+      avg_win: 0.06918546881445363
+      bnh_cagr: 0.14926876971718883
+      cagr: 0.0025308235119192446
+      expectancy: 0.0039278282215237485
+      max_drawdown: -0.32480876973455036
+      n_trades: 19
+      profit_factor: 1.0406245061145114
+      win_rate: 0.47368421052631576
+    verdict: DD_BREACH
+  '6271':
+    best_params:
+      atr_stop_k: 4.0
+      donchian_entry_n: 120
+      donchian_exit_n: 20
+      trend_ma: 50
+      volume_min_ratio: 1.0
+    test:
+      alpha_vs_0050: -0.38230230725670533
+      alpha_vs_bnh: -0.16355371816859532
+      avg_loss: -0.0675178967034065
+      avg_win: 0.0
+      bnh_cagr: 0.05119733453681996
+      cagr: -0.11235638363177536
+      expectancy: -0.0675178967034065
+      max_drawdown: -0.49027663981109315
+      n_trades: 9
+      profit_factor: 0.0
+      win_rate: 0.0
+    train:
+      avg_loss: -0.05356835776936944
+      avg_win: 0.0638028122665018
+      bnh_cagr: 0.06735944404649707
+      cagr: -0.027363711790048817
+      expectancy: -0.014444634424079034
+      max_drawdown: -0.37762470865199504
+      n_trades: 18
+      profit_factor: 0.5741310956281299
+      win_rate: 0.3333333333333333
+    verdict: DD_BREACH
+  '6505':
+    best_params:
+      atr_stop_k: 2.5
+      donchian_entry_n: 55
+      donchian_exit_n: 20
+      trend_ma: 100
+      volume_min_ratio: 1.25
+    test:
+      alpha_vs_0050: -0.35282341663727124
+      alpha_vs_bnh: 0.00728704771480726
+      avg_loss: -0.05079414772724139
+      avg_win: 0.005143365254443635
+      bnh_cagr: -0.09016454072714852
+      cagr: -0.08287749301234126
+      expectancy: -0.04062369082148048
+      max_drawdown: -0.38723561535990875
+      n_trades: 11
+      profit_factor: 0.017801071858672784
+      win_rate: 0.18181818181818182
+    train:
+      avg_loss: -0.042473834856182315
+      avg_win: 0.04143528467533576
+      bnh_cagr: 0.05359993715780664
+      cagr: -0.01581531332590791
+      expectancy: -0.005180892842174281
+      max_drawdown: -0.277539495292609
+      n_trades: 27
+      profit_factor: 0.7417307085852688
+      win_rate: 0.4444444444444444
+    verdict: DD_BREACH
+  '6770':
+    best_params:
+      atr_stop_k: 3.5
+      donchian_entry_n: 55
+      donchian_exit_n: 10
+      trend_ma: 100
+      volume_min_ratio: 0.5
+    test:
+      alpha_vs_0050: -0.2089022473360893
+      alpha_vs_bnh: 0.12818154258692493
+      avg_loss: -0.06720776393038048
+      avg_win: 0.5093410823494636
+      bnh_cagr: -0.06713786629808427
+      cagr: 0.061043676288840665
+      expectancy: 0.048102005325588344
+      max_drawdown: -0.44005167625994335
+      n_trades: 10
+      profit_factor: 1.6951367508586779
+      win_rate: 0.2
+    train:
+      avg_loss: 0.0
+      avg_win: 0.0
+      bnh_cagr: null
+      cagr: null
+      expectancy: null
+      max_drawdown: null
+      n_trades: 0
+      profit_factor: null
+      win_rate: null
+    verdict: DD_BREACH
+  '8046':
+    best_params:
+      atr_stop_k: 3.5
+      donchian_entry_n: 120
+      donchian_exit_n: 20
+      trend_ma: 200
+      volume_min_ratio: 1.25
+    test:
+      alpha_vs_0050: 0.03842365714482332
+      alpha_vs_bnh: -0.0777511130729367
+      avg_loss: -0.05507595657068659
+      avg_win: 0.2526774478963852
+      bnh_cagr: 0.38612069384269
+      cagr: 0.3083695807697533
+      expectancy: 0.13726992122123327
+      max_drawdown: -0.30796198575776107
+      n_trades: 8
+      profit_factor: 7.1771809287790695
+      win_rate: 0.625
+    train:
+      avg_loss: -0.06047912066979149
+      avg_win: 0.11179758498010857
+      bnh_cagr: 0.05809503849180797
+      cagr: 0.012841682558894618
+      expectancy: 0.019033205014777774
+      max_drawdown: -0.3285441944723822
+      n_trades: 13
+      profit_factor: 1.3792768538759557
+      win_rate: 0.46153846153846156
+    verdict: DD_BREACH
+template: donchian_breakout
+test_period: 2021-01-01~2026-05-04
+train_period: 2010-01-01~2020-12-31
