@@ -8,8 +8,8 @@
 - output/auto_iterate/merged_*/{template}.yaml ← 各檔 best_params
 
 輸出：
-- docs/index.html                             ← 首頁（3 帳戶 tab + 訊號表）
-- docs/stock/{sid}.html                       ← 個股頁
+- /index.html                             ← 首頁（3 帳戶 tab + 訊號表）
+- /stock/{sid}.html                       ← 個股頁
 - docs/_data.json                             ← 嵌入資料（debug 用，主要寫進 HTML）
 
 設計：
@@ -46,8 +46,13 @@ from src.strategy.runner import (
 from src.strategy.backtest.engine import Backtester, BacktestConfig
 from src.strategy.auto_iterate.templates import TEMPLATE_GENERATORS
 
-DOCS_DIR = os.path.join(BASE_DIR, "docs")
-DOCS_STOCK_DIR = os.path.join(DOCS_DIR, "stock")
+# Web UI 寫到 repo 根目錄（GitHub Pages source = /）
+# docs/ 保留給 markdown 文件（給人或 Claude 看）
+WEB_DIR = BASE_DIR
+WEB_STOCK_DIR = os.path.join(WEB_DIR, "stock")
+# 舊變數名相容（避免 build 過程中其他地方仍然引用）
+DOCS_DIR = WEB_DIR
+DOCS_STOCK_DIR = WEB_STOCK_DIR
 TODAY = date.today().strftime("%Y-%m-%d")
 
 
@@ -338,7 +343,7 @@ def cell_rsi(rsi_str: str) -> str:
 
 
 def render_index_html(accounts_data: dict) -> str:
-    """產 docs/index.html
+    """產 /index.html
 
     accounts_data = {
        "Takeshi": [{"sid":"1301", "name":"台塑", "close":"51.5", "action":"HOLD",
@@ -567,7 +572,7 @@ def fmt_num(x, fmt=".1f", suffix=""):
 def render_stock_html(sid: str, name: str, rec: dict,
                        res, bnh_close,
                        bench_returns: dict) -> str:
-    """產 docs/stock/{sid}.html"""
+    """產 /stock/{sid}.html"""
     # 多時段績效
     strat_returns = trailing_returns_strategy(res.equity_curve) if res else {}
     bnh_returns = trailing_returns_close(bnh_close) if bnh_close is not None else {}
@@ -743,11 +748,11 @@ def main():
         accounts_data[acc] = std_rows
 
     # 1. 寫首頁
-    print("產生首頁 docs/index.html ...")
+    print("產生首頁 /index.html ...")
     idx_html = render_index_html(accounts_data)
     with open(os.path.join(DOCS_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(idx_html)
-    print(f"  ✓ docs/index.html ({len(idx_html)//1024} KB)")
+    print(f"  ✓ /index.html ({len(idx_html)//1024} KB)")
 
     # 2. 收集所有需要產個股頁的股票
     if args.stocks:
