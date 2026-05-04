@@ -23,10 +23,10 @@ echo ============================================================ >> "%LOG%"
 echo  Post-retrain %DATE% %TIME% >> "%LOG%"
 echo ============================================================ >> "%LOG%"
 
-echo [1/5] signals (Takeshi / Katie / research) >> "%LOG%"
+echo [1/5] signals (Takeshi / Katie / universe) >> "%LOG%"
 "%PYTHON%" main.py signals --list Takeshi  >> "%LOG%" 2>&1
 "%PYTHON%" main.py signals --list Katie    >> "%LOG%" 2>&1
-"%PYTHON%" main.py signals --list research >> "%LOG%" 2>&1
+"%PYTHON%" main.py signals --list universe >> "%LOG%" 2>&1
 
 echo [2/5] build_per_stock_reports >> "%LOG%"
 "%PYTHON%" scripts\build_per_stock_reports.py >> "%LOG%" 2>&1

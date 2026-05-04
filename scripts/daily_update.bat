@@ -52,10 +52,10 @@ echo [2/7] update --all >> "%LOG%"
 "%PYTHON%" main.py update --all >> "%LOG%" 2>&1
 
 REM ---- Step 3: signals 各帳戶 ----
-echo [3/7] signals (Takeshi / Katie / research) >> "%LOG%"
+echo [3/7] signals (Takeshi / Katie / universe) >> "%LOG%"
 "%PYTHON%" main.py signals --list Takeshi  >> "%LOG%" 2>&1
 "%PYTHON%" main.py signals --list Katie    >> "%LOG%" 2>&1
-"%PYTHON%" main.py signals --list research >> "%LOG%" 2>&1
+"%PYTHON%" main.py signals --list universe >> "%LOG%" 2>&1
 
 REM ---- Step 4: per_stock backtest reports (Markdown) ----
 echo [4/7] build_per_stock_reports >> "%LOG%"

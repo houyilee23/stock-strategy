@@ -38,7 +38,7 @@ python main.py screen | fetch | fetch-adjusted | fetch-revenue | update
 ```
 [1] git pull                            ← Phase B 才啟用
 [2] update --all                        ← fetch raw + adjusted
-[3] signals --list Takeshi/Katie/research
+[3] signals --list Takeshi/Katie/universe
 [4] build_per_stock_reports.py          ← 產 output/reports/per_stock/{sid}.md
 [5] update_readme.py                    ← 產 README.md（手機 GitHub App 入口）
 [6] build_html.py                       ← 產 docs/index.html + docs/stock/*.html（GitHub Pages 手機 web UI）

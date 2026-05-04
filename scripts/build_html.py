@@ -346,10 +346,10 @@ def render_index_html(accounts_data: dict) -> str:
     """產 /index.html
 
     accounts_data = {
-       "Takeshi": [{"sid":"1301", "name":"台塑", "close":"51.5", "action":"HOLD",
+       "Takeshi":  [{"sid":"1301", "name":"台塑", "close":"51.5", "action":"HOLD",
                     "tier":"F", "pos":"—", "rsi":"56", "trend":"[多頭]", "regime":"BULL"}, ...],
-       "Katie":   [...],
-       "research":[...]
+       "Katie":    [...],
+       "universe": [...]
     }
     """
     # 各帳戶摘要：BUY/SELL 數、過熱數
@@ -721,7 +721,7 @@ def main():
 
     # 收集首頁 accounts_data
     accounts_data = {}
-    main_accounts = ["Takeshi", "Katie", "research"]  # 順序
+    main_accounts = ["Takeshi", "Katie", "universe"]  # 順序
     for acc in main_accounts:
         if acc not in wl:
             continue

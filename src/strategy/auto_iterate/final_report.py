@@ -233,7 +233,7 @@ def write_final_report(run_id: str) -> None:
     # Section 2: Watchlist coverage
     L.append("## 2. Watchlist 覆蓋率")
     L.append("")
-    for list_name in ("Takeshi", "Katie", "research", "research_todo"):
+    for list_name in ("Takeshi", "Katie", "universe", "research_todo"):
         bucket = wl_coverage.get(list_name, {"tradeable": [], "fail": []})
         n_t = len(bucket["tradeable"])
         n_f = len(bucket["fail"])

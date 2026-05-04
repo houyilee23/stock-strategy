@@ -1,10 +1,10 @@
-"""逐檔抓 watchlists.yaml 中 research_todo 的股票，成功後移至 research
+"""逐檔抓 watchlists.yaml 中 research_todo 的股票，成功後移至 universe
 
 機制：
   1. 讀 research_todo 清單
   2. 對每檔呼叫 `python main.py update <sid>`（fetcher 自帶 IPO skip + rate limit）
   3. 抓完檢查 data/adjusted/{sid}.csv 是否存在且 ≥ 50 筆
-  4. 通過 → 從 research_todo 移到 research（保留尾隨註解）
+  4. 通過 → 從 research_todo 移到 universe（保留尾隨註解）
   5. 失敗 → 留在 research_todo，記錄到 failed list
 
 ⚠️ 不要在 auto_iterate retrain 跑中時執行此腳本。fetcher 會寫入 adjusted/，可能與
@@ -76,29 +76,29 @@ def adjusted_ok(stock_id: str) -> bool:
 
 
 def move_lines_in_text(text: str, lines_to_move: list[str]) -> str:
-    """把 lines_to_move 從 research_todo: 區塊移到 research: 區塊尾"""
+    """把 lines_to_move 從 research_todo: 區塊移到 universe: 區塊尾"""
     if not lines_to_move:
         return text
 
     src_lines = text.splitlines(keepends=True)
 
-    # 1) 找 research: 與 research_todo: 行 index
-    idx_research = None
+    # 1) 找 universe: 與 research_todo: 行 index
+    idx_universe = None
     idx_research_todo = None
     for i, line in enumerate(src_lines):
-        if re.match(r"^research:\s*$", line):
-            idx_research = i
+        if re.match(r"^universe:\s*$", line):
+            idx_universe = i
         elif re.match(r"^research_todo:\s*$", line):
             idx_research_todo = i
 
-    if idx_research is None or idx_research_todo is None:
-        raise ValueError("找不到 research: 或 research_todo: 區塊")
+    if idx_universe is None or idx_research_todo is None:
+        raise ValueError("找不到 universe: 或 research_todo: 區塊")
 
-    # 2) 找 research 區塊結尾（下一個 ^[A-Za-z_]+:）
-    end_research = idx_research_todo  # research 區塊結到 research_todo 之前
-    for i in range(idx_research + 1, idx_research_todo):
+    # 2) 找 universe 區塊結尾（下一個 ^[A-Za-z_]+:）
+    end_universe = idx_research_todo  # universe 區塊結到 research_todo 之前
+    for i in range(idx_universe + 1, idx_research_todo):
         if re.match(r"^[A-Za-z_]+:\s*$", src_lines[i]):
-            end_research = i
+            end_universe = i
             break
 
     # 3) 找 research_todo 區塊範圍（從 idx_research_todo 到下一個 ^[A-Za-z_]+:）
@@ -123,10 +123,9 @@ def move_lines_in_text(text: str, lines_to_move: list[str]) -> str:
             continue  # 跳過要被移走的行
         new_src.append(line)
 
-    # 5) 重新算 end_research（行被移除前後 idx 沒變因為我們用「保留」的 list）
-    # 6) 在 research: 區塊尾插入新行（end_research 位置之前）
+    # 5) 在 universe 區塊尾插入新行（end_universe 位置之前）
     insertion = [line if line.endswith("\n") else line + "\n" for line in lines_to_move]
-    final = new_src[:end_research] + insertion + new_src[end_research:]
+    final = new_src[:end_universe] + insertion + new_src[end_universe:]
     return "".join(final)
 
 
@@ -190,7 +189,7 @@ def main():
     if success_lines:
         new_text = move_lines_in_text(text, success_lines)
         write_watchlists_text(new_text)
-        print(f"\nwatchlists.yaml 已更新：{len(success_lines)} 檔從 research_todo → research")
+        print(f"\nwatchlists.yaml 已更新：{len(success_lines)} 檔從 research_todo → universe")
 
     print(f"\n總結：成功 {len(success_lines)} / 失敗 {len(failed)} / 已跳過 {len(skipped)}")
     if failed:
