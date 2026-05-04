@@ -519,8 +519,24 @@ def run_signals(stock_ids: list, account_name: str, cfg: dict = None) -> None:
     # Console 輸出
     _print_signals_table(result_df, account_name)
 
-    # Markdown 報表
-    path = save_daily_signals_md(result_df, account_name)
+    # Markdown 報表（補股名 dict：優先 per_stock_recommendations.yaml，fallback watchlists 註解）
+    stock_names = {sid: rec.get("name") for sid, rec in recommendations.items()
+                    if isinstance(rec, dict) and rec.get("name")}
+    # Fallback：從 watchlists.yaml 註解解析（為 OLD 沒進 recommendations 的股票）
+    try:
+        import re
+        wl_path = os.path.join(BASE_DIR, "config", "watchlists.yaml")
+        with open(wl_path, encoding="utf-8") as f:
+            for line in f:
+                m = re.match(r'^\s*-\s*"([^"]+)"\s*#\s*(.+?)(?:\s*\(|\s*$)', line)
+                if m:
+                    sid, name = m.group(1), m.group(2).strip()
+                    # 不要 override recommendations 已有的 name
+                    if sid not in stock_names and name:
+                        stock_names[sid] = name
+    except Exception:
+        pass
+    path = save_daily_signals_md(result_df, account_name, stock_names=stock_names)
     print(f"\n  報表已儲存：{path}")
 
 

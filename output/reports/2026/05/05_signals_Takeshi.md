@@ -2,19 +2,19 @@
 
 | 股票 | 名稱 | 在倉 | 收盤 | 動作 | Tier | 倉位上限 | Template | 掛單目標 | 建議買入 | 建議停損 | RSI | 個股趨勢 | 市場Regime | 說明 |
 |------|------|-----|------|------|------|---------|---------|---------|---------|---------|-----|---------|-----------|------|
-| 1301 |  | ✅ | 50.8 | HOLD | A | 50% | gap_continuation | — | — | — | 53 | [多頭] | BULL | (持200股 @46.68) |
-| 1326 |  | ✅ | 50.8 | HOLD | B | 30% | low_vol_pullback | — | — | — | 56 | [多頭] | BULL | (持100股 @43.45，你的 TP 47.8) |
-| 6505 |  | — | 54.0 | HOLD | F | — | style1_pullback | — | 53.8~54.3 | 47.4 | 49 | [多頭] | BULL | 觀察中 RSI=49.4 |
-| 1303 |  | — | 88.4 | HOLD | A | 50% | gap_continuation | — | — | — | 54 | [多頭] | BULL |  |
-| 1809 |  | — | 28.2 | HOLD | F | — | style1_pullback | — | — | — | 56 | [多頭] | BULL |  |
-| 2002 |  | — | 18.6 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
-| 6271 |  | ✅ | 178.0 | HOLD | F | — | style1_pullback | — | — | — | 58 | [多頭] | BULL | (持10股 @179.90) |
-| 4958 |  | ✅ | 432.5 | HOLD | F | — | style1_pullback | — | — | — | 86 | [多頭] | BULL | (持4股 @415.50) |
-| 2382 |  | — | 318.0 | HOLD | F | — | style1_pullback | — | — | — | 54 | [多頭] | BULL |  |
-| 2337 |  | — | 154.5 | HOLD | C | 15% | monthly_revenue_event | — | — | — | 58 | [多頭] | BULL |  |
-| 2408 |  | — | 237.0 | HOLD | F | — | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
-| 6770 |  | — | 53.1 | HOLD | B | 30% | low_vol_pullback | TP 68 / SL 46 | — | — | 44 | [多頭] | BULL |  |
-| 00981A |  | ✅ | 29.6 | HOLD | — | — | style1_pullback | — | — | — | 85 | [多頭] | BULL | (持50股 @22.64) |
-| 2369 |  | ✅ | 31.1 | HOLD | B | 30% | low_vol_pullback | TP 33 / SL 25 | — | — | 53 | [多頭] | BULL | (持30股 @31.23，你的 TP 34.0) |
-| 3189 |  | ✅ | 531.0 | HOLD | C | 15% | chip_momentum | — | — | — | 75 | [多頭] | BULL | (持2股 @533.50) |
-| 8046 |  | ✅ | 986.0 | HOLD | S | 100% | low_vol_pullback | — | — | — | 79 | [多頭] | BULL | (持1股 @970.00，你的 TP 1057.3) |
+| 1301 | 台塑 | ✅ | 50.8 | HOLD | A | 50% | gap_continuation | — | — | — | 53 | [多頭] | BULL | (持200股 @46.68) |
+| 1326 | 台化 | ✅ | 50.8 | HOLD | B | 30% | low_vol_pullback | — | — | — | 56 | [多頭] | BULL | (持100股 @43.45，你的 TP 47.8) |
+| 6505 | 台塑化 | — | 54.0 | HOLD | F | — | style1_pullback | — | 53.8~54.3 | 47.4 | 49 | [多頭] | BULL | 觀察中 RSI=49.4 |
+| 1303 | 南亞 | — | 88.4 | HOLD | A | 50% | gap_continuation | — | — | — | 54 | [多頭] | BULL |  |
+| 1809 | 中釉 | — | 28.2 | HOLD | F | — | style1_pullback | — | — | — | 56 | [多頭] | BULL |  |
+| 2002 | 中鋼 | — | 18.6 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
+| 6271 | 同欣電 | ✅ | 178.0 | HOLD | F | — | style1_pullback | — | — | — | 58 | [多頭] | BULL | (持10股 @179.90) |
+| 4958 | 臻鼎-KY | ✅ | 432.5 | HOLD | F | — | style1_pullback | — | — | — | 86 | [多頭] | BULL | (持4股 @415.50) |
+| 2382 | 廣達 | — | 318.0 | HOLD | F | — | style1_pullback | — | — | — | 54 | [多頭] | BULL |  |
+| 2337 | 旺宏 | — | 154.5 | HOLD | C | 15% | monthly_revenue_event | — | — | — | 58 | [多頭] | BULL |  |
+| 2408 | 南亞科 | — | 237.0 | HOLD | F | — | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
+| 6770 | 力積電 | — | 53.1 | HOLD | B | 30% | low_vol_pullback | TP 68 / SL 46 | — | — | 44 | [多頭] | BULL |  |
+| 00981A | 主動統一台股增長 | ✅ | 29.6 | HOLD | — | — | style1_pullback | — | — | — | 85 | [多頭] | BULL | (持50股 @22.64) |
+| 2369 | 2369 | ✅ | 31.1 | HOLD | B | 30% | low_vol_pullback | TP 33 / SL 25 | — | — | 53 | [多頭] | BULL | (持30股 @31.23，你的 TP 34.0) |
+| 3189 | 3189 | ✅ | 531.0 | HOLD | C | 15% | chip_momentum | — | — | — | 75 | [多頭] | BULL | (持2股 @533.50) |
+| 8046 | 8046 | ✅ | 986.0 | HOLD | S | 100% | low_vol_pullback | — | — | — | 79 | [多頭] | BULL | (持1股 @970.00，你的 TP 1057.3) |
