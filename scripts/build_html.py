@@ -703,6 +703,24 @@ def render_stock_html(sid: str, name: str, rec: dict,
 
 # ===== 7. main ================================================================
 
+def _build_stock_names_from_watchlists() -> dict:
+    """從 watchlists.yaml 註解解析人讀股名（最準），過濾 name==sid 的偽值。"""
+    import re
+    path = os.path.join(BASE_DIR, "config", "watchlists.yaml")
+    names = {}
+    try:
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                m = re.match(r'^\s*-\s*"([^"]+)"\s*#\s*(.+?)(?:\s*\(|\s*$)', line)
+                if m:
+                    sid, name = m.group(1), m.group(2).strip()
+                    if name and name != sid:
+                        names[sid] = name
+    except Exception:
+        pass
+    return names
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stocks", nargs="*", default=None,
@@ -768,11 +786,18 @@ def main():
     print(f"\n產生 {len(target_sids)} 檔個股頁...")
     bench = benchmark_0050_returns()
 
+    # 預載 watchlists 註解中的股名（修 final_report fallback name=sid 的 bug）
+    wl_names = _build_stock_names_from_watchlists()
+
     success, failed = 0, []
     for sid in target_sids:
         try:
             rec = rec_all.get(sid, {})
-            name = rec.get("name", sid) if rec else sid
+            # 優先 watchlists 註解；其次 recommendations.name（過濾 name==sid 偽值）；fallback sid
+            rec_name = rec.get("name") if rec else None
+            if rec_name == sid:
+                rec_name = None
+            name = wl_names.get(sid) or rec_name or sid
             template = rec.get("template", "")
             pos_max = rec.get("position_pct_max", 0.0) or 0.0
             tradeable = rec.get("tradeable", False)
