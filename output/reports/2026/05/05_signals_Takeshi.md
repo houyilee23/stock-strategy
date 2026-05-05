@@ -6,7 +6,7 @@
 | 1326 | 台化 | ✅ | 51.8 | HOLD | B | 30% | low_vol_pullback | — | — | — | 58 | [多頭] | BULL | (持100股 @43.45，你的 TP 47.8) |
 | 6505 | 台塑化 | — | 55.4 | HOLD | F | — | style1_pullback | — | — | — | 53 | [多頭] | BULL |  |
 | 1303 | 南亞 | — | 94.0 | HOLD | A | 50% | gap_continuation | — | — | — | 61 | [多頭] | BULL |  |
-| 1809 | 中釉 | — | 31.1 | HOLD | F | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
+| 1809 | 中釉（陶瓷） | — | 31.1 | HOLD | F | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
 | 2002 | 中鋼 | — | 18.6 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
 | 6271 | 同欣電 | ✅ | 177.5 | HOLD | F | — | style1_pullback | — | — | — | 57 | [多頭] | BULL | (持10股 @179.90) |
 | 4958 | 臻鼎-KY | ✅ | 426.5 | HOLD | F | — | style1_pullback | — | — | — | 83 | [多頭] | BULL | (持4股 @415.50) |
@@ -15,6 +15,6 @@
 | 2408 | 南亞科 | — | 256.5 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
 | 6770 | 力積電 | — | 55.4 | HOLD | B | 30% | low_vol_pullback | TP 68 / SL 46 | — | — | 49 | [多頭] | BULL |  |
 | 00981A | 主動統一台股增長 | ✅ | 29.5 | HOLD | — | — | style1_pullback | — | — | — | 83 | [多頭] | BULL | (持50股 @22.64) |
-| 2369 | 2369 | ✅ | 33.2 | SELL | B | 30% | low_vol_pullback | — | — | — | 59 | [多頭] | BULL | (持30股 @31.23，你的 TP 34.0) |
-| 3189 | 3189 | ✅ | 527.0 | HOLD | C | 15% | chip_momentum | — | — | — | 73 | [多頭] | BULL | (持2股 @533.50) |
-| 8046 | 8046 | ✅ | 997.0 | HOLD | S | 100% | low_vol_pullback | — | — | — | 80 | [多頭] | BULL | (持1股 @970.00，你的 TP 1057.3) |
+| 2369 | 菱生 | ✅ | 33.2 | SELL | B | 30% | low_vol_pullback | — | — | — | 59 | [多頭] | BULL | (持30股 @31.23，你的 TP 34.0) |
+| 3189 | 景碩 | ✅ | 527.0 | HOLD | C | 15% | chip_momentum | — | — | — | 73 | [多頭] | BULL | (持2股 @533.50) |
+| 8046 | 南電 | ✅ | 997.0 | HOLD | S | 100% | low_vol_pullback | — | — | — | 80 | [多頭] | BULL | (持1股 @970.00，你的 TP 1057.3) |

@@ -5,7 +5,7 @@
 | 2330 | 台積電 | — | 2250.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 2303 | 聯電 | — | 83.1 | HOLD | F | — | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
 | 2426 | 鼎元 | — | 69.3 | HOLD | F | — | style1_pullback | — | — | — | 76 | [多頭] | BULL |  |
-| 1560 | 中砂 | — | 572.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 1560 | 中砂（CMP） | — | 572.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 9940 | 信義 | — | 19.8 | HOLD | F | — | style1_pullback | — | — | — | 40 | [空頭] | BULL |  |
 | 1227 | 佳格 | — | 28.8 | HOLD | F | — | style1_pullback | — | — | — | 34 | [空頭] | BULL |  |
 | 1301 | 台塑 | — | 51.3 | HOLD | A | 50% | gap_continuation | — | — | — | 55 | [多頭] | BULL |  |

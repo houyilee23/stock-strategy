@@ -27,7 +27,7 @@
 | 2353 | 宏碁 | — | 27.8 | HOLD | F | — | style1_pullback | — | — | — | 52 | [空頭] | BULL |  |
 | 3661 | 世芯-KY | — | 4150.0 | HOLD | F | — | style1_pullback | — | — | — | 66 | [空頭] | BULL |  |
 | 2426 | 鼎元 | — | 69.3 | HOLD | F | — | style1_pullback | — | — | — | 76 | [多頭] | BULL |  |
-| 1560 | 中砂 | — | 572.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 1560 | 中砂（CMP） | — | 572.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 2324 | 仁寶 | — | 29.3 | HOLD | F | — | style1_pullback | — | — | — | 46 | [空頭] | BULL |  |
 | 2344 | 華邦電 | — | 98.8 | HOLD | F | — | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
 | 6271 | 同欣電 | — | 177.5 | HOLD | F | — | style1_pullback | — | — | — | 57 | [多頭] | BULL |  |
@@ -36,9 +36,9 @@
 | 2337 | 旺宏 | — | 160.5 | HOLD | C | 15% | monthly_revenue_event | — | — | — | 60 | [多頭] | BULL |  |
 | 2408 | 南亞科 | — | 256.5 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
 | 6770 | 力積電 | — | 55.4 | HOLD | B | 30% | low_vol_pullback | TP 68 / SL 46 | — | — | 49 | [多頭] | BULL |  |
-| 2369 | 2369 | — | 33.2 | SELL | B | 30% | low_vol_pullback | — | — | — | 59 | [多頭] | BULL |  |
-| 3189 | 3189 | — | 527.0 | HOLD | C | 15% | chip_momentum | — | — | — | 73 | [多頭] | BULL |  |
-| 8046 | 8046 | — | 997.0 | HOLD | S | 100% | low_vol_pullback | — | — | — | 80 | [多頭] | BULL |  |
+| 2369 | 菱生 | — | 33.2 | SELL | B | 30% | low_vol_pullback | — | — | — | 59 | [多頭] | BULL |  |
+| 3189 | 景碩 | — | 527.0 | HOLD | C | 15% | chip_momentum | — | — | — | 73 | [多頭] | BULL |  |
+| 8046 | 南電 | — | 997.0 | HOLD | S | 100% | low_vol_pullback | — | — | — | 80 | [多頭] | BULL |  |
 | 5347 | 世界先進 | — | 151.0 | HOLD | — | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 6488 | 環球晶 | — | 606.0 | HOLD | — | — | style1_pullback | — | — | — | 62 | [多頭] | BULL |  |
 | 2412 | 中華電 | — | 136.0 | HOLD | F | — | style1_pullback | — | 135.0~135.5 | 133.1 | 52 | [多頭] | BULL | 觀察中 RSI=51.7 |
@@ -59,7 +59,7 @@
 | 1326 | 台化 | — | 51.8 | HOLD | B | 30% | low_vol_pullback | — | — | — | 58 | [多頭] | BULL |  |
 | 6505 | 台塑化 | — | 55.4 | HOLD | F | — | style1_pullback | — | — | — | 53 | [多頭] | BULL |  |
 | 2002 | 中鋼 | — | 18.6 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
-| 1809 | 中釉 | — | 31.1 | HOLD | F | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
+| 1809 | 中釉（陶瓷） | — | 31.1 | HOLD | F | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
 | 1101 | 台泥 | — | 24.1 | HOLD | — | — | style1_pullback | — | 24.1~24.3 | 23.7 | 44 | [多頭] | BULL | 觀察中 RSI=43.6 |
 | 1102 | 亞泥 | — | 35.0 | HOLD | — | — | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
 | 1227 | 佳格 | — | 28.8 | HOLD | F | — | style1_pullback | — | — | — | 34 | [空頭] | BULL |  |
@@ -81,6 +81,6 @@
 | 0056 | 元大高股息 | — | 42.6 | HOLD | — | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
 | 006208 | 富邦台50 | — | 219.6 | HOLD | B | 30% | style1_pullback | — | — | — | 76 | [多頭] | BULL |  |
 | 00878 | 國泰永續高股息 | — | 26.6 | HOLD | F | — | style1_pullback | — | — | — | 82 | [多頭] | BULL |  |
-| 00919 | 群益台灣精選高息 | — | 24.2 | HOLD | F | — | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
-| 00940 | 元大台灣價值高息 | — | 10.7 | HOLD | F | — | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
+| 00919 | 群益台灣精選高息（2023 IPO，歷史短） | — | 24.2 | HOLD | F | — | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
+| 00940 | 元大台灣價值高息（2024 IPO，歷史很短） | — | 10.7 | HOLD | F | — | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
 | 00981A | 主動統一台股增長 | — | 29.5 | HOLD | — | — | style1_pullback | — | — | — | 83 | [多頭] | BULL |  |

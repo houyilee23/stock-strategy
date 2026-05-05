@@ -519,10 +519,10 @@ def run_signals(stock_ids: list, account_name: str, cfg: dict = None) -> None:
     # Console 輸出
     _print_signals_table(result_df, account_name)
 
-    # Markdown 報表（補股名 dict：優先 per_stock_recommendations.yaml，fallback watchlists 註解）
-    stock_names = {sid: rec.get("name") for sid, rec in recommendations.items()
-                    if isinstance(rec, dict) and rec.get("name")}
-    # Fallback：從 watchlists.yaml 註解解析（為 OLD 沒進 recommendations 的股票）
+    # Markdown 報表（補股名 dict）
+    # 優先 watchlists.yaml 註解（人寫的最準），其次 per_stock_recommendations.yaml
+    # 注意：final_report.py 對沒名字的股票會 fallback 寫 name=stock_id，要過濾掉
+    stock_names = {}
     try:
         import re
         wl_path = os.path.join(BASE_DIR, "config", "watchlists.yaml")
@@ -531,11 +531,18 @@ def run_signals(stock_ids: list, account_name: str, cfg: dict = None) -> None:
                 m = re.match(r'^\s*-\s*"([^"]+)"\s*#\s*(.+?)(?:\s*\(|\s*$)', line)
                 if m:
                     sid, name = m.group(1), m.group(2).strip()
-                    # 不要 override recommendations 已有的 name
-                    if sid not in stock_names and name:
+                    if name and name != sid:
                         stock_names[sid] = name
     except Exception:
         pass
+    # 其次補：recommendations 裡若有合理 name（非 stock_id）才用
+    for sid, rec in recommendations.items():
+        if sid in stock_names:
+            continue
+        if isinstance(rec, dict):
+            n = rec.get("name")
+            if n and n != sid:
+                stock_names[sid] = n
     path = save_daily_signals_md(result_df, account_name, stock_names=stock_names)
     print(f"\n  報表已儲存：{path}")
 
