@@ -8,8 +8,8 @@ NEW: `config\per_stock_recommendations.yaml`
 - 總股票：OLD 71 / NEW 74 / 共 71 檔出現在兩邊
 - 只在 OLD：0
 - 只在 NEW：3
-- **Tier 改變**：6 檔
-- **Template 改變**：8 檔
+- **Tier 改變**：8 檔
+- **Template 改變**：12 檔
 - **Tradeable 翻轉**：3 檔
 - **BNH Tier 改變**：3 檔
 
@@ -18,9 +18,9 @@ NEW: `config\per_stock_recommendations.yaml`
 | Tier | OLD | NEW | Δ |
 |---|---|---|---|
 | S | 1 | 2 | +1 |
-| A | 6 | 7 | +1 |
+| A | 6 | 5 | -1 |
 | B | 6 | 8 | +2 |
-| C | 14 | 14 | — |
+| C | 14 | 16 | +2 |
 | F | 44 | 43 | -1 |
 
 ## Tier 變動清單
@@ -32,7 +32,9 @@ NEW: `config\per_stock_recommendations.yaml`
 | 1303 | 南亞 | B | A | B↑A |
 | 1326 | 台化 | C | B | C↑B |
 | 6770 | 力積電 | A | B | A↓B |
+| 1560 | 中砂 | A | C | A↓C |
 | 1809 | 中釉 | C | F | C↓F |
+| 2330 | 台積電 | A | C | A↓C |
 
 ## Template 變動清單
 
@@ -42,8 +44,12 @@ NEW: `config\per_stock_recommendations.yaml`
 | 1326 | 台化 | trend_pullback | low_vol_pullback |
 | 1809 | 中釉 | donchian_breakout | bollinger_squeeze |
 | 2002 | 中鋼 | mean_reversion | monthly_revenue_event |
+| 2303 | 聯電 | mean_reversion | chip_momentum |
+| 2330 | 台積電 | donchian_breakout | gap_continuation |
+| 2344 | 華邦電 | donchian_breakout | momentum_hold |
 | 2382 | 廣達 | monthly_revenue_event | chip_momentum |
 | 2408 | 南亞科 | bollinger_squeeze | chip_momentum |
+| 2426 | 鼎元 | gap_continuation | mean_reversion |
 | 4958 | 臻鼎-KY | bollinger_squeeze | gap_continuation |
 | 6271 | 同欣電 | mean_reversion | chip_momentum |
 

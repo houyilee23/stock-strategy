@@ -35,10 +35,10 @@ _最後更新：**2026-05-05**_
 
 | 股票 | 名稱 | 收盤 | 動作 | Tier | 倉位 | RSI | 趨勢 | Regime |
 |------|------|------|------|------|------|-----|------|--------|
-| [2330](output/reports/per_stock/2330.md) | 台積電 | 2250.0 | HOLD | A | 50% | 66 | [多頭] | BULL |
+| [2330](output/reports/per_stock/2330.md) | 台積電 | 2250.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
 | [2303](output/reports/per_stock/2303.md) | 聯電 | 83.1 | HOLD | F | — | 72 | [多頭] | BULL |
 | [2426](output/reports/per_stock/2426.md) | 鼎元 | 69.3 | HOLD | F | — | 76 | [多頭] | BULL |
-| [1560](output/reports/per_stock/1560.md) | 中砂 | 572.0 | HOLD | A | 50% | 66 | [多頭] | BULL |
+| [1560](output/reports/per_stock/1560.md) | 中砂 | 572.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
 | [9940](output/reports/per_stock/9940.md) | 信義 | 19.8 | HOLD | F | — | 40 | [空頭] | BULL |
 | [1227](output/reports/per_stock/1227.md) | 佳格 | 28.8 | HOLD | F | — | 34 | [空頭] | BULL |
 | [1301](output/reports/per_stock/1301.md) | 台塑 | 51.3 | HOLD | A | 50% | 55 | [多頭] | BULL |
@@ -51,7 +51,7 @@ _最後更新：**2026-05-05**_
 
 | 股票 | 名稱 | 收盤 | 動作 | Tier | 倉位 | RSI | 趨勢 | Regime |
 |------|------|------|------|------|------|-----|------|--------|
-| [2330](output/reports/per_stock/2330.md) | 台積電 | 2250.0 | HOLD | A | 50% | 66 | [多頭] | BULL |
+| [2330](output/reports/per_stock/2330.md) | 台積電 | 2250.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
 | [2454](output/reports/per_stock/2454.md) | 聯發科 | 3155.0 | HOLD | B | 30% | 88 | [多頭] | BULL |
 | [2317](output/reports/per_stock/2317.md) | 鴻海 | 239.5 | HOLD | S | 100% | 70 | [空頭] | BULL |
 | [2303](output/reports/per_stock/2303.md) | 聯電 | 83.1 | HOLD | F | — | 72 | [多頭] | BULL |
@@ -76,7 +76,7 @@ _最後更新：**2026-05-05**_
 | [2353](output/reports/per_stock/2353.md) | 宏碁 | 27.8 | HOLD | F | — | 52 | [空頭] | BULL |
 | [3661](output/reports/per_stock/3661.md) | 世芯-KY | 4150.0 | HOLD | F | — | 66 | [空頭] | BULL |
 | [2426](output/reports/per_stock/2426.md) | 鼎元 | 69.3 | HOLD | F | — | 76 | [多頭] | BULL |
-| [1560](output/reports/per_stock/1560.md) | 中砂 | 572.0 | HOLD | A | 50% | 66 | [多頭] | BULL |
+| [1560](output/reports/per_stock/1560.md) | 中砂 | 572.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
 | [2324](output/reports/per_stock/2324.md) | 仁寶 | 29.3 | HOLD | F | — | 46 | [空頭] | BULL |
 | [2344](output/reports/per_stock/2344.md) | 華邦電 | 98.8 | HOLD | F | — | 55 | [多頭] | BULL |
 | [6271](output/reports/per_stock/6271.md) | 同欣電 | 177.5 | HOLD | F | — | 57 | [多頭] | BULL |
