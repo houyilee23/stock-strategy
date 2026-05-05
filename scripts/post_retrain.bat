@@ -1,13 +1,18 @@
 @echo off
+chcp 65001 >nul
 REM ============================================================
-REM Post-retrain：重跑 signals/reports/html + diff vs OLD baseline
+REM Post-retrain pipeline (run after auto_iterate finishes
+REM and final_report has updated config/per_stock_recommendations.yaml)
 REM
-REM 用法：retrain (auto_iterate) 完成、final_report 已寫新
-REM       config/per_stock_recommendations.yaml 後執行此 bat
+REM Pipeline:
+REM   1. signals (Takeshi / Katie / universe)
+REM   2. per_stock backtest reports
+REM   3. README.md
+REM   4. Web UI (root index.html + stock/*.html)
+REM   5. compare OLD vs NEW recommendations
 REM ============================================================
 
 setlocal
-chcp 65001 >nul
 set PYTHONIOENCODING=utf-8
 set PYTHONUTF8=1
 set PYTHON=python
@@ -42,6 +47,6 @@ echo [5/5] compare OLD vs NEW recommendations >> "%LOG%"
 
 echo Done at %TIME% >> "%LOG%"
 echo.
-echo 完成。看 diff：output\recommendations_diff_%TODAY%.md
-echo 看 web UI：file:///D:/stock/docs/index.html
+echo Done. See output\recommendations_diff_%TODAY%.md for diff.
+echo Open file:///D:/stock/index.html for local preview.
 endlocal
