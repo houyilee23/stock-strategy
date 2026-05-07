@@ -86,31 +86,70 @@ a.stock-link:hover { text-decoration: underline; }
 <div class="stock-card">
 <h3>策略推薦</h3>
 <div class="metric-grid">
-<div class="metric"><strong>F</strong><small>Tier</small></div>
-<div class="metric"><strong>0%</strong><small>倉位上限</small></div>
+<div class="metric"><strong>C</strong><small>Tier</small></div>
+<div class="metric"><strong>15%</strong><small>倉位上限</small></div>
 <div class="metric"><strong>low_vol_pullback</strong><small>Template</small></div>
-<div class="metric"><strong>⚠️ 不建議</strong><small>狀態</small></div>
+<div class="metric"><strong>✅ 可交易</strong><small>狀態</small></div>
 </div>
-<p style="margin-top:0.8rem;">📌 BNH 長持 Tier: <strong>F</strong> · 倉位上限 0%
- · CAGR +7.9%
-</p>
 </div>
 <div class="stock-card">
 <h3>📈 多時段績效</h3>
 <table>
 <thead><tr><th>期間</th><th>策略 CAGR</th><th>同期 BNH CAGR</th><th>同期 0050</th><th>策略 vs 0050</th></tr></thead>
 <tbody>
-<tr><td>近半年</td><td>—</td><td><span class="neg-cagr">-7.1%</span></td><td><span class="pos-cagr">+150.2%</span></td><td>—</td></tr>
-<tr><td>近 1 年</td><td>—</td><td><span class="neg-cagr">-21.1%</span></td><td><span class="pos-cagr">+134.3%</span></td><td>—</td></tr>
-<tr><td>近 2 年</td><td>—</td><td><span class="neg-cagr">-8.2%</span></td><td><span class="pos-cagr">+59.4%</span></td><td>—</td></tr>
-<tr><td>近 3 年</td><td>—</td><td><span class="neg-cagr">-3.1%</span></td><td><span class="pos-cagr">+52.7%</span></td><td>—</td></tr>
-<tr><td>近 5 年</td><td>—</td><td><span class="neg-cagr">-0.8%</span></td><td><span class="pos-cagr">+26.6%</span></td><td>—</td></tr>
-<tr><td>近 10 年</td><td>—</td><td><span class="pos-cagr">+5.7%</span></td><td><span class="pos-cagr">+24.6%</span></td><td>—</td></tr>
-<tr><td>全期</td><td>—</td><td><span class="pos-cagr">+2.5%</span></td><td><span class="pos-cagr">+16.1%</span></td><td>—</td></tr>
+<tr><td>近半年</td><td><span class="pos-cagr">+0.0%</span></td><td><span class="neg-cagr">-7.1%</span></td><td><span class="pos-cagr">+150.2%</span></td><td><span class="neg-cagr">-150.2%</span></td></tr>
+<tr><td>近 1 年</td><td><span class="pos-cagr">+0.0%</span></td><td><span class="neg-cagr">-21.1%</span></td><td><span class="pos-cagr">+134.3%</span></td><td><span class="neg-cagr">-134.3%</span></td></tr>
+<tr><td>近 2 年</td><td><span class="pos-cagr">+0.8%</span></td><td><span class="neg-cagr">-8.2%</span></td><td><span class="pos-cagr">+59.4%</span></td><td><span class="neg-cagr">-58.5%</span></td></tr>
+<tr><td>近 3 年</td><td><span class="pos-cagr">+0.6%</span></td><td><span class="neg-cagr">-3.1%</span></td><td><span class="pos-cagr">+52.7%</span></td><td><span class="neg-cagr">-52.2%</span></td></tr>
+<tr><td>近 5 年</td><td><span class="pos-cagr">+0.3%</span></td><td><span class="neg-cagr">-0.8%</span></td><td><span class="pos-cagr">+26.6%</span></td><td><span class="neg-cagr">-26.3%</span></td></tr>
+<tr><td>近 10 年</td><td><span class="pos-cagr">+0.2%</span></td><td><span class="pos-cagr">+5.7%</span></td><td><span class="pos-cagr">+24.6%</span></td><td><span class="neg-cagr">-24.3%</span></td></tr>
+<tr><td>全期</td><td><span class="pos-cagr">+0.1%</span></td><td><span class="pos-cagr">+2.5%</span></td><td><span class="pos-cagr">+16.1%</span></td><td><span class="neg-cagr">-16.0%</span></td></tr>
 </tbody></table>
 <small style="color:var(--pico-muted-color)">說明：策略 CAGR 取自 equity curve 在該期間的起點到最新值；BNH 為同期間單純買進長持；0050 為元大台灣 50 同期 BNH 對照。</small>
 </div>
-<div class="stock-card"><p>本地完整回測：資料不足或 template 未支援。</p></div></main>
+<div class="stock-card">
+<h3>📊 整體回測指標</h3>
+<div class="metric-grid">
+<div class="metric"><strong>14</strong><small>交易次數</small></div>
+<div class="metric"><strong>36%</strong><small>勝率</small></div>
+<div class="metric"><strong>1.51</strong><small>Profit Factor</small></div>
+<div class="metric"><strong>+0.67%</strong><small>每筆 Expectancy</small></div>
+<div class="metric"><strong>-2.2%</strong><small>最大回撤</small></div>
+<div class="metric"><strong>10%</strong><small>持倉期 CAGR</small></div>
+<div class="metric"><strong>16d</strong><small>平均持有</small></div>
+</div></div>
+<div class="stock-card">
+<h3>📅 年度交易分布</h3>
+<table>
+<thead><tr><th>年份</th><th>筆數</th><th>勝率</th><th>平均</th><th>累積</th></tr></thead>
+<tbody>
+<tr><td>2011</td><td>1</td><td>100%</td><td class="pos-cagr">+4.84%</td><td class="pos-cagr">+4.8%</td></tr>
+<tr><td>2012</td><td>2</td><td>0%</td><td class="neg-cagr">-4.04%</td><td class="neg-cagr">-8.1%</td></tr>
+<tr><td>2013</td><td>1</td><td>0%</td><td class="neg-cagr">-1.00%</td><td class="neg-cagr">-1.0%</td></tr>
+<tr><td>2014</td><td>1</td><td>0%</td><td class="neg-cagr">-2.60%</td><td class="neg-cagr">-2.6%</td></tr>
+<tr><td>2016</td><td>1</td><td>0%</td><td class="neg-cagr">-1.15%</td><td class="neg-cagr">-1.1%</td></tr>
+<tr><td>2017</td><td>2</td><td>50%</td><td class="pos-cagr">+2.16%</td><td class="pos-cagr">+4.3%</td></tr>
+<tr><td>2019</td><td>2</td><td>50%</td><td class="pos-cagr">+1.96%</td><td class="pos-cagr">+3.9%</td></tr>
+<tr><td>2020</td><td>1</td><td>0%</td><td class="neg-cagr">-0.51%</td><td class="neg-cagr">-0.5%</td></tr>
+<tr><td>2022</td><td>1</td><td>0%</td><td class="neg-cagr">-1.66%</td><td class="neg-cagr">-1.7%</td></tr>
+<tr><td>2024</td><td>2</td><td>100%</td><td class="pos-cagr">+5.66%</td><td class="pos-cagr">+11.3%</td></tr>
+</tbody></table></div>
+<div class="stock-card">
+<h3>📋 最近 10 筆交易</h3>
+<table>
+<thead><tr><th>進場</th><th>進場價</th><th>出場</th><th>出場價</th><th>報酬</th><th>持有</th></tr></thead>
+<tbody>
+<tr><td>2014-08-05</td><td>19.0</td><td>2014-09-26</td><td>18.7</td><td class="neg-cagr">-2.60%</td><td>37d</td></tr>
+<tr><td>2016-09-14</td><td>15.7</td><td>2016-10-05</td><td>15.7</td><td class="neg-cagr">-1.15%</td><td>11d</td></tr>
+<tr><td>2017-04-13</td><td>17.1</td><td>2017-04-14</td><td>17.1</td><td class="neg-cagr">-1.21%</td><td>1d</td></tr>
+<tr><td>2017-12-11</td><td>17.3</td><td>2017-12-29</td><td>18.5</td><td class="pos-cagr">+5.53%</td><td>14d</td></tr>
+<tr><td>2019-05-15</td><td>22.6</td><td>2019-06-24</td><td>24.2</td><td class="pos-cagr">+5.91%</td><td>27d</td></tr>
+<tr><td>2019-07-24</td><td>23.4</td><td>2019-07-25</td><td>23.2</td><td class="neg-cagr">-1.98%</td><td>1d</td></tr>
+<tr><td>2020-07-29</td><td>20.4</td><td>2020-08-20</td><td>20.5</td><td class="neg-cagr">-0.51%</td><td>16d</td></tr>
+<tr><td>2022-10-19</td><td>26.9</td><td>2022-10-20</td><td>26.8</td><td class="neg-cagr">-1.66%</td><td>1d</td></tr>
+<tr><td>2024-05-24</td><td>30.8</td><td>2024-06-19</td><td>33.0</td><td class="pos-cagr">+5.74%</td><td>17d</td></tr>
+<tr><td>2024-09-05</td><td>33.3</td><td>2024-09-25</td><td>35.6</td><td class="pos-cagr">+5.59%</td><td>13d</td></tr>
+</tbody></table></div></main>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>

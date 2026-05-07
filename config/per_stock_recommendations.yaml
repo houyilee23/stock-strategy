@@ -1,9 +1,24 @@
-# Auto-generated: baseline + Takeshi NEW + Katie NEW (manual merge)
-# Baseline: archive/per_stock_recommendations_2017train.yaml
-# Takeshi NEW (16 stocks): merged_20260505_023327
-# Katie NEW (7 stocks): 20260505_194813
-# Note: 1301 in Takeshi NEW retains Takeshi value (not overridden by Katie)
+# Auto-merge: baseline + Takeshi NEW + Katie NEW + Main partial NEW (45 stocks)
+# Main run 20260504_203450 partial: 45/75 stocks done (80 trials each)
+# Remaining 30 stocks fallback to Takeshi/Katie NEW (overlap) or baseline OLD
 
+'0056':
+  bnh_cagr: 0.1289699698821516
+  bnh_div_yield: 0.07019098723652485
+  bnh_holdable: false
+  bnh_max_dd: -0.258563327534753
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
+  name: 元大高股息
+  params_ref: donchian_breakout.yaml#per_stock.0056
+  position_pct_max: 0.0
+  template: donchian_breakout
+  test_expectancy: 0.0182
+  test_max_dd: -0.1043
+  test_n_trades: 11
+  test_pf: 2.093
+  tier: F
+  tradeable: false
 006208:
   bnh_cagr: null
   bnh_div_yield: null
@@ -12,14 +27,14 @@
   bnh_position_pct_max: 0.0
   bnh_tier: null
   name: 富邦台50
-  params_ref: donchian_breakout.yaml#per_stock.006208
-  position_pct_max: 0.3
-  template: donchian_breakout
-  test_expectancy: 0.1115
-  test_max_dd: -0.1647
-  test_n_trades: 6
-  test_pf: 8.601
-  tier: B
+  params_ref: bollinger_squeeze.yaml#per_stock.006208
+  position_pct_max: 0.15
+  template: bollinger_squeeze
+  test_expectancy: 0.0797
+  test_max_dd: -0.0671
+  test_n_trades: 4
+  test_pf: 13.791
+  tier: C
   tradeable: true
 00878:
   bnh_cagr: 0.15979092539324924
@@ -29,32 +44,32 @@
   bnh_position_pct_max: 0.2
   bnh_tier: BNH_B
   name: 國泰永續高股息
-  params_ref: mean_reversion.yaml#per_stock.00878
+  params_ref: bollinger_squeeze.yaml#per_stock.00878
   position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.0222
-  test_max_dd: -0.095
-  test_n_trades: 3
-  test_pf: 2.596
+  template: bollinger_squeeze
+  test_expectancy: 0.0135
+  test_max_dd: -0.1111
+  test_n_trades: 10
+  test_pf: 1.96
   tier: F
   tradeable: false
 00919:
-  bnh_cagr: 0.33060488957794876
-  bnh_div_yield: 0.04128167449195369
-  bnh_holdable: true
-  bnh_max_dd: -0.15606254728536983
-  bnh_position_pct_max: 0.5
-  bnh_tier: BNH_S
+  bnh_cagr: null
+  bnh_div_yield: null
+  bnh_holdable: false
+  bnh_max_dd: null
+  bnh_position_pct_max: 0.0
+  bnh_tier: null
   name: 群益台灣精選高息
-  params_ref: trend_pullback.yaml#per_stock.00919
-  position_pct_max: 0.0
-  template: trend_pullback
-  test_expectancy: 0.0488
-  test_max_dd: -0.0301
-  test_n_trades: 1
-  test_pf: null
-  tier: F
-  tradeable: false
+  params_ref: momentum_hold.yaml#per_stock.00919
+  position_pct_max: 0.15
+  template: momentum_hold
+  test_expectancy: 0.1408
+  test_max_dd: -0.11
+  test_n_trades: 3
+  test_pf: 7.038
+  tier: C
+  tradeable: true
 00940:
   bnh_cagr: -0.015590598291324254
   bnh_div_yield: 0.0057837747792770285
@@ -63,13 +78,64 @@
   bnh_position_pct_max: 0.0
   bnh_tier: F
   name: 元大台灣價值高息
-  params_ref: mean_reversion.yaml#per_stock.00940
+  params_ref: momentum_hold.yaml#per_stock.00940
   position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.0116
-  test_max_dd: -0.0141
+  template: momentum_hold
+  test_expectancy: 0.0272
+  test_max_dd: -0.0726
   test_n_trades: 1
   test_pf: null
+  tier: F
+  tradeable: false
+'1101':
+  bnh_cagr: 0.07038984218271316
+  bnh_div_yield: 0.04178110946214395
+  bnh_holdable: false
+  bnh_max_dd: -0.35233215770329174
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
+  name: 台泥
+  params_ref: low_vol_pullback.yaml#per_stock.1101
+  position_pct_max: 0.0
+  template: low_vol_pullback
+  test_expectancy: 0.0065
+  test_max_dd: -0.0866
+  test_n_trades: 3
+  test_pf: 1.147
+  tier: F
+  tradeable: false
+'1102':
+  bnh_cagr: 0.11307433820094515
+  bnh_div_yield: 0.06540617211097408
+  bnh_holdable: false
+  bnh_max_dd: -0.3058276565063899
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
+  name: 亞泥
+  params_ref: trend_pullback.yaml#per_stock.1102
+  position_pct_max: 0.0
+  template: trend_pullback
+  test_expectancy: 0.0196
+  test_max_dd: -0.0364
+  test_n_trades: 1
+  test_pf: null
+  tier: F
+  tradeable: false
+'1216':
+  bnh_cagr: 0.09793497333680246
+  bnh_div_yield: 0.03921198705082699
+  bnh_holdable: false
+  bnh_max_dd: -0.2304051454861582
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
+  name: 統一
+  params_ref: mean_reversion.yaml#per_stock.1216
+  position_pct_max: 0.0
+  template: mean_reversion
+  test_expectancy: 0.0092
+  test_max_dd: -0.0902
+  test_n_trades: 4
+  test_pf: 1.361
   tier: F
   tradeable: false
 '1227':
@@ -80,13 +146,13 @@
   bnh_position_pct_max: 0.0
   bnh_tier: F
   name: 佳格
-  params_ref: donchian_breakout.yaml#per_stock.1227
+  params_ref: monthly_revenue_event.yaml#per_stock.1227
   position_pct_max: 0.0
-  template: donchian_breakout
-  test_expectancy: -0.0096
-  test_max_dd: -0.0832
+  template: monthly_revenue_event
+  test_expectancy: -0.0072
+  test_max_dd: -0.0331
   test_n_trades: 2
-  test_pf: 0.439
+  test_pf: 0.0
   tier: F
   tradeable: false
 '1301':
@@ -141,22 +207,22 @@
   tier: B
   tradeable: true
 '1402':
-  bnh_cagr: 0.0788467878638126
-  bnh_div_yield: 0.04605732721047958
+  bnh_cagr: null
+  bnh_div_yield: null
   bnh_holdable: false
-  bnh_max_dd: -0.4211354890299355
+  bnh_max_dd: null
   bnh_position_pct_max: 0.0
-  bnh_tier: F
+  bnh_tier: null
   name: 遠東新
   params_ref: low_vol_pullback.yaml#per_stock.1402
-  position_pct_max: 0.0
+  position_pct_max: 0.15
   template: low_vol_pullback
-  test_expectancy: 0.0643
-  test_max_dd: -0.0148
-  test_n_trades: 2
-  test_pf: null
-  tier: F
-  tradeable: false
+  test_expectancy: 0.0272
+  test_max_dd: -0.0555
+  test_n_trades: 6
+  test_pf: 5.072
+  tier: C
+  tradeable: true
 '1560':
   bnh_cagr: null
   bnh_div_yield: null
@@ -182,13 +248,13 @@
   bnh_position_pct_max: 0.0
   bnh_tier: F
   name: 華新
-  params_ref: momentum_hold.yaml#per_stock.1605
+  params_ref: bollinger_squeeze.yaml#per_stock.1605
   position_pct_max: 0.0
-  template: momentum_hold
-  test_expectancy: 0.163
-  test_max_dd: -0.3205
-  test_n_trades: 1
-  test_pf: null
+  template: bollinger_squeeze
+  test_expectancy: 0.1098
+  test_max_dd: -0.2124
+  test_n_trades: 5
+  test_pf: 4.082
   tier: F
   tradeable: false
 '1802':
@@ -200,13 +266,13 @@
   bnh_tier: null
   name: 台玻
   params_ref: low_vol_pullback.yaml#per_stock.1802
-  position_pct_max: 0.3
+  position_pct_max: 1.0
   template: low_vol_pullback
-  test_expectancy: 0.1119
-  test_max_dd: -0.0909
-  test_n_trades: 5
-  test_pf: 16.369
-  tier: B
+  test_expectancy: 0.0756
+  test_max_dd: -0.1402
+  test_n_trades: 9
+  test_pf: 24.573
+  tier: S
   tradeable: true
 '1809':
   bnh_cagr: 0.07850144899741518
@@ -216,13 +282,13 @@
   bnh_position_pct_max: 0.0
   bnh_tier: F
   name: 中釉
-  params_ref: bollinger_squeeze.yaml#per_stock.1809
+  params_ref: chip_momentum.yaml#per_stock.1809
   position_pct_max: 0.0
-  template: bollinger_squeeze
-  test_expectancy: 0.0882
-  test_max_dd: -0.1782
-  test_n_trades: 8
-  test_pf: 5.071
+  template: chip_momentum
+  test_expectancy: 0.0353
+  test_max_dd: -0.3577
+  test_n_trades: 11
+  test_pf: 1.318
   tier: F
   tradeable: false
 '2002':
@@ -250,13 +316,13 @@
   bnh_position_pct_max: 0.0
   bnh_tier: F
   name: 大成鋼
-  params_ref: donchian_breakout.yaml#per_stock.2027
+  params_ref: gap_continuation.yaml#per_stock.2027
   position_pct_max: 0.0
-  template: donchian_breakout
-  test_expectancy: 0.0147
-  test_max_dd: -0.0721
+  template: gap_continuation
+  test_expectancy: 0.0837
+  test_max_dd: -0.3167
   test_n_trades: 4
-  test_pf: 2.067
+  test_pf: 2.301
   tier: F
   tradeable: false
 '2105':
@@ -267,13 +333,13 @@
   bnh_position_pct_max: 0.0
   bnh_tier: F
   name: 正新
-  params_ref: trend_pullback.yaml#per_stock.2105
+  params_ref: chip_momentum.yaml#per_stock.2105
   position_pct_max: 0.0
-  template: trend_pullback
-  test_expectancy: 0.0533
-  test_max_dd: -0.139
-  test_n_trades: 4
-  test_pf: 2.55
+  template: chip_momentum
+  test_expectancy: 0.0044
+  test_max_dd: -0.2366
+  test_n_trades: 17
+  test_pf: 1.041
   tier: F
   tradeable: false
 '2207':
@@ -287,10 +353,10 @@
   params_ref: chip_streak.yaml#per_stock.2207
   position_pct_max: 0.0
   template: chip_streak
-  test_expectancy: -0.0256
-  test_max_dd: -0.2085
-  test_n_trades: 6
-  test_pf: 0.194
+  test_expectancy: -0.0
+  test_max_dd: -0.2349
+  test_n_trades: 8
+  test_pf: 0.912
   tier: F
   tradeable: false
 '2303':
@@ -311,22 +377,22 @@
   tier: F
   tradeable: false
 '2308':
-  bnh_cagr: null
-  bnh_div_yield: null
+  bnh_cagr: 0.16524423187086468
+  bnh_div_yield: 0.02325259285924859
   bnh_holdable: false
-  bnh_max_dd: null
+  bnh_max_dd: -0.39295181678129
   bnh_position_pct_max: 0.0
-  bnh_tier: null
+  bnh_tier: F
   name: 台達電
-  params_ref: low_vol_pullback.yaml#per_stock.2308
-  position_pct_max: 0.5
-  template: low_vol_pullback
-  test_expectancy: 0.0628
-  test_max_dd: -0.1716
-  test_n_trades: 7
-  test_pf: 10.716
-  tier: A
-  tradeable: true
+  params_ref: volume_breakout.yaml#per_stock.2308
+  position_pct_max: 0.0
+  template: volume_breakout
+  test_expectancy: 0.1543
+  test_max_dd: -0.2489
+  test_n_trades: 6
+  test_pf: 3.427
+  tier: F
+  tradeable: false
 '2317':
   bnh_cagr: null
   bnh_div_yield: null
@@ -336,13 +402,13 @@
   bnh_tier: null
   name: 鴻海
   params_ref: gap_continuation.yaml#per_stock.2317
-  position_pct_max: 1.0
+  position_pct_max: 0.5
   template: gap_continuation
-  test_expectancy: 0.0844
-  test_max_dd: -0.1514
-  test_n_trades: 9
-  test_pf: 11.474
-  tier: S
+  test_expectancy: 0.1106
+  test_max_dd: -0.1295
+  test_n_trades: 6
+  test_pf: null
+  tier: A
   tradeable: true
 '2324':
   bnh_cagr: 0.15687419789178958
@@ -369,13 +435,13 @@
   bnh_position_pct_max: 0.0
   bnh_tier: F
   name: 國巨
-  params_ref: bollinger_squeeze.yaml#per_stock.2327
+  params_ref: donchian_breakout.yaml#per_stock.2327
   position_pct_max: 0.0
-  template: bollinger_squeeze
-  test_expectancy: 0.1546
-  test_max_dd: -0.1571
-  test_n_trades: 4
-  test_pf: 6.68
+  template: donchian_breakout
+  test_expectancy: 0.0351
+  test_max_dd: -0.371
+  test_n_trades: 7
+  test_pf: 1.269
   tier: F
   tradeable: false
 '2330':
@@ -403,13 +469,13 @@
   bnh_position_pct_max: 0.0
   bnh_tier: null
   name: 旺宏
-  params_ref: monthly_revenue_event.yaml#per_stock.2337
+  params_ref: low_vol_pullback.yaml#per_stock.2337
   position_pct_max: 0.15
-  template: monthly_revenue_event
-  test_expectancy: 0.1798
-  test_max_dd: -0.1004
-  test_n_trades: 3
-  test_pf: null
+  template: low_vol_pullback
+  test_expectancy: 0.0538
+  test_max_dd: -0.0861
+  test_n_trades: 5
+  test_pf: 4.115
   tier: C
   tradeable: true
 '2344':
@@ -430,39 +496,39 @@
   tier: F
   tradeable: false
 '2345':
+  bnh_cagr: 0.4418086978258964
+  bnh_div_yield: 0.021589718172315815
+  bnh_holdable: true
+  bnh_max_dd: -0.4370370370370372
+  bnh_position_pct_max: 0.3
+  bnh_tier: BNH_A
+  name: 智邦
+  params_ref: gap_continuation.yaml#per_stock.2345
+  position_pct_max: 0.0
+  template: gap_continuation
+  test_expectancy: 0.066
+  test_max_dd: -0.3164
+  test_n_trades: 10
+  test_pf: 2.458
+  tier: F
+  tradeable: false
+'2353':
   bnh_cagr: null
   bnh_div_yield: null
   bnh_holdable: false
   bnh_max_dd: null
   bnh_position_pct_max: 0.0
   bnh_tier: null
-  name: 智邦
-  params_ref: low_vol_pullback.yaml#per_stock.2345
+  name: 宏碁
+  params_ref: donchian_breakout.yaml#per_stock.2353
   position_pct_max: 0.15
-  template: low_vol_pullback
-  test_expectancy: 0.057
-  test_max_dd: -0.1549
-  test_n_trades: 9
-  test_pf: 3.427
+  template: donchian_breakout
+  test_expectancy: 0.053
+  test_max_dd: -0.1623
+  test_n_trades: 8
+  test_pf: 3.086
   tier: C
   tradeable: true
-'2353':
-  bnh_cagr: 0.20306347051800722
-  bnh_div_yield: 0.04870130296157459
-  bnh_holdable: true
-  bnh_max_dd: -0.5582516749063127
-  bnh_position_pct_max: 0.2
-  bnh_tier: BNH_B
-  name: 宏碁
-  params_ref: mean_reversion.yaml#per_stock.2353
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.1036
-  test_max_dd: -0.023
-  test_n_trades: 1
-  test_pf: null
-  tier: F
-  tradeable: false
 '2356':
   bnh_cagr: 0.16819154591604812
   bnh_div_yield: 0.045520772000718954
@@ -481,22 +547,22 @@
   tier: F
   tradeable: false
 '2360':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
+  bnh_cagr: 0.2686873884963361
+  bnh_div_yield: 0.027669413064263848
+  bnh_holdable: true
+  bnh_max_dd: -0.4971376706733295
+  bnh_position_pct_max: 0.3
+  bnh_tier: BNH_A
   name: 致茂
-  params_ref: low_vol_pullback.yaml#per_stock.2360
-  position_pct_max: 0.5
-  template: low_vol_pullback
-  test_expectancy: 0.072
-  test_max_dd: -0.32
-  test_n_trades: 18
-  test_pf: 7.074
-  tier: A
-  tradeable: true
+  params_ref: gap_continuation.yaml#per_stock.2360
+  position_pct_max: 0.0
+  template: gap_continuation
+  test_expectancy: 0.034
+  test_max_dd: -0.3012
+  test_n_trades: 9
+  test_pf: 1.824
+  tier: F
+  tradeable: false
 '2369':
   bnh_cagr: null
   bnh_div_yield: null
@@ -506,13 +572,13 @@
   bnh_tier: null
   name: '2369'
   params_ref: low_vol_pullback.yaml#per_stock.2369
-  position_pct_max: 0.3
+  position_pct_max: 0.15
   template: low_vol_pullback
-  test_expectancy: 0.0563
-  test_max_dd: -0.2143
-  test_n_trades: 13
-  test_pf: 4.584
-  tier: B
+  test_expectancy: 0.0356
+  test_max_dd: -0.1342
+  test_n_trades: 7
+  test_pf: 3.897
+  tier: C
   tradeable: true
 '2376':
   bnh_cagr: null
@@ -522,13 +588,13 @@
   bnh_position_pct_max: 0.0
   bnh_tier: null
   name: 技嘉
-  params_ref: monthly_revenue_event.yaml#per_stock.2376
+  params_ref: momentum_hold.yaml#per_stock.2376
   position_pct_max: 0.15
-  template: monthly_revenue_event
-  test_expectancy: 0.0993
-  test_max_dd: -0.1839
-  test_n_trades: 4
-  test_pf: 4.12
+  template: momentum_hold
+  test_expectancy: 0.3569
+  test_max_dd: -0.3289
+  test_n_trades: 5
+  test_pf: 11.975
   tier: C
   tradeable: true
 '2379':
@@ -539,32 +605,32 @@
   bnh_position_pct_max: 0.2
   bnh_tier: BNH_B
   name: 瑞昱
-  params_ref: monthly_revenue_event.yaml#per_stock.2379
+  params_ref: mean_reversion.yaml#per_stock.2379
   position_pct_max: 0.0
-  template: monthly_revenue_event
-  test_expectancy: 0.1901
-  test_max_dd: -0.0126
-  test_n_trades: 1
-  test_pf: null
+  template: mean_reversion
+  test_expectancy: 0.0252
+  test_max_dd: -0.1334
+  test_n_trades: 5
+  test_pf: 2.491
   tier: F
   tradeable: false
 '2382':
-  bnh_cagr: 0.28737251870711567
-  bnh_div_yield: 0.04555193710570548
-  bnh_holdable: true
-  bnh_max_dd: -0.3360384549632436
-  bnh_position_pct_max: 0.5
-  bnh_tier: BNH_S
+  bnh_cagr: null
+  bnh_div_yield: null
+  bnh_holdable: false
+  bnh_max_dd: null
+  bnh_position_pct_max: 0.0
+  bnh_tier: null
   name: 廣達
-  params_ref: chip_momentum.yaml#per_stock.2382
-  position_pct_max: 0.0
-  template: chip_momentum
-  test_expectancy: 0.2382
-  test_max_dd: -0.3677
-  test_n_trades: 6
-  test_pf: 3.385
-  tier: F
-  tradeable: false
+  params_ref: low_vol_pullback.yaml#per_stock.2382
+  position_pct_max: 0.15
+  template: low_vol_pullback
+  test_expectancy: 0.0299
+  test_max_dd: -0.1841
+  test_n_trades: 16
+  test_pf: 2.088
+  tier: C
+  tradeable: true
 '2383':
   bnh_cagr: null
   bnh_div_yield: null
@@ -573,32 +639,32 @@
   bnh_position_pct_max: 0.0
   bnh_tier: null
   name: 台光電
-  params_ref: chip_momentum.yaml#per_stock.2383
-  position_pct_max: 0.15
-  template: chip_momentum
-  test_expectancy: 0.1846
-  test_max_dd: -0.1956
-  test_n_trades: 6
-  test_pf: 9.124
-  tier: C
+  params_ref: donchian_breakout.yaml#per_stock.2383
+  position_pct_max: 0.3
+  template: donchian_breakout
+  test_expectancy: 0.0841
+  test_max_dd: -0.2862
+  test_n_trades: 26
+  test_pf: 3.283
+  tier: B
   tradeable: true
 '2408':
-  bnh_cagr: -0.01974064711137591
-  bnh_div_yield: 0.026258569930207948
+  bnh_cagr: null
+  bnh_div_yield: null
   bnh_holdable: false
-  bnh_max_dd: -0.6848059418979608
+  bnh_max_dd: null
   bnh_position_pct_max: 0.0
-  bnh_tier: F
+  bnh_tier: null
   name: 南亞科
   params_ref: chip_momentum.yaml#per_stock.2408
-  position_pct_max: 0.0
+  position_pct_max: 0.15
   template: chip_momentum
-  test_expectancy: 0.1962
-  test_max_dd: -0.4043
-  test_n_trades: 13
-  test_pf: 2.617
-  tier: F
-  tradeable: false
+  test_expectancy: 0.1688
+  test_max_dd: -0.3481
+  test_n_trades: 10
+  test_pf: 8.218
+  tier: C
+  tradeable: true
 '2412':
   bnh_cagr: 0.06482040447603232
   bnh_div_yield: 0.03871656699280798
@@ -641,13 +707,13 @@
   bnh_position_pct_max: 0.0
   bnh_tier: null
   name: 聯發科
-  params_ref: mean_reversion.yaml#per_stock.2454
+  params_ref: monthly_revenue_event.yaml#per_stock.2454
   position_pct_max: 0.3
-  template: mean_reversion
-  test_expectancy: 0.1394
-  test_max_dd: -0.2226
-  test_n_trades: 5
-  test_pf: null
+  template: monthly_revenue_event
+  test_expectancy: 0.0871
+  test_max_dd: -0.1213
+  test_n_trades: 10
+  test_pf: 10.998
   tier: B
   tradeable: true
 '2474':
@@ -658,11 +724,11 @@
   bnh_position_pct_max: 0.0
   bnh_tier: F
   name: 可成
-  params_ref: trend_pullback.yaml#per_stock.2474
+  params_ref: mean_reversion.yaml#per_stock.2474
   position_pct_max: 0.0
-  template: trend_pullback
-  test_expectancy: 0.107
-  test_max_dd: -0.0505
+  template: mean_reversion
+  test_expectancy: 0.0604
+  test_max_dd: -0.0045
   test_n_trades: 1
   test_pf: null
   tier: F
@@ -675,32 +741,32 @@
   bnh_position_pct_max: 0.2
   bnh_tier: BNH_B
   name: 長榮
-  params_ref: low_vol_pullback.yaml#per_stock.2603
+  params_ref: monthly_revenue_event.yaml#per_stock.2603
   position_pct_max: 0.0
-  template: low_vol_pullback
-  test_expectancy: 0.029
-  test_max_dd: -0.1301
-  test_n_trades: 4
-  test_pf: 2.957
+  template: monthly_revenue_event
+  test_expectancy: 0.1094
+  test_max_dd: -0.0535
+  test_n_trades: 2
+  test_pf: 13.329
   tier: F
   tradeable: false
 '2615':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
+  bnh_cagr: 0.3049000082209523
+  bnh_div_yield: 0.04438550745460158
+  bnh_holdable: true
+  bnh_max_dd: -0.807690526768312
+  bnh_position_pct_max: 0.2
+  bnh_tier: BNH_B
   name: 萬海
-  params_ref: volume_breakout.yaml#per_stock.2615
-  position_pct_max: 0.15
-  template: volume_breakout
-  test_expectancy: 0.1751
-  test_max_dd: -0.2228
-  test_n_trades: 4
-  test_pf: 3.594
-  tier: C
-  tradeable: true
+  params_ref: donchian_breakout.yaml#per_stock.2615
+  position_pct_max: 0.0
+  template: donchian_breakout
+  test_expectancy: 0.1787
+  test_max_dd: -0.262
+  test_n_trades: 7
+  test_pf: 3.468
+  tier: F
+  tradeable: false
 '2618':
   bnh_cagr: 0.18951584952345257
   bnh_div_yield: 0.026988394161847656
@@ -709,32 +775,32 @@
   bnh_position_pct_max: 0.3
   bnh_tier: BNH_A
   name: 長榮航
-  params_ref: chip_momentum.yaml#per_stock.2618
+  params_ref: momentum_hold.yaml#per_stock.2618
   position_pct_max: 0.0
-  template: chip_momentum
-  test_expectancy: 0.0589
-  test_max_dd: -0.073
-  test_n_trades: 3
-  test_pf: 3.978
+  template: momentum_hold
+  test_expectancy: 0.0308
+  test_max_dd: -0.2347
+  test_n_trades: 14
+  test_pf: 2.696
   tier: F
   tradeable: false
 '2881':
-  bnh_cagr: null
-  bnh_div_yield: null
+  bnh_cagr: 0.1513889431135269
+  bnh_div_yield: 0.039653087658106906
   bnh_holdable: false
-  bnh_max_dd: null
+  bnh_max_dd: -0.3414906537121133
   bnh_position_pct_max: 0.0
-  bnh_tier: null
+  bnh_tier: F
   name: 富邦金
-  params_ref: mean_reversion.yaml#per_stock.2881
-  position_pct_max: 0.15
-  template: mean_reversion
-  test_expectancy: 0.1047
-  test_max_dd: -0.1013
-  test_n_trades: 4
+  params_ref: momentum_hold.yaml#per_stock.2881
+  position_pct_max: 0.0
+  template: momentum_hold
+  test_expectancy: 0.7139
+  test_max_dd: -0.1205
+  test_n_trades: 1
   test_pf: null
-  tier: C
-  tradeable: true
+  tier: F
+  tradeable: false
 '2882':
   bnh_cagr: null
   bnh_div_yield: null

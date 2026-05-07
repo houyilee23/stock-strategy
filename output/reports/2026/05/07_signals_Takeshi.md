@@ -10,11 +10,11 @@
 | 2002 | 中鋼 | — | 18.9 | HOLD | F | — | style1_pullback | — | — | — | 42 | [空頭] | BULL |  |
 | 6271 | 同欣電 | ✅ | 180.0 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL | (持10股 @179.90) |
 | 4958 | 臻鼎-KY | ✅ | 427.0 | HOLD | F | — | style1_pullback | — | — | — | 79 | [多頭] | BULL | (持4股 @415.50) |
-| 2382 | 廣達 | — | 344.0 | HOLD | F | — | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
-| 2337 | 旺宏 | — | 164.5 | HOLD | C | 15% | monthly_revenue_event | — | — | — | 60 | [多頭] | BULL |  |
-| 2408 | 南亞科 | — | 287.0 | HOLD | F | — | style1_pullback | — | — | — | 67 | [多頭] | BULL |  |
+| 2382 | 廣達 | — | 344.0 | HOLD | C | 15% | low_vol_pullback | — | — | — | 65 | [多頭] | BULL |  |
+| 2337 | 旺宏 | — | 164.5 | HOLD | C | 15% | low_vol_pullback | — | — | — | 60 | [多頭] | BULL |  |
+| 2408 | 南亞科 | — | 287.0 | HOLD | C | 15% | chip_momentum | — | — | — | 67 | [多頭] | BULL |  |
 | 6770 | 力積電 | — | 63.9 | HOLD | B | 30% | low_vol_pullback | TP 68 / SL 47 | — | — | 62 | [多頭] | BULL |  |
 | 00981A | 主動統一台股增長 | ✅ | 29.6 | HOLD | — | — | style1_pullback | — | — | — | 82 | [多頭] | BULL | (持50股 @22.64) |
-| 2369 | 菱生 | ✅ | 33.0 | HOLD | B | 30% | low_vol_pullback | — | — | — | 57 | [多頭] | BULL | (持30股 @31.23，你的 TP 34.0) |
+| 2369 | 菱生 | ✅ | 33.0 | HOLD | C | 15% | low_vol_pullback | — | — | — | 57 | [多頭] | BULL | (持30股 @31.23，你的 TP 34.0) |
 | 3189 | 景碩 | ✅ | 492.5 | HOLD | C | 15% | chip_momentum | — | — | — | 61 | [多頭] | BULL | (持2股 @533.50) |
 | 8046 | 南電 | ✅ | 947.0 | HOLD | S | 100% | low_vol_pullback | — | — | — | 70 | [多頭] | BULL | (持1股 @970.00，你的 TP 1057.3) |
