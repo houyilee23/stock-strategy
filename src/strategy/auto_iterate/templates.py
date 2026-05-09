@@ -84,6 +84,26 @@ SEARCH_SPACES = {
         "trend_ma":          {"type": "categorical", "choices": [50, 100, 200]},
         "atr_stop_k":        {"type": "float", "low": 2.0, "high": 4.0, "step": 0.5},
     },
+    # ── range-bound 大盤股 / 傳產股專用：BB 極值反轉到中軌 ─────────
+    # 不同於 bollinger_squeeze（突破型），bb_extremes 是 mean-reversion：
+    # close 觸 BB_lower → 預期反彈到 BB_middle → 出
+    "bb_extremes": {
+        "bb_period":     {"type": "categorical", "choices": [20, 30, 50]},
+        "bb_std":        {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "entry_buffer":  {"type": "float", "low": 0.0, "high": 0.03, "step": 0.005},
+        "long_ma":       {"type": "categorical", "choices": [100, 150, 200]},
+        "max_hold_days": {"type": "categorical", "choices": [10, 20, 40, 60]},
+    },
+    # ── 低波動轉趨勢突破：NR4/NR7 narrow range 後 high 突破 ──────
+    # 觀察「狹幅整理 → 下一日突破」pattern，適合 sideways 然後 break out 的股
+    # 不同於 donchian_breakout（用固定 N 天 high）也不同於 bollinger_squeeze（BB 寬度）
+    "narrow_range_breakout": {
+        "nr_window":     {"type": "categorical", "choices": [4, 7, 10]},
+        "trend_ma":      {"type": "categorical", "choices": [50, 100, 200]},
+        "atr_stop_k":    {"type": "float", "low": 1.5, "high": 3.5, "step": 0.5},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.15, "step": 0.02},
+        "max_hold_days": {"type": "categorical", "choices": [10, 20, 40]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -1066,6 +1086,169 @@ def generate_signals_monthly_revenue_event(
     return pd.DataFrame({"action": action}, index=df.index)
 
 
+def generate_bb_extremes(df: pd.DataFrame, params: dict,
+                          regime=None, chip_data=None) -> pd.DataFrame:
+    """bb_extremes: Bollinger Band 極值反轉（range-bound 股票專用，5/9 新增）
+
+    機制：
+      BUY  ：close 接近 BB_lower（oversold）AND price > long_ma × 0.92（避免崩跌追刀）
+      SELL ：close 回到 BB_middle（mean-revert 完成）OR 跌破 long_ma OR 持有超 max_hold
+
+    限價單機制：
+      target_buy = BB_lower × (1 + entry_buffer)  隔日掛限價買在 BB_lower 上方
+      target_tp  = BB_middle                        隔日掛限價賣在中軌
+      target_sl  = long_ma                          跌破長期均線 → 停損
+    """
+    close = df["close"]
+    bb_period    = int(params["bb_period"])
+    bb_std       = float(params["bb_std"])
+    entry_buffer = float(params["entry_buffer"])
+    long_ma_n    = int(params["long_ma"])
+    max_hold     = int(params["max_hold_days"])
+
+    bb = bollinger(close, bb_period, bb_std)
+    bb_mid_s   = bb["mid"]
+    bb_lower_s = bb["lower"]
+    long_ma_s = sma(close, long_ma_n)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp  = [np.nan] * n
+    target_sl  = [np.nan] * n
+
+    in_pos = False
+    hold_days = 0
+
+    for i in range(n):
+        c   = close.iloc[i]
+        bbl = bb_lower_s.iloc[i]
+        bbm = bb_mid_s.iloc[i]
+        lma = long_ma_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(bbm):
+                target_tp[i] = bbm
+            if not np.isnan(lma):
+                target_sl[i] = lma
+
+            tp_hit = (not np.isnan(bbm)) and (c >= bbm)
+            sl_hit = (not np.isnan(lma)) and (c < lma)
+            timeout = hold_days >= max_hold
+
+            if tp_hit or sl_hit or timeout:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if (not np.isnan(bbl) and not np.isnan(bbm) and not np.isnan(lma)
+                and c < bbl * (1 + entry_buffer)
+                and c > lma * 0.92):
+                action[i] = "BUY"
+                target_buy[i] = bbl * (1 + entry_buffer)
+                in_pos = True
+                hold_days = 0
+
+    return pd.DataFrame({
+        "action": action,
+        "target_buy": target_buy,
+        "target_tp": target_tp,
+        "target_sl": target_sl,
+    }, index=df.index)
+
+
+def generate_narrow_range_breakout(df: pd.DataFrame, params: dict,
+                                    regime=None, chip_data=None) -> pd.DataFrame:
+    """narrow_range_breakout: NR-N 狹幅整理後高點突破 (5/9 新增)
+
+    機制：
+      identifier：T 日 H-L 是 N-day 中最小 → narrow range
+      BUY：T+1 high break T's high AND price > trend_ma
+      SELL：take_profit_pct 達標 OR ATR-based stop OR timeout
+
+    限價單機制：
+      target_buy = T_high (隔日掛 buy-stop)
+      target_tp  = entry × (1 + take_profit_pct)
+      target_sl  = T_low - ATR × atr_stop_k
+    """
+    high  = df["high"]
+    low   = df["low"]
+    close = df["close"]
+
+    nr_window    = int(params["nr_window"])
+    trend_n      = int(params["trend_ma"])
+    atr_k        = float(params["atr_stop_k"])
+    tp_pct       = float(params["take_profit_pct"])
+    max_hold     = int(params["max_hold_days"])
+
+    rng = (high - low)
+    is_nr = rng == rng.rolling(nr_window).min()  # T 是窗內最小 range
+    trend_ma_s = sma(close, trend_n)
+    atr_s = atr(df, 14)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy      = [np.nan] * n
+    target_tp       = [np.nan] * n
+    target_sl       = [np.nan] * n
+    target_buy_mode = [""] * n  # buy-stop mode for breakout
+
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    nr_high = np.nan
+    nr_low_atr = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]
+        h = high.iloc[i]
+        l = low.iloc[i]
+        tm = trend_ma_s.iloc[i]
+        a = atr_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            if not np.isnan(nr_low_atr):
+                target_sl[i] = nr_low_atr
+
+            tp_hit = (not np.isnan(target_tp[i])) and (c >= target_tp[i])
+            sl_hit = (not np.isnan(nr_low_atr)) and (c < nr_low_atr)
+            timeout = hold_days >= max_hold
+
+            if tp_hit or sl_hit or timeout:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                entry_price = np.nan
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if (bool(is_nr.iloc[i]) and not np.isnan(tm) and c > tm
+                and not np.isnan(a)):
+                # T 是 NR-N → 隔日掛 buy-stop = T_high
+                action[i] = "BUY"
+                target_buy[i] = h
+                target_buy_mode[i] = "stop"
+                in_pos = True
+                entry_price = h
+                nr_high = h
+                nr_low_atr = l - a * atr_k
+                hold_days = 0
+
+    return pd.DataFrame({
+        "action": action,
+        "target_buy": target_buy,
+        "target_tp": target_tp,
+        "target_sl": target_sl,
+        "target_buy_mode": target_buy_mode,
+    }, index=df.index)
+
+
 TEMPLATE_GENERATORS = {
     "trend_pullback":         generate_T1,
     "donchian_breakout":      generate_T2,
@@ -1076,6 +1259,8 @@ TEMPLATE_GENERATORS = {
     "gap_continuation":       generate_T7,
     "low_vol_pullback":       generate_T8,
     "bollinger_squeeze":      generate_T9,
+    "bb_extremes":            generate_bb_extremes,            # 5/9 range-bound 反轉
+    "narrow_range_breakout":  generate_narrow_range_breakout,  # 5/9 NR-N 突破
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

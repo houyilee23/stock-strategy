@@ -1,0 +1,2 @@
+﻿date,stock_id,ClosingPriceonTheLastTradingDay,PostReductionReferencePrice,LimitUp,LimitDown,OpeningReferencePrice,ExrightReferencePrice,ReasonforCapitalReduction
+2013-11-12,1234,33.7,41.59,44.5,38.7,41.6,-1.0,Cash refund
