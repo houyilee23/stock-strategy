@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-05-09**_
+_最後更新：**2026-05-10**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -89,18 +89,18 @@ _最後更新：**2026-05-09**_
 | [3189](output/reports/per_stock/3189.md) | 景碩 | 458.0 | HOLD | B | 30% | 53 | [多頭] | BULL |
 | [8046](output/reports/per_stock/8046.md) | 南電 | 854.0 | HOLD | C | 15% | 56 | [多頭] | BULL |
 | [5347](output/reports/per_stock/5347.md) | 世界先進 | 151.0 | HOLD | F | — | 66 | [多頭] | BULL |
-| [6488](output/reports/per_stock/6488.md) | 環球晶 | 606.0 | HOLD | F | — | 62 | [多頭] | BULL |
+| [6488](output/reports/per_stock/6488.md) | 環球晶 | 606.0 | HOLD | C | — | 62 | [多頭] | BULL |
 | [2412](output/reports/per_stock/2412.md) | 中華電 | 136.5 | HOLD | F | — | 55 | [多頭] | BULL |
 | [3045](output/reports/per_stock/3045.md) | 台灣大 | 110.0 | HOLD | F | — | 46 | [多頭] | BULL |
 | [4904](output/reports/per_stock/4904.md) | 遠傳 | 95.9 | HOLD | C | 15% | 54 | [多頭] | BULL |
 | [2881](output/reports/per_stock/2881.md) | 富邦金 | 96.7 | HOLD | F | — | 75 | [空頭] | BULL |
 | [2882](output/reports/per_stock/2882.md) | 國泰金 | 80.0 | HOLD | B | 30% | 68 | [多頭] | BULL |
 | [2883](output/reports/per_stock/2883.md) | 開發金 | 22.9 | HOLD | C | 15% | 72 | [多頭] | BULL |
-| [2884](output/reports/per_stock/2884.md) | 玉山金 | 32.5 | HOLD | F | — | 52 | [空頭] | BULL |
+| [2884](output/reports/per_stock/2884.md) | 玉山金 | 32.5 | HOLD | C | — | 52 | [空頭] | BULL |
 | [2885](output/reports/per_stock/2885.md) | 元大金 | 56.5 | HOLD | F | — | 80 | [多頭] | BULL |
 | [2886](output/reports/per_stock/2886.md) | 兆豐金 | 40.2 | HOLD | F | — | 59 | [空頭] | BULL |
 | [2891](output/reports/per_stock/2891.md) | 中信金 | 56.4 | HOLD | C | — | 67 | [多頭] | BULL |
-| [2892](output/reports/per_stock/2892.md) | 第一金 | 29.5 | HOLD | F | — | 62 | [空頭] | BULL |
+| [2892](output/reports/per_stock/2892.md) | 第一金 | 29.5 | HOLD | C | — | 62 | [空頭] | BULL |
 | [5880](output/reports/per_stock/5880.md) | 合庫金 | 23.1 | HOLD | F | — | 43 | [空頭] | BULL |
 | [5871](output/reports/per_stock/5871.md) | 中租-KY | 112.5 | HOLD | C | 15% | 46 | [空頭] | BULL |
 | [1301](output/reports/per_stock/1301.md) | 台塑 | 48.5 | HOLD | A | 50% | 44 | [多頭] | BULL |
@@ -110,7 +110,7 @@ _最後更新：**2026-05-09**_
 | [2002](output/reports/per_stock/2002.md) | 中鋼 | 18.8 | HOLD | F | — | 41 | [空頭] | BULL |
 | [1809](output/reports/per_stock/1809.md) | 中釉（陶瓷） | 36.0 | HOLD | F | — | 73 | [多頭] | BULL |
 | [1101](output/reports/per_stock/1101.md) | 台泥 | 25.0 | HOLD | F | — | 55 | [多頭] | BULL |
-| [1102](output/reports/per_stock/1102.md) | 亞泥 | 35.0 | HOLD | F | — | 46 | [空頭] | BULL |
+| [1102](output/reports/per_stock/1102.md) | 亞泥 | 35.0 | HOLD | C | — | 46 | [空頭] | BULL |
 | [1227](output/reports/per_stock/1227.md) | 佳格 | 29.1 | HOLD | F | — | 41 | [空頭] | BULL |
 | [1216](output/reports/per_stock/1216.md) | 統一 | 73.2 | HOLD | F | — | 61 | [空頭] | BULL |
 | [9940](output/reports/per_stock/9940.md) | 信義 | 19.6 | HOLD | F | — | 36 | [空頭] | BULL |
@@ -186,7 +186,7 @@ _最後更新：**2026-05-09**_
 
 ## 歷史報告
 
-- [2026/05](output/reports/2026/05/) — 16 份
+- [2026/05](output/reports/2026/05/) — 19 份
 - [2026/04](output/reports/2026/04/) — 10 份
 
 ---

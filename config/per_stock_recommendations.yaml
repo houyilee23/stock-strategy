@@ -1,4 +1,4 @@
-# Auto-merge: F-tier upgrades phase 2 (golden_cross + three_day_reversal)
+# Phase 3: support_bounce + cci_extremes + hammer_revert F-tier upgrades
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -103,22 +103,30 @@
   tier: F
   tradeable: false
 '1102':
-  bnh_cagr: 0.11307433820094515
-  bnh_div_yield: 0.06540617211097408
-  bnh_holdable: false
-  bnh_max_dd: -0.3058276565063899
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 亞泥
-  params_ref: trend_pullback.yaml#per_stock.1102
-  position_pct_max: 0.0
-  template: trend_pullback
-  test_expectancy: 0.0196
-  test_max_dd: -0.0364
-  test_n_trades: 1
-  test_pf: null
-  tier: F
-  tradeable: false
+  best_template: support_bounce
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: support_bounce.yaml#per_stock.1102
+  position_pct_recommended: 0.15
+  template: support_bounce
+  test_alpha_vs_0050: -0.2194
+  test_cagr: 0.0506
+  test_expectancy: 0.073
+  test_max_dd: -0.0732
+  test_n_trades: 4
+  test_pf: 14.71
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=4, raw_PF=14.71 ≥ 3.0, exp=+7.3% ≥ 5%, |DD|=7% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '1216':
   bnh_cagr: 0.09793497333680246
   bnh_div_yield: 0.03921198705082699
@@ -885,22 +893,31 @@
   tier: C
   tradeable: true
 '2884':
-  bnh_cagr: 0.1382357296797705
-  bnh_div_yield: 0.02592820325643945
-  bnh_holdable: false
-  bnh_max_dd: -0.33333333333333337
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 玉山金
-  params_ref: gap_continuation.yaml#per_stock.2884
-  position_pct_max: 0.0
-  template: gap_continuation
-  test_expectancy: 0.0339
-  test_max_dd: -0.0917
-  test_n_trades: 6
-  test_pf: 3.693
-  tier: F
-  tradeable: false
+  best_template: support_bounce
+  bootstrap:
+    n_iterations: 1000
+    n_original: 10
+    pf_lower: 0.968
+    pf_mean: 3.616
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: false
+  params_ref: support_bounce.yaml#per_stock.2884
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: support_bounce
+  test_alpha_vs_0050: -0.2125
+  test_cagr: 0.0575
+  test_expectancy: 0.0355
+  test_max_dd: -0.1906
+  test_n_trades: 10
+  test_pf: 4.187
+  tier: C
+  tier_reason: PF_lower=0.97 ≥ 0.7, exp=+3.5% ≥ 1%, n=10≥5, holdout=[A_new=NA B=X
+    C=X]
+  verdict: WEAK
 '2885':
   bnh_cagr: 0.20390724937275673
   bnh_div_yield: 0.04370709264650759
@@ -962,22 +979,30 @@
     C=X]
   verdict: WEAK
 '2892':
-  bnh_cagr: 0.12476010429842521
-  bnh_div_yield: 0.036818712141532456
-  bnh_holdable: false
-  bnh_max_dd: -0.2987804878048781
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 第一金
-  params_ref: mean_reversion.yaml#per_stock.2892
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.0379
-  test_max_dd: -0.0323
-  test_n_trades: 1
+  best_template: support_bounce
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: support_bounce.yaml#per_stock.2892
+  position_pct_recommended: 0.15
+  template: support_bounce
+  test_alpha_vs_0050: -0.2167
+  test_cagr: 0.0533
+  test_expectancy: 0.0719
+  test_max_dd: -0.0609
+  test_n_trades: 4
   test_pf: null
-  tier: F
-  tradeable: false
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=4, raw_PF=inf ≥ 3.0, exp=+7.2% ≥ 5%, |DD|=6% ≤ 25%,
+    holdout=[A_new=NA B=O C=O]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '2912':
   bnh_cagr: 0.05364185590999626
   bnh_div_yield: 0.03139831903647864
@@ -1303,22 +1328,31 @@
     C=NA]
   verdict: WEAK
 '6488':
-  bnh_cagr: 0.2027215326979479
-  bnh_div_yield: 0.03199088819332381
-  bnh_holdable: false
-  bnh_max_dd: -0.6708029427552018
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 環球晶
-  params_ref: mean_reversion.yaml#per_stock.6488
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.058
-  test_max_dd: -0.1712
-  test_n_trades: 6
-  test_pf: 2.094
-  tier: F
-  tradeable: false
+  best_template: support_bounce
+  bootstrap:
+    n_iterations: 1000
+    n_original: 11
+    pf_lower: 0.772
+    pf_mean: 2.833
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: false
+  params_ref: support_bounce.yaml#per_stock.6488
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: support_bounce
+  test_alpha_vs_0050: -0.1811
+  test_cagr: 0.0888
+  test_expectancy: 0.0472
+  test_max_dd: -0.2078
+  test_n_trades: 11
+  test_pf: 2.13
+  tier: C
+  tier_reason: PF_lower=0.77 ≥ 0.7, exp=+4.7% ≥ 1%, n=11≥5, holdout=[A_new=NA B=O
+    C=X]
+  verdict: WEAK
 '6505':
   bnh_cagr: -0.10524583220700723
   bnh_div_yield: 0.024775667203652155

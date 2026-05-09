@@ -133,6 +133,33 @@ SEARCH_SPACES = {
         "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.15, "step": 0.025},
         "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
     },
+    # ── 歷史支撐位反彈 ── 找 N 天內最低點，price 接近該位 → 反彈 buy
+    "support_bounce": {
+        "lookback":        {"type": "categorical", "choices": [60, 120, 250]},
+        "support_buffer":  {"type": "float", "low": 0.005, "high": 0.04, "step": 0.005},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.15, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 60]},
+    },
+    # ── CCI 超漲超跌反轉 ──
+    "cci_extremes": {
+        "cci_period":      {"type": "categorical", "choices": [14, 20, 30]},
+        "cci_oversold":    {"type": "int", "low": -250, "high": -100, "step": 25},
+        "cci_overbought":  {"type": "int", "low": 100, "high": 250, "step": 25},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── 高量 doji/hammer pattern 反轉 ── ATR 量化「長下影線 + 上影線小」
+    "hammer_revert": {
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "shadow_ratio":    {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "min_drop_pct":    {"type": "float", "low": 0.01, "high": 0.05, "step": 0.005},
+        "take_profit_pct": {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 2.5, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -1491,6 +1518,159 @@ def generate_rsi_oversold_volume(df: pd.DataFrame, params: dict,
     }, index=df.index)
 
 
+def generate_support_bounce(df: pd.DataFrame, params: dict,
+                              regime=None, chip_data=None) -> pd.DataFrame:
+    """support_bounce: N 天內歷史最低點附近反彈 (5/9 新增)"""
+    close = df["close"]; low = df["low"]
+    lookback   = int(params["lookback"])
+    buf        = float(params["support_buffer"])
+    trend_n    = int(params["trend_ma"])
+    tp_pct     = float(params["take_profit_pct"])
+    atr_k      = float(params["atr_stop_k"])
+    max_hold   = int(params["max_hold_days"])
+
+    rolling_low = low.rolling(lookback).min()
+    trend_s = sma(close, trend_n)
+    atr_s = atr(df, 14)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp  = [np.nan] * n
+    target_sl  = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]; l = low.iloc[i]; rl = rolling_low.iloc[i]
+        tm = trend_s.iloc[i]; a = atr_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and (c >= target_tp[i])
+            sl_hit = (not np.isnan(sl_level)) and (c < sl_level)
+            timeout = hold_days >= max_hold
+            if tp_hit or sl_hit or timeout:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            if (not np.isnan(rl) and rl > 0
+                and l <= rl * (1 + buf)
+                and not np.isnan(tm) and c > tm * 0.85
+                and not np.isnan(a)):
+                action[i] = "BUY"
+                target_buy[i] = rl * (1 + buf)
+                in_pos = True; entry_price = c
+                sl_level = rl - a * atr_k
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_cci_extremes(df: pd.DataFrame, params: dict,
+                           regime=None, chip_data=None) -> pd.DataFrame:
+    """cci_extremes: CCI 極值反轉 (5/9 新增)"""
+    high  = df["high"]; low = df["low"]; close = df["close"]
+    cci_period = int(params["cci_period"])
+    cci_os     = int(params["cci_oversold"])
+    cci_ob     = int(params["cci_overbought"])
+    trend_n    = int(params["trend_ma"])
+    tp_pct     = float(params["take_profit_pct"])
+    max_hold   = int(params["max_hold_days"])
+
+    tp = (high + low + close) / 3
+    ma_tp = tp.rolling(cci_period).mean()
+    md = (tp - ma_tp).abs().rolling(cci_period).mean()
+    cci = (tp - ma_tp) / (0.015 * md.replace(0, np.nan))
+    trend_s = sma(close, trend_n)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]; cc = cci.iloc[i]; tm = trend_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            if not np.isnan(tm):
+                target_sl[i] = tm * 0.92
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(target_sl[i])) and c < target_sl[i]
+            cci_overbought = (not np.isnan(cc)) and cc > cci_ob
+            timeout = hold_days >= max_hold
+            if tp_hit or sl_hit or cci_overbought or timeout:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            if (not np.isnan(cc) and cc < cci_os and
+                not np.isnan(tm) and c > tm * 0.85):
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_hammer_revert(df: pd.DataFrame, params: dict,
+                            regime=None, chip_data=None) -> pd.DataFrame:
+    """hammer_revert: hammer/長下影線 candle 反轉 (5/9 新增)"""
+    open_  = df["open"]; high = df["high"]; low = df["low"]; close = df["close"]
+    trend_n      = int(params["trend_ma"])
+    shadow_ratio = float(params["shadow_ratio"])
+    min_drop     = float(params["min_drop_pct"])
+    tp_pct       = float(params["take_profit_pct"])
+    atr_k        = float(params["atr_stop_k"])
+    max_hold     = int(params["max_hold_days"])
+
+    trend_s = sma(close, trend_n)
+    atr_s   = atr(df, 14)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+
+    for i in range(1, n):
+        o = open_.iloc[i]; h = high.iloc[i]; l = low.iloc[i]; c = close.iloc[i]
+        prev_c = close.iloc[i-1]
+        body = abs(c - o)
+        lower_shadow = min(o, c) - l
+        upper_shadow = h - max(o, c)
+        tm = trend_s.iloc[i]; a = atr_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            timeout = hold_days >= max_hold
+            if tp_hit or sl_hit or timeout:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            is_hammer = (body > 0 and lower_shadow > body * shadow_ratio
+                          and upper_shadow < body * 0.5
+                          and prev_c > 0 and (prev_c - l) / prev_c >= min_drop)
+            in_uptrend = (not np.isnan(tm)) and c > tm * 0.92
+            if is_hammer and in_uptrend and not np.isnan(a):
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c
+                sl_level = l - a * atr_k * 0.5
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
 TEMPLATE_GENERATORS = {
     "trend_pullback":         generate_T1,
     "donchian_breakout":      generate_T2,
@@ -1501,11 +1681,14 @@ TEMPLATE_GENERATORS = {
     "gap_continuation":       generate_T7,
     "low_vol_pullback":       generate_T8,
     "bollinger_squeeze":      generate_T9,
-    "bb_extremes":            generate_bb_extremes,                # 5/9
-    "narrow_range_breakout":  generate_narrow_range_breakout,      # 5/9
-    "golden_cross":           generate_golden_cross,               # 5/9
-    "three_day_reversal":     generate_three_day_reversal,         # 5/9
-    "rsi_oversold_volume":    generate_rsi_oversold_volume,        # 5/9
+    "bb_extremes":            generate_bb_extremes,
+    "narrow_range_breakout":  generate_narrow_range_breakout,
+    "golden_cross":           generate_golden_cross,
+    "three_day_reversal":     generate_three_day_reversal,
+    "rsi_oversold_volume":    generate_rsi_oversold_volume,
+    "support_bounce":         generate_support_bounce,
+    "cci_extremes":           generate_cci_extremes,
+    "hammer_revert":          generate_hammer_revert,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }
