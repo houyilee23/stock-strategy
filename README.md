@@ -55,7 +55,7 @@ _最後更新：**2026-05-09**_
 | [2454](output/reports/per_stock/2454.md) | 聯發科 | 3630.0 | HOLD | B | 30% | 91 | [多頭] | BULL |
 | [2317](output/reports/per_stock/2317.md) | 鴻海 | 250.0 | HOLD | A | 50% | 72 | [空頭] | BULL |
 | [2303](output/reports/per_stock/2303.md) | 聯電 | 91.3 | HOLD | C | — | 71 | [多頭] | BULL |
-| [2308](output/reports/per_stock/2308.md) | 台達電 | 2200.0 | HOLD | F | — | 69 | [多頭] | BULL |
+| [2308](output/reports/per_stock/2308.md) | 台達電 | 2200.0 | HOLD | C | — | 69 | [多頭] | BULL |
 | [3711](output/reports/per_stock/3711.md) | 日月光投控 | 516.0 | HOLD | C | 15% | 67 | [多頭] | BULL |
 | [2383](output/reports/per_stock/2383.md) | 台光電 | 4750.0 | HOLD | B | 30% | 70 | [多頭] | BULL |
 | [2345](output/reports/per_stock/2345.md) | 智邦 | 2375.0 | HOLD | B | — | 63 | [多頭] | BULL |
@@ -69,7 +69,7 @@ _最後更新：**2026-05-09**_
 | [3034](output/reports/per_stock/3034.md) | 聯詠 | 498.0 | HOLD | C | — | 80 | [空頭] | BULL |
 | [3008](output/reports/per_stock/3008.md) | 大立光 | 2570.0 | HOLD | C | 15% | 54 | [多頭] | BULL |
 | [4938](output/reports/per_stock/4938.md) | 和碩 | 84.4 | HOLD | F | — | 63 | [多頭] | BULL |
-| [3231](output/reports/per_stock/3231.md) | 緯創 | 146.5 | HOLD | F | — | 64 | [多頭] | BULL |
+| [3231](output/reports/per_stock/3231.md) | 緯創 | 146.5 | HOLD | C | — | 64 | [多頭] | BULL |
 | [2474](output/reports/per_stock/2474.md) | 可成 | 205.0 | HOLD | F | — | 49 | [空頭] | BULL |
 | [2376](output/reports/per_stock/2376.md) | 技嘉 | 317.0 | HOLD | C | 15% | 75 | [空頭] | BULL |
 | [2356](output/reports/per_stock/2356.md) | 英業達 | 49.5 | HOLD | F | — | 67 | [多頭] | BULL |
@@ -117,7 +117,7 @@ _最後更新：**2026-05-09**_
 | [2207](output/reports/per_stock/2207.md) | 和泰車 | 487.0 | HOLD | F | — | 46 | [空頭] | BULL |
 | [2105](output/reports/per_stock/2105.md) | 正新 | 32.1 | HOLD | F | — | 55 | [空頭] | BULL |
 | [9921](output/reports/per_stock/9921.md) | 巨大 | 66.0 | HOLD | F | — | 38 | [空頭] | BULL |
-| [9914](output/reports/per_stock/9914.md) | 美利達 | 55.7 | HOLD | F | — | 28 | [空頭] | BULL |
+| [9914](output/reports/per_stock/9914.md) | 美利達 | 55.7 | HOLD | C | — | 28 | [空頭] | BULL |
 | [2912](output/reports/per_stock/2912.md) | 統一超 | 232.0 | HOLD | F | — | 58 | [空頭] | BULL |
 | [1402](output/reports/per_stock/1402.md) | 遠東新 | 26.1 | HOLD | C | 15% | 47 | [空頭] | BULL |
 | [1605](output/reports/per_stock/1605.md) | 華新 | 33.8 | HOLD | F | — | 57 | [多頭] | BULL |

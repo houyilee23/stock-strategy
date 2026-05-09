@@ -6,7 +6,7 @@
 | 2454 | 聯發科 | — | 3630.0 | HOLD | B | 30% | style1_pullback | — | — | — | 91 | [多頭] | BULL |  |
 | 2317 | 鴻海 | — | 250.0 | HOLD | A | 50% | style1_pullback | — | — | — | 72 | [空頭] | BULL |  |
 | 2303 | 聯電 | — | 91.3 | HOLD | C | — | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
-| 2308 | 台達電 | — | 2200.0 | HOLD | F | — | style1_pullback | — | — | — | 69 | [多頭] | BULL |  |
+| 2308 | 台達電 | — | 2200.0 | HOLD | C | — | style1_pullback | — | — | — | 69 | [多頭] | BULL |  |
 | 3711 | 日月光投控 | — | 516.0 | HOLD | C | 15% | style1_pullback | — | — | — | 67 | [多頭] | BULL |  |
 | 2383 | 台光電 | — | 4750.0 | HOLD | B | 30% | style1_pullback | — | — | — | 70 | [多頭] | BULL |  |
 | 2345 | 智邦 | — | 2375.0 | HOLD | B | — | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |
@@ -20,7 +20,7 @@
 | 3034 | 聯詠 | — | 498.0 | HOLD | C | — | style1_pullback | — | — | — | 80 | [空頭] | BULL |  |
 | 3008 | 大立光 | — | 2570.0 | HOLD | C | 15% | style1_pullback | — | — | — | 54 | [多頭] | BULL |  |
 | 4938 | 和碩 | — | 84.4 | HOLD | F | — | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |
-| 3231 | 緯創 | — | 146.5 | HOLD | F | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
+| 3231 | 緯創 | — | 146.5 | HOLD | C | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
 | 2474 | 可成 | — | 205.0 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
 | 2376 | 技嘉 | — | 317.0 | HOLD | C | 15% | style1_pullback | — | — | — | 75 | [空頭] | BULL |  |
 | 2356 | 英業達 | — | 49.5 | HOLD | F | — | style1_pullback | — | — | — | 67 | [多頭] | BULL |  |
@@ -68,7 +68,7 @@
 | 2207 | 和泰車 | — | 487.0 | HOLD | F | — | style1_pullback | — | — | — | 46 | [空頭] | BULL |  |
 | 2105 | 正新 | — | 32.1 | HOLD | F | — | style1_pullback | — | — | — | 55 | [空頭] | BULL |  |
 | 9921 | 巨大 | — | 66.0 | HOLD | F | — | style1_pullback | — | — | — | 38 | [空頭] | BULL |  |
-| 9914 | 美利達 | — | 55.7 | HOLD | F | — | style1_pullback | — | — | — | 28 | [空頭] | BULL |  |
+| 9914 | 美利達 | — | 55.7 | HOLD | C | — | style1_pullback | — | — | — | 28 | [空頭] | BULL |  |
 | 2912 | 統一超 | — | 232.0 | HOLD | F | — | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
 | 1402 | 遠東新 | — | 26.1 | HOLD | C | 15% | style1_pullback | — | — | — | 47 | [空頭] | BULL |  |
 | 1605 | 華新 | — | 33.8 | HOLD | F | — | style1_pullback | — | — | — | 57 | [多頭] | BULL |  |

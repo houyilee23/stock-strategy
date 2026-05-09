@@ -104,6 +104,35 @@ SEARCH_SPACES = {
         "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.15, "step": 0.02},
         "max_hold_days": {"type": "categorical", "choices": [10, 20, 40]},
     },
+    # ── 經典快慢均線黃金交叉 / 死亡交叉 ────────────────────────
+    # 同時在 sideways 與 trending 都能捕到部分訊號，適合多種股性
+    "golden_cross": {
+        "fast_n":          {"type": "categorical", "choices": [5, 10, 20]},
+        "slow_n":          {"type": "categorical", "choices": [30, 50, 100, 150]},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.20, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.5, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [30, 60, 120]},
+    },
+    # ── 3 日連跌反彈 ── 大盤股拉回 capitulation
+    "three_day_reversal": {
+        "drop_days":       {"type": "int", "low": 3, "high": 5, "step": 1},
+        "min_drop_pct":    {"type": "float", "low": 0.02, "high": 0.08, "step": 0.01},
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── RSI 極端超賣 + 量能放大 ──
+    "rsi_oversold_volume": {
+        "rsi_period":      {"type": "categorical", "choices": [7, 14, 21]},
+        "rsi_threshold":   {"type": "int", "low": 20, "high": 35, "step": 5},
+        "volume_ratio":    {"type": "float", "low": 1.2, "high": 2.5, "step": 0.25},
+        "volume_period":   {"type": "categorical", "choices": [10, 20, 30]},
+        "trend_ma":        {"type": "categorical", "choices": [100, 150, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.15, "step": 0.025},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -1249,6 +1278,219 @@ def generate_narrow_range_breakout(df: pd.DataFrame, params: dict,
     }, index=df.index)
 
 
+def generate_golden_cross(df: pd.DataFrame, params: dict,
+                           regime=None, chip_data=None) -> pd.DataFrame:
+    """golden_cross: 快慢 MA 交叉 (5/9 新增)
+
+    BUY  : fast MA crosses ABOVE slow MA AND price > trend_ma
+    SELL : fast MA crosses BELOW slow MA OR take_profit OR atr stop OR timeout
+    """
+    close = df["close"]
+    fast_n   = int(params["fast_n"])
+    slow_n   = int(params["slow_n"])
+    trend_n  = int(params["trend_ma"])
+    tp_pct   = float(params["take_profit_pct"])
+    atr_k    = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+
+    if fast_n >= slow_n:
+        return pd.DataFrame({"action": ["HOLD"] * len(df)}, index=df.index)
+
+    fast_s   = sma(close, fast_n)
+    slow_s   = sma(close, slow_n)
+    trend_s  = sma(close, trend_n)
+    atr_s    = atr(df, 14)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp  = [np.nan] * n
+    target_sl  = [np.nan] * n
+
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    sl_level = np.nan
+
+    for i in range(1, n):
+        c  = close.iloc[i]
+        f0, f1 = fast_s.iloc[i-1], fast_s.iloc[i]
+        s0, s1 = slow_s.iloc[i-1], slow_s.iloc[i]
+        tm = trend_s.iloc[i]
+        a  = atr_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+
+            tp_hit = (not np.isnan(target_tp[i])) and (c >= target_tp[i])
+            sl_hit = (not np.isnan(sl_level)) and (c < sl_level)
+            death_cross = (not np.isnan(f0) and not np.isnan(f1) and not np.isnan(s0) and not np.isnan(s1)
+                            and f0 >= s0 and f1 < s1)
+            timeout = hold_days >= max_hold
+
+            if tp_hit or sl_hit or death_cross or timeout:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            golden = (not np.isnan(f0) and not np.isnan(f1) and not np.isnan(s0) and not np.isnan(s1)
+                      and f0 <= s0 and f1 > s1)
+            if golden and not np.isnan(tm) and c > tm and not np.isnan(a):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                sl_level = c - a * atr_k
+                hold_days = 0
+
+    return pd.DataFrame({
+        "action": action,
+        "target_buy": target_buy,
+        "target_tp": target_tp,
+        "target_sl": target_sl,
+    }, index=df.index)
+
+
+def generate_three_day_reversal(df: pd.DataFrame, params: dict,
+                                 regime=None, chip_data=None) -> pd.DataFrame:
+    """three_day_reversal: 連 N 日下跌且累計跌幅夠 → 反彈 (5/9 新增)"""
+    close = df["close"]
+    drop_days   = int(params["drop_days"])
+    min_drop    = float(params["min_drop_pct"])
+    trend_n     = int(params["trend_ma"])
+    tp_pct      = float(params["take_profit_pct"])
+    atr_k       = float(params["atr_stop_k"])
+    max_hold    = int(params["max_hold_days"])
+
+    trend_s = sma(close, trend_n)
+    atr_s   = atr(df, 14)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    sl_level = np.nan
+
+    for i in range(drop_days, n):
+        c = close.iloc[i]
+        tm = trend_s.iloc[i]
+        a = atr_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and (c >= target_tp[i])
+            sl_hit = (not np.isnan(sl_level)) and (c < sl_level)
+            timeout = hold_days >= max_hold
+            if tp_hit or sl_hit or timeout:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            # 檢查連 drop_days 個下跌天 + 累計跌幅
+            window_start = i - drop_days
+            window_close_chain = close.iloc[window_start:i+1].values
+            all_down = all(window_close_chain[k+1] < window_close_chain[k]
+                            for k in range(len(window_close_chain)-1))
+            cum_drop = (window_close_chain[0] - window_close_chain[-1]) / window_close_chain[0] if window_close_chain[0] > 0 else 0
+            in_uptrend = (not np.isnan(tm)) and c > tm * 0.95
+            if all_down and cum_drop >= min_drop and in_uptrend and not np.isnan(a):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                sl_level = c - a * atr_k
+                hold_days = 0
+
+    return pd.DataFrame({
+        "action": action,
+        "target_buy": target_buy,
+        "target_tp": target_tp,
+        "target_sl": target_sl,
+    }, index=df.index)
+
+
+def generate_rsi_oversold_volume(df: pd.DataFrame, params: dict,
+                                   regime=None, chip_data=None) -> pd.DataFrame:
+    """rsi_oversold_volume: RSI 極端 + 量能放大進場 (5/9 新增)"""
+    close = df["close"]
+    volume = df["volume"]
+    rsi_period   = int(params["rsi_period"])
+    rsi_thresh   = int(params["rsi_threshold"])
+    vol_ratio    = float(params["volume_ratio"])
+    vol_period   = int(params["volume_period"])
+    trend_n      = int(params["trend_ma"])
+    tp_pct       = float(params["take_profit_pct"])
+    max_hold     = int(params["max_hold_days"])
+
+    rsi_s   = rsi(close, rsi_period)
+    vol_avg = volume.rolling(vol_period).mean()
+    trend_s = sma(close, trend_n)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]
+        r = rsi_s.iloc[i]
+        v = volume.iloc[i]
+        va = vol_avg.iloc[i]
+        tm = trend_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            if not np.isnan(tm):
+                target_sl[i] = tm * 0.95
+            tp_hit = (not np.isnan(target_tp[i])) and (c >= target_tp[i])
+            sl_hit = (not np.isnan(target_sl[i])) and (c < target_sl[i])
+            timeout = hold_days >= max_hold
+            if tp_hit or sl_hit or timeout:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if (not np.isnan(r) and r < rsi_thresh and
+                not np.isnan(va) and va > 0 and v / va >= vol_ratio and
+                not np.isnan(tm) and c > tm * 0.85):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                hold_days = 0
+
+    return pd.DataFrame({
+        "action": action,
+        "target_buy": target_buy,
+        "target_tp": target_tp,
+        "target_sl": target_sl,
+    }, index=df.index)
+
+
 TEMPLATE_GENERATORS = {
     "trend_pullback":         generate_T1,
     "donchian_breakout":      generate_T2,
@@ -1259,8 +1501,11 @@ TEMPLATE_GENERATORS = {
     "gap_continuation":       generate_T7,
     "low_vol_pullback":       generate_T8,
     "bollinger_squeeze":      generate_T9,
-    "bb_extremes":            generate_bb_extremes,            # 5/9 range-bound 反轉
-    "narrow_range_breakout":  generate_narrow_range_breakout,  # 5/9 NR-N 突破
+    "bb_extremes":            generate_bb_extremes,                # 5/9
+    "narrow_range_breakout":  generate_narrow_range_breakout,      # 5/9
+    "golden_cross":           generate_golden_cross,               # 5/9
+    "three_day_reversal":     generate_three_day_reversal,         # 5/9
+    "rsi_oversold_volume":    generate_rsi_oversold_volume,        # 5/9
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

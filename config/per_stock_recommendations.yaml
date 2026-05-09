@@ -1,4 +1,4 @@
-# Auto-merge: main retrain + bb_extremes + narrow_range_breakout (5/9)
+# Auto-merge: F-tier upgrades phase 2 (golden_cross + three_day_reversal)
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -393,22 +393,30 @@
     C=NA]
   verdict: WEAK
 '2308':
-  bnh_cagr: 0.16524423187086468
-  bnh_div_yield: 0.02325259285924859
-  bnh_holdable: false
-  bnh_max_dd: -0.39295181678129
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 台達電
-  params_ref: volume_breakout.yaml#per_stock.2308
-  position_pct_max: 0.0
-  template: volume_breakout
-  test_expectancy: 0.1543
-  test_max_dd: -0.2489
-  test_n_trades: 6
-  test_pf: 3.427
-  tier: F
-  tradeable: false
+  best_template: three_day_reversal
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: three_day_reversal.yaml#per_stock.2308
+  position_pct_recommended: 0.15
+  template: three_day_reversal
+  test_alpha_vs_0050: -0.2428
+  test_cagr: 0.0272
+  test_expectancy: 0.0506
+  test_max_dd: -0.1089
+  test_n_trades: 3
+  test_pf: 4.916
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=4.92 ≥ 3.0, exp=+5.1% ≥ 5%, |DD|=11% ≤ 25%,
+    holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '2317':
   bnh_cagr: null
   bnh_div_yield: null
@@ -1108,22 +1116,30 @@
   tier: B
   tradeable: true
 '3231':
-  bnh_cagr: 0.2674520067809767
-  bnh_div_yield: 0.04230934844779825
-  bnh_holdable: true
-  bnh_max_dd: -0.4379867095312111
-  bnh_position_pct_max: 0.3
-  bnh_tier: BNH_A
-  name: 緯創
-  params_ref: chip_momentum.yaml#per_stock.3231
-  position_pct_max: 0.0
-  template: chip_momentum
-  test_expectancy: 0.4823
-  test_max_dd: -0.3609
-  test_n_trades: 7
-  test_pf: 2.501
-  tier: F
-  tradeable: false
+  best_template: three_day_reversal
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: three_day_reversal.yaml#per_stock.3231
+  position_pct_recommended: 0.15
+  template: three_day_reversal
+  test_alpha_vs_0050: -0.2398
+  test_cagr: 0.0302
+  test_expectancy: 0.0558
+  test_max_dd: -0.0471
+  test_n_trades: 3
+  test_pf: 8.584
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=8.58 ≥ 3.0, exp=+5.6% ≥ 5%, |DD|=5% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '3661':
   bnh_cagr: 0.8071200619497936
   bnh_div_yield: 0.00831587965794551
@@ -1389,22 +1405,30 @@
   tier: C
   tradeable: true
 '9914':
-  bnh_cagr: 0.028772616715462718
-  bnh_div_yield: 0.02845813031293245
-  bnh_holdable: false
-  bnh_max_dd: -0.5665792658329967
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 美利達
-  params_ref: bollinger_squeeze.yaml#per_stock.9914
-  position_pct_max: 0.0
-  template: bollinger_squeeze
-  test_expectancy: 0.1261
-  test_max_dd: -0.0968
-  test_n_trades: 2
-  test_pf: null
-  tier: F
-  tradeable: false
+  best_template: golden_cross
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: golden_cross.yaml#per_stock.9914
+  position_pct_recommended: 0.15
+  template: golden_cross
+  test_alpha_vs_0050: -0.2231
+  test_cagr: 0.0468
+  test_expectancy: 0.0905
+  test_max_dd: -0.0806
+  test_n_trades: 3
+  test_pf: 5.484
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=5.48 ≥ 3.0, exp=+9.0% ≥ 5%, |DD|=8% ≤ 25%,
+    holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '9921':
   bnh_cagr: -0.004720005575242103
   bnh_div_yield: 0.029450099115910032
