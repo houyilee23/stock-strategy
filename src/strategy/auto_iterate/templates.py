@@ -160,6 +160,35 @@ SEARCH_SPACES = {
         "atr_stop_k":      {"type": "float", "low": 1.5, "high": 2.5, "step": 0.5},
         "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
     },
+    # ── MACD 訊號線交叉 + histogram 增強
+    "macd_cross": {
+        "fast_n":          {"type": "categorical", "choices": [8, 12, 16]},
+        "slow_n":          {"type": "categorical", "choices": [21, 26, 35]},
+        "signal_n":        {"type": "categorical", "choices": [7, 9, 12]},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.20, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.5, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
+    },
+    # ── KD (Stochastic) 超賣 + golden cross
+    "kd_oversold_cross": {
+        "k_period":        {"type": "categorical", "choices": [9, 14, 21]},
+        "k_oversold":      {"type": "int", "low": 15, "high": 30, "step": 5},
+        "k_overbought":    {"type": "int", "low": 70, "high": 85, "step": 5},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── ADX trending + entry on pullback
+    "adx_trending_pullback": {
+        "adx_period":      {"type": "categorical", "choices": [14, 20]},
+        "adx_threshold":   {"type": "int", "low": 20, "high": 35, "step": 5},
+        "pullback_pct":    {"type": "float", "low": 0.02, "high": 0.08, "step": 0.01},
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.15, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -1671,6 +1700,178 @@ def generate_hammer_revert(df: pd.DataFrame, params: dict,
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_macd_cross(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """MACD line cross above signal line"""
+    close = df["close"]
+    fast_n   = int(params["fast_n"])
+    slow_n   = int(params["slow_n"])
+    signal_n = int(params["signal_n"])
+    trend_n  = int(params["trend_ma"])
+    tp_pct   = float(params["take_profit_pct"])
+    atr_k    = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+
+    if fast_n >= slow_n:
+        return pd.DataFrame({"action": ["HOLD"] * len(df)}, index=df.index)
+
+    ema_fast = close.ewm(span=fast_n, adjust=False).mean()
+    ema_slow = close.ewm(span=slow_n, adjust=False).mean()
+    macd = ema_fast - ema_slow
+    signal_line = macd.ewm(span=signal_n, adjust=False).mean()
+    trend_s = sma(close, trend_n)
+    atr_s = atr(df, 14)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+
+    for i in range(1, n):
+        c = close.iloc[i]
+        m0, m1 = macd.iloc[i-1], macd.iloc[i]
+        s0, s1 = signal_line.iloc[i-1], signal_line.iloc[i]
+        tm = trend_s.iloc[i]; a = atr_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            death = (not np.isnan(m0) and not np.isnan(m1) and not np.isnan(s0) and not np.isnan(s1)
+                     and m0 >= s0 and m1 < s1)
+            if tp_hit or sl_hit or death or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            golden = (not np.isnan(m0) and not np.isnan(m1) and not np.isnan(s0) and not np.isnan(s1)
+                      and m0 <= s0 and m1 > s1)
+            if golden and not np.isnan(tm) and c > tm and not np.isnan(a):
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c
+                sl_level = c - a * atr_k; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_kd_oversold_cross(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """KD oversold + %K crossing above %D"""
+    high = df["high"]; low = df["low"]; close = df["close"]
+    k_period   = int(params["k_period"])
+    k_os       = int(params["k_oversold"])
+    k_ob       = int(params["k_overbought"])
+    trend_n    = int(params["trend_ma"])
+    tp_pct     = float(params["take_profit_pct"])
+    max_hold   = int(params["max_hold_days"])
+
+    ll = low.rolling(k_period).min()
+    hh = high.rolling(k_period).max()
+    k = 100 * (close - ll) / (hh - ll).replace(0, np.nan)
+    d = k.rolling(3).mean()
+    trend_s = sma(close, trend_n)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan
+
+    for i in range(1, n):
+        c = close.iloc[i]
+        k0, k1 = k.iloc[i-1], k.iloc[i]
+        d0, d1 = d.iloc[i-1], d.iloc[i]
+        tm = trend_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            if not np.isnan(tm):
+                target_sl[i] = tm * 0.92
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(target_sl[i])) and c < target_sl[i]
+            kd_overbought = (not np.isnan(k1)) and k1 > k_ob
+            if tp_hit or sl_hit or kd_overbought or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            kd_oversold_cross = (not np.isnan(k0) and not np.isnan(k1) and not np.isnan(d0) and not np.isnan(d1)
+                                  and k1 < k_os + 10 and k0 <= d0 and k1 > d1)
+            if kd_oversold_cross and not np.isnan(tm) and c > tm * 0.85:
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_adx_trending_pullback(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """ADX > threshold + pullback to short MA + bounce"""
+    high = df["high"]; low = df["low"]; close = df["close"]
+    adx_p     = int(params["adx_period"])
+    adx_th    = int(params["adx_threshold"])
+    pb_pct    = float(params["pullback_pct"])
+    trend_n   = int(params["trend_ma"])
+    tp_pct    = float(params["take_profit_pct"])
+    atr_k     = float(params["atr_stop_k"])
+    max_hold  = int(params["max_hold_days"])
+
+    # Simple ADX approx via ATR & directional movement
+    plus_dm = (high - high.shift()).where(lambda x: x > 0, 0)
+    minus_dm = (low.shift() - low).where(lambda x: x > 0, 0)
+    tr = pd.concat([(high - low).abs(),
+                    (high - close.shift()).abs(),
+                    (low - close.shift()).abs()], axis=1).max(axis=1)
+    atr_x = tr.ewm(span=adx_p, adjust=False).mean()
+    plus_di = 100 * plus_dm.ewm(span=adx_p, adjust=False).mean() / atr_x.replace(0, np.nan)
+    minus_di = 100 * minus_dm.ewm(span=adx_p, adjust=False).mean() / atr_x.replace(0, np.nan)
+    dx = 100 * (plus_di - minus_di).abs() / (plus_di + minus_di).replace(0, np.nan)
+    adx_s = dx.ewm(span=adx_p, adjust=False).mean()
+
+    short_ma_s = sma(close, 10)
+    trend_s = sma(close, trend_n)
+    atr_s = atr(df, 14)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]
+        ax = adx_s.iloc[i]
+        sm = short_ma_s.iloc[i]
+        tm = trend_s.iloc[i]
+        a = atr_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            if tp_hit or sl_hit or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            if (not np.isnan(ax) and ax > adx_th
+                and not np.isnan(sm) and c < sm * (1 - pb_pct)
+                and not np.isnan(tm) and c > tm
+                and not np.isnan(a)):
+                action[i] = "BUY"
+                target_buy[i] = sm * (1 - pb_pct)
+                in_pos = True; entry_price = c
+                sl_level = c - a * atr_k; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
 TEMPLATE_GENERATORS = {
     "trend_pullback":         generate_T1,
     "donchian_breakout":      generate_T2,
@@ -1689,6 +1890,9 @@ TEMPLATE_GENERATORS = {
     "support_bounce":         generate_support_bounce,
     "cci_extremes":           generate_cci_extremes,
     "hammer_revert":          generate_hammer_revert,
+    "macd_cross":             generate_macd_cross,
+    "kd_oversold_cross":      generate_kd_oversold_cross,
+    "adx_trending_pullback":  generate_adx_trending_pullback,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

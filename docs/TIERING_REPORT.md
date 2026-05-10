@@ -1,4 +1,4 @@
-# TIERING REPORT — 20260509_203247
+# TIERING REPORT — 20260510_015130
 
 ## 1. 統計摘要
 
@@ -7,10 +7,10 @@
 | S | 0 | 100% | ROBUST：訊號模式直接用，單檔上限 100% |
 | A | 0 | 50% | STRONG：可用，建議 50% 部位 |
 | B | 0 | 30% | MODERATE：可用，建議 30% 部位 + 嚴格 trailing stop |
-| C | 4 | 15% | WEAK：紙上交易 3 個月再啟用，最大 15% |
-| F | 34 | 0% | FAIL：移出 universe |
+| C | 1 | 15% | WEAK：紙上交易 3 個月再啟用，最大 15% |
+| F | 33 | 0% | FAIL：移出 universe |
 
-**可操作標的合計（S+A+B+C）= 4 / 38**  （目標 ≥ 20）
+**可操作標的合計（S+A+B+C）= 1 / 34**  （目標 ≥ 20）
 
 ## 2. 各 Tier 個股清單
 
@@ -26,50 +26,46 @@
 
 （無）
 
-### Tier C — 部位上限 15% （共 4 檔）
+### Tier C — 部位上限 15% （共 1 檔）
 
 | Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
 |-------|----------|-----|----|---|----|----------|-------|---|---|--------|
-| 1102 | support_bounce | +7.3% | 14.71 | 4 | -7.3% | N/A | X | X | X | LOW_N_RESCUE：n=4, raw_PF=14.71 ≥ 3.0, exp=+7.3% ≥ 5%, |DD|=7% ≤ 25%, holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月） |
-| 2892 | support_bounce | +7.2% | inf | 4 | -6.1% | N/A | X | O | O | LOW_N_RESCUE：n=4, raw_PF=inf ≥ 3.0, exp=+7.2% ≥ 5%, |DD|=6% ≤ 25%, holdout=[A_new=NA B=O C=O]（紙上交易 3 個月） |
-| 6488 | support_bounce | +4.7% | 2.13 | 11 | -20.8% | 0.77 | X | O | X | PF_lower=0.77 ≥ 0.7, exp=+4.7% ≥ 1%, n=11≥5, holdout=[A_new=NA B=O C=X] |
-| 2884 | support_bounce | +3.5% | 4.19 | 10 | -19.1% | 0.97 | X | X | X | PF_lower=0.97 ≥ 0.7, exp=+3.5% ≥ 1%, n=10≥5, holdout=[A_new=NA B=X C=X] |
+| 00940 | kd_oversold_cross | +1.8% | 12.52 | 6 | -7.7% | 1.70 | X | X | X | PF_lower=1.70 ≥ 0.7, exp=+1.8% ≥ 1%, n=6≥5, holdout=[A_new=NA B=NA C=NA] |
 
-### Tier F — 部位上限 0% （共 34 檔）
+### Tier F — 部位上限 0% （共 33 檔）
 
 | Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
 |-------|----------|-----|----|---|----|----------|-------|---|---|--------|
-| 3661 | support_bounce | +5.6% | inf | 1 | -16.4% | N/A | X | X | X | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2615 | support_bounce | +3.8% | 1.63 | 5 | -26.2% | 0.26 | X | X | O | FAIL：PF_lower=0.26, exp=+3.8%, n=5, holdout=[A_new=NA B=NA C=O] |
-| 4938 | support_bounce | +3.5% | 1.68 | 2 | -15.2% | N/A | X | X | O | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2207 | support_bounce | +2.9% | 2.29 | 6 | -19.3% | 0.35 | X | X | X | FAIL：PF_lower=0.35, exp=+2.9%, n=6, holdout=[A_new=NA B=X C=NA] |
-| 1605 | support_bounce | +2.8% | 1.51 | 10 | -24.7% | 0.44 | X | O | O | FAIL：PF_lower=0.44, exp=+2.8%, n=10, holdout=[A_new=NA B=O C=O] |
-| 6669 | support_bounce | +2.5% | inf | 1 | -10.9% | N/A | X | X | O | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2886 | support_bounce | +2.1% | 1.71 | 4 | -10.3% | N/A | X | X | X | FAIL：test n_trades=4 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2474 | support_bounce | +2.1% | 2.26 | 5 | -16.1% | 0.19 | X | X | X | FAIL：PF_lower=0.19, exp=+2.1%, n=5, holdout=[A_new=NA B=X C=NA] |
-| 2885 | support_bounce | +1.4% | 1.85 | 8 | -25.9% | 0.19 | X | O | O | FAIL：PF_lower=0.19, exp=+1.4%, n=8, holdout=[A_new=NA B=O C=O] |
-| 0056 | support_bounce | +1.2% | 1.40 | 7 | -21.1% | 0.20 | X | O | X | FAIL：PF_lower=0.20, exp=+1.2%, n=7, holdout=[A_new=NA B=O C=X] |
-| 2324 | support_bounce | +0.8% | 0.95 | 3 | -24.5% | N/A | X | X | X | FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2412 | support_bounce | +0.7% | 1.26 | 7 | -15.4% | 0.23 | X | X | X | FAIL：PF_lower=0.23, exp=+0.7%, n=7, holdout=[A_new=NA B=NA C=X] |
-| 2912 | support_bounce | +0.5% | 1.06 | 11 | -30.7% | 0.16 | X | X | O | FAIL：PF_lower=0.16, exp=+0.5%, n=11, holdout=[A_new=NA B=NA C=O] |
-| 2379 | support_bounce | +0.3% | 0.97 | 5 | -14.8% | 0.15 | X | O | X | FAIL：PF_lower=0.15, exp=+0.3%, n=5, holdout=[A_new=NA B=O C=X] |
-| 3045 | support_bounce | +0.1% | 1.11 | 12 | -13.7% | 0.27 | X | O | X | FAIL：PF_lower=0.27, exp=+0.1%, n=12, holdout=[A_new=NA B=O C=X] |
-| 2426 | support_bounce | +0.1% | 1.00 | 8 | -12.1% | 0.19 | X | X | X | FAIL：PF_lower=0.19, exp=+0.1%, n=8, holdout=[A_new=NA B=NA C=X] |
-| 2105 | support_bounce | -0.3% | 0.86 | 4 | -17.4% | N/A | X | O | O | FAIL：test expectancy=-0.3% < 0（負期望值） |
-| 1809 | support_bounce | -0.8% | 0.78 | 3 | -14.8% | N/A | X | X | X | FAIL：test expectancy=-0.8% < 0（負期望值） |
-| 5880 | support_bounce | -1.0% | 0.63 | 7 | -18.4% | 0.13 | X | O | X | FAIL：test expectancy=-1.0% < 0（負期望值） |
-| 1227 | support_bounce | -1.1% | 0.47 | 17 | -23.2% | 0.09 | X | X | X | FAIL：test expectancy=-1.1% < 0（負期望值） |
-| 1216 | support_bounce | -1.1% | 0.51 | 4 | -15.6% | N/A | X | X | O | FAIL：test expectancy=-1.1% < 0（負期望值） |
-| 2002 | support_bounce | -1.4% | 0.60 | 8 | -16.7% | 0.00 | X | O | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
-| 9921 | support_bounce | -1.5% | 0.68 | 7 | -28.4% | 0.14 | X | X | O | FAIL：test expectancy=-1.5% < 0（負期望值） |
-| 00878 | support_bounce | -1.7% | 0.45 | 7 | -19.8% | 0.07 | X | X | X | FAIL：test expectancy=-1.7% < 0（負期望值） |
-| 1101 | support_bounce | -1.9% | 0.40 | 11 | -24.8% | 0.00 | X | X | X | FAIL：test expectancy=-1.9% < 0（負期望值） |
-| 2881 | support_bounce | -2.0% | 0.51 | 5 | -32.6% | 0.00 | X | X | X | FAIL：test expectancy=-2.0% < 0（負期望值） |
-| 6505 | support_bounce | -2.2% | 0.38 | 9 | -23.6% | 0.00 | X | X | O | FAIL：test expectancy=-2.2% < 0（負期望值） |
-| 9940 | support_bounce | -2.4% | 0.31 | 14 | -32.0% | 0.03 | X | X | X | FAIL：test expectancy=-2.4% < 0（負期望值） |
-| 00940 | support_bounce | -2.8% | 0.40 | 2 | -16.0% | N/A | X | X | X | FAIL：test expectancy=-2.8% < 0（負期望值） |
-| 2356 | support_bounce | -2.9% | 0.49 | 4 | -18.6% | N/A | X | X | X | FAIL：test expectancy=-2.9% < 0（負期望值） |
-| 5347 | support_bounce | -3.3% | 0.35 | 5 | -31.1% | 0.00 | X | X | X | FAIL：test expectancy=-3.3% < 0（負期望值） |
-| 2327 | support_bounce | -3.7% | 0.08 | 4 | -21.6% | N/A | X | X | X | FAIL：test expectancy=-3.7% < 0（負期望值） |
-| 2618 | support_bounce | -6.0% | 0.00 | 1 | -6.6% | N/A | X | O | X | FAIL：test expectancy=-6.0% < 0（負期望值） |
-| 2603 | support_bounce | N/A | inf | 0 | -0.0% | N/A | X | O | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2426 | kd_oversold_cross | +0.9% | 1.39 | 26 | -25.5% | 0.64 | X | O | X | FAIL：PF_lower=0.64, exp=+0.9%, n=26, holdout=[A_new=NA B=O C=X] |
+| 1216 | kd_oversold_cross | +0.4% | 1.41 | 18 | -10.7% | 0.39 | X | X | O | FAIL：PF_lower=0.39, exp=+0.4%, n=18, holdout=[A_new=NA B=NA C=O] |
+| 2885 | kd_oversold_cross | +0.3% | 1.19 | 15 | -15.9% | 0.32 | X | O | X | FAIL：PF_lower=0.32, exp=+0.3%, n=15, holdout=[A_new=NA B=O C=X] |
+| 2379 | kd_oversold_cross | +0.3% | 1.03 | 22 | -19.9% | 0.35 | X | X | X | FAIL：PF_lower=0.35, exp=+0.3%, n=22, holdout=[A_new=NA B=X C=X] |
+| 2881 | kd_oversold_cross | +0.2% | 1.09 | 16 | -20.8% | 0.35 | X | O | X | FAIL：PF_lower=0.35, exp=+0.2%, n=16, holdout=[A_new=NA B=O C=X] |
+| 00878 | kd_oversold_cross | +0.0% | 0.98 | 19 | -15.3% | 0.27 | X | X | X | FAIL：PF_lower=0.27, exp=+0.0%, n=19, holdout=[A_new=NA B=NA C=X] |
+| 3661 | kd_oversold_cross | -0.0% | 0.87 | 14 | -28.4% | 0.27 | X | O | O | FAIL：test expectancy=-0.0% < 0（負期望值） |
+| 2603 | kd_oversold_cross | -0.1% | 0.90 | 21 | -37.1% | 0.31 | X | X | X | FAIL：test expectancy=-0.1% < 0（負期望值） |
+| 3045 | kd_oversold_cross | -0.1% | 0.87 | 18 | -14.4% | 0.24 | X | O | X | FAIL：test expectancy=-0.1% < 0（負期望值） |
+| 1605 | kd_oversold_cross | -0.4% | 0.71 | 25 | -30.5% | 0.24 | X | O | X | FAIL：test expectancy=-0.4% < 0（負期望值） |
+| 2327 | kd_oversold_cross | -0.6% | 0.66 | 29 | -31.9% | 0.28 | X | O | X | FAIL：test expectancy=-0.6% < 0（負期望值） |
+| 2886 | kd_oversold_cross | -0.6% | 0.56 | 21 | -26.2% | 0.19 | X | O | X | FAIL：test expectancy=-0.6% < 0（負期望值） |
+| 6505 | kd_oversold_cross | -0.8% | 0.56 | 34 | -37.7% | 0.21 | X | X | X | FAIL：test expectancy=-0.8% < 0（負期望值） |
+| 2618 | kd_oversold_cross | -0.8% | 0.69 | 22 | -38.9% | 0.22 | X | X | O | FAIL：test expectancy=-0.8% < 0（負期望值） |
+| 2356 | kd_oversold_cross | -0.9% | 0.54 | 36 | -33.9% | 0.24 | X | O | X | FAIL：test expectancy=-0.9% < 0（負期望值） |
+| 2412 | kd_oversold_cross | -0.9% | 0.34 | 16 | -19.9% | 0.04 | X | O | X | FAIL：test expectancy=-0.9% < 0（負期望值） |
+| 1809 | kd_oversold_cross | -1.0% | 0.50 | 47 | -55.6% | 0.22 | X | X | X | FAIL：test expectancy=-1.0% < 0（負期望值） |
+| 6669 | kd_oversold_cross | -1.0% | 0.76 | 26 | -57.0% | 0.32 | X | X | X | FAIL：test expectancy=-1.0% < 0（負期望值） |
+| 2324 | kd_oversold_cross | -1.1% | 0.38 | 24 | -31.9% | 0.14 | X | X | X | FAIL：test expectancy=-1.1% < 0（負期望值） |
+| 4938 | kd_oversold_cross | -1.1% | 0.36 | 31 | -36.3% | 0.14 | X | X | X | FAIL：test expectancy=-1.1% < 0（負期望值） |
+| 9940 | kd_oversold_cross | -1.2% | 0.38 | 41 | -46.2% | 0.14 | X | X | X | FAIL：test expectancy=-1.2% < 0（負期望值） |
+| 2912 | kd_oversold_cross | -1.3% | 0.26 | 22 | -25.8% | 0.06 | X | O | O | FAIL：test expectancy=-1.3% < 0（負期望值） |
+| 0056 | kd_oversold_cross | -1.3% | 0.22 | 15 | -19.6% | 0.01 | X | O | X | FAIL：test expectancy=-1.3% < 0（負期望值） |
+| 5880 | kd_oversold_cross | -1.3% | 0.34 | 17 | -26.2% | 0.10 | X | O | X | FAIL：test expectancy=-1.3% < 0（負期望值） |
+| 2207 | kd_oversold_cross | -1.3% | 0.39 | 35 | -38.4% | 0.10 | X | X | X | FAIL：test expectancy=-1.3% < 0（負期望值） |
+| 1227 | kd_oversold_cross | -1.4% | 0.16 | 41 | -44.9% | 0.06 | X | X | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
+| 1101 | kd_oversold_cross | -1.6% | 0.22 | 42 | -56.8% | 0.08 | X | O | X | FAIL：test expectancy=-1.6% < 0（負期望值） |
+| 9921 | kd_oversold_cross | -1.6% | 0.40 | 32 | -43.7% | 0.15 | X | X | X | FAIL：test expectancy=-1.6% < 0（負期望值） |
+| 2105 | kd_oversold_cross | -1.6% | 0.31 | 25 | -37.9% | 0.10 | X | X | X | FAIL：test expectancy=-1.6% < 0（負期望值） |
+| 2474 | kd_oversold_cross | -1.6% | 0.26 | 42 | -50.9% | 0.07 | X | X | O | FAIL：test expectancy=-1.6% < 0（負期望值） |
+| 2002 | kd_oversold_cross | -1.9% | 0.23 | 35 | -57.6% | 0.06 | X | O | X | FAIL：test expectancy=-1.9% < 0（負期望值） |
+| 2615 | kd_oversold_cross | -2.1% | 0.32 | 26 | -54.0% | 0.07 | X | X | X | FAIL：test expectancy=-2.1% < 0（負期望值） |
+| 5347 | kd_oversold_cross | -3.0% | 0.21 | 26 | -68.8% | 0.04 | X | X | X | FAIL：test expectancy=-3.0% < 0（負期望值） |
