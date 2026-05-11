@@ -189,6 +189,32 @@ SEARCH_SPACES = {
         "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
         "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
     },
+    # ── VWAP 偏離反轉
+    "vwap_revert": {
+        "vwap_period":     {"type": "categorical", "choices": [20, 50, 100]},
+        "deviation_pct":   {"type": "float", "low": 0.02, "high": 0.08, "step": 0.01},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── 52 週新高突破（年度高）
+    "yearly_high_break": {
+        "lookback":        {"type": "categorical", "choices": [120, 200, 250]},
+        "break_buffer":    {"type": "float", "low": 0.0, "high": 0.02, "step": 0.005},
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.20, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 2.0, "high": 4.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [30, 60, 120]},
+    },
+    # ── Keltner channel 突破
+    "keltner_breakout": {
+        "kc_period":       {"type": "categorical", "choices": [20, 30, 50]},
+        "kc_multiplier":   {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.15, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -1872,6 +1898,156 @@ def generate_adx_trending_pullback(df: pd.DataFrame, params: dict, regime=None, 
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_vwap_revert(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """VWAP-like (volume-weighted MA) deviation revert"""
+    close = df["close"]; volume = df["volume"]
+    vwap_p     = int(params["vwap_period"])
+    dev_pct    = float(params["deviation_pct"])
+    trend_n    = int(params["trend_ma"])
+    tp_pct     = float(params["take_profit_pct"])
+    max_hold   = int(params["max_hold_days"])
+
+    pv = close * volume
+    vwap = pv.rolling(vwap_p).sum() / volume.rolling(vwap_p).sum().replace(0, np.nan)
+    trend_s = sma(close, trend_n)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]; vw = vwap.iloc[i]; tm = trend_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            if not np.isnan(tm):
+                target_sl[i] = tm * 0.92
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(target_sl[i])) and c < target_sl[i]
+            if tp_hit or sl_hit or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            if (not np.isnan(vw) and c < vw * (1 - dev_pct)
+                and not np.isnan(tm) and c > tm * 0.88):
+                action[i] = "BUY"; target_buy[i] = vw * (1 - dev_pct)
+                in_pos = True; entry_price = c; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_yearly_high_break(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """52-week high breakout"""
+    high = df["high"]; close = df["close"]
+    lookback = int(params["lookback"])
+    buf      = float(params["break_buffer"])
+    trend_n  = int(params["trend_ma"])
+    tp_pct   = float(params["take_profit_pct"])
+    atr_k    = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+
+    rolling_high = high.shift(1).rolling(lookback).max()
+    trend_s = sma(close, trend_n)
+    atr_s = atr(df, 14)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    target_buy_mode = [""] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]; h = high.iloc[i]; rh = rolling_high.iloc[i]
+        tm = trend_s.iloc[i]; a = atr_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            if tp_hit or sl_hit or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            if (not np.isnan(rh) and rh > 0
+                and h >= rh * (1 + buf)
+                and not np.isnan(tm) and c > tm
+                and not np.isnan(a)):
+                action[i] = "BUY"
+                target_buy[i] = rh * (1 + buf)
+                target_buy_mode[i] = "stop"
+                in_pos = True; entry_price = h
+                sl_level = c - a * atr_k; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl,
+                          "target_buy_mode": target_buy_mode}, index=df.index)
+
+
+def generate_keltner_breakout(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Keltner channel breakout"""
+    close = df["close"]
+    kc_p     = int(params["kc_period"])
+    kc_mult  = float(params["kc_multiplier"])
+    trend_n  = int(params["trend_ma"])
+    tp_pct   = float(params["take_profit_pct"])
+    atr_k    = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+
+    mid = close.ewm(span=kc_p, adjust=False).mean()
+    atr_s = atr(df, kc_p)
+    upper = mid + kc_mult * atr_s
+    lower = mid - kc_mult * atr_s
+    trend_s = sma(close, trend_n)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    target_buy_mode = [""] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+
+    for i in range(1, n):
+        c0, c1 = close.iloc[i-1], close.iloc[i]
+        u0, u1 = upper.iloc[i-1], upper.iloc[i]
+        m1 = mid.iloc[i]
+        tm = trend_s.iloc[i]
+        a = atr_s.iloc[i]
+
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c1 >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c1 < sl_level
+            below_mid = (not np.isnan(m1)) and c1 < m1
+            if tp_hit or sl_hit or below_mid or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            # break above upper
+            break_up = (not np.isnan(c0) and not np.isnan(u0) and not np.isnan(c1) and not np.isnan(u1)
+                         and c0 <= u0 and c1 > u1)
+            if (break_up and not np.isnan(tm) and c1 > tm and not np.isnan(a)):
+                action[i] = "BUY"
+                target_buy[i] = u1
+                target_buy_mode[i] = "stop"
+                in_pos = True; entry_price = c1
+                sl_level = c1 - a * atr_k; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl,
+                          "target_buy_mode": target_buy_mode}, index=df.index)
+
+
 TEMPLATE_GENERATORS = {
     "trend_pullback":         generate_T1,
     "donchian_breakout":      generate_T2,
@@ -1893,6 +2069,9 @@ TEMPLATE_GENERATORS = {
     "macd_cross":             generate_macd_cross,
     "kd_oversold_cross":      generate_kd_oversold_cross,
     "adx_trending_pullback":  generate_adx_trending_pullback,
+    "vwap_revert":            generate_vwap_revert,
+    "yearly_high_break":      generate_yearly_high_break,
+    "keltner_breakout":       generate_keltner_breakout,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

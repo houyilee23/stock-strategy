@@ -1,4 +1,4 @@
-# Phase 4: macd_cross + kd_oversold_cross + adx_trending_pullback
+# Phase 5: vwap_revert + yearly_high_break + keltner_breakout
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -35,22 +35,30 @@
   tier: C
   tradeable: true
 00878:
-  bnh_cagr: 0.15979092539324924
-  bnh_div_yield: 0.06150207767090511
-  bnh_holdable: true
-  bnh_max_dd: -0.17843780076598803
-  bnh_position_pct_max: 0.2
-  bnh_tier: BNH_B
-  name: 國泰永續高股息
-  params_ref: bollinger_squeeze.yaml#per_stock.00878
-  position_pct_max: 0.0
-  template: bollinger_squeeze
-  test_expectancy: 0.0135
-  test_max_dd: -0.1111
-  test_n_trades: 10
-  test_pf: 1.96
-  tier: F
-  tradeable: false
+  best_template: yearly_high_break
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: yearly_high_break.yaml#per_stock.00878
+  position_pct_recommended: 0.15
+  template: yearly_high_break
+  test_alpha_vs_0050: -0.1902
+  test_cagr: 0.0798
+  test_expectancy: 0.1475
+  test_max_dd: -0.1326
+  test_n_trades: 3
+  test_pf: null
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+14.7% ≥ 5%, |DD|=13% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 00919:
   bnh_cagr: null
   bnh_div_yield: null
@@ -289,22 +297,31 @@
   tier: S
   tradeable: true
 '1809':
-  bnh_cagr: 0.07850144899741518
-  bnh_div_yield: 0.014701264044712085
-  bnh_holdable: false
-  bnh_max_dd: -0.6149653262644668
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 中釉
-  params_ref: chip_momentum.yaml#per_stock.1809
-  position_pct_max: 0.0
-  template: chip_momentum
+  best_template: vwap_revert
+  bootstrap:
+    n_iterations: 1000
+    n_original: 18
+    pf_lower: 1.137
+    pf_mean: 3.962
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: vwap_revert.yaml#per_stock.1809
+  position_pct_recommended: 0.3
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: vwap_revert
+  test_alpha_vs_0050: -0.1525
+  test_cagr: 0.1174
   test_expectancy: 0.0353
-  test_max_dd: -0.3577
-  test_n_trades: 11
-  test_pf: 1.318
-  tier: F
-  tradeable: false
+  test_max_dd: -0.2089
+  test_n_trades: 18
+  test_pf: 3.49
+  tier: B
+  tier_reason: PF_lower=1.14 ≥ 1.0, exp=+3.5% ≥ 2%, n=18≥5, holdout=[A_new=NA B=O
+    C=O]
+  verdict: WEAK
 '2002':
   bnh_cagr: 0.009390799697681196
   bnh_div_yield: 0.03803225950583084
@@ -468,22 +485,30 @@
   tier: F
   tradeable: false
 '2327':
-  bnh_cagr: 0.3102343471565565
-  bnh_div_yield: 0.025211172929769696
-  bnh_holdable: false
-  bnh_max_dd: -0.7684210526315784
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 國巨
-  params_ref: donchian_breakout.yaml#per_stock.2327
-  position_pct_max: 0.0
-  template: donchian_breakout
-  test_expectancy: 0.0351
-  test_max_dd: -0.371
-  test_n_trades: 7
-  test_pf: 1.269
-  tier: F
-  tradeable: false
+  best_template: yearly_high_break
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: yearly_high_break.yaml#per_stock.2327
+  position_pct_recommended: 0.15
+  template: yearly_high_break
+  test_alpha_vs_0050: -0.2157
+  test_cagr: 0.0542
+  test_expectancy: 0.1029
+  test_max_dd: -0.1908
+  test_n_trades: 3
+  test_pf: 15.72
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=15.72 ≥ 3.0, exp=+10.3% ≥ 5%, |DD|=19% ≤ 25%,
+    holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '2330':
   bnh_cagr: null
   bnh_div_yield: null
@@ -816,39 +841,56 @@
   tier: F
   tradeable: false
 '2615':
-  bnh_cagr: 0.3049000082209523
-  bnh_div_yield: 0.04438550745460158
-  bnh_holdable: true
-  bnh_max_dd: -0.807690526768312
-  bnh_position_pct_max: 0.2
-  bnh_tier: BNH_B
-  name: 萬海
-  params_ref: donchian_breakout.yaml#per_stock.2615
-  position_pct_max: 0.0
-  template: donchian_breakout
-  test_expectancy: 0.1787
-  test_max_dd: -0.262
-  test_n_trades: 7
-  test_pf: 3.468
-  tier: F
-  tradeable: false
+  best_template: yearly_high_break
+  bootstrap:
+    n_iterations: 1000
+    n_original: 9
+    pf_lower: 1.023
+    pf_mean: 3.893
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: yearly_high_break.yaml#per_stock.2615
+  position_pct_recommended: 0.3
+  template: yearly_high_break
+  test_alpha_vs_0050: -0.1008
+  test_cagr: 0.1691
+  test_expectancy: 0.1079
+  test_max_dd: -0.2719
+  test_n_trades: 9
+  test_pf: 2.787
+  tier: B
+  tier_reason: PF_lower=1.02 ≥ 1.0, exp=+10.8% ≥ 2%, n=9≥5, holdout=[A_new=NA B=NA
+    C=NA]
+  verdict: PASS
 '2618':
-  bnh_cagr: 0.18951584952345257
-  bnh_div_yield: 0.026988394161847656
-  bnh_holdable: true
-  bnh_max_dd: -0.49124024085374196
-  bnh_position_pct_max: 0.3
-  bnh_tier: BNH_A
-  name: 長榮航
-  params_ref: momentum_hold.yaml#per_stock.2618
-  position_pct_max: 0.0
-  template: momentum_hold
-  test_expectancy: 0.0308
-  test_max_dd: -0.2347
+  best_template: keltner_breakout
+  bootstrap:
+    n_iterations: 1000
+    n_original: 14
+    pf_lower: 0.732
+    pf_mean: 2.62
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: keltner_breakout.yaml#per_stock.2618
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: keltner_breakout
+  test_alpha_vs_0050: -0.1898
+  test_cagr: 0.0801
+  test_expectancy: 0.0335
+  test_max_dd: -0.1968
   test_n_trades: 14
-  test_pf: 2.696
-  tier: F
-  tradeable: false
+  test_pf: 1.94
+  tier: C
+  tier_reason: PF_lower=0.73 ≥ 0.7, exp=+3.3% ≥ 1%, n=14≥5, holdout=[A_new=NA B=O
+    C=O]
+  verdict: WEAK
 '2881':
   bnh_cagr: 0.1513889431135269
   bnh_div_yield: 0.039653087658106906
@@ -927,22 +969,29 @@
     C=X]
   verdict: WEAK
 '2885':
-  bnh_cagr: 0.20390724937275673
-  bnh_div_yield: 0.04370709264650759
-  bnh_holdable: true
-  bnh_max_dd: -0.3220338983050841
-  bnh_position_pct_max: 0.3
-  bnh_tier: BNH_A
-  name: 元大金
-  params_ref: momentum_hold.yaml#per_stock.2885
-  position_pct_max: 0.0
-  template: momentum_hold
-  test_expectancy: 0.1214
-  test_max_dd: -0.2053
-  test_n_trades: 5
-  test_pf: 16.157
-  tier: F
-  tradeable: false
+  best_template: yearly_high_break
+  bootstrap:
+    n_iterations: 1000
+    n_original: 7
+    pf_lower: 0.736
+    pf_mean: 3.753
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: false
+  params_ref: yearly_high_break.yaml#per_stock.2885
+  position_pct_recommended: 0.15
+  template: yearly_high_break
+  test_alpha_vs_0050: -0.1881
+  test_cagr: 0.0818
+  test_expectancy: 0.0668
+  test_max_dd: -0.1977
+  test_n_trades: 7
+  test_pf: 3.841
+  tier: C
+  tier_reason: PF_lower=0.74 ≥ 0.7, exp=+6.7% ≥ 1%, n=7≥5, holdout=[A_new=NA B=X C=X]
+  verdict: PASS
 '2886':
   bnh_cagr: 0.1266341397986599
   bnh_div_yield: 0.042720554726312206
@@ -1174,22 +1223,30 @@
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '3661':
-  bnh_cagr: 0.8071200619497936
-  bnh_div_yield: 0.00831587965794551
-  bnh_holdable: false
-  bnh_max_dd: -0.6267967145790553
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 世芯-KY
-  params_ref: bollinger_squeeze.yaml#per_stock.3661
-  position_pct_max: 0.0
-  template: bollinger_squeeze
-  test_expectancy: 0.1521
-  test_max_dd: -0.378
-  test_n_trades: 4
-  test_pf: 5.741
-  tier: F
-  tradeable: false
+  best_template: yearly_high_break
+  bootstrap:
+    n_iterations: 1000
+    n_original: 11
+    pf_lower: 0.826
+    pf_mean: 3.126
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: yearly_high_break.yaml#per_stock.3661
+  position_pct_recommended: 0.15
+  template: yearly_high_break
+  test_alpha_vs_0050: -0.1046
+  test_cagr: 0.1654
+  test_expectancy: 0.0931
+  test_max_dd: -0.3561
+  test_n_trades: 11
+  test_pf: 1.996
+  tier: C
+  tier_reason: PF_lower=0.83 ≥ 0.7, exp=+9.3% ≥ 1%, n=11≥5, holdout=[A_new=NA B=O
+    C=NA]
+  verdict: DD_BREACH
 '3711':
   bnh_cagr: null
   bnh_div_yield: null
@@ -1259,22 +1316,31 @@
   tier: C
   tradeable: true
 '5347':
-  bnh_cagr: 0.12492624393118557
-  bnh_div_yield: 0.0412309944170838
-  bnh_holdable: false
-  bnh_max_dd: -1.0
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 世界先進
-  params_ref: mean_reversion.yaml#per_stock.5347
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.0101
-  test_max_dd: -0.3108
-  test_n_trades: 5
-  test_pf: 1.167
-  tier: F
-  tradeable: false
+  best_template: vwap_revert
+  bootstrap:
+    n_iterations: 1000
+    n_original: 12
+    pf_lower: 0.738
+    pf_mean: 3.162
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: false
+  params_ref: vwap_revert.yaml#per_stock.5347
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: vwap_revert
+  test_alpha_vs_0050: -0.2096
+  test_cagr: 0.0604
+  test_expectancy: 0.0284
+  test_max_dd: -0.1612
+  test_n_trades: 12
+  test_pf: 2.677
+  tier: C
+  tier_reason: PF_lower=0.74 ≥ 0.7, exp=+2.8% ≥ 1%, n=12≥5, holdout=[A_new=NA B=O
+    C=X]
+  verdict: WEAK
 '5871':
   bnh_cagr: null
   bnh_div_yield: null
