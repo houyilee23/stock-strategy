@@ -215,6 +215,32 @@ SEARCH_SPACES = {
         "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
         "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
     },
+    # ── MFI (Money Flow Index) 量價超賣反轉
+    "mfi_oversold": {
+        "mfi_period":      {"type": "categorical", "choices": [10, 14, 20]},
+        "mfi_threshold":   {"type": "int", "low": 20, "high": 35, "step": 5},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── ROC (Rate of Change) 極端反轉
+    "roc_reversal": {
+        "roc_period":      {"type": "categorical", "choices": [10, 14, 21]},
+        "roc_threshold":   {"type": "float", "low": -0.20, "high": -0.05, "step": 0.025},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.15, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── Williams %R 極端反轉
+    "williams_r_extreme": {
+        "wr_period":       {"type": "categorical", "choices": [10, 14, 21]},
+        "wr_oversold":     {"type": "int", "low": -95, "high": -80, "step": 5},
+        "wr_overbought":   {"type": "int", "low": -25, "high": -10, "step": 5},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -2048,6 +2074,143 @@ def generate_keltner_breakout(df: pd.DataFrame, params: dict, regime=None, chip_
                           "target_buy_mode": target_buy_mode}, index=df.index)
 
 
+def generate_mfi_oversold(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Money Flow Index oversold reversal"""
+    high = df["high"]; low = df["low"]; close = df["close"]; volume = df["volume"]
+    period   = int(params["mfi_period"])
+    threshold = int(params["mfi_threshold"])
+    trend_n  = int(params["trend_ma"])
+    tp_pct   = float(params["take_profit_pct"])
+    max_hold = int(params["max_hold_days"])
+
+    tp = (high + low + close) / 3
+    raw_money = tp * volume
+    pos_flow = raw_money.where(tp > tp.shift(), 0)
+    neg_flow = raw_money.where(tp < tp.shift(), 0)
+    pos_sum = pos_flow.rolling(period).sum()
+    neg_sum = neg_flow.rolling(period).sum().replace(0, np.nan)
+    mfi = 100 - (100 / (1 + pos_sum / neg_sum))
+    trend_s = sma(close, trend_n)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]; m = mfi.iloc[i]; tm = trend_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            if not np.isnan(tm):
+                target_sl[i] = tm * 0.92
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(target_sl[i])) and c < target_sl[i]
+            mfi_overbought = (not np.isnan(m)) and m > 70
+            if tp_hit or sl_hit or mfi_overbought or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            if (not np.isnan(m) and m < threshold and
+                not np.isnan(tm) and c > tm * 0.85):
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_roc_reversal(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Rate of Change extreme reversal"""
+    close = df["close"]
+    roc_p     = int(params["roc_period"])
+    roc_th    = float(params["roc_threshold"])
+    trend_n   = int(params["trend_ma"])
+    tp_pct    = float(params["take_profit_pct"])
+    atr_k     = float(params["atr_stop_k"])
+    max_hold  = int(params["max_hold_days"])
+
+    roc = (close - close.shift(roc_p)) / close.shift(roc_p)
+    trend_s = sma(close, trend_n)
+    atr_s = atr(df, 14)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]; r = roc.iloc[i]; tm = trend_s.iloc[i]; a = atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            if tp_hit or sl_hit or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            if (not np.isnan(r) and r < roc_th
+                and not np.isnan(tm) and c > tm * 0.80
+                and not np.isnan(a)):
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c
+                sl_level = c - a * atr_k; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_williams_r_extreme(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Williams %R extreme reversal"""
+    high = df["high"]; low = df["low"]; close = df["close"]
+    period   = int(params["wr_period"])
+    wr_os    = int(params["wr_oversold"])
+    wr_ob    = int(params["wr_overbought"])
+    trend_n  = int(params["trend_ma"])
+    tp_pct   = float(params["take_profit_pct"])
+    max_hold = int(params["max_hold_days"])
+
+    hh = high.rolling(period).max()
+    ll = low.rolling(period).min()
+    wr = -100 * (hh - close) / (hh - ll).replace(0, np.nan)
+    trend_s = sma(close, trend_n)
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False; hold_days = 0; entry_price = np.nan
+
+    for i in range(n):
+        c = close.iloc[i]; w = wr.iloc[i]; tm = trend_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            if not np.isnan(tm):
+                target_sl[i] = tm * 0.92
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(target_sl[i])) and c < target_sl[i]
+            wr_overbought = (not np.isnan(w)) and w > wr_ob
+            if tp_hit or sl_hit or wr_overbought or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            if (not np.isnan(w) and w < wr_os
+                and not np.isnan(tm) and c > tm * 0.85):
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
 TEMPLATE_GENERATORS = {
     "trend_pullback":         generate_T1,
     "donchian_breakout":      generate_T2,
@@ -2072,6 +2235,9 @@ TEMPLATE_GENERATORS = {
     "vwap_revert":            generate_vwap_revert,
     "yearly_high_break":      generate_yearly_high_break,
     "keltner_breakout":       generate_keltner_breakout,
+    "mfi_oversold":           generate_mfi_oversold,
+    "roc_reversal":           generate_roc_reversal,
+    "williams_r_extreme":     generate_williams_r_extreme,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

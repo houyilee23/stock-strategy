@@ -68,7 +68,7 @@ _最後更新：**2026-05-12**_
 | [2379](output/reports/per_stock/2379.md) | 瑞昱 | 584.0 | HOLD | F | — | 65 | [空頭] | BULL |
 | [3034](output/reports/per_stock/3034.md) | 聯詠 | 496.5 | HOLD | C | — | 79 | [空頭] | BULL |
 | [3008](output/reports/per_stock/3008.md) | 大立光 | 2545.0 | HOLD | C | 15% | 52 | [多頭] | BULL |
-| [4938](output/reports/per_stock/4938.md) | 和碩 | 83.4 | HOLD | F | — | 59 | [多頭] | BULL |
+| [4938](output/reports/per_stock/4938.md) | 和碩 | 83.4 | HOLD | C | — | 59 | [多頭] | BULL |
 | [3231](output/reports/per_stock/3231.md) | 緯創 | 139.0 | HOLD | C | — | 51 | [多頭] | BULL |
 | [2474](output/reports/per_stock/2474.md) | 可成 | 208.0 | HOLD | F | — | 51 | [空頭] | BULL |
 | [2376](output/reports/per_stock/2376.md) | 技嘉 | 324.5 | HOLD | C | 15% | 77 | [空頭] | BULL |

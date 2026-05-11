@@ -1,4 +1,4 @@
-# Phase 5: vwap_revert + yearly_high_break + keltner_breakout
+# Phase 6: mfi_oversold + roc_reversal + williams_r_extreme
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -1282,22 +1282,30 @@
   tier: C
   tradeable: true
 '4938':
-  bnh_cagr: 0.08159547665176525
-  bnh_div_yield: 0.05914899369631884
-  bnh_holdable: false
-  bnh_max_dd: -0.47649052108773715
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 和碩
-  params_ref: mean_reversion.yaml#per_stock.4938
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.0654
-  test_max_dd: -0.0254
-  test_n_trades: 2
-  test_pf: null
-  tier: F
-  tradeable: false
+  best_template: roc_reversal
+  bootstrap:
+    n_iterations: 1000
+    n_original: 6
+    pf_lower: 0.725
+    pf_mean: 3.682
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: roc_reversal.yaml#per_stock.4938
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: roc_reversal
+  test_alpha_vs_0050: -0.2373
+  test_cagr: 0.0326
+  test_expectancy: 0.03
+  test_max_dd: -0.0467
+  test_n_trades: 6
+  test_pf: 3.841
+  tier: C
+  tier_reason: PF_lower=0.73 ≥ 0.7, exp=+3.0% ≥ 1%, n=6≥5, holdout=[A_new=NA B=O C=O]
+  verdict: WEAK
 '4958':
   bnh_cagr: null
   bnh_div_yield: null

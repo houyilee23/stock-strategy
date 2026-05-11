@@ -19,7 +19,7 @@
 | 2379 | 瑞昱 | — | 584.0 | HOLD | F | — | style1_pullback | — | — | — | 65 | [空頭] | BULL |  |
 | 3034 | 聯詠 | — | 496.5 | HOLD | C | — | style1_pullback | — | — | — | 79 | [空頭] | BULL |  |
 | 3008 | 大立光 | — | 2545.0 | HOLD | C | 15% | style1_pullback | — | — | — | 52 | [多頭] | BULL |  |
-| 4938 | 和碩 | — | 83.4 | HOLD | F | — | style1_pullback | — | — | — | 59 | [多頭] | BULL |  |
+| 4938 | 和碩 | — | 83.4 | HOLD | C | — | style1_pullback | — | — | — | 59 | [多頭] | BULL |  |
 | 3231 | 緯創 | — | 139.0 | HOLD | C | — | style1_pullback | — | — | — | 51 | [多頭] | BULL |  |
 | 2474 | 可成 | — | 208.0 | HOLD | F | — | style1_pullback | — | — | — | 51 | [空頭] | BULL |  |
 | 2376 | 技嘉 | — | 324.5 | HOLD | C | 15% | style1_pullback | — | — | — | 77 | [空頭] | BULL |  |
