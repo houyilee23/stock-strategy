@@ -57,7 +57,7 @@
 | 1301 | 台塑 | — | 49.2 | HOLD | A | 50% | gap_continuation | — | — | — | 47 | [多頭] | BULL |  |
 | 1303 | 南亞 | — | 91.5 | HOLD | A | 50% | gap_continuation | — | — | — | 56 | [多頭] | BULL |  |
 | 1326 | 台化 | — | 47.8 | HOLD | B | 30% | low_vol_pullback | TP 50 / SL 38 | — | — | 46 | [多頭] | BULL |  |
-| 6505 | 台塑化 | — | 54.0 | HOLD | F | — | style1_pullback | — | 53.3~53.8 | 47.9 | 50 | [多頭] | BULL | 觀察中 RSI=49.7 |
+| 6505 | 台塑化 | — | 54.0 | HOLD | C | — | style1_pullback | — | 53.3~53.8 | 47.9 | 50 | [多頭] | BULL | 觀察中 RSI=49.7 |
 | 2002 | 中鋼 | — | 18.6 | HOLD | F | — | style1_pullback | — | — | — | 38 | [空頭] | BULL |  |
 | 1809 | 中釉（陶瓷） | — | 39.6 | HOLD | B | — | style1_pullback | — | — | — | 78 | [多頭] | BULL |  |
 | 1101 | 台泥 | — | 25.4 | HOLD | F | — | style1_pullback | — | — | — | 59 | [多頭] | BULL |  |
@@ -74,7 +74,7 @@
 | 1605 | 華新 | — | 35.0 | HOLD | F | — | style1_pullback | — | — | — | 61 | [多頭] | BULL |  |
 | 2027 | 大成鋼 | — | 40.0 | HOLD | C | — | style1_pullback | — | — | — | 68 | [空頭] | BULL |  |
 | 1802 | 台玻 | — | 69.9 | HOLD | S | 100% | style1_pullback | — | — | — | 56 | [多頭] | BULL |  |
-| 2603 | 長榮 | — | 214.0 | HOLD | F | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 2603 | 長榮 | — | 214.0 | HOLD | C | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 2615 | 萬海 | — | 78.5 | HOLD | B | — | style1_pullback | — | — | — | 57 | [空頭] | BULL |  |
 | 2618 | 長榮航 | — | 35.9 | HOLD | C | — | style1_pullback | — | — | — | 61 | [空頭] | BULL |  |
 | 0050 | 元大台灣50（2025/06 4:1 拆分樣本） | — | 96.9 | HOLD | — | — | style1_pullback | — | — | — | 76 | [多頭] | BULL |  |

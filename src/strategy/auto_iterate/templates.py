@@ -241,6 +241,33 @@ SEARCH_SPACES = {
         "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
         "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
     },
+    # ── EMA cross (vs SMA cross)
+    "ema_cross": {
+        "fast_n":          {"type": "categorical", "choices": [5, 8, 12, 20]},
+        "slow_n":          {"type": "categorical", "choices": [21, 34, 55, 100]},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.20, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.5, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80, 120]},
+    },
+    # ── Gap-down 反轉
+    "gap_down_revert": {
+        "gap_pct":         {"type": "float", "low": 0.01, "high": 0.04, "step": 0.005},
+        "require_close_up":{"type": "categorical", "choices": [True, False]},
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [5, 10, 20]},
+    },
+    # ── PSAR 反轉
+    "psar_flip": {
+        "step":            {"type": "float", "low": 0.01, "high": 0.04, "step": 0.005},
+        "max_step":        {"type": "float", "low": 0.1, "high": 0.3, "step": 0.05},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.15, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -2211,6 +2238,150 @@ def generate_williams_r_extreme(df: pd.DataFrame, params: dict, regime=None, chi
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_ema_cross(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """EMA cross (similar to golden_cross but using EMA)"""
+    close = df["close"]
+    fast_n = int(params["fast_n"]); slow_n = int(params["slow_n"])
+    trend_n = int(params["trend_ma"])
+    tp_pct = float(params["take_profit_pct"])
+    atr_k = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+    if fast_n >= slow_n:
+        return pd.DataFrame({"action": ["HOLD"] * len(df)}, index=df.index)
+    fast_s = close.ewm(span=fast_n, adjust=False).mean()
+    slow_s = close.ewm(span=slow_n, adjust=False).mean()
+    trend_s = sma(close, trend_n)
+    atr_s = atr(df, 14)
+    n = len(df)
+    action = ["HOLD"] * n; target_buy = [np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+    for i in range(1, n):
+        c = close.iloc[i]
+        f0, f1 = fast_s.iloc[i-1], fast_s.iloc[i]
+        s0, s1 = slow_s.iloc[i-1], slow_s.iloc[i]
+        tm = trend_s.iloc[i]; a = atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            death = (not np.isnan(f0) and not np.isnan(s0) and f0 >= s0 and f1 < s1)
+            if tp_hit or sl_hit or death or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            golden = (not np.isnan(f0) and not np.isnan(s0) and f0 <= s0 and f1 > s1)
+            if golden and not np.isnan(tm) and c > tm and not np.isnan(a):
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c; sl_level = c - a * atr_k; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_gap_down_revert(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Gap-down + intraday reversal"""
+    open_ = df["open"]; close = df["close"]
+    gap_pct = float(params["gap_pct"])
+    req_up = bool(params["require_close_up"])
+    trend_n = int(params["trend_ma"])
+    tp_pct = float(params["take_profit_pct"])
+    atr_k = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+    trend_s = sma(close, trend_n)
+    atr_s = atr(df, 14)
+    n = len(df)
+    action = ["HOLD"] * n; target_buy = [np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+    for i in range(1, n):
+        prev_c = close.iloc[i-1]; o = open_.iloc[i]; c = close.iloc[i]
+        tm = trend_s.iloc[i]; a = atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            if tp_hit or sl_hit or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            gap_down = prev_c > 0 and (prev_c - o) / prev_c >= gap_pct
+            close_up = c > o
+            cond = gap_down and (close_up if req_up else True)
+            if cond and not np.isnan(tm) and c > tm * 0.85 and not np.isnan(a):
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c
+                sl_level = o - a * atr_k * 0.5; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_psar_flip(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Parabolic SAR flip from down to up"""
+    high = df["high"]; low = df["low"]; close = df["close"]
+    step = float(params["step"])
+    max_step = float(params["max_step"])
+    trend_n = int(params["trend_ma"])
+    tp_pct = float(params["take_profit_pct"])
+    atr_k = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+
+    # Simple PSAR
+    psar = np.zeros(len(df)); trend = np.zeros(len(df))  # 1 = up, -1 = down
+    af = step
+    ep = float(high.iloc[0])
+    psar[0] = float(low.iloc[0])
+    trend[0] = 1
+    for i in range(1, len(df)):
+        prev = psar[i-1]
+        if trend[i-1] == 1:  # uptrend
+            psar[i] = prev + af * (ep - prev)
+            if low.iloc[i] < psar[i]:
+                trend[i] = -1; psar[i] = ep; ep = float(low.iloc[i]); af = step
+            else:
+                trend[i] = 1
+                if high.iloc[i] > ep:
+                    ep = float(high.iloc[i]); af = min(af + step, max_step)
+        else:  # downtrend
+            psar[i] = prev + af * (ep - prev)
+            if high.iloc[i] > psar[i]:
+                trend[i] = 1; psar[i] = ep; ep = float(high.iloc[i]); af = step
+            else:
+                trend[i] = -1
+                if low.iloc[i] < ep:
+                    ep = float(low.iloc[i]); af = min(af + step, max_step)
+
+    trend_s = sma(close, trend_n)
+    atr_s = atr(df, 14)
+    n = len(df)
+    action = ["HOLD"] * n; target_buy = [np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos = False; hold_days = 0; entry_price = np.nan; sl_level = np.nan
+    for i in range(1, n):
+        c = close.iloc[i]; tm = trend_s.iloc[i]; a = atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            flip_down = trend[i] == -1 and trend[i-1] == 1
+            if tp_hit or sl_hit or flip_down or hold_days >= max_hold:
+                action[i] = "SELL"; in_pos = False; hold_days = 0
+                target_tp[i] = np.nan; target_sl[i] = np.nan
+        else:
+            flip_up = trend[i] == 1 and trend[i-1] == -1
+            if flip_up and not np.isnan(tm) and c > tm * 0.85 and not np.isnan(a):
+                action[i] = "BUY"; target_buy[i] = c
+                in_pos = True; entry_price = c
+                sl_level = c - a * atr_k; hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
 TEMPLATE_GENERATORS = {
     "trend_pullback":         generate_T1,
     "donchian_breakout":      generate_T2,
@@ -2238,6 +2409,9 @@ TEMPLATE_GENERATORS = {
     "mfi_oversold":           generate_mfi_oversold,
     "roc_reversal":           generate_roc_reversal,
     "williams_r_extreme":     generate_williams_r_extreme,
+    "ema_cross":              generate_ema_cross,
+    "gap_down_revert":        generate_gap_down_revert,
+    "psar_flip":              generate_psar_flip,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

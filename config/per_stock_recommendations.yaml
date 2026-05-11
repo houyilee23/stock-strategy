@@ -1,4 +1,4 @@
-# Phase 6: mfi_oversold + roc_reversal + williams_r_extreme
+# Phase 7: ema_cross + gap_down_revert + psar_flip
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -824,22 +824,31 @@
   tier: F
   tradeable: false
 '2603':
-  bnh_cagr: 0.46255287151474533
-  bnh_div_yield: 0.17635998325508695
-  bnh_holdable: true
-  bnh_max_dd: -0.6815373054054896
-  bnh_position_pct_max: 0.2
-  bnh_tier: BNH_B
-  name: 長榮
-  params_ref: monthly_revenue_event.yaml#per_stock.2603
-  position_pct_max: 0.0
-  template: monthly_revenue_event
-  test_expectancy: 0.1094
-  test_max_dd: -0.0535
-  test_n_trades: 2
-  test_pf: 13.329
-  tier: F
-  tradeable: false
+  best_template: gap_down_revert
+  bootstrap:
+    n_iterations: 1000
+    n_original: 13
+    pf_lower: 0.85
+    pf_mean: 3.396
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: gap_down_revert.yaml#per_stock.2603
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: gap_down_revert
+  test_alpha_vs_0050: -0.2312
+  test_cagr: 0.0387
+  test_expectancy: 0.0163
+  test_max_dd: -0.1083
+  test_n_trades: 13
+  test_pf: 2.966
+  tier: C
+  tier_reason: PF_lower=0.85 ≥ 0.7, exp=+1.6% ≥ 1%, n=13≥5, holdout=[A_new=NA B=O
+    C=O]
+  verdict: WEAK
 '2615':
   best_template: yearly_high_break
   bootstrap:
@@ -1436,22 +1445,30 @@
     C=X]
   verdict: WEAK
 '6505':
-  bnh_cagr: -0.10524583220700723
-  bnh_div_yield: 0.024775667203652155
-  bnh_holdable: false
-  bnh_max_dd: -0.7258208354581803
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 台塑化
-  params_ref: trend_pullback.yaml#per_stock.6505
-  position_pct_max: 0.0
-  template: trend_pullback
-  test_expectancy: 0.3981
-  test_max_dd: -0.0565
-  test_n_trades: 1
-  test_pf: null
-  tier: F
-  tradeable: false
+  best_template: ema_cross
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: ema_cross.yaml#per_stock.6505
+  position_pct_recommended: 0.15
+  template: ema_cross
+  test_alpha_vs_0050: -0.217
+  test_cagr: 0.0529
+  test_expectancy: 0.1013
+  test_max_dd: -0.1338
+  test_n_trades: 3
+  test_pf: 7.6
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=7.60 ≥ 3.0, exp=+10.1% ≥ 5%, |DD|=13% ≤ 25%,
+    holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '6515':
   bnh_cagr: null
   bnh_div_yield: null

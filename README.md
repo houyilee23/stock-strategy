@@ -14,7 +14,7 @@ _最後更新：**2026-05-12**_
 |------|------|------|------|------|------|-----|------|--------|
 | [1301](output/reports/per_stock/1301.md) | 台塑 | 49.2 | HOLD | A | 50% | 47 | [多頭] | BULL |
 | [1326](output/reports/per_stock/1326.md) | 台化 | 47.8 | HOLD | B | 30% | 46 | [多頭] | BULL |
-| [6505](output/reports/per_stock/6505.md) | 台塑化 | 54.0 | HOLD | F | — | 50 | [多頭] | BULL |
+| [6505](output/reports/per_stock/6505.md) | 台塑化 | 54.0 | HOLD | C | — | 50 | [多頭] | BULL |
 | [1303](output/reports/per_stock/1303.md) | 南亞 | 91.5 | HOLD | A | 50% | 56 | [多頭] | BULL |
 | [1809](output/reports/per_stock/1809.md) | 中釉（陶瓷） | 39.6 | HOLD | B | — | 78 | [多頭] | BULL |
 | [2002](output/reports/per_stock/2002.md) | 中鋼 | 18.6 | HOLD | F | — | 38 | [空頭] | BULL |
@@ -106,7 +106,7 @@ _最後更新：**2026-05-12**_
 | [1301](output/reports/per_stock/1301.md) | 台塑 | 49.2 | HOLD | A | 50% | 47 | [多頭] | BULL |
 | [1303](output/reports/per_stock/1303.md) | 南亞 | 91.5 | HOLD | A | 50% | 56 | [多頭] | BULL |
 | [1326](output/reports/per_stock/1326.md) | 台化 | 47.8 | HOLD | B | 30% | 46 | [多頭] | BULL |
-| [6505](output/reports/per_stock/6505.md) | 台塑化 | 54.0 | HOLD | F | — | 50 | [多頭] | BULL |
+| [6505](output/reports/per_stock/6505.md) | 台塑化 | 54.0 | HOLD | C | — | 50 | [多頭] | BULL |
 | [2002](output/reports/per_stock/2002.md) | 中鋼 | 18.6 | HOLD | F | — | 38 | [空頭] | BULL |
 | [1809](output/reports/per_stock/1809.md) | 中釉（陶瓷） | 39.6 | HOLD | B | — | 78 | [多頭] | BULL |
 | [1101](output/reports/per_stock/1101.md) | 台泥 | 25.4 | HOLD | F | — | 59 | [多頭] | BULL |
@@ -123,7 +123,7 @@ _最後更新：**2026-05-12**_
 | [1605](output/reports/per_stock/1605.md) | 華新 | 35.0 | HOLD | F | — | 61 | [多頭] | BULL |
 | [2027](output/reports/per_stock/2027.md) | 大成鋼 | 40.0 | HOLD | C | — | 68 | [空頭] | BULL |
 | [1802](output/reports/per_stock/1802.md) | 台玻 | 69.9 | HOLD | S | 100% | 56 | [多頭] | BULL |
-| [2603](output/reports/per_stock/2603.md) | 長榮 | 214.0 | HOLD | F | — | 66 | [多頭] | BULL |
+| [2603](output/reports/per_stock/2603.md) | 長榮 | 214.0 | HOLD | C | — | 66 | [多頭] | BULL |
 | [2615](output/reports/per_stock/2615.md) | 萬海 | 78.5 | HOLD | B | — | 57 | [空頭] | BULL |
 | [2618](output/reports/per_stock/2618.md) | 長榮航 | 35.9 | HOLD | C | — | 61 | [空頭] | BULL |
 | [0050](output/reports/per_stock/0050.md) | 元大台灣50（2025/06 4:1 拆分樣本） | 96.9 | HOLD | — | — | 76 | [多頭] | BULL |
