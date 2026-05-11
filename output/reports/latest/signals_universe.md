@@ -82,7 +82,7 @@
 | 006208 | 富邦台50 | — | 224.4 | HOLD | C | 15% | style1_pullback | — | — | — | 76 | [多頭] | BULL |  |
 | 00878 | 國泰永續高股息 | — | 28.3 | HOLD | F | — | style1_pullback | — | — | — | 87 | [多頭] | BULL |  |
 | 00919 | 群益台灣精選高息（2023 IPO，歷史短） | — | 25.8 | HOLD | C | 15% | style1_pullback | — | — | — | 79 | [多頭] | BULL |  |
-| 00940 | 元大台灣價值高息（2024 IPO，歷史很短） | — | 11.3 | HOLD | F | — | style1_pullback | — | — | — | 81 | [多頭] | BULL |  |
+| 00940 | 元大台灣價值高息（2024 IPO，歷史很短） | — | 11.3 | HOLD | C | — | style1_pullback | — | — | — | 81 | [多頭] | BULL |  |
 | 00981A | 主動統一台股增長 | — | 29.7 | HOLD | — | — | style1_pullback | — | — | — | 76 | [多頭] | BULL |  |
 | 2458 | 義隆電 | — | 150.0 | HOLD | — | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
 | 3035 | 智原 | — | 195.5 | HOLD | — | — | style1_pullback | — | — | — | 67 | [空頭] | BULL |  |
