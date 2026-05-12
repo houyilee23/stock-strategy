@@ -12,7 +12,7 @@
 | 2345 | 智邦 | — | 2525.0 | HOLD | B | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 3037 | 欣興 | — | 875.0 | HOLD | C | — | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
 | 3017 | 奇鋐 | — | 2520.0 | HOLD | A | 50% | style1_pullback | — | — | — | 52 | [多頭] | BULL |  |
-| 6669 | 緯穎 | — | 5790.0 | HOLD | F | — | style1_pullback | — | — | — | 79 | [多頭] | BULL |  |
+| 6669 | 緯穎 | — | 5790.0 | HOLD | B | — | style1_pullback | — | — | — | 79 | [多頭] | BULL |  |
 | 2360 | 致茂 | — | 2440.0 | HOLD | C | — | style1_pullback | — | — | — | 69 | [多頭] | BULL |  |
 | 6515 | 穎崴 | — | 9950.0 | HOLD | B | 30% | style1_pullback | — | — | — | 57 | [多頭] | BULL |  |
 | 2327 | 國巨 | — | 419.5 | HOLD | C | — | style1_pullback | — | — | — | 78 | [多頭] | BULL |  |

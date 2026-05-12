@@ -1,4 +1,4 @@
-# Phase 9: yearly_low_revert + atr_band_breakout + double_pullback + NR-200
+# Phase 10: linreg_slope + coppock_buy + ultimate_oscillator
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -1504,22 +1504,31 @@
   tier: B
   tradeable: true
 '6669':
-  bnh_cagr: 0.4468304074387839
-  bnh_div_yield: 0.02833145071525512
-  bnh_holdable: true
-  bnh_max_dd: -0.44350758853288375
-  bnh_position_pct_max: 0.3
-  bnh_tier: BNH_A
-  name: 緯穎
-  params_ref: monthly_revenue_event.yaml#per_stock.6669
-  position_pct_max: 0.0
-  template: monthly_revenue_event
-  test_expectancy: 0.0448
-  test_max_dd: -0.0144
-  test_n_trades: 1
-  test_pf: null
-  tier: F
-  tradeable: false
+  best_template: coppock_buy
+  bootstrap:
+    n_iterations: 1000
+    n_original: 23
+    pf_lower: 1.307
+    pf_mean: 3.557
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: true
+  params_ref: coppock_buy.yaml#per_stock.6669
+  position_pct_recommended: 0.3
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: coppock_buy
+  test_alpha_vs_0050: -0.1756
+  test_cagr: 0.0944
+  test_expectancy: 0.0219
+  test_max_dd: -0.1731
+  test_n_trades: 23
+  test_pf: 3.246
+  tier: B
+  tier_reason: PF_lower=1.31 ≥ 1.0, exp=+2.2% ≥ 2%, n=23≥5, holdout=[A_new=NA B=NA
+    C=O]
+  verdict: WEAK
 '6770':
   bnh_cagr: null
   bnh_div_yield: null

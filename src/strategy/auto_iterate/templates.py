@@ -323,6 +323,33 @@ SEARCH_SPACES = {
         "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
         "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
     },
+    # ── Linear regression slope reversal
+    "linreg_slope_revert": {
+        "lr_period":       {"type": "categorical", "choices": [20, 50, 100]},
+        "slope_threshold": {"type": "float", "low": -0.005, "high": -0.001, "step": 0.0005},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── Coppock curve buy signal (long-term momentum)
+    "coppock_buy": {
+        "roc1_n":          {"type": "categorical", "choices": [11, 14, 21]},
+        "roc2_n":          {"type": "categorical", "choices": [14, 21, 30]},
+        "wma_n":           {"type": "categorical", "choices": [7, 10, 14]},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.20, "step": 0.025},
+        "max_hold_days":   {"type": "categorical", "choices": [30, 60, 120]},
+    },
+    # ── Ultimate oscillator
+    "ultimate_oscillator": {
+        "uo_short":        {"type": "categorical", "choices": [5, 7]},
+        "uo_mid":          {"type": "categorical", "choices": [10, 14]},
+        "uo_long":         {"type": "categorical", "choices": [21, 28]},
+        "uo_oversold":     {"type": "int", "low": 25, "high": 40, "step": 5},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -2374,6 +2401,113 @@ def generate_gap_down_revert(df: pd.DataFrame, params: dict, regime=None, chip_d
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_linreg_slope_revert(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Buy when LR slope strongly negative (oversold extrema)"""
+    close=df["close"]
+    p=int(params["lr_period"]); thr=float(params["slope_threshold"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"]); max_hold=int(params["max_hold_days"])
+    def lr_slope(s, n):
+        x = np.arange(n)
+        return s.rolling(n).apply(lambda y: np.polyfit(x, y, 1)[0] / np.mean(y) if np.mean(y) > 0 else 0, raw=True)
+    slope = lr_slope(close, p)
+    trend_s=sma(close,trend_n)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan
+    for i in range(n):
+        c=close.iloc[i]; sl=slope.iloc[i]; tm=trend_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            if not np.isnan(tm): target_sl[i]=tm*0.92
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(target_sl[i])) and c<target_sl[i]
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            if not np.isnan(sl) and sl<thr and not np.isnan(tm) and c>tm*0.85:
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
+def generate_coppock_buy(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Coppock curve crosses 0"""
+    close=df["close"]
+    r1=int(params["roc1_n"]); r2=int(params["roc2_n"]); wma_n=int(params["wma_n"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"]); max_hold=int(params["max_hold_days"])
+    roc1 = 100*(close.pct_change(r1))
+    roc2 = 100*(close.pct_change(r2))
+    s = roc1 + roc2
+    # weighted MA
+    w = pd.Series(range(1,wma_n+1))
+    coppock = s.rolling(wma_n).apply(lambda x: (x*w).sum()/w.sum(), raw=True)
+    trend_s=sma(close,trend_n)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan
+    for i in range(1,n):
+        c=close.iloc[i]; tm=trend_s.iloc[i]
+        cp0,cp1=coppock.iloc[i-1],coppock.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            if not np.isnan(tm): target_sl[i]=tm*0.90
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(target_sl[i])) and c<target_sl[i]
+            cross_down=(not np.isnan(cp0) and not np.isnan(cp1) and cp0>=0 and cp1<0)
+            if tp_hit or sl_hit or cross_down or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            cross_up=(not np.isnan(cp0) and not np.isnan(cp1) and cp0<0 and cp1>=0)
+            if cross_up and not np.isnan(tm) and c>tm*0.85:
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
+def generate_ultimate_oscillator(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Ultimate Oscillator oversold"""
+    high=df["high"]; low=df["low"]; close=df["close"]
+    sn=int(params["uo_short"]); mn=int(params["uo_mid"]); ln=int(params["uo_long"])
+    os_th=int(params["uo_oversold"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"]); max_hold=int(params["max_hold_days"])
+    prev_close=close.shift()
+    true_low = pd.concat([low, prev_close], axis=1).min(axis=1)
+    true_range = pd.concat([(high-low).abs(), (high-prev_close).abs(), (low-prev_close).abs()], axis=1).max(axis=1)
+    bp = close - true_low
+    avg_s = bp.rolling(sn).sum() / true_range.rolling(sn).sum().replace(0, np.nan)
+    avg_m = bp.rolling(mn).sum() / true_range.rolling(mn).sum().replace(0, np.nan)
+    avg_l = bp.rolling(ln).sum() / true_range.rolling(ln).sum().replace(0, np.nan)
+    uo = 100 * (4*avg_s + 2*avg_m + avg_l) / 7
+    trend_s=sma(close,trend_n)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan
+    for i in range(n):
+        c=close.iloc[i]; u=uo.iloc[i]; tm=trend_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            if not np.isnan(tm): target_sl[i]=tm*0.92
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(target_sl[i])) and c<target_sl[i]
+            uo_overbought=(not np.isnan(u)) and u>65
+            if tp_hit or sl_hit or uo_overbought or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            if not np.isnan(u) and u<os_th and not np.isnan(tm) and c>tm*0.85:
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
 def generate_yearly_low_revert(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
     """52-week low counter-trend bounce"""
     close = df["close"]; low = df["low"]
@@ -2689,6 +2823,9 @@ TEMPLATE_GENERATORS = {
     "yearly_low_revert":      generate_yearly_low_revert,
     "atr_band_breakout":      generate_atr_band_breakout,
     "double_pullback":        generate_double_pullback,
+    "linreg_slope_revert":    generate_linreg_slope_revert,
+    "coppock_buy":            generate_coppock_buy,
+    "ultimate_oscillator":    generate_ultimate_oscillator,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }
