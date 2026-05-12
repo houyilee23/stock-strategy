@@ -37,7 +37,7 @@ _最後更新：**2026-05-13**_
 |------|------|------|------|------|------|-----|------|--------|
 | [2330](output/reports/per_stock/2330.md) | 台積電 | 2255.0 | HOLD | C | 15% | 62 | [多頭] | BULL |
 | [2303](output/reports/per_stock/2303.md) | 聯電 | 104.5 | HOLD | C | — | 79 | [多頭] | BULL |
-| [2426](output/reports/per_stock/2426.md) | 鼎元 | 69.9 | HOLD | F | — | 67 | [多頭] | BULL |
+| [2426](output/reports/per_stock/2426.md) | 鼎元 | 69.9 | HOLD | B | — | 67 | [多頭] | BULL |
 | [1560](output/reports/per_stock/1560.md) | 中砂（CMP） | 668.0 | HOLD | C | 15% | 79 | [多頭] | BULL |
 | [9940](output/reports/per_stock/9940.md) | 信義 | 18.9 | HOLD | F | — | 24 | [空頭] | BULL |
 | [1227](output/reports/per_stock/1227.md) | 佳格 | 28.8 | HOLD | F | — | 37 | [空頭] | BULL |
@@ -75,7 +75,7 @@ _最後更新：**2026-05-13**_
 | [2356](output/reports/per_stock/2356.md) | 英業達 | 48.7 | HOLD | F | — | 60 | [多頭] | BULL |
 | [2353](output/reports/per_stock/2353.md) | 宏碁 | 28.3 | HOLD | C | 15% | 56 | [空頭] | BULL |
 | [3661](output/reports/per_stock/3661.md) | 世芯-KY | 5310.0 | HOLD | C | — | 80 | [多頭] | BULL |
-| [2426](output/reports/per_stock/2426.md) | 鼎元 | 69.9 | HOLD | F | — | 67 | [多頭] | BULL |
+| [2426](output/reports/per_stock/2426.md) | 鼎元 | 69.9 | HOLD | B | — | 67 | [多頭] | BULL |
 | [1560](output/reports/per_stock/1560.md) | 中砂（CMP） | 668.0 | HOLD | C | 15% | 79 | [多頭] | BULL |
 | [2324](output/reports/per_stock/2324.md) | 仁寶 | 29.9 | HOLD | F | — | 50 | [空頭] | BULL |
 | [2344](output/reports/per_stock/2344.md) | 華邦電 | 121.5 | HOLD | B | — | 68 | [多頭] | BULL |
@@ -120,7 +120,7 @@ _最後更新：**2026-05-13**_
 | [9914](output/reports/per_stock/9914.md) | 美利達 | 59.5 | HOLD | C | — | 47 | [空頭] | BULL |
 | [2912](output/reports/per_stock/2912.md) | 統一超 | 226.0 | HOLD | F | — | 48 | [空頭] | BULL |
 | [1402](output/reports/per_stock/1402.md) | 遠東新 | 26.6 | HOLD | C | 15% | 57 | [空頭] | BULL |
-| [1605](output/reports/per_stock/1605.md) | 華新 | 34.5 | HOLD | F | — | 58 | [多頭] | BULL |
+| [1605](output/reports/per_stock/1605.md) | 華新 | 34.5 | HOLD | C | — | 58 | [多頭] | BULL |
 | [2027](output/reports/per_stock/2027.md) | 大成鋼 | 39.7 | HOLD | C | — | 65 | [空頭] | BULL |
 | [1802](output/reports/per_stock/1802.md) | 台玻 | 71.1 | HOLD | S | 100% | 58 | [多頭] | BULL |
 | [2603](output/reports/per_stock/2603.md) | 長榮 | 214.0 | HOLD | C | — | 66 | [多頭] | BULL |

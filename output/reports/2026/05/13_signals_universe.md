@@ -26,7 +26,7 @@
 | 2356 | 英業達 | — | 48.7 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
 | 2353 | 宏碁 | — | 28.3 | HOLD | C | 15% | style1_pullback | — | — | — | 56 | [空頭] | BULL |  |
 | 3661 | 世芯-KY | — | 5310.0 | HOLD | C | — | style1_pullback | — | — | — | 80 | [多頭] | BULL |  |
-| 2426 | 鼎元 | — | 69.9 | HOLD | F | — | style1_pullback | — | — | — | 67 | [多頭] | BULL |  |
+| 2426 | 鼎元 | — | 69.9 | HOLD | B | — | style1_pullback | — | — | — | 67 | [多頭] | BULL |  |
 | 1560 | 中砂（CMP） | — | 668.0 | HOLD | C | 15% | style1_pullback | — | — | — | 79 | [多頭] | BULL |  |
 | 2324 | 仁寶 | — | 29.9 | HOLD | F | — | style1_pullback | — | — | — | 50 | [空頭] | BULL |  |
 | 2344 | 華邦電 | — | 121.5 | HOLD | B | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
@@ -71,7 +71,7 @@
 | 9914 | 美利達 | — | 59.5 | HOLD | C | — | style1_pullback | — | — | — | 47 | [空頭] | BULL |  |
 | 2912 | 統一超 | — | 226.0 | HOLD | F | — | style1_pullback | — | — | — | 48 | [空頭] | BULL |  |
 | 1402 | 遠東新 | — | 26.6 | HOLD | C | 15% | style1_pullback | — | — | — | 57 | [空頭] | BULL |  |
-| 1605 | 華新 | — | 34.5 | HOLD | F | — | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
+| 1605 | 華新 | — | 34.5 | HOLD | C | — | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
 | 2027 | 大成鋼 | — | 39.7 | HOLD | C | — | style1_pullback | — | — | — | 65 | [空頭] | BULL |  |
 | 1802 | 台玻 | — | 71.1 | HOLD | S | 100% | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
 | 2603 | 長榮 | — | 214.0 | HOLD | C | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |

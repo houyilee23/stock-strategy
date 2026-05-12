@@ -296,6 +296,33 @@ SEARCH_SPACES = {
         "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
         "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
     },
+    # ── 52-week LOW counter-trend bounce (vs yearly_high_break)
+    "yearly_low_revert": {
+        "lookback":        {"type": "categorical", "choices": [200, 250, 504]},
+        "low_buffer":      {"type": "float", "low": 0.0, "high": 0.02, "step": 0.005},
+        "trend_ma":        {"type": "categorical", "choices": [200, 252, 504]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.20, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.5, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [30, 60, 120]},
+    },
+    # ── ATR-band channel breakout
+    "atr_band_breakout": {
+        "ma_period":       {"type": "categorical", "choices": [20, 50, 100]},
+        "atr_period":      {"type": "categorical", "choices": [10, 14, 20]},
+        "atr_mult":        {"type": "float", "low": 1.5, "high": 3.5, "step": 0.5},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.20, "step": 0.025},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
+    },
+    # ── 2 successive pullbacks (deeper pullback than single)
+    "double_pullback": {
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "pullback_window": {"type": "categorical", "choices": [10, 20, 30]},
+        "min_pullback_pct":{"type": "float", "low": 0.02, "high": 0.08, "step": 0.01},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -2347,6 +2374,114 @@ def generate_gap_down_revert(df: pd.DataFrame, params: dict, regime=None, chip_d
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_yearly_low_revert(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """52-week low counter-trend bounce"""
+    close = df["close"]; low = df["low"]
+    lookback = int(params["lookback"]); buf = float(params["low_buffer"])
+    trend_n = int(params["trend_ma"])
+    tp_pct = float(params["take_profit_pct"]); atr_k = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+    rolling_low = low.shift(1).rolling(lookback).min()
+    trend_s = sma(close, trend_n); atr_s = atr(df, 14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(n):
+        c=close.iloc[i]; l=low.iloc[i]; rl=rolling_low.iloc[i]
+        tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            if (not np.isnan(rl) and rl>0 and l<=rl*(1+buf)
+                and not np.isnan(a)):
+                action[i]="BUY"; target_buy[i]=rl*(1+buf)
+                in_pos=True; entry_price=c; sl_level=rl-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
+def generate_atr_band_breakout(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """ATR band breakout"""
+    close=df["close"]
+    ma_p=int(params["ma_period"]); atr_p=int(params["atr_period"])
+    mult=float(params["atr_mult"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"]); max_hold=int(params["max_hold_days"])
+    ma=sma(close,ma_p); atr_s=atr(df,atr_p)
+    upper=ma+mult*atr_s; lower=ma-mult*atr_s
+    trend_s=sma(close,trend_n)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    target_buy_mode=[""]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(1,n):
+        c=close.iloc[i]; c0=close.iloc[i-1]
+        u0,u1=upper.iloc[i-1],upper.iloc[i]
+        m1=ma.iloc[i]; tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            below_mid=(not np.isnan(m1)) and c<m1
+            if tp_hit or sl_hit or below_mid or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            br_up=(not np.isnan(c0) and not np.isnan(u0) and not np.isnan(u1)
+                    and c0<=u0 and c>u1)
+            if br_up and not np.isnan(tm) and c>tm and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=u1; target_buy_mode[i]="stop"
+                in_pos=True; entry_price=c; sl_level=c-a*1.5; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl,
+                          "target_buy_mode":target_buy_mode}, index=df.index)
+
+
+def generate_double_pullback(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """2 successive pullbacks within window then bounce"""
+    high=df["high"]; close=df["close"]
+    trend_n=int(params["trend_ma"])
+    pb_window=int(params["pullback_window"])
+    min_pb=float(params["min_pullback_pct"])
+    tp_pct=float(params["take_profit_pct"]); atr_k=float(params["atr_stop_k"])
+    max_hold=int(params["max_hold_days"])
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(pb_window*2, n):
+        c=close.iloc[i]; tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            # 找最近 pb_window×2 內的 2 個明顯 pullback
+            window = close.iloc[i-pb_window*2:i]
+            highs = high.iloc[i-pb_window*2:i]
+            max_h = highs.max()
+            if max_h > 0:
+                drops_count = sum(1 for j in range(1, len(window))
+                                   if (max_h - window.iloc[j]) / max_h >= min_pb)
+                if drops_count >= 2 and not np.isnan(tm) and c > tm and c > window.iloc[-1] and not np.isnan(a):
+                    action[i]="BUY"; target_buy[i]=c
+                    in_pos=True; entry_price=c
+                    sl_level=c-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
 def generate_slow_trend_pullback(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
     """Slow trend (long MA) + tiny pullback to short MA for low-vol blue chips"""
     close = df["close"]
@@ -2551,6 +2686,9 @@ TEMPLATE_GENERATORS = {
     "slow_trend_pullback":    generate_slow_trend_pullback,
     "stoch_rsi":              generate_stoch_rsi,
     "ao_zero_cross":          generate_ao_zero_cross,
+    "yearly_low_revert":      generate_yearly_low_revert,
+    "atr_band_breakout":      generate_atr_band_breakout,
+    "double_pullback":        generate_double_pullback,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

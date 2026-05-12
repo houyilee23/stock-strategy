@@ -1,4 +1,4 @@
-# Phase 8: slow_trend_pullback + stoch_rsi + ao_zero_cross
+# Phase 9: yearly_low_revert + atr_band_breakout + double_pullback + NR-200
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -263,22 +263,30 @@
   tier: C
   tradeable: true
 '1605':
-  bnh_cagr: 0.1415605104440314
-  bnh_div_yield: 0.038535953192812535
-  bnh_holdable: false
-  bnh_max_dd: -0.5664990854847203
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 華新
-  params_ref: bollinger_squeeze.yaml#per_stock.1605
-  position_pct_max: 0.0
-  template: bollinger_squeeze
-  test_expectancy: 0.1098
-  test_max_dd: -0.2124
-  test_n_trades: 5
-  test_pf: 4.082
-  tier: F
-  tradeable: false
+  best_template: atr_band_breakout
+  bootstrap:
+    n_iterations: 1000
+    n_original: 13
+    pf_lower: 0.968
+    pf_mean: 2.973
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: atr_band_breakout.yaml#per_stock.1605
+  position_pct_recommended: 0.15
+  template: atr_band_breakout
+  test_alpha_vs_0050: -0.1491
+  test_cagr: 0.1208
+  test_expectancy: 0.0534
+  test_max_dd: -0.1996
+  test_n_trades: 13
+  test_pf: 2.563
+  tier: C
+  tier_reason: PF_lower=0.97 ≥ 0.7, exp=+5.3% ≥ 1%, n=13≥5, holdout=[A_new=NA B=O
+    C=O]
+  verdict: PASS
 '1802':
   bnh_cagr: null
   bnh_div_yield: null
@@ -773,22 +781,31 @@
   tier: F
   tradeable: false
 '2426':
-  bnh_cagr: 0.11652309083211021
-  bnh_div_yield: 0.022853274372020282
-  bnh_holdable: false
-  bnh_max_dd: -0.6444630669424778
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 鼎元
-  params_ref: mean_reversion.yaml#per_stock.2426
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.1073
-  test_max_dd: -0.1752
-  test_n_trades: 3
-  test_pf: 8.238
-  tier: F
-  tradeable: false
+  best_template: double_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 31
+    pf_lower: 1.126
+    pf_mean: 2.806
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: null
+  params_ref: double_pullback.yaml#per_stock.2426
+  position_pct_recommended: 0.3
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: double_pullback
+  test_alpha_vs_0050: -0.0702
+  test_cagr: 0.1997
+  test_expectancy: 0.0351
+  test_max_dd: -0.2696
+  test_n_trades: 31
+  test_pf: 2.128
+  tier: B
+  tier_reason: PF_lower=1.13 ≥ 1.0, exp=+3.5% ≥ 2%, n=31≥5, holdout=[A_new=NA B=X
+    C=NA]
+  verdict: WEAK
 '2454':
   bnh_cagr: null
   bnh_div_yield: null
