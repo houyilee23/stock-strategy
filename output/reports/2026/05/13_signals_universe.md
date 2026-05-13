@@ -44,7 +44,7 @@
 | 2412 | 中華電 | — | 135.5 | HOLD | F | — | style1_pullback | — | 135.5~135.5 | 133.3 | 48 | [多頭] | BULL | 觀察中 RSI=48.3 |
 | 3045 | 台灣大 | — | 110.0 | HOLD | F | — | style1_pullback | — | 110.0~111.1 | 108.0 | 46 | [多頭] | BULL | 觀察中 RSI=45.6 |
 | 4904 | 遠傳 | — | 95.5 | HOLD | C | 15% | style1_pullback | — | 95.5~95.7 | 89.5 | 52 | [多頭] | BULL | 觀察中 RSI=52.2 |
-| 2881 | 富邦金 | — | 93.7 | HOLD | F | — | style1_pullback | — | — | — | 61 | [空頭] | BULL |  |
+| 2881 | 富邦金 | — | 93.7 | HOLD | C | — | style1_pullback | — | — | — | 61 | [空頭] | BULL |  |
 | 2882 | 國泰金 | — | 76.4 | HOLD | B | 30% | style1_pullback | — | — | — | 52 | [多頭] | BULL |  |
 | 2883 | 開發金 | — | 21.6 | HOLD | C | 15% | style1_pullback | — | — | — | 53 | [多頭] | BULL |  |
 | 2884 | 玉山金 | — | 31.8 | HOLD | C | — | style1_pullback | — | — | — | 43 | [空頭] | BULL |  |

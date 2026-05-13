@@ -350,6 +350,31 @@ SEARCH_SPACES = {
         "take_profit_pct": {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
         "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
     },
+    # ── Inside-day breakout (T 日 HL 完全在 T-1 HL 內) + 下一日 high 突破
+    "inside_day_breakout": {
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.15, "step": 0.025},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── 3 white soldiers (3 連紅 K 紅 K 在 oversold)
+    "three_white_soldiers": {
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "min_drop_pct":    {"type": "float", "low": 0.02, "high": 0.08, "step": 0.01},
+        "rsi_period":      {"type": "categorical", "choices": [7, 14]},
+        "rsi_threshold":   {"type": "int", "low": 30, "high": 50, "step": 5},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── Outside day reversal (engulfing pattern)
+    "outside_day_engulf": {
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "min_prev_drop":   {"type": "float", "low": 0.01, "high": 0.04, "step": 0.005},
+        "take_profit_pct": {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [5, 10, 20]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -2401,6 +2426,118 @@ def generate_gap_down_revert(df: pd.DataFrame, params: dict, regime=None, chip_d
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_inside_day_breakout(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Inside day (HL 在 T-1 HL 內) + T+1 高點突破"""
+    high=df["high"]; low=df["low"]; close=df["close"]
+    trend_n=int(params["trend_ma"])
+    atr_k=float(params["atr_stop_k"])
+    tp_pct=float(params["take_profit_pct"]); max_hold=int(params["max_hold_days"])
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    target_buy_mode=[""]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(1,n):
+        c=close.iloc[i]; h=high.iloc[i]; l=low.iloc[i]
+        h0=high.iloc[i-1]; l0=low.iloc[i-1]
+        tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            inside = (h<h0 and l>l0)
+            if inside and not np.isnan(tm) and c>tm and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=h0; target_buy_mode[i]="stop"
+                in_pos=True; entry_price=h0
+                sl_level=l-a*atr_k*0.5; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl,
+                          "target_buy_mode":target_buy_mode}, index=df.index)
+
+
+def generate_three_white_soldiers(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """3 連紅 K + oversold context"""
+    open_=df["open"]; close=df["close"]
+    trend_n=int(params["trend_ma"])
+    min_drop=float(params["min_drop_pct"])
+    rsi_p=int(params["rsi_period"]); rsi_th=int(params["rsi_threshold"])
+    tp_pct=float(params["take_profit_pct"])
+    atr_k=float(params["atr_stop_k"]); max_hold=int(params["max_hold_days"])
+    trend_s=sma(close,trend_n)
+    rsi_s=rsi(close,rsi_p)
+    atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(4,n):
+        c=close.iloc[i]; tm=trend_s.iloc[i]; r=rsi_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            # 3 連紅
+            c0,c1,c2=close.iloc[i-3],close.iloc[i-2],close.iloc[i-1]
+            o0,o1,o2=open_.iloc[i-3],open_.iloc[i-2],open_.iloc[i-1]
+            three_green = (c0>o0 and c1>o1 and c2>o2 and c1>c0 and c2>c1)
+            # 之前 oversold 跌幅
+            past_high = close.iloc[max(0,i-10):i-3].max()
+            recent_low = close.iloc[i-3]
+            drop = (past_high - recent_low)/past_high if past_high>0 else 0
+            cond_drop = drop >= min_drop
+            cond_rsi = (not np.isnan(r)) and r < rsi_th
+            if three_green and cond_drop and cond_rsi and not np.isnan(tm) and c>tm*0.85 and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c
+                sl_level=c-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
+def generate_outside_day_engulf(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Bullish engulfing pattern"""
+    open_=df["open"]; close=df["close"]
+    trend_n=int(params["trend_ma"])
+    min_drop=float(params["min_prev_drop"])
+    tp_pct=float(params["take_profit_pct"])
+    atr_k=float(params["atr_stop_k"]); max_hold=int(params["max_hold_days"])
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(2,n):
+        c=close.iloc[i]; o=open_.iloc[i]
+        c0=close.iloc[i-1]; o0=open_.iloc[i-1]
+        tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            prev_red = c0 < o0
+            engulf = (c > o and o < c0 and c > o0)
+            prev_drop = (o0 - c0)/o0 if o0>0 else 0
+            if prev_red and engulf and prev_drop >= min_drop and not np.isnan(tm) and c>tm*0.85 and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c
+                sl_level=o-a*atr_k*0.5; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
 def generate_linreg_slope_revert(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
     """Buy when LR slope strongly negative (oversold extrema)"""
     close=df["close"]
@@ -2826,6 +2963,9 @@ TEMPLATE_GENERATORS = {
     "linreg_slope_revert":    generate_linreg_slope_revert,
     "coppock_buy":            generate_coppock_buy,
     "ultimate_oscillator":    generate_ultimate_oscillator,
+    "inside_day_breakout":    generate_inside_day_breakout,
+    "three_white_soldiers":   generate_three_white_soldiers,
+    "outside_day_engulf":     generate_outside_day_engulf,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

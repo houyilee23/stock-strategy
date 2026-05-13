@@ -93,7 +93,7 @@ _最後更新：**2026-05-13**_
 | [2412](output/reports/per_stock/2412.md) | 中華電 | 135.5 | HOLD | F | — | 48 | [多頭] | BULL |
 | [3045](output/reports/per_stock/3045.md) | 台灣大 | 110.0 | HOLD | F | — | 46 | [多頭] | BULL |
 | [4904](output/reports/per_stock/4904.md) | 遠傳 | 95.5 | HOLD | C | 15% | 52 | [多頭] | BULL |
-| [2881](output/reports/per_stock/2881.md) | 富邦金 | 93.7 | HOLD | F | — | 61 | [空頭] | BULL |
+| [2881](output/reports/per_stock/2881.md) | 富邦金 | 93.7 | HOLD | C | — | 61 | [空頭] | BULL |
 | [2882](output/reports/per_stock/2882.md) | 國泰金 | 76.4 | HOLD | B | 30% | 52 | [多頭] | BULL |
 | [2883](output/reports/per_stock/2883.md) | 開發金 | 21.6 | HOLD | C | 15% | 53 | [多頭] | BULL |
 | [2884](output/reports/per_stock/2884.md) | 玉山金 | 31.8 | HOLD | C | — | 43 | [空頭] | BULL |

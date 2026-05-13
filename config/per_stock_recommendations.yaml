@@ -1,4 +1,4 @@
-# Phase 10: linreg_slope + coppock_buy + ultimate_oscillator
+# Phase 11: inside_day_breakout + 3_white_soldiers + outside_day_engulf
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -918,22 +918,30 @@
     C=O]
   verdict: WEAK
 '2881':
-  bnh_cagr: 0.1513889431135269
-  bnh_div_yield: 0.039653087658106906
-  bnh_holdable: false
-  bnh_max_dd: -0.3414906537121133
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 富邦金
-  params_ref: momentum_hold.yaml#per_stock.2881
-  position_pct_max: 0.0
-  template: momentum_hold
-  test_expectancy: 0.7139
-  test_max_dd: -0.1205
-  test_n_trades: 1
+  best_template: three_white_soldiers
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: three_white_soldiers.yaml#per_stock.2881
+  position_pct_recommended: 0.15
+  template: three_white_soldiers
+  test_alpha_vs_0050: -0.2291
+  test_cagr: 0.0408
+  test_expectancy: 0.074
+  test_max_dd: -0.0894
+  test_n_trades: 3
   test_pf: null
-  tier: F
-  tradeable: false
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+7.4% ≥ 5%, |DD|=9% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '2882':
   bnh_cagr: null
   bnh_div_yield: null
