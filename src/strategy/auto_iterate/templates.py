@@ -400,6 +400,32 @@ SEARCH_SPACES = {
         "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
         "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
     },
+    # ── Pivot point breakout (classic floor pivots)
+    "pivot_break": {
+        "pivot_lookback":  {"type": "categorical", "choices": [5, 10, 20]},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── 短期動能 (5-day return high vs N-day high)
+    "short_momentum": {
+        "ret_period":      {"type": "categorical", "choices": [3, 5, 8, 13]},
+        "min_return":      {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.15, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── 兩日連續放量 (back-to-back high volume)
+    "double_volume": {
+        "vol_period":      {"type": "categorical", "choices": [10, 20]},
+        "vol_ratio":       {"type": "float", "low": 1.3, "high": 2.5, "step": 0.25},
+        "trend_ma":        {"type": "categorical", "choices": [50, 100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [5, 10, 20]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -2451,6 +2477,114 @@ def generate_gap_down_revert(df: pd.DataFrame, params: dict, regime=None, chip_d
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_pivot_break(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Daily pivot break (classic floor pivots)"""
+    high=df["high"]; low=df["low"]; close=df["close"]
+    p=int(params["pivot_lookback"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"])
+    atr_k=float(params["atr_stop_k"]); max_hold=int(params["max_hold_days"])
+    # Recent N-day pivot = avg of last N day's H+L+C
+    hlc = (high+low+close)/3
+    pivot = hlc.rolling(p).mean().shift(1)
+    r1 = (2*pivot - low.shift(1)).rolling(p).mean()
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    target_buy_mode=[""]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(p+1,n):
+        c=close.iloc[i]; c0=close.iloc[i-1]
+        r1v=r1.iloc[i]
+        tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            br = (not np.isnan(r1v) and c>r1v and c0<=r1v)
+            if br and not np.isnan(tm) and c>tm*0.85 and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=r1v; target_buy_mode[i]="stop"
+                in_pos=True; entry_price=c
+                sl_level=c-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl,
+                          "target_buy_mode":target_buy_mode}, index=df.index)
+
+
+def generate_short_momentum(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Short-term momentum trigger"""
+    close=df["close"]
+    p=int(params["ret_period"])
+    min_r=float(params["min_return"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"])
+    atr_k=float(params["atr_stop_k"]); max_hold=int(params["max_hold_days"])
+    ret = close.pct_change(p)
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(n):
+        c=close.iloc[i]; r=ret.iloc[i]; tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            if not np.isnan(r) and r>=min_r and not np.isnan(tm) and c>tm and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c
+                sl_level=c-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
+def generate_double_volume(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """2 連續放量"""
+    close=df["close"]; volume=df["volume"]; open_=df["open"]
+    vol_p=int(params["vol_period"])
+    ratio=float(params["vol_ratio"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"])
+    atr_k=float(params["atr_stop_k"]); max_hold=int(params["max_hold_days"])
+    vol_avg=volume.rolling(vol_p).mean()
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(2,n):
+        c=close.iloc[i]
+        v1=volume.iloc[i-1]; v0=volume.iloc[i-2]; va=vol_avg.iloc[i-2]
+        c1=close.iloc[i-1]; o1=open_.iloc[i-1]
+        tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            double_vol = (not np.isnan(va) and va>0 and v0/va>=ratio and v1/va>=ratio)
+            prev_green = c1>o1
+            if double_vol and prev_green and not np.isnan(tm) and c>tm and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c
+                sl_level=c-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
 def generate_failed_breakdown(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
     """跌破 N 日低後當日收回 (failed breakdown)"""
     high=df["high"]; low=df["low"]; close=df["close"]
@@ -3103,6 +3237,9 @@ TEMPLATE_GENERATORS = {
     "failed_breakdown":       generate_failed_breakdown,
     "volume_spike_reverse":   generate_volume_spike_reverse,
     "obv_uptrend":            generate_obv_uptrend,
+    "pivot_break":            generate_pivot_break,
+    "short_momentum":         generate_short_momentum,
+    "double_volume":          generate_double_volume,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }
