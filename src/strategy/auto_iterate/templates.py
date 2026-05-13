@@ -454,6 +454,23 @@ SEARCH_SPACES = {
         "take_profit_pct": {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
         "max_hold_days":   {"type": "categorical", "choices": [20, 40, 60]},
     },
+    # ── Trend-confirmation hold (MA50 > MA200 + price > MA50)
+    "trend_confirm_hold": {
+        "fast_ma":         {"type": "categorical", "choices": [30, 50, 80]},
+        "slow_ma":         {"type": "categorical", "choices": [100, 150, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.05, "high": 0.25, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 2.0, "high": 4.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [60, 120, 200]},
+    },
+    # ── 量縮反彈 (低量盤整後反彈)
+    "low_volume_reversal": {
+        "vol_period":      {"type": "categorical", "choices": [10, 20]},
+        "vol_low_ratio":   {"type": "float", "low": 0.5, "high": 0.9, "step": 0.1},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -2505,6 +2522,80 @@ def generate_gap_down_revert(df: pd.DataFrame, params: dict, regime=None, chip_d
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_trend_confirm_hold(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Trend confirmation hold: fast_ma > slow_ma + price > fast_ma → long hold"""
+    close=df["close"]
+    fast_p=int(params["fast_ma"]); slow_p=int(params["slow_ma"])
+    tp_pct=float(params["take_profit_pct"])
+    atr_k=float(params["atr_stop_k"]); max_hold=int(params["max_hold_days"])
+    if fast_p >= slow_p:
+        return pd.DataFrame({"action": ["HOLD"]*len(df)}, index=df.index)
+    fast_s=sma(close,fast_p); slow_s=sma(close,slow_p)
+    atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(1,n):
+        c=close.iloc[i]; f=fast_s.iloc[i]; s=slow_s.iloc[i]
+        f0=fast_s.iloc[i-1]; s0=slow_s.iloc[i-1]
+        a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            trend_break = (not np.isnan(f) and not np.isnan(s) and f<s)
+            if tp_hit or sl_hit or trend_break or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            cross_up = (not np.isnan(f0) and not np.isnan(s0) and not np.isnan(f) and not np.isnan(s)
+                        and f0<=s0 and f>s)
+            confirm = (not np.isnan(f) and c>f)
+            if cross_up and confirm and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c
+                sl_level=c-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
+def generate_low_volume_reversal(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Low volume reversal: 量縮 + 反彈"""
+    close=df["close"]; volume=df["volume"]
+    vol_p=int(params["vol_period"])
+    vol_ratio=float(params["vol_low_ratio"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"])
+    atr_k=float(params["atr_stop_k"]); max_hold=int(params["max_hold_days"])
+    vol_avg=volume.rolling(vol_p).mean()
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(2,n):
+        c=close.iloc[i]; v=volume.iloc[i]; va=vol_avg.iloc[i]
+        c0=close.iloc[i-1]
+        tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            low_vol = (not np.isnan(va) and va>0 and v/va<vol_ratio)
+            green_close = c > c0
+            if low_vol and green_close and not np.isnan(tm) and c>tm*0.85 and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c
+                sl_level=c-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
 def generate_deep_dip_long_hold(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
     """Deep drawdown then long hold"""
     close=df["close"]
@@ -3391,6 +3482,8 @@ TEMPLATE_GENERATORS = {
     "monthly_anchor":         generate_monthly_anchor,
     "deep_dip_long_hold":     generate_deep_dip_long_hold,
     "weekly_low_buy":         generate_weekly_low_buy,
+    "trend_confirm_hold":     generate_trend_confirm_hold,
+    "low_volume_reversal":    generate_low_volume_reversal,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }
