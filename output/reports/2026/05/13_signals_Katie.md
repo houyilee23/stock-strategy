@@ -2,12 +2,12 @@
 
 | 股票 | 名稱 | 在倉 | 收盤 | 動作 | Tier | 倉位上限 | Template | 掛單目標 | 建議買入 | 建議停損 | RSI | 個股趨勢 | 市場Regime | 說明 |
 |------|------|-----|------|------|------|---------|---------|---------|---------|---------|-----|---------|-----------|------|
-| 2330 | 台積電 | — | 2255.0 | HOLD | C | 15% | style1_pullback | — | — | — | 62 | [多頭] | BULL |  |
-| 2303 | 聯電 | — | 104.5 | HOLD | C | — | style1_pullback | — | — | — | 79 | [多頭] | BULL |  |
-| 2426 | 鼎元 | — | 69.9 | HOLD | B | — | style1_pullback | — | — | — | 67 | [多頭] | BULL |  |
-| 1560 | 中砂（CMP） | — | 668.0 | HOLD | C | 15% | style1_pullback | — | — | — | 79 | [多頭] | BULL |  |
-| 9940 | 信義 | — | 18.9 | HOLD | F | — | style1_pullback | — | — | — | 24 | [空頭] | BULL |  |
+| 2330 | 台積電 | — | 2220.0 | HOLD | C | 15% | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
+| 2303 | 聯電 | — | 98.4 | HOLD | C | — | style1_pullback | — | — | — | 70 | [多頭] | BULL |  |
+| 2426 | 鼎元 | — | 68.0 | HOLD | B | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
+| 1560 | 中砂（CMP） | — | 633.0 | HOLD | C | 15% | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
+| 9940 | 信義 | — | 19.0 | HOLD | F | — | style1_pullback | — | — | — | 26 | [空頭] | BULL |  |
 | 1227 | 佳格 | — | 28.8 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
-| 1301 | 台塑 | — | 47.6 | HOLD | A | 50% | gap_continuation | — | — | — | 42 | [多頭] | BULL |  |
-| 2324 | 仁寶 | — | 29.9 | HOLD | C | — | style1_pullback | — | — | — | 50 | [空頭] | BULL |  |
-| 2344 | 華邦電 | — | 121.5 | HOLD | B | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
+| 1301 | 台塑 | — | 46.9 | HOLD | A | 50% | gap_continuation | — | — | — | 39 | [多頭] | BULL |  |
+| 2324 | 仁寶 | — | 31.3 | HOLD | C | — | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
+| 2344 | 華邦電 | — | 122.0 | HOLD | B | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
