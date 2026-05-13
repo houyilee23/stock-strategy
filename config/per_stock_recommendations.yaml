@@ -1,4 +1,4 @@
-# Phase 11: inside_day_breakout + 3_white_soldiers + outside_day_engulf
+# Phase 12: failed_breakdown + volume_spike_reverse + obv_uptrend
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -144,22 +144,31 @@
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '1216':
-  bnh_cagr: 0.09793497333680246
-  bnh_div_yield: 0.03921198705082699
-  bnh_holdable: false
-  bnh_max_dd: -0.2304051454861582
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 統一
-  params_ref: mean_reversion.yaml#per_stock.1216
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.0092
-  test_max_dd: -0.0902
-  test_n_trades: 4
-  test_pf: 1.361
-  tier: F
-  tradeable: false
+  best_template: failed_breakdown
+  bootstrap:
+    n_iterations: 1000
+    n_original: 8
+    pf_lower: 1.173
+    pf_mean: 4.182
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: true
+  params_ref: failed_breakdown.yaml#per_stock.1216
+  position_pct_recommended: 0.3
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: failed_breakdown
+  test_alpha_vs_0050: -0.2337
+  test_cagr: 0.0363
+  test_expectancy: 0.0246
+  test_max_dd: -0.0665
+  test_n_trades: 8
+  test_pf: 5.327
+  tier: B
+  tier_reason: PF_lower=1.17 ≥ 1.0, exp=+2.5% ≥ 2%, n=8≥5, holdout=[A_new=NA B=NA
+    C=O]
+  verdict: WEAK
 '1227':
   bnh_cagr: -0.04965137917247453
   bnh_div_yield: 0.03968139704825237

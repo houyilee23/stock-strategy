@@ -112,7 +112,7 @@ _最後更新：**2026-05-13**_
 | [1101](output/reports/per_stock/1101.md) | 台泥 | 24.9 | HOLD | F | — | 53 | [多頭] | BULL |
 | [1102](output/reports/per_stock/1102.md) | 亞泥 | 34.6 | HOLD | C | — | 41 | [空頭] | BULL |
 | [1227](output/reports/per_stock/1227.md) | 佳格 | 28.8 | HOLD | F | — | 37 | [空頭] | BULL |
-| [1216](output/reports/per_stock/1216.md) | 統一 | 73.1 | HOLD | F | — | 59 | [空頭] | BULL |
+| [1216](output/reports/per_stock/1216.md) | 統一 | 73.1 | HOLD | B | — | 59 | [空頭] | BULL |
 | [9940](output/reports/per_stock/9940.md) | 信義 | 18.9 | HOLD | F | — | 24 | [空頭] | BULL |
 | [2207](output/reports/per_stock/2207.md) | 和泰車 | 470.0 | HOLD | F | — | 38 | [空頭] | BULL |
 | [2105](output/reports/per_stock/2105.md) | 正新 | 31.9 | HOLD | F | — | 53 | [空頭] | BULL |

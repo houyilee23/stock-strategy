@@ -375,6 +375,31 @@ SEARCH_SPACES = {
         "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
         "max_hold_days":   {"type": "categorical", "choices": [5, 10, 20]},
     },
+    # ── Failed breakdown (跌破 N 日低後當日收回)
+    "failed_breakdown": {
+        "lookback":        {"type": "categorical", "choices": [20, 50, 100]},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    # ── Volume spike reverse (大量黑K後反彈)
+    "volume_spike_reverse": {
+        "vol_period":      {"type": "categorical", "choices": [10, 20, 50]},
+        "vol_ratio":       {"type": "float", "low": 1.8, "high": 4.0, "step": 0.5},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.10, "step": 0.02},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [5, 10, 20]},
+    },
+    # ── 連 N 日 OBV 上升 (累積買盤)
+    "obv_uptrend": {
+        "obv_period":      {"type": "categorical", "choices": [5, 10, 20]},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.15, "step": 0.025},
+        "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -2426,6 +2451,115 @@ def generate_gap_down_revert(df: pd.DataFrame, params: dict, regime=None, chip_d
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_failed_breakdown(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """跌破 N 日低後當日收回 (failed breakdown)"""
+    high=df["high"]; low=df["low"]; close=df["close"]
+    lookback=int(params["lookback"])
+    trend_n=int(params["trend_ma"])
+    atr_k=float(params["atr_stop_k"])
+    tp_pct=float(params["take_profit_pct"]); max_hold=int(params["max_hold_days"])
+    rolling_low=low.shift(1).rolling(lookback).min()
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(n):
+        c=close.iloc[i]; l=low.iloc[i]; rl=rolling_low.iloc[i]
+        tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            # 當日 low 跌破 rolling_low 但 close 收回
+            broke = (not np.isnan(rl) and l<rl and c>rl)
+            if broke and not np.isnan(tm) and c>tm*0.85 and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c
+                sl_level=l-a*atr_k*0.5; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
+def generate_volume_spike_reverse(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """大量黑K後反彈"""
+    open_=df["open"]; close=df["close"]; volume=df["volume"]
+    vol_p=int(params["vol_period"]); ratio=float(params["vol_ratio"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"])
+    atr_k=float(params["atr_stop_k"]); max_hold=int(params["max_hold_days"])
+    vol_avg=volume.rolling(vol_p).mean()
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(1,n):
+        c=close.iloc[i]; o=open_.iloc[i]
+        c0=close.iloc[i-1]; v0=volume.iloc[i-1]; va=vol_avg.iloc[i-1]
+        o0=open_.iloc[i-1]
+        tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            prev_high_vol = (not np.isnan(va) and va>0 and v0/va>=ratio)
+            prev_red = c0<o0
+            today_green = c>o
+            if prev_high_vol and prev_red and today_green and not np.isnan(tm) and c>tm*0.80 and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c
+                sl_level=c-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
+def generate_obv_uptrend(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """OBV 上升 N 日 (累積買盤)"""
+    close=df["close"]; volume=df["volume"]
+    obv_p=int(params["obv_period"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"])
+    atr_k=float(params["atr_stop_k"]); max_hold=int(params["max_hold_days"])
+    # OBV
+    direction = np.sign(close.diff().fillna(0))
+    obv = (direction * volume).cumsum()
+    obv_ma = obv.rolling(obv_p).mean()
+    trend_s=sma(close,trend_n); atr_s=atr(df,14)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan; sl_level=np.nan
+    for i in range(obv_p+1,n):
+        c=close.iloc[i]
+        obv0=obv.iloc[i-1]; obv1=obv.iloc[i]
+        oma=obv_ma.iloc[i]
+        tm=trend_s.iloc[i]; a=atr_s.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            target_sl[i]=sl_level
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(sl_level)) and c<sl_level
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            obv_up = obv1>obv0 and not np.isnan(oma) and obv1>oma
+            if obv_up and not np.isnan(tm) and c>tm and not np.isnan(a):
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c
+                sl_level=c-a*atr_k; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
 def generate_inside_day_breakout(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
     """Inside day (HL 在 T-1 HL 內) + T+1 高點突破"""
     high=df["high"]; low=df["low"]; close=df["close"]
@@ -2966,6 +3100,9 @@ TEMPLATE_GENERATORS = {
     "inside_day_breakout":    generate_inside_day_breakout,
     "three_white_soldiers":   generate_three_white_soldiers,
     "outside_day_engulf":     generate_outside_day_engulf,
+    "failed_breakdown":       generate_failed_breakdown,
+    "volume_spike_reverse":   generate_volume_spike_reverse,
+    "obv_uptrend":            generate_obv_uptrend,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

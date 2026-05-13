@@ -63,7 +63,7 @@
 | 1101 | 台泥 | — | 24.9 | HOLD | F | — | style1_pullback | — | 24.9~25.1 | 23.7 | 53 | [多頭] | BULL | 觀察中 RSI=53.1 |
 | 1102 | 亞泥 | — | 34.6 | HOLD | C | — | style1_pullback | — | — | — | 41 | [空頭] | BULL |  |
 | 1227 | 佳格 | — | 28.8 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
-| 1216 | 統一 | — | 73.1 | HOLD | F | — | style1_pullback | — | — | — | 59 | [空頭] | BULL |  |
+| 1216 | 統一 | — | 73.1 | HOLD | B | — | style1_pullback | — | — | — | 59 | [空頭] | BULL |  |
 | 9940 | 信義 | — | 18.9 | HOLD | F | — | style1_pullback | — | — | — | 24 | [空頭] | BULL |  |
 | 2207 | 和泰車 | — | 470.0 | HOLD | F | — | style1_pullback | — | — | — | 38 | [空頭] | BULL |  |
 | 2105 | 正新 | — | 31.9 | HOLD | F | — | style1_pullback | — | — | — | 53 | [空頭] | BULL |  |
