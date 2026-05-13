@@ -426,6 +426,20 @@ SEARCH_SPACES = {
         "atr_stop_k":      {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
         "max_hold_days":   {"type": "categorical", "choices": [5, 10, 20]},
     },
+    # ── 簡單跌深買 + 固定持有 (for 低波動藍籌)
+    "simple_dip_buy": {
+        "ma_period":       {"type": "categorical", "choices": [50, 100, 200]},
+        "dip_pct":         {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "take_profit_pct": {"type": "float", "low": 0.04, "high": 0.10, "step": 0.01},
+        "max_hold_days":   {"type": "categorical", "choices": [20, 40, 80, 120]},
+    },
+    # ── 月初效應 (month-start buy)
+    "monthly_anchor": {
+        "month_day":       {"type": "int", "low": 1, "high": 7, "step": 1},
+        "trend_ma":        {"type": "categorical", "choices": [100, 200]},
+        "take_profit_pct": {"type": "float", "low": 0.02, "high": 0.08, "step": 0.01},
+        "max_hold_days":   {"type": "categorical", "choices": [10, 20, 30]},
+    },
     # ── 三大法人連續買超模板（chip persistence alpha）──────────────
     # 不同於 chip_momentum（單日 net-buy 觸發），chip_streak 強調「連續性」：
     # 法人持續加碼 N 天 + 累積買超達 avg_volume 的 X% 後進場。
@@ -2477,6 +2491,68 @@ def generate_gap_down_revert(df: pd.DataFrame, params: dict, regime=None, chip_d
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_simple_dip_buy(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Simple dip buy: price < MA × (1-dip_pct) → buy → hold N days"""
+    close=df["close"]
+    ma_p=int(params["ma_period"]); dip=float(params["dip_pct"])
+    tp_pct=float(params["take_profit_pct"]); max_hold=int(params["max_hold_days"])
+    ma=sma(close,ma_p)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan
+    for i in range(n):
+        c=close.iloc[i]; m=ma.iloc[i]
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            if tp_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan
+        else:
+            if not np.isnan(m) and c<m*(1-dip):
+                action[i]="BUY"; target_buy[i]=m*(1-dip)
+                in_pos=True; entry_price=c; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
+def generate_monthly_anchor(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """月初前 N 個交易日買入"""
+    close=df["close"]
+    md=int(params["month_day"])
+    trend_n=int(params["trend_ma"])
+    tp_pct=float(params["take_profit_pct"])
+    max_hold=int(params["max_hold_days"])
+    trend_s=sma(close,trend_n)
+    n=len(df); action=["HOLD"]*n; target_buy=[np.nan]*n; target_tp=[np.nan]*n; target_sl=[np.nan]*n
+    in_pos=False; hold_days=0; entry_price=np.nan
+    prev_month=-1
+    day_of_month_count=0
+    for i in range(n):
+        c=close.iloc[i]; tm=trend_s.iloc[i]
+        cur_month = df.index[i].month
+        if cur_month != prev_month:
+            day_of_month_count = 1
+            prev_month = cur_month
+        else:
+            day_of_month_count += 1
+        if in_pos:
+            hold_days+=1
+            if not np.isnan(entry_price): target_tp[i]=entry_price*(1+tp_pct)
+            if not np.isnan(tm): target_sl[i]=tm*0.95
+            tp_hit=(not np.isnan(target_tp[i])) and c>=target_tp[i]
+            sl_hit=(not np.isnan(target_sl[i])) and c<target_sl[i]
+            if tp_hit or sl_hit or hold_days>=max_hold:
+                action[i]="SELL"; in_pos=False; hold_days=0
+                target_tp[i]=np.nan; target_sl[i]=np.nan
+        else:
+            if day_of_month_count == md and not np.isnan(tm) and c>tm*0.85:
+                action[i]="BUY"; target_buy[i]=c
+                in_pos=True; entry_price=c; hold_days=0
+    return pd.DataFrame({"action":action,"target_buy":target_buy,
+                          "target_tp":target_tp,"target_sl":target_sl}, index=df.index)
+
+
 def generate_pivot_break(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
     """Daily pivot break (classic floor pivots)"""
     high=df["high"]; low=df["low"]; close=df["close"]
@@ -3240,6 +3316,8 @@ TEMPLATE_GENERATORS = {
     "pivot_break":            generate_pivot_break,
     "short_momentum":         generate_short_momentum,
     "double_volume":          generate_double_volume,
+    "simple_dip_buy":         generate_simple_dip_buy,
+    "monthly_anchor":         generate_monthly_anchor,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
 }

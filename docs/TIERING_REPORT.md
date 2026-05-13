@@ -1,4 +1,4 @@
-# TIERING REPORT — 20260513_122307
+# TIERING REPORT — 20260513_135706
 
 ## 1. 統計摘要
 
@@ -34,20 +34,20 @@
 
 | Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
 |-------|----------|-----|----|---|----|----------|-------|---|---|--------|
-| 9921 | failed_breakdown | +2.2% | 1.67 | 14 | -12.6% | 0.55 | X | O | O | FAIL：PF_lower=0.55, exp=+2.2%, n=14, holdout=[A_new=NA B=O C=O] |
-| 2105 | failed_breakdown | +2.2% | 2.00 | 9 | -17.0% | 0.36 | X | O | O | FAIL：PF_lower=0.36, exp=+2.2%, n=9, holdout=[A_new=NA B=O C=O] |
-| 3045 | failed_breakdown | +1.0% | 2.27 | 3 | -6.0% | N/A | X | O | O | FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2324 | failed_breakdown | +1.0% | 1.38 | 5 | -11.1% | 0.08 | X | X | O | FAIL：PF_lower=0.08, exp=+1.0%, n=5, holdout=[A_new=NA B=X C=O] |
-| 2207 | failed_breakdown | +1.0% | 1.32 | 10 | -19.2% | 0.29 | X | X | O | FAIL：PF_lower=0.29, exp=+1.0%, n=10, holdout=[A_new=NA B=X C=O] |
-| 1227 | failed_breakdown | +0.0% | 0.95 | 18 | -15.8% | 0.22 | X | O | X | FAIL：PF_lower=0.22, exp=+0.0%, n=18, holdout=[A_new=NA B=O C=X] |
-| 5880 | failed_breakdown | -0.3% | 0.80 | 8 | -10.0% | 0.08 | X | X | O | FAIL：test expectancy=-0.3% < 0（負期望值） |
-| 0056 | failed_breakdown | -1.1% | 0.56 | 4 | -11.5% | N/A | X | O | X | FAIL：test expectancy=-1.1% < 0（負期望值） |
-| 2356 | failed_breakdown | -1.3% | 0.65 | 10 | -28.0% | 0.08 | X | X | O | FAIL：test expectancy=-1.3% < 0（負期望值） |
-| 2886 | failed_breakdown | -1.4% | 0.47 | 17 | -26.1% | 0.10 | X | X | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
-| 2912 | failed_breakdown | -1.8% | 0.36 | 18 | -37.2% | 0.01 | X | O | X | FAIL：test expectancy=-1.8% < 0（負期望值） |
-| 1101 | failed_breakdown | -1.8% | 0.40 | 10 | -23.4% | 0.00 | X | O | X | FAIL：test expectancy=-1.8% < 0（負期望值） |
-| 9940 | failed_breakdown | -1.9% | 0.44 | 10 | -25.7% | 0.00 | X | X | X | FAIL：test expectancy=-1.9% < 0（負期望值） |
-| 2412 | failed_breakdown | -3.7% | 0.00 | 3 | -10.8% | N/A | X | X | X | FAIL：test expectancy=-3.7% < 0（負期望值） |
-| 2002 | failed_breakdown | -3.8% | 0.08 | 7 | -26.9% | 0.00 | X | X | X | FAIL：test expectancy=-3.8% < 0（負期望值） |
-| 2474 | failed_breakdown | -4.7% | 0.00 | 3 | -13.5% | N/A | X | X | X | FAIL：test expectancy=-4.7% < 0（負期望值） |
-| 2379 | failed_breakdown | -5.7% | 0.00 | 5 | -29.9% | 0.00 | X | O | X | FAIL：test expectancy=-5.7% < 0（負期望值） |
+| 2356 | monthly_anchor | +1.4% | 1.52 | 31 | -26.5% | 0.69 | X | X | X | FAIL：PF_lower=0.69, exp=+1.4%, n=31, holdout=[A_new=NA B=X C=X] |
+| 2412 | monthly_anchor | +0.4% | 1.35 | 31 | -9.7% | 0.60 | X | O | O | FAIL：PF_lower=0.60, exp=+0.4%, n=31, holdout=[A_new=NA B=O C=O] |
+| 3045 | monthly_anchor | +0.3% | 1.24 | 32 | -17.5% | 0.54 | X | O | O | FAIL：PF_lower=0.54, exp=+0.3%, n=32, holdout=[A_new=NA B=O C=O] |
+| 2324 | monthly_anchor | +0.3% | 1.07 | 42 | -29.0% | 0.49 | X | X | X | FAIL：PF_lower=0.49, exp=+0.3%, n=42, holdout=[A_new=NA B=X C=X] |
+| 2379 | monthly_anchor | +0.2% | 1.04 | 42 | -27.6% | 0.53 | X | O | X | FAIL：PF_lower=0.53, exp=+0.2%, n=42, holdout=[A_new=NA B=O C=X] |
+| 2474 | monthly_anchor | -0.6% | 0.58 | 52 | -37.0% | 0.27 | X | X | O | FAIL：test expectancy=-0.6% < 0（負期望值） |
+| 0056 | monthly_anchor | -0.7% | 0.63 | 29 | -34.5% | 0.29 | X | X | X | FAIL：test expectancy=-0.7% < 0（負期望值） |
+| 2912 | monthly_anchor | -0.7% | 0.60 | 37 | -37.5% | 0.21 | X | O | O | FAIL：test expectancy=-0.7% < 0（負期望值） |
+| 2886 | monthly_anchor | -0.9% | 0.60 | 33 | -39.4% | 0.25 | X | X | X | FAIL：test expectancy=-0.9% < 0（負期望值） |
+| 9940 | monthly_anchor | -0.9% | 0.57 | 42 | -46.6% | 0.21 | X | X | X | FAIL：test expectancy=-0.9% < 0（負期望值） |
+| 5880 | monthly_anchor | -1.0% | 0.53 | 37 | -39.5% | 0.24 | X | O | X | FAIL：test expectancy=-1.0% < 0（負期望值） |
+| 2105 | monthly_anchor | -1.4% | 0.53 | 36 | -53.8% | 0.19 | X | X | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
+| 1101 | monthly_anchor | -1.5% | 0.36 | 37 | -49.8% | 0.16 | X | X | X | FAIL：test expectancy=-1.5% < 0（負期望值） |
+| 2207 | monthly_anchor | -1.6% | 0.29 | 47 | -55.5% | 0.13 | X | X | X | FAIL：test expectancy=-1.6% < 0（負期望值） |
+| 9921 | monthly_anchor | -1.7% | 0.46 | 37 | -59.3% | 0.17 | X | X | O | FAIL：test expectancy=-1.7% < 0（負期望值） |
+| 2002 | monthly_anchor | -2.2% | 0.31 | 39 | -66.1% | 0.06 | X | X | O | FAIL：test expectancy=-2.2% < 0（負期望值） |
+| 1227 | monthly_anchor | -2.3% | 0.08 | 47 | -68.1% | 0.01 | X | X | X | FAIL：test expectancy=-2.3% < 0（負期望值） |

@@ -1,4 +1,4 @@
-# Phase 14: trials=200 retry on best templates (NR/support/yearly_high/failed_breakdown)
+# Phase 15: simple_dip_buy + monthly_anchor
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -400,22 +400,29 @@
   tier: F
   tradeable: false
 '2207':
-  bnh_cagr: 0.09997438434726136
-  bnh_div_yield: 0.023286463798530953
-  bnh_holdable: false
-  bnh_max_dd: -0.5254596888260256
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 和泰車
-  params_ref: chip_streak.yaml#per_stock.2207
-  position_pct_max: 0.0
-  template: chip_streak
-  test_expectancy: -0.0
-  test_max_dd: -0.2349
-  test_n_trades: 8
-  test_pf: 0.912
-  tier: F
-  tradeable: false
+  best_template: simple_dip_buy
+  bootstrap:
+    n_iterations: 1000
+    n_original: 5
+    pf_lower: 5.0
+    pf_mean: 5.0
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: simple_dip_buy.yaml#per_stock.2207
+  position_pct_recommended: 0.3
+  template: simple_dip_buy
+  test_alpha_vs_0050: -0.2451
+  test_cagr: 0.0248
+  test_expectancy: 0.0507
+  test_max_dd: -0.1617
+  test_n_trades: 5
+  test_pf: null
+  tier: B
+  tier_reason: PF_lower=5.00 ≥ 1.0, exp=+5.1% ≥ 2%, n=5≥5, holdout=[A_new=NA B=O C=NA]
+  verdict: SUSPICIOUS_PERFECT
 '2303':
   best_template: narrow_range_breakout
   bootstrap:
@@ -485,22 +492,30 @@
   tier: A
   tradeable: true
 '2324':
-  bnh_cagr: 0.15687419789178958
-  bnh_div_yield: 0.04479255151083089
-  bnh_holdable: true
-  bnh_max_dd: -0.26674937965260526
-  bnh_position_pct_max: 0.2
-  bnh_tier: BNH_B
-  name: 仁寶
-  params_ref: chip_momentum.yaml#per_stock.2324
-  position_pct_max: 0.0
-  template: chip_momentum
-  test_expectancy: 0.055
-  test_max_dd: -0.1838
-  test_n_trades: 11
-  test_pf: 2.969
-  tier: F
-  tradeable: false
+  best_template: simple_dip_buy
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: simple_dip_buy.yaml#per_stock.2324
+  position_pct_recommended: 0.15
+  template: simple_dip_buy
+  test_alpha_vs_0050: -0.2304
+  test_cagr: 0.0396
+  test_expectancy: 0.0537
+  test_max_dd: -0.105
+  test_n_trades: 4
+  test_pf: null
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=4, raw_PF=inf ≥ 3.0, exp=+5.4% ≥ 5%, |DD|=11% ≤ 25%,
+    holdout=[A_new=NA B=O C=O]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '2327':
   best_template: yearly_high_break
   bootstrap:
@@ -628,22 +643,30 @@
   tier: C
   tradeable: true
 '2356':
-  bnh_cagr: 0.16819154591604812
-  bnh_div_yield: 0.045520772000718954
-  bnh_holdable: true
-  bnh_max_dd: -0.44166666666666643
-  bnh_position_pct_max: 0.2
-  bnh_tier: BNH_B
-  name: 英業達
-  params_ref: chip_momentum.yaml#per_stock.2356
-  position_pct_max: 0.0
-  template: chip_momentum
-  test_expectancy: 0.4316
-  test_max_dd: -0.1018
-  test_n_trades: 1
+  best_template: simple_dip_buy
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: simple_dip_buy.yaml#per_stock.2356
+  position_pct_recommended: 0.15
+  template: simple_dip_buy
+  test_alpha_vs_0050: -0.2224
+  test_cagr: 0.0475
+  test_expectancy: 0.086
+  test_max_dd: -0.2298
+  test_n_trades: 3
   test_pf: null
-  tier: F
-  tradeable: false
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+8.6% ≥ 5%, |DD|=23% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '2360':
   best_template: narrow_range_breakout
   bootstrap:
@@ -705,22 +728,30 @@
   tier: C
   tradeable: true
 '2379':
-  bnh_cagr: 0.29409582135299805
-  bnh_div_yield: 0.041163241325105245
-  bnh_holdable: true
-  bnh_max_dd: -0.5734866501913216
-  bnh_position_pct_max: 0.2
-  bnh_tier: BNH_B
-  name: 瑞昱
-  params_ref: mean_reversion.yaml#per_stock.2379
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.0252
-  test_max_dd: -0.1334
-  test_n_trades: 5
-  test_pf: 2.491
-  tier: F
-  tradeable: false
+  best_template: simple_dip_buy
+  bootstrap:
+    n_iterations: 1000
+    n_original: 10
+    pf_lower: 5.0
+    pf_mean: 5.0
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: simple_dip_buy.yaml#per_stock.2379
+  position_pct_recommended: 0.3
+  template: simple_dip_buy
+  test_alpha_vs_0050: -0.2165
+  test_cagr: 0.0534
+  test_expectancy: 0.0286
+  test_max_dd: -0.0947
+  test_n_trades: 10
+  test_pf: 84.751
+  tier: B
+  tier_reason: PF_lower=5.00 ≥ 1.0, exp=+2.9% ≥ 2%, n=10≥5, holdout=[A_new=NA B=O
+    C=O]
+  verdict: SUSPICIOUS_PERFECT
 '2382':
   bnh_cagr: null
   bnh_div_yield: null

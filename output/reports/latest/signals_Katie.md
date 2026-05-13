@@ -9,5 +9,5 @@
 | 9940 | 信義 | — | 18.9 | HOLD | F | — | style1_pullback | — | — | — | 24 | [空頭] | BULL |  |
 | 1227 | 佳格 | — | 28.8 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
 | 1301 | 台塑 | — | 47.6 | HOLD | A | 50% | gap_continuation | — | — | — | 42 | [多頭] | BULL |  |
-| 2324 | 仁寶 | — | 29.9 | HOLD | F | — | style1_pullback | — | — | — | 50 | [空頭] | BULL |  |
+| 2324 | 仁寶 | — | 29.9 | HOLD | C | — | style1_pullback | — | — | — | 50 | [空頭] | BULL |  |
 | 2344 | 華邦電 | — | 121.5 | HOLD | B | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |

@@ -16,19 +16,19 @@
 | 2360 | 致茂 | — | 2440.0 | HOLD | C | — | style1_pullback | — | — | — | 69 | [多頭] | BULL |  |
 | 6515 | 穎崴 | — | 9950.0 | HOLD | B | 30% | style1_pullback | — | — | — | 57 | [多頭] | BULL |  |
 | 2327 | 國巨 | — | 419.5 | HOLD | C | — | style1_pullback | — | — | — | 78 | [多頭] | BULL |  |
-| 2379 | 瑞昱 | — | 555.0 | HOLD | F | — | style1_pullback | — | — | — | 55 | [空頭] | BULL |  |
+| 2379 | 瑞昱 | — | 555.0 | HOLD | B | — | style1_pullback | — | — | — | 55 | [空頭] | BULL |  |
 | 3034 | 聯詠 | — | 487.0 | HOLD | C | — | style1_pullback | — | — | — | 74 | [空頭] | BULL |  |
 | 3008 | 大立光 | — | 2795.0 | HOLD | C | 15% | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
 | 4938 | 和碩 | — | 81.1 | HOLD | C | — | style1_pullback | — | 81.1~82.5 | 74.0 | 49 | [多頭] | BULL | 觀察中 RSI=49.1 |
 | 3231 | 緯創 | — | 141.5 | HOLD | C | — | style1_pullback | — | — | — | 54 | [多頭] | BULL |  |
 | 2474 | 可成 | — | 205.5 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
 | 2376 | 技嘉 | — | 321.0 | HOLD | C | 15% | style1_pullback | — | — | — | 74 | [空頭] | BULL |  |
-| 2356 | 英業達 | — | 48.7 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
+| 2356 | 英業達 | — | 48.7 | HOLD | C | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
 | 2353 | 宏碁 | — | 28.3 | HOLD | C | 15% | style1_pullback | — | — | — | 56 | [空頭] | BULL |  |
 | 3661 | 世芯-KY | — | 5310.0 | HOLD | C | — | style1_pullback | — | — | — | 80 | [多頭] | BULL |  |
 | 2426 | 鼎元 | — | 69.9 | HOLD | B | — | style1_pullback | — | — | — | 67 | [多頭] | BULL |  |
 | 1560 | 中砂（CMP） | — | 668.0 | HOLD | C | 15% | style1_pullback | — | — | — | 79 | [多頭] | BULL |  |
-| 2324 | 仁寶 | — | 29.9 | HOLD | F | — | style1_pullback | — | — | — | 50 | [空頭] | BULL |  |
+| 2324 | 仁寶 | — | 29.9 | HOLD | C | — | style1_pullback | — | — | — | 50 | [空頭] | BULL |  |
 | 2344 | 華邦電 | — | 121.5 | HOLD | B | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
 | 6271 | 同欣電 | — | 183.0 | HOLD | C | — | style1_pullback | — | — | — | 61 | [多頭] | BULL |  |
 | 4958 | 臻鼎-KY | — | 407.0 | HOLD | C | 15% | gap_continuation | — | — | — | 69 | [多頭] | BULL |  |
@@ -65,7 +65,7 @@
 | 1227 | 佳格 | — | 28.8 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
 | 1216 | 統一 | — | 73.1 | HOLD | B | — | style1_pullback | — | — | — | 59 | [空頭] | BULL |  |
 | 9940 | 信義 | — | 18.9 | HOLD | F | — | style1_pullback | — | — | — | 24 | [空頭] | BULL |  |
-| 2207 | 和泰車 | — | 470.0 | HOLD | F | — | style1_pullback | — | — | — | 38 | [空頭] | BULL |  |
+| 2207 | 和泰車 | — | 470.0 | HOLD | B | — | style1_pullback | — | — | — | 38 | [空頭] | BULL |  |
 | 2105 | 正新 | — | 31.9 | HOLD | F | — | style1_pullback | — | — | — | 53 | [空頭] | BULL |  |
 | 9921 | 巨大 | — | 72.1 | HOLD | F | — | style1_pullback | — | — | — | 57 | [空頭] | BULL |  |
 | 9914 | 美利達 | — | 59.5 | HOLD | C | — | style1_pullback | — | — | — | 47 | [空頭] | BULL |  |

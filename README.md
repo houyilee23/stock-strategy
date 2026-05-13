@@ -42,7 +42,7 @@ _最後更新：**2026-05-13**_
 | [9940](output/reports/per_stock/9940.md) | 信義 | 18.9 | HOLD | F | — | 24 | [空頭] | BULL |
 | [1227](output/reports/per_stock/1227.md) | 佳格 | 28.8 | HOLD | F | — | 37 | [空頭] | BULL |
 | [1301](output/reports/per_stock/1301.md) | 台塑 | 47.6 | HOLD | A | 50% | 42 | [多頭] | BULL |
-| [2324](output/reports/per_stock/2324.md) | 仁寶 | 29.9 | HOLD | F | — | 50 | [空頭] | BULL |
+| [2324](output/reports/per_stock/2324.md) | 仁寶 | 29.9 | HOLD | C | — | 50 | [空頭] | BULL |
 | [2344](output/reports/per_stock/2344.md) | 華邦電 | 121.5 | HOLD | B | — | 68 | [多頭] | BULL |
 
 ### universe
@@ -65,19 +65,19 @@ _最後更新：**2026-05-13**_
 | [2360](output/reports/per_stock/2360.md) | 致茂 | 2440.0 | HOLD | C | — | 69 | [多頭] | BULL |
 | [6515](output/reports/per_stock/6515.md) | 穎崴 | 9950.0 | HOLD | B | 30% | 57 | [多頭] | BULL |
 | [2327](output/reports/per_stock/2327.md) | 國巨 | 419.5 | HOLD | C | — | 78 | [多頭] | BULL |
-| [2379](output/reports/per_stock/2379.md) | 瑞昱 | 555.0 | HOLD | F | — | 55 | [空頭] | BULL |
+| [2379](output/reports/per_stock/2379.md) | 瑞昱 | 555.0 | HOLD | B | — | 55 | [空頭] | BULL |
 | [3034](output/reports/per_stock/3034.md) | 聯詠 | 487.0 | HOLD | C | — | 74 | [空頭] | BULL |
 | [3008](output/reports/per_stock/3008.md) | 大立光 | 2795.0 | HOLD | C | 15% | 65 | [多頭] | BULL |
 | [4938](output/reports/per_stock/4938.md) | 和碩 | 81.1 | HOLD | C | — | 49 | [多頭] | BULL |
 | [3231](output/reports/per_stock/3231.md) | 緯創 | 141.5 | HOLD | C | — | 54 | [多頭] | BULL |
 | [2474](output/reports/per_stock/2474.md) | 可成 | 205.5 | HOLD | F | — | 49 | [空頭] | BULL |
 | [2376](output/reports/per_stock/2376.md) | 技嘉 | 321.0 | HOLD | C | 15% | 74 | [空頭] | BULL |
-| [2356](output/reports/per_stock/2356.md) | 英業達 | 48.7 | HOLD | F | — | 60 | [多頭] | BULL |
+| [2356](output/reports/per_stock/2356.md) | 英業達 | 48.7 | HOLD | C | — | 60 | [多頭] | BULL |
 | [2353](output/reports/per_stock/2353.md) | 宏碁 | 28.3 | HOLD | C | 15% | 56 | [空頭] | BULL |
 | [3661](output/reports/per_stock/3661.md) | 世芯-KY | 5310.0 | HOLD | C | — | 80 | [多頭] | BULL |
 | [2426](output/reports/per_stock/2426.md) | 鼎元 | 69.9 | HOLD | B | — | 67 | [多頭] | BULL |
 | [1560](output/reports/per_stock/1560.md) | 中砂（CMP） | 668.0 | HOLD | C | 15% | 79 | [多頭] | BULL |
-| [2324](output/reports/per_stock/2324.md) | 仁寶 | 29.9 | HOLD | F | — | 50 | [空頭] | BULL |
+| [2324](output/reports/per_stock/2324.md) | 仁寶 | 29.9 | HOLD | C | — | 50 | [空頭] | BULL |
 | [2344](output/reports/per_stock/2344.md) | 華邦電 | 121.5 | HOLD | B | — | 68 | [多頭] | BULL |
 | [6271](output/reports/per_stock/6271.md) | 同欣電 | 183.0 | HOLD | C | — | 61 | [多頭] | BULL |
 | [4958](output/reports/per_stock/4958.md) | 臻鼎-KY | 407.0 | HOLD | C | 15% | 69 | [多頭] | BULL |
@@ -114,7 +114,7 @@ _最後更新：**2026-05-13**_
 | [1227](output/reports/per_stock/1227.md) | 佳格 | 28.8 | HOLD | F | — | 37 | [空頭] | BULL |
 | [1216](output/reports/per_stock/1216.md) | 統一 | 73.1 | HOLD | B | — | 59 | [空頭] | BULL |
 | [9940](output/reports/per_stock/9940.md) | 信義 | 18.9 | HOLD | F | — | 24 | [空頭] | BULL |
-| [2207](output/reports/per_stock/2207.md) | 和泰車 | 470.0 | HOLD | F | — | 38 | [空頭] | BULL |
+| [2207](output/reports/per_stock/2207.md) | 和泰車 | 470.0 | HOLD | B | — | 38 | [空頭] | BULL |
 | [2105](output/reports/per_stock/2105.md) | 正新 | 31.9 | HOLD | F | — | 53 | [空頭] | BULL |
 | [9921](output/reports/per_stock/9921.md) | 巨大 | 72.1 | HOLD | F | — | 57 | [空頭] | BULL |
 | [9914](output/reports/per_stock/9914.md) | 美利達 | 59.5 | HOLD | C | — | 47 | [空頭] | BULL |
