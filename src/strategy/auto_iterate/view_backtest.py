@@ -197,7 +197,7 @@ def view_filter(run_id: str, tiers: List[str] = None) -> None:
         if tiers and tier not in tiers:
             continue
         rows.append((sid, e))
-    rows.sort(key=lambda x: ({"S":5,"A":4,"B":3,"C":2,"F":1}.get(x[1].get("tier","F"),0),
+    rows.sort(key=lambda x: ({"S":6,"A":5,"B":4,"C":3,"D":2,"F":1}.get(x[1].get("tier","F"),0),
                               x[1].get("test_expectancy") or 0),
               reverse=True)
 

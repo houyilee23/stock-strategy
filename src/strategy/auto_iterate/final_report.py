@@ -156,7 +156,7 @@ def write_final_report(run_id: str) -> None:
             else:
                 bucket["fail"].append((sid, e))
         bucket["tradeable"].sort(
-            key=lambda x: ({"S":5,"A":4,"B":3,"C":2}.get(x[1].get("tier","F"),0),
+            key=lambda x: ({"S":6,"A":5,"B":4,"C":3,"D":2}.get(x[1].get("tier","F"),0),
                            x[1].get("test_expectancy") or 0),
             reverse=True,
         )
@@ -290,7 +290,7 @@ def write_final_report(run_id: str) -> None:
     for sid, e in stock_entries.items():
         if e.get("tier") in ("S", "A", "B", "C") and e.get("best_template") in new_templates:
             saved.append((sid, e))
-    saved.sort(key=lambda x: ({"S":5,"A":4,"B":3,"C":2}.get(x[1].get("tier","F"),0),
+    saved.sort(key=lambda x: ({"S":6,"A":5,"B":4,"C":3,"D":2}.get(x[1].get("tier","F"),0),
                               x[1].get("test_expectancy") or 0), reverse=True)
     if saved:
         L.append("| Stock | 名稱 | Tier | 模板 | Exp | PF_lower |")

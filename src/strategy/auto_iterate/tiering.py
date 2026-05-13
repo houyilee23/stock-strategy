@@ -60,6 +60,14 @@ TIER_RULES = {
         pos_max=0.15,
         label="WEAK：紙上交易 3 個月再啟用，最大 15%",
     ),
+    "D": dict(
+        pf_lower=0.5,
+        expectancy=0.0,
+        n_min=5,
+        holdout_required="none",
+        pos_max=0.10,
+        label="BORDERLINE：策略邊界，僅供紙上交易；最大 10%",
+    ),
     "F": dict(
         pf_lower=0.0,
         expectancy=-1.0,
@@ -369,6 +377,16 @@ def assign_tier(
         return "C", (
             f"PF_lower={pf_lower_s} ≥ 0.7, exp={exp_s} ≥ 1%, n={n}≥5, "
             f"holdout=[{ho_str}]"
+        )
+
+    # D：邊界正期望（PF_lower≥0.5 + exp>0% + n≥5）
+    d_rule = TIER_RULES["D"]
+    if (pf_lower >= d_rule["pf_lower"]
+            and exp >= d_rule["expectancy"]
+            and n >= d_rule["n_min"]):
+        return "D", (
+            f"BORDERLINE：PF_lower={pf_lower_s} ≥ 0.5, exp={exp_s} ≥ 0%, n={n}≥5, "
+            f"holdout=[{ho_str}]（紙上交易）"
         )
 
     # F：其他

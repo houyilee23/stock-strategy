@@ -252,7 +252,7 @@ def _write_per_stock_best(out_dir, sids, all_results, templates, rows, bm0050_te
     """
     doc = {"benchmark_0050_test_cagr": _safe(bm0050_test)}
 
-    tier_order = {"S": 5, "A": 4, "B": 3, "C": 2, "F": 1}
+    tier_order = {"S": 6, "A": 5, "B": 4, "C": 3, "D": 2, "F": 1}
 
     for sid in sids:
         # 用 tier 而非 verdict 選 best_template
@@ -525,7 +525,7 @@ def _write_tiering_report(out_dir, run_id, sids, all_results, templates):
     """
     from src.strategy.auto_iterate.tiering import TIER_RULES
 
-    tier_order = {"S": 5, "A": 4, "B": 3, "C": 2, "F": 1}
+    tier_order = {"S": 6, "A": 5, "B": 4, "C": 3, "D": 2, "F": 1}
 
     # 收集每檔的 best (tier, template, metrics)
     per_stock_best = {}
