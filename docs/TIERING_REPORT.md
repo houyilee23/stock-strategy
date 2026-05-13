@@ -1,4 +1,4 @@
-# TIERING REPORT — 20260513_150036
+# TIERING REPORT — 20260513_163816
 
 ## 1. 統計摘要
 
@@ -34,16 +34,16 @@
 
 | Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
 |-------|----------|-----|----|---|----|----------|-------|---|---|--------|
-| 2412 | monthly_anchor | +0.4% | 1.35 | 31 | -9.7% | 0.60 | X | O | O | FAIL：PF_lower=0.60, exp=+0.4%, n=31, holdout=[A_new=NA B=O C=O] |
-| 3045 | monthly_anchor | +0.3% | 1.24 | 32 | -17.5% | 0.54 | X | O | O | FAIL：PF_lower=0.54, exp=+0.3%, n=32, holdout=[A_new=NA B=O C=O] |
-| 1101 | monthly_anchor | -0.5% | 0.72 | 36 | -37.3% | 0.26 | X | X | X | FAIL：test expectancy=-0.5% < 0（負期望值） |
-| 2474 | monthly_anchor | -0.6% | 0.58 | 52 | -37.0% | 0.27 | X | X | O | FAIL：test expectancy=-0.6% < 0（負期望值） |
-| 0056 | monthly_anchor | -0.7% | 0.63 | 29 | -34.5% | 0.29 | X | X | X | FAIL：test expectancy=-0.7% < 0（負期望值） |
-| 2912 | monthly_anchor | -0.7% | 0.60 | 37 | -37.5% | 0.21 | X | O | O | FAIL：test expectancy=-0.7% < 0（負期望值） |
-| 2886 | monthly_anchor | -0.9% | 0.60 | 33 | -39.4% | 0.25 | X | X | X | FAIL：test expectancy=-0.9% < 0（負期望值） |
-| 9940 | monthly_anchor | -0.9% | 0.57 | 42 | -46.6% | 0.21 | X | X | X | FAIL：test expectancy=-0.9% < 0（負期望值） |
-| 5880 | monthly_anchor | -1.2% | 0.45 | 36 | -41.0% | 0.17 | X | O | X | FAIL：test expectancy=-1.2% < 0（負期望值） |
-| 9921 | monthly_anchor | -1.4% | 0.55 | 29 | -48.2% | 0.18 | X | X | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
-| 2105 | monthly_anchor | -1.4% | 0.53 | 36 | -53.8% | 0.19 | X | X | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
-| 2002 | monthly_anchor | -2.2% | 0.31 | 39 | -66.1% | 0.06 | X | X | O | FAIL：test expectancy=-2.2% < 0（負期望值） |
-| 1227 | monthly_anchor | -2.3% | 0.08 | 47 | -68.1% | 0.01 | X | X | X | FAIL：test expectancy=-2.3% < 0（負期望值） |
+| 2105 | weekly_low_buy | +1.3% | 2.38 | 5 | -4.7% | 0.29 | X | X | X | FAIL：PF_lower=0.29, exp=+1.3%, n=5, holdout=[A_new=NA B=X C=NA] |
+| 5880 | weekly_low_buy | +1.0% | 1.97 | 10 | -7.5% | 0.29 | X | O | O | FAIL：PF_lower=0.29, exp=+1.0%, n=10, holdout=[A_new=NA B=O C=O] |
+| 3045 | weekly_low_buy | +0.2% | 1.02 | 5 | -8.8% | 0.04 | X | O | X | FAIL：PF_lower=0.04, exp=+0.2%, n=5, holdout=[A_new=NA B=O C=X] |
+| 0056 | weekly_low_buy | +0.1% | 1.02 | 9 | -14.9% | 0.00 | X | O | X | FAIL：PF_lower=0.00, exp=+0.1%, n=9, holdout=[A_new=NA B=O C=X] |
+| 9940 | weekly_low_buy | -0.7% | 0.45 | 22 | -17.2% | 0.00 | X | O | X | FAIL：test expectancy=-0.7% < 0（負期望值） |
+| 9921 | weekly_low_buy | -1.5% | 0.15 | 15 | -19.9% | 0.00 | X | X | X | FAIL：test expectancy=-1.5% < 0（負期望值） |
+| 2412 | weekly_low_buy | -1.6% | 0.28 | 5 | -14.5% | 0.00 | X | O | X | FAIL：test expectancy=-1.6% < 0（負期望值） |
+| 2002 | weekly_low_buy | -1.7% | 0.00 | 18 | -27.9% | 0.00 | X | O | X | FAIL：test expectancy=-1.7% < 0（負期望值） |
+| 2886 | weekly_low_buy | -1.9% | 0.23 | 5 | -17.7% | 0.00 | X | X | X | FAIL：test expectancy=-1.9% < 0（負期望值） |
+| 2912 | weekly_low_buy | -2.1% | 0.32 | 15 | -36.9% | 0.00 | X | O | O | FAIL：test expectancy=-2.1% < 0（負期望值） |
+| 1101 | weekly_low_buy | -2.1% | 0.10 | 12 | -26.0% | 0.00 | X | X | X | FAIL：test expectancy=-2.1% < 0（負期望值） |
+| 1227 | weekly_low_buy | -2.3% | 0.01 | 28 | -49.9% | 0.00 | X | X | X | FAIL：test expectancy=-2.3% < 0（負期望值） |
+| 2474 | weekly_low_buy | -2.6% | 0.01 | 11 | -25.7% | 0.00 | X | X | O | FAIL：test expectancy=-2.6% < 0（負期望值） |
