@@ -1,4 +1,4 @@
-# Phase 19: trend_confirm_hold + low_volume_reversal
+# Merge: 50-retrain finalize + Phase 20 + D-tier
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -186,6 +186,30 @@
   test_pf: 0.0
   tier: F
   tradeable: false
+'1234':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: mean_reversion.yaml#per_stock.1234
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.259
+  test_cagr: 0.0109
+  test_expectancy: 0.015
+  test_max_dd: -0.0528
+  test_n_trades: 4
+  test_pf: 3.056
+  tier: F
+  tier_reason: FAIL：test n_trades=4 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '1301':
   bnh_cagr: null
   bnh_div_yield: null
@@ -254,6 +278,102 @@
   test_pf: 5.072
   tier: C
   tradeable: true
+'1456':
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: low_vol_pullback.yaml#per_stock.1456
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2626
+  test_cagr: 0.0074
+  test_expectancy: 0.0152
+  test_max_dd: -0.0959
+  test_n_trades: 3
+  test_pf: 1.471
+  tier: F
+  tier_reason: FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
+'1503':
+  best_template: momentum_hold
+  bootstrap:
+    n_iterations: 1000
+    n_original: 7
+    pf_lower: 0.0
+    pf_mean: 3.196
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: true
+  params_ref: momentum_hold.yaml#per_stock.1503
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.1491
+  test_cagr: 0.1208
+  test_expectancy: 0.1388
+  test_max_dd: -0.3106
+  test_n_trades: 7
+  test_pf: 3.248
+  tier: F
+  tier_reason: FAIL：PF_lower=0.00, exp=+13.9%, n=7, holdout=[A_new=NA B=X C=O]
+  verdict: DD_BREACH
+'1504':
+  best_template: donchian_breakout
+  bootstrap:
+    n_iterations: 1000
+    n_original: 11
+    pf_lower: 0.299
+    pf_mean: 3.331
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: false
+  params_ref: donchian_breakout.yaml#per_stock.1504
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.1386
+  test_cagr: 0.1314
+  test_expectancy: 0.0866
+  test_max_dd: -0.2159
+  test_n_trades: 11
+  test_pf: 3.978
+  tier: F
+  tier_reason: FAIL：PF_lower=0.30, exp=+8.7%, n=11, holdout=[A_new=NA B=NA C=X]
+  verdict: PASS
+'1521':
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: false
+  params_ref: low_vol_pullback.yaml#per_stock.1521
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2741
+  test_cagr: -0.0041
+  test_expectancy: -0.0041
+  test_max_dd: -0.092
+  test_n_trades: 4
+  test_pf: 0.807
+  tier: F
+  tier_reason: FAIL：test expectancy=-0.4% < 0（負期望值）
+  verdict: INSUFFICIENT
 '1560':
   bnh_cagr: null
   bnh_div_yield: null
@@ -271,6 +391,30 @@
   test_pf: 6.928
   tier: C
   tradeable: true
+'1582':
+  best_template: trend_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 1
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: trend_pullback.yaml#per_stock.1582
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2235
+  test_cagr: 0.0464
+  test_expectancy: 0.2738
+  test_max_dd: -0.1292
+  test_n_trades: 1
+  test_pf: null
+  tier: F
+  tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '1605':
   best_template: atr_band_breakout
   bootstrap:
@@ -296,6 +440,78 @@
   tier_reason: PF_lower=0.97 ≥ 0.7, exp=+5.3% ≥ 1%, n=13≥5, holdout=[A_new=NA B=O
     C=O]
   verdict: PASS
+'1717':
+  best_template: gap_continuation
+  bootstrap:
+    n_iterations: 1000
+    n_original: 12
+    pf_lower: 0.367
+    pf_mean: 2.542
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: false
+  params_ref: gap_continuation.yaml#per_stock.1717
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.1861
+  test_cagr: 0.0838
+  test_expectancy: 0.0456
+  test_max_dd: -0.2373
+  test_n_trades: 12
+  test_pf: 2.326
+  tier: F
+  tier_reason: FAIL：PF_lower=0.37, exp=+4.6%, n=12, holdout=[A_new=NA B=NA C=X]
+  verdict: WEAK
+'1722':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 5
+    pf_lower: 0.586
+    pf_mean: 3.985
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: mean_reversion.yaml#per_stock.1722
+  position_pct_recommended: 0.1
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  test_alpha_vs_0050: -0.2274
+  test_cagr: 0.0425
+  test_expectancy: 0.0474
+  test_max_dd: -0.0438
+  test_n_trades: 5
+  test_pf: 5.525
+  tier: D
+  tier_reason: BORDERLINE：PF_lower=0.59 ≥ 0.5, exp=+4.7% ≥ 0%, n=5≥5, holdout=[A_new=NA
+    B=O C=O]（紙上交易）
+  verdict: WEAK
+'1736':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 5
+    pf_lower: 1.475
+    pf_mean: 4.732
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: true
+  params_ref: mean_reversion.yaml#per_stock.1736
+  position_pct_recommended: 0.3
+  test_alpha_vs_0050: -0.1915
+  test_cagr: 0.0785
+  test_expectancy: 0.0894
+  test_max_dd: -0.1434
+  test_n_trades: 5
+  test_pf: 14.134
+  tier: B
+  tier_reason: PF_lower=1.48 ≥ 1.0, exp=+8.9% ≥ 2%, n=5≥5, holdout=[A_new=NA B=X C=O]
+  verdict: SUSPICIOUS_PERFECT
 '1802':
   bnh_cagr: null
   bnh_div_yield: null
@@ -339,6 +555,30 @@
   tier_reason: PF_lower=1.14 ≥ 1.0, exp=+3.5% ≥ 2%, n=18≥5, holdout=[A_new=NA B=O
     C=O]
   verdict: WEAK
+'1907':
+  best_template: gap_continuation
+  bootstrap:
+    n_iterations: 1000
+    n_original: 2
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: gap_continuation.yaml#per_stock.1907
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2484
+  test_cagr: 0.0216
+  test_expectancy: 0.059
+  test_max_dd: -0.0379
+  test_n_trades: 2
+  test_pf: null
+  tier: F
+  tier_reason: FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '2002':
   bnh_cagr: 0.009390799697681196
   bnh_div_yield: 0.03803225950583084
@@ -356,6 +596,54 @@
   test_pf: null
   tier: F
   tradeable: false
+'2009':
+  best_template: bollinger_squeeze
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: bollinger_squeeze.yaml#per_stock.2009
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2526
+  test_cagr: 0.0174
+  test_expectancy: 0.0471
+  test_max_dd: -0.4278
+  test_n_trades: 4
+  test_pf: 1.267
+  tier: F
+  tier_reason: FAIL：test n_trades=4 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
+'2014':
+  best_template: bollinger_squeeze
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: bollinger_squeeze.yaml#per_stock.2014
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.1767
+  test_cagr: 0.0932
+  test_expectancy: 0.2098
+  test_max_dd: -0.2954
+  test_n_trades: 4
+  test_pf: 2.285
+  tier: F
+  tier_reason: FAIL：test n_trades=4 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '2027':
   best_template: narrow_range_breakout
   bootstrap:
@@ -382,6 +670,54 @@
   tier_reason: PF_lower=0.93 ≥ 0.7, exp=+2.3% ≥ 1%, n=15≥5, holdout=[A_new=NA B=O
     C=O]
   verdict: WEAK
+'2049':
+  best_template: volume_breakout
+  bootstrap:
+    n_iterations: 1000
+    n_original: 13
+    pf_lower: 0.285
+    pf_mean: 2.115
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: volume_breakout.yaml#per_stock.2049
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2395
+  test_cagr: 0.0304
+  test_expectancy: 0.0147
+  test_max_dd: -0.1622
+  test_n_trades: 13
+  test_pf: 1.6
+  tier: F
+  tier_reason: FAIL：PF_lower=0.29, exp=+1.5%, n=13, holdout=[A_new=NA B=O C=NA]
+  verdict: WEAK
+'2059':
+  best_template: donchian_breakout
+  bootstrap:
+    n_iterations: 1000
+    n_original: 11
+    pf_lower: 1.756
+    pf_mean: 4.56
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: false
+  params_ref: donchian_breakout.yaml#per_stock.2059
+  position_pct_recommended: 0.3
+  test_alpha_vs_0050: 0.0084
+  test_cagr: 0.2784
+  test_expectancy: 0.156
+  test_max_dd: -0.2394
+  test_n_trades: 11
+  test_pf: 8.532
+  tier: B
+  tier_reason: PF_lower=1.76 ≥ 1.0, exp=+15.6% ≥ 2%, n=11≥5, holdout=[A_new=NA B=X
+    C=X]
+  verdict: PASS
 '2105':
   bnh_cagr: 0.006308558249347618
   bnh_div_yield: 0.033667752442996746
@@ -423,6 +759,30 @@
   tier: B
   tier_reason: PF_lower=5.00 ≥ 1.0, exp=+5.1% ≥ 2%, n=5≥5, holdout=[A_new=NA B=O C=NA]
   verdict: SUSPICIOUS_PERFECT
+'2227':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 2
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: mean_reversion.yaml#per_stock.2227
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2733
+  test_cagr: -0.0034
+  test_expectancy: -0.0089
+  test_max_dd: -0.0219
+  test_n_trades: 2
+  test_pf: 0.0
+  tier: F
+  tier_reason: FAIL：test expectancy=-0.9% < 0（負期望值）
+  verdict: INSUFFICIENT
 '2303':
   best_template: narrow_range_breakout
   bootstrap:
@@ -710,6 +1070,30 @@
   test_pf: 3.897
   tier: C
   tradeable: true
+'2371':
+  best_template: momentum_hold
+  bootstrap:
+    n_iterations: 1000
+    n_original: 2
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: momentum_hold.yaml#per_stock.2371
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2713
+  test_cagr: -0.0014
+  test_expectancy: -0.0026
+  test_max_dd: -0.282
+  test_n_trades: 2
+  test_pf: 0.85
+  tier: F
+  tier_reason: FAIL：test expectancy=-0.3% < 0（負期望值）
+  verdict: INSUFFICIENT
 '2376':
   bnh_cagr: null
   bnh_div_yield: null
@@ -803,6 +1187,30 @@
   test_pf: 8.218
   tier: C
   tradeable: true
+'2409':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: mean_reversion.yaml#per_stock.2409
+  position_pct_recommended: 0.15
+  test_alpha_vs_0050: -0.1812
+  test_cagr: 0.0887
+  test_expectancy: 0.1644
+  test_max_dd: -0.1651
+  test_n_trades: 3
+  test_pf: null
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+16.4% ≥ 5%, |DD|=17% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '2412':
   best_template: trend_confirm_hold
   bootstrap:
@@ -872,23 +1280,55 @@
   test_pf: 10.998
   tier: B
   tradeable: true
-'2474':
-  bnh_cagr: 0.0357194111659076
-  bnh_div_yield: 0.06254885422130167
-  bnh_holdable: false
-  bnh_max_dd: -0.5450606955728257
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 可成
-  params_ref: mean_reversion.yaml#per_stock.2474
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.0604
-  test_max_dd: -0.0045
+'2458':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 1
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: false
+    C: null
+  params_ref: mean_reversion.yaml#per_stock.2458
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.246
+  test_cagr: 0.0239
+  test_expectancy: 0.1344
+  test_max_dd: -0.0344
   test_n_trades: 1
   test_pf: null
   tier: F
-  tradeable: false
+  tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
+'2474':
+  best_template: simple_dip_buy
+  bootstrap:
+    n_iterations: 1000
+    n_original: 6
+    pf_lower: 0.846
+    pf_mean: 3.846
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: simple_dip_buy.yaml#per_stock.2474
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: simple_dip_buy
+  test_alpha_vs_0050: -0.2256
+  test_cagr: 0.0443
+  test_expectancy: 0.0407
+  test_max_dd: -0.1954
+  test_n_trades: 6
+  test_pf: 4.698
+  tier: C
+  tier_reason: PF_lower=0.85 ≥ 0.7, exp=+4.1% ≥ 1%, n=6≥5, holdout=[A_new=NA B=O C=NA]
+  verdict: WEAK
 '2603':
   best_template: gap_down_revert
   bootstrap:
@@ -915,6 +1355,54 @@
   tier_reason: PF_lower=0.85 ≥ 0.7, exp=+1.6% ≥ 1%, n=13≥5, holdout=[A_new=NA B=O
     C=O]
   verdict: WEAK
+'2606':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 7
+    pf_lower: 0.0
+    pf_mean: 2.637
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: null
+  params_ref: mean_reversion.yaml#per_stock.2606
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2087
+  test_cagr: 0.0612
+  test_expectancy: 0.0705
+  test_max_dd: -0.3612
+  test_n_trades: 7
+  test_pf: 1.551
+  tier: F
+  tier_reason: FAIL：PF_lower=0.00, exp=+7.0%, n=7, holdout=[A_new=NA B=X C=NA]
+  verdict: DD_BREACH
+'2609':
+  best_template: gap_continuation
+  bootstrap:
+    n_iterations: 1000
+    n_original: 13
+    pf_lower: 0.194
+    pf_mean: 2.664
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: false
+  params_ref: gap_continuation.yaml#per_stock.2609
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.1431
+  test_cagr: 0.1268
+  test_expectancy: 0.1235
+  test_max_dd: -0.6529
+  test_n_trades: 13
+  test_pf: 1.302
+  tier: F
+  tier_reason: FAIL：PF_lower=0.19, exp=+12.4%, n=13, holdout=[A_new=NA B=NA C=X]
+  verdict: DD_BREACH
 '2615':
   best_template: yearly_high_break
   bootstrap:
@@ -966,6 +1454,126 @@
   tier_reason: PF_lower=0.73 ≥ 0.7, exp=+3.3% ≥ 1%, n=14≥5, holdout=[A_new=NA B=O
     C=O]
   verdict: WEAK
+'2723':
+  best_template: trend_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 1
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: false
+    C: null
+  params_ref: trend_pullback.yaml#per_stock.2723
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2218
+  test_cagr: 0.0482
+  test_expectancy: 0.2854
+  test_max_dd: -0.1301
+  test_n_trades: 1
+  test_pf: null
+  tier: F
+  tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
+'2727':
+  best_template: chip_momentum
+  bootstrap:
+    n_iterations: 1000
+    n_original: 7
+    pf_lower: 0.564
+    pf_mean: 3.934
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: false
+  params_ref: chip_momentum.yaml#per_stock.2727
+  position_pct_recommended: 0.1
+  test_alpha_vs_0050: -0.0798
+  test_cagr: 0.1902
+  test_expectancy: 0.1908
+  test_max_dd: -0.2649
+  test_n_trades: 7
+  test_pf: 3.522
+  tier: D
+  tier_reason: BORDERLINE：PF_lower=0.56 ≥ 0.5, exp=+19.1% ≥ 0%, n=7≥5, holdout=[A_new=NA
+    B=NA C=X]（紙上交易）
+  verdict: PASS
+'2812':
+  best_template: momentum_hold
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: momentum_hold.yaml#per_stock.2812
+  position_pct_recommended: 0.15
+  test_alpha_vs_0050: -0.1979
+  test_cagr: 0.0721
+  test_expectancy: 0.1004
+  test_max_dd: -0.1656
+  test_n_trades: 4
+  test_pf: 22.141
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=4, raw_PF=22.14 ≥ 3.0, exp=+10.0% ≥ 5%, |DD|=17% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
+'2823':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 1
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: mean_reversion.yaml#per_stock.2823
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.1827
+  test_cagr: 0.0873
+  test_expectancy: 0.0828
+  test_max_dd: -0.0486
+  test_n_trades: 1
+  test_pf: null
+  tier: F
+  tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
+'2867':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: false
+    C: null
+  params_ref: mean_reversion.yaml#per_stock.2867
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2631
+  test_cagr: 0.0068
+  test_expectancy: 0.0128
+  test_max_dd: -0.0895
+  test_n_trades: 4
+  test_pf: 1.334
+  tier: F
+  tier_reason: FAIL：test n_trades=4 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '2881':
   best_template: three_white_soldiers
   bootstrap:
@@ -1092,6 +1700,78 @@
   test_pf: 2.839
   tier: F
   tradeable: false
+'2887':
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: false
+  params_ref: low_vol_pullback.yaml#per_stock.2887
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2598
+  test_cagr: 0.0102
+  test_expectancy: 0.019
+  test_max_dd: -0.0623
+  test_n_trades: 3
+  test_pf: 2.444
+  tier: F
+  tier_reason: FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
+'2888':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: mean_reversion.yaml#per_stock.2888
+  position_pct_recommended: 0.15
+  test_alpha_vs_0050: -0.2254
+  test_cagr: 0.0445
+  test_expectancy: 0.0509
+  test_max_dd: -0.0506
+  test_n_trades: 4
+  test_pf: 56.702
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=4, raw_PF=56.70 ≥ 3.0, exp=+5.1% ≥ 5%, |DD|=5% ≤ 25%,
+    holdout=[A_new=NA B=O C=O]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
+'2890':
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: low_vol_pullback.yaml#per_stock.2890
+  position_pct_recommended: 0.15
+  test_alpha_vs_0050: -0.235
+  test_cagr: 0.0349
+  test_expectancy: 0.0749
+  test_max_dd: -0.0438
+  test_n_trades: 3
+  test_pf: null
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+7.5% ≥ 5%, |DD|=4% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '2891':
   best_template: narrow_range_breakout
   bootstrap:
@@ -1220,6 +1900,31 @@
   tier_reason: PF_lower=0.78 ≥ 0.7, exp=+4.2% ≥ 1%, n=13≥5, holdout=[A_new=NA B=O
     C=NA]
   verdict: WEAK
+'3035':
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 5
+    pf_lower: 1.047
+    pf_mean: 4.171
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: true
+  params_ref: low_vol_pullback.yaml#per_stock.3035
+  position_pct_recommended: 0.3
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  test_alpha_vs_0050: -0.2243
+  test_cagr: 0.0457
+  test_expectancy: 0.05
+  test_max_dd: -0.1561
+  test_n_trades: 5
+  test_pf: 7.08
+  tier: B
+  tier_reason: PF_lower=1.05 ≥ 1.0, exp=+5.0% ≥ 2%, n=5≥5, holdout=[A_new=NA B=NA
+    C=O]
+  verdict: WEAK
 '3037':
   best_template: narrow_range_breakout
   bootstrap:
@@ -1263,6 +1968,30 @@
   test_pf: 2.803
   tier: F
   tradeable: false
+'3081':
+  best_template: gap_continuation
+  bootstrap:
+    n_iterations: 1000
+    n_original: 12
+    pf_lower: 1.041
+    pf_mean: 4.04
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: false
+  params_ref: gap_continuation.yaml#per_stock.3081
+  position_pct_recommended: 0.3
+  test_alpha_vs_0050: -0.0081
+  test_cagr: 0.2618
+  test_expectancy: 0.1386
+  test_max_dd: -0.2583
+  test_n_trades: 12
+  test_pf: 6.94
+  tier: B
+  tier_reason: PF_lower=1.04 ≥ 1.0, exp=+13.9% ≥ 2%, n=12≥5, holdout=[A_new=NA B=NA
+    C=X]
+  verdict: PASS
 '3189':
   bnh_cagr: null
   bnh_div_yield: null
@@ -1304,6 +2033,78 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=8.58 ≥ 3.0, exp=+5.6% ≥ 5%, |DD|=5% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
+'3443':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 8
+    pf_lower: 3.236
+    pf_mean: 4.894
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: false
+  params_ref: mean_reversion.yaml#per_stock.3443
+  position_pct_recommended: 1.0
+  test_alpha_vs_0050: -0.153
+  test_cagr: 0.1169
+  test_expectancy: 0.0795
+  test_max_dd: -0.1875
+  test_n_trades: 8
+  test_pf: 20.489
+  tier: S
+  tier_reason: PF_lower=3.24 ≥ 2.0, exp=+8.0% ≥ 5%, n=8≥8, holdout=[A_new=NA B=O C=X],
+    gate=any holdout PASS
+  verdict: SUSPICIOUS_PERFECT
+'3481':
+  best_template: donchian_breakout
+  bootstrap:
+    n_iterations: 1000
+    n_original: 8
+    pf_lower: 0.103
+    pf_mean: 2.642
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: donchian_breakout.yaml#per_stock.3481
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2064
+  test_cagr: 0.0636
+  test_expectancy: 0.0566
+  test_max_dd: -0.2394
+  test_n_trades: 8
+  test_pf: 1.828
+  tier: F
+  tier_reason: FAIL：PF_lower=0.10, exp=+5.7%, n=8, holdout=[A_new=NA B=NA C=NA]
+  verdict: PASS
+'3596':
+  best_template: gap_continuation
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: gap_continuation.yaml#per_stock.3596
+  position_pct_recommended: 0.15
+  test_alpha_vs_0050: -0.2044
+  test_cagr: 0.0655
+  test_expectancy: 0.0924
+  test_max_dd: -0.0763
+  test_n_trades: 4
+  test_pf: 19.032
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=4, raw_PF=19.03 ≥ 3.0, exp=+9.2% ≥ 5%, |DD|=8% ≤ 25%,
+    holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '3661':
   best_template: yearly_high_break
@@ -1347,6 +2148,30 @@
   test_pf: 1.825
   tier: C
   tradeable: true
+'4147':
+  best_template: trend_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 2
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: false
+    C: false
+  params_ref: trend_pullback.yaml#per_stock.4147
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.264
+  test_cagr: 0.0059
+  test_expectancy: 0.0162
+  test_max_dd: -0.0662
+  test_n_trades: 2
+  test_pf: 3.708
+  tier: F
+  tier_reason: FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '4904':
   bnh_cagr: null
   bnh_div_yield: null
@@ -1406,6 +2231,78 @@
   test_pf: 4.482
   tier: C
   tradeable: true
+'4961':
+  best_template: donchian_breakout
+  bootstrap:
+    n_iterations: 1000
+    n_original: 7
+    pf_lower: 0.0
+    pf_mean: 2.376
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: donchian_breakout.yaml#per_stock.4961
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2157
+  test_cagr: 0.0542
+  test_expectancy: 0.0714
+  test_max_dd: -0.3971
+  test_n_trades: 7
+  test_pf: 1.504
+  tier: F
+  tier_reason: FAIL：PF_lower=0.00, exp=+7.1%, n=7, holdout=[A_new=NA B=O C=NA]
+  verdict: DD_BREACH
+'5269':
+  best_template: gap_continuation
+  bootstrap:
+    n_iterations: 1000
+    n_original: 11
+    pf_lower: 0.328
+    pf_mean: 2.859
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: false
+  params_ref: gap_continuation.yaml#per_stock.5269
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2027
+  test_cagr: 0.0673
+  test_expectancy: 0.0375
+  test_max_dd: -0.222
+  test_n_trades: 11
+  test_pf: 2.162
+  tier: F
+  tier_reason: FAIL：PF_lower=0.33, exp=+3.8%, n=11, holdout=[A_new=NA B=X C=X]
+  verdict: WEAK
+'5314':
+  best_template: chip_momentum
+  bootstrap:
+    n_iterations: 1000
+    n_original: 31
+    pf_lower: 0.833
+    pf_mean: 3.087
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: chip_momentum.yaml#per_stock.5314
+  position_pct_recommended: 0.15
+  test_alpha_vs_0050: -0.1578
+  test_cagr: 0.1121
+  test_expectancy: 0.095
+  test_max_dd: -0.9459
+  test_n_trades: 31
+  test_pf: 1.034
+  tier: C
+  tier_reason: PF_lower=0.83 ≥ 0.7, exp=+9.5% ≥ 1%, n=31≥5, holdout=[A_new=NA B=NA
+    C=NA]
+  verdict: DD_BREACH
 '5347':
   best_template: vwap_revert
   bootstrap:
@@ -1432,6 +2329,30 @@
   tier_reason: PF_lower=0.74 ≥ 0.7, exp=+2.8% ≥ 1%, n=12≥5, holdout=[A_new=NA B=O
     C=X]
   verdict: WEAK
+'5388':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 8
+    pf_lower: 0.315
+    pf_mean: 2.582
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: true
+  params_ref: mean_reversion.yaml#per_stock.5388
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.239
+  test_cagr: 0.0309
+  test_expectancy: 0.0227
+  test_max_dd: -0.1037
+  test_n_trades: 8
+  test_pf: 2.059
+  tier: F
+  tier_reason: FAIL：PF_lower=0.32, exp=+2.3%, n=8, holdout=[A_new=NA B=NA C=O]
+  verdict: WEAK
 '5871':
   bnh_cagr: null
   bnh_div_yield: null
@@ -1449,6 +2370,30 @@
   test_pf: 3.444
   tier: C
   tradeable: true
+'5876':
+  best_template: gap_continuation
+  bootstrap:
+    n_iterations: 1000
+    n_original: 1
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: gap_continuation.yaml#per_stock.5876
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2624
+  test_cagr: 0.0076
+  test_expectancy: 0.041
+  test_max_dd: -0.0375
+  test_n_trades: 1
+  test_pf: null
+  tier: F
+  tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '5880':
   bnh_cagr: 0.1439623059298316
   bnh_div_yield: 0.02860100114891497
@@ -1466,6 +2411,102 @@
   test_pf: 2.191
   tier: F
   tradeable: false
+'6116':
+  best_template: gap_continuation
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: gap_continuation.yaml#per_stock.6116
+  position_pct_recommended: 0.15
+  test_alpha_vs_0050: -0.2089
+  test_cagr: 0.061
+  test_expectancy: 0.1207
+  test_max_dd: -0.1912
+  test_n_trades: 3
+  test_pf: 4.729
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=4.73 ≥ 3.0, exp=+12.1% ≥ 5%, |DD|=19% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
+'6121':
+  best_template: bollinger_squeeze
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: bollinger_squeeze.yaml#per_stock.6121
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2527
+  test_cagr: 0.0173
+  test_expectancy: 0.0256
+  test_max_dd: -0.1497
+  test_n_trades: 4
+  test_pf: 2.142
+  tier: F
+  tier_reason: FAIL：test n_trades=4 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
+'6182':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 5
+    pf_lower: 3.818
+    pf_mean: 4.924
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: false
+  params_ref: mean_reversion.yaml#per_stock.6182
+  position_pct_recommended: 0.3
+  test_alpha_vs_0050: -0.146
+  test_cagr: 0.124
+  test_expectancy: 0.1372
+  test_max_dd: -0.1715
+  test_n_trades: 5
+  test_pf: 19.507
+  tier: B
+  tier_reason: PF_lower=3.82 ≥ 1.0, exp=+13.7% ≥ 2%, n=5≥5, holdout=[A_new=NA B=O
+    C=X]
+  verdict: SUSPICIOUS_PERFECT
+'6213':
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 8
+    pf_lower: 0.797
+    pf_mean: 3.451
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: null
+  params_ref: low_vol_pullback.yaml#per_stock.6213
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  test_alpha_vs_0050: -0.225
+  test_cagr: 0.045
+  test_expectancy: 0.0312
+  test_max_dd: -0.1415
+  test_n_trades: 8
+  test_pf: 3.639
+  tier: C
+  tier_reason: PF_lower=0.80 ≥ 0.7, exp=+3.1% ≥ 1%, n=8≥5, holdout=[A_new=NA B=X C=NA]
+  verdict: WEAK
 '6271':
   best_template: narrow_range_breakout
   bootstrap:
@@ -1492,6 +2533,30 @@
   tier_reason: PF_lower=0.76 ≥ 0.7, exp=+2.3% ≥ 1%, n=20≥5, holdout=[A_new=NA B=O
     C=NA]
   verdict: WEAK
+'6285':
+  best_template: mean_reversion
+  bootstrap:
+    n_iterations: 1000
+    n_original: 2
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: mean_reversion.yaml#per_stock.6285
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2568
+  test_cagr: 0.0132
+  test_expectancy: 0.0373
+  test_max_dd: -0.0925
+  test_n_trades: 2
+  test_pf: 4.071
+  tier: F
+  tier_reason: FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '6488':
   best_template: support_bounce
   bootstrap:
@@ -1560,6 +2625,31 @@
   test_pf: 3.439
   tier: B
   tradeable: true
+'6531':
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 17
+    pf_lower: 0.94
+    pf_mean: 3.445
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: low_vol_pullback.yaml#per_stock.6531
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  test_alpha_vs_0050: -0.2131
+  test_cagr: 0.0569
+  test_expectancy: 0.0183
+  test_max_dd: -0.2397
+  test_n_trades: 17
+  test_pf: 2.689
+  tier: C
+  tier_reason: PF_lower=0.94 ≥ 0.7, exp=+1.8% ≥ 1%, n=17≥5, holdout=[A_new=NA B=O
+    C=NA]
+  verdict: WEAK
 '6669':
   best_template: coppock_buy
   bootstrap:
@@ -1620,6 +2710,102 @@
   test_pf: 3.881
   tier: C
   tradeable: true
+'8069':
+  best_template: bollinger_squeeze
+  bootstrap:
+    n_iterations: 1000
+    n_original: 2
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: bollinger_squeeze.yaml#per_stock.8069
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2468
+  test_cagr: 0.0231
+  test_expectancy: 0.0631
+  test_max_dd: -0.0683
+  test_n_trades: 2
+  test_pf: null
+  tier: F
+  tier_reason: FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
+'8081':
+  best_template: trend_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: trend_pullback.yaml#per_stock.8081
+  position_pct_recommended: 0.15
+  test_alpha_vs_0050: -0.2302
+  test_cagr: 0.0397
+  test_expectancy: 0.0753
+  test_max_dd: -0.0847
+  test_n_trades: 3
+  test_pf: 33.712
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=33.71 ≥ 3.0, exp=+7.5% ≥ 5%, |DD|=8% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
+'8454':
+  best_template: momentum_hold
+  bootstrap:
+    n_iterations: 1000
+    n_original: 2
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: false
+    C: null
+  params_ref: momentum_hold.yaml#per_stock.8454
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.1282
+  test_cagr: 0.1417
+  test_expectancy: 0.5152
+  test_max_dd: -0.2672
+  test_n_trades: 2
+  test_pf: null
+  tier: F
+  tier_reason: FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
+'9907':
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 2
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: true
+  params_ref: low_vol_pullback.yaml#per_stock.9907
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2556
+  test_cagr: 0.0144
+  test_expectancy: 0.039
+  test_max_dd: -0.0609
+  test_n_trades: 2
+  test_pf: null
+  tier: F
+  tier_reason: FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '9914':
   best_template: golden_cross
   bootstrap:
@@ -1662,6 +2848,30 @@
   test_pf: 0.747
   tier: F
   tradeable: false
+'9933':
+  best_template: bollinger_squeeze
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: false
+    C: null
+  params_ref: bollinger_squeeze.yaml#per_stock.9933
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  test_alpha_vs_0050: -0.2572
+  test_cagr: 0.0128
+  test_expectancy: 0.0237
+  test_max_dd: -0.0618
+  test_n_trades: 3
+  test_pf: 5.981
+  tier: F
+  tier_reason: FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE）
+  verdict: INSUFFICIENT
 '9940':
   bnh_cagr: 0.05611668854266827
   bnh_div_yield: 0.056224560983603435
@@ -1679,3 +2889,98 @@
   test_pf: 2.551
   tier: F
   tradeable: false
+borderline_candidates:
+  borderline_dd:
+  - expectancy: 0.6363
+    max_dd: -0.3394
+    n_trades: 5
+    note: DD 30-35% 超標，其餘達 PASS 標準
+    pf: 3.922
+    stock: '3035'
+    template: momentum_hold
+  - expectancy: 0.0972
+    max_dd: -0.317
+    n_trades: 13
+    note: DD 30-35% 超標，其餘達 PASS 標準
+    pf: 4.338
+    stock: '3081'
+    template: donchian_breakout
+  - expectancy: 0.1388
+    max_dd: -0.3106
+    n_trades: 7
+    note: DD 30-35% 超標，其餘達 PASS 標準
+    pf: 3.248
+    stock: '1503'
+    template: momentum_hold
+  - expectancy: 0.0557
+    max_dd: -0.3064
+    n_trades: 8
+    note: DD 30-35% 超標，其餘達 PASS 標準
+    pf: 1.713
+    stock: '1504'
+    template: gap_continuation
+  borderline_low_n:
+  - expectancy: 0.0716
+    max_dd: -0.0596
+    n_trades: 4
+    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
+    pf: 5.556
+    stock: '6116'
+    template: mean_reversion
+  - expectancy: 0.1207
+    max_dd: -0.1912
+    n_trades: 3
+    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
+    pf: 4.729
+    stock: '6116'
+    template: gap_continuation
+  - expectancy: 0.1069
+    max_dd: -0.2271
+    n_trades: 3
+    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
+    pf: 3.222
+    stock: '6182'
+    template: trend_pullback
+  - expectancy: 0.0753
+    max_dd: -0.0847
+    n_trades: 3
+    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
+    pf: 33.712
+    stock: '8081'
+    template: trend_pullback
+  - expectancy: 0.0924
+    max_dd: -0.0763
+    n_trades: 4
+    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
+    pf: 19.032
+    stock: '3596'
+    template: gap_continuation
+  - expectancy: 0.1004
+    max_dd: -0.1656
+    n_trades: 4
+    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
+    pf: 22.141
+    stock: '2812'
+    template: momentum_hold
+  - expectancy: 0.0509
+    max_dd: -0.0506
+    n_trades: 4
+    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
+    pf: 56.702
+    stock: '2888'
+    template: mean_reversion
+  - expectancy: 0.0869
+    max_dd: -0.2699
+    n_trades: 3
+    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
+    pf: 2.801
+    stock: '2890'
+    template: momentum_hold
+  - expectancy: 0.2098
+    max_dd: -0.2954
+    n_trades: 4
+    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
+    pf: 2.285
+    stock: '2014'
+    template: bollinger_squeeze
+  note: 以下個股未達 PASS 門檻，但具備觀察價值
