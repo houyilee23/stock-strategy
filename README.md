@@ -116,7 +116,7 @@ _最後更新：**2026-05-14**_
 | [9940](output/reports/per_stock/9940.md) | 信義 | 19.0 | HOLD | F | — | 26 | [空頭] | BULL |
 | [2207](output/reports/per_stock/2207.md) | 和泰車 | 473.5 | HOLD | B | — | 41 | [空頭] | BULL |
 | [2105](output/reports/per_stock/2105.md) | 正新 | 31.2 | HOLD | F | — | 46 | [空頭] | BULL |
-| [9921](output/reports/per_stock/9921.md) | 巨大 | 75.7 | HOLD | F | — | 64 | [空頭] | BULL |
+| [9921](output/reports/per_stock/9921.md) | 巨大 | 75.7 | HOLD | D | — | 64 | [空頭] | BULL |
 | [9914](output/reports/per_stock/9914.md) | 美利達 | 62.9 | HOLD | C | — | 58 | [空頭] | BULL |
 | [2912](output/reports/per_stock/2912.md) | 統一超 | 225.5 | HOLD | F | — | 47 | [空頭] | BULL |
 | [1402](output/reports/per_stock/1402.md) | 遠東新 | 26.8 | HOLD | C | 15% | 58 | [空頭] | BULL |
@@ -143,12 +143,12 @@ _最後更新：**2026-05-14**_
 | [6182](output/reports/per_stock/6182.md) | 合晶 | 56.9 | HOLD | B | — | 80 | [多頭] | BULL |
 | [6213](output/reports/per_stock/6213.md) | 聯茂 | 273.5 | HOLD | C | — | 57 | [多頭] | BULL |
 | [6531](output/reports/per_stock/6531.md) | 愛普 | 1040.0 | HOLD | C | — | 75 | [多頭] | BULL |
-| [8069](output/reports/per_stock/8069.md) | 元太 | 162.0 | HOLD | F | — | 63 | [空頭] | BULL |
+| [8069](output/reports/per_stock/8069.md) | 元太 | 162.0 | HOLD | C | — | 63 | [空頭] | BULL |
 | [8081](output/reports/per_stock/8081.md) | 致新 | 256.5 | HOLD | C | — | 55 | [多頭] | BULL |
 | [1582](output/reports/per_stock/1582.md) | 信邦 | 92.0 | HOLD | F | — | 49 | [多頭] | BULL |
 | [2059](output/reports/per_stock/2059.md) | 川湖 | 5250.0 | HOLD | B | — | 72 | [多頭] | BULL |
 | [3596](output/reports/per_stock/3596.md) | 智易 | 183.0 | HOLD | C | — | 61 | [空頭] | BULL |
-| [5388](output/reports/per_stock/5388.md) | 中磊 | 79.4 | HOLD | F | — | 47 | [空頭] | BULL |
+| [5388](output/reports/per_stock/5388.md) | 中磊 | 79.4 | HOLD | D | — | 47 | [空頭] | BULL |
 | [6121](output/reports/per_stock/6121.md) | 新普 | 390.0 | HOLD | A | — | 70 | [空頭] | BULL |
 | [6285](output/reports/per_stock/6285.md) | 啟碁 | 270.5 | HOLD | A | — | 64 | [多頭] | BULL |
 | [8454](output/reports/per_stock/8454.md) | 富邦媒 | 196.0 | HOLD | F | — | 67 | [空頭] | BULL |
@@ -176,7 +176,7 @@ _最後更新：**2026-05-14**_
 | [1456](output/reports/per_stock/1456.md) | 儒鴻 | 13.8 | HOLD | F | — | 49 | [多頭] | BULL |
 | [1717](output/reports/per_stock/1717.md) | 長興 | 80.4 | HOLD | F | — | 57 | [多頭] | BULL |
 | [1722](output/reports/per_stock/1722.md) | 台肥 | 46.7 | HOLD | D | — | 51 | [空頭] | BULL |
-| [1907](output/reports/per_stock/1907.md) | 永豐餘 | 24.5 | HOLD | F | — | 49 | [空頭] | BULL |
+| [1907](output/reports/per_stock/1907.md) | 永豐餘 | 24.5 | HOLD | C | — | 49 | [空頭] | BULL |
 | [2723](output/reports/per_stock/2723.md) | 美食-KY | 66.5 | HOLD | F | — | 49 | [空頭] | BULL |
 | [2727](output/reports/per_stock/2727.md) | 王品 | 236.0 | HOLD | D | — | 65 | [多頭] | BULL |
 | [9907](output/reports/per_stock/9907.md) | 統一實 | 16.4 | HOLD | B | — | 18 | [空頭] | BULL |

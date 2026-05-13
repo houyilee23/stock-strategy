@@ -67,7 +67,7 @@
 | 9940 | 信義 | — | 19.0 | HOLD | F | — | style1_pullback | — | — | — | 26 | [空頭] | BULL |  |
 | 2207 | 和泰車 | — | 473.5 | HOLD | B | — | style1_pullback | — | — | — | 41 | [空頭] | BULL |  |
 | 2105 | 正新 | — | 31.2 | HOLD | F | — | style1_pullback | — | — | — | 46 | [空頭] | BULL |  |
-| 9921 | 巨大 | — | 75.7 | HOLD | F | — | style1_pullback | — | — | — | 64 | [空頭] | BULL |  |
+| 9921 | 巨大 | — | 75.7 | HOLD | D | — | style1_pullback | — | — | — | 64 | [空頭] | BULL |  |
 | 9914 | 美利達 | — | 62.9 | HOLD | C | — | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
 | 2912 | 統一超 | — | 225.5 | HOLD | F | — | style1_pullback | — | — | — | 47 | [空頭] | BULL |  |
 | 1402 | 遠東新 | — | 26.8 | HOLD | C | 15% | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
@@ -94,12 +94,12 @@
 | 6182 | 合晶 | — | 56.9 | HOLD | B | — | style1_pullback | — | — | — | 80 | [多頭] | BULL |  |
 | 6213 | 聯茂 | — | 273.5 | HOLD | C | — | style1_pullback | — | — | — | 57 | [多頭] | BULL |  |
 | 6531 | 愛普 | — | 1040.0 | HOLD | C | — | style1_pullback | — | — | — | 75 | [多頭] | BULL |  |
-| 8069 | 元太 | — | 162.0 | HOLD | F | — | style1_pullback | — | — | — | 63 | [空頭] | BULL |  |
+| 8069 | 元太 | — | 162.0 | HOLD | C | — | style1_pullback | — | — | — | 63 | [空頭] | BULL |  |
 | 8081 | 致新 | — | 256.5 | HOLD | C | — | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
 | 1582 | 信邦 | — | 92.0 | HOLD | F | — | style1_pullback | — | 87.9~89.7 | 74.3 | 49 | [多頭] | BULL | 觀察中 RSI=48.7 |
 | 2059 | 川湖 | — | 5250.0 | HOLD | B | — | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
 | 3596 | 智易 | — | 183.0 | HOLD | C | — | style1_pullback | — | — | — | 61 | [空頭] | BULL |  |
-| 5388 | 中磊 | — | 79.4 | HOLD | F | — | style1_pullback | — | — | — | 47 | [空頭] | BULL |  |
+| 5388 | 中磊 | — | 79.4 | HOLD | D | — | style1_pullback | — | — | — | 47 | [空頭] | BULL |  |
 | 6121 | 新普 | — | 390.0 | HOLD | A | — | style1_pullback | — | — | — | 70 | [空頭] | BULL |  |
 | 6285 | 啟碁 | — | 270.5 | HOLD | A | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
 | 8454 | 富邦媒 | — | 196.0 | HOLD | F | — | style1_pullback | — | — | — | 67 | [空頭] | BULL |  |
@@ -127,7 +127,7 @@
 | 1456 | 儒鴻 | — | 13.8 | HOLD | F | — | style1_pullback | — | 13.8~13.9 | 12.9 | 49 | [多頭] | BULL | 觀察中 RSI=49.3 |
 | 1717 | 長興 | — | 80.4 | HOLD | F | — | style1_pullback | — | — | — | 57 | [多頭] | BULL |  |
 | 1722 | 台肥 | — | 46.7 | HOLD | D | — | style1_pullback | — | — | — | 51 | [空頭] | BULL |  |
-| 1907 | 永豐餘 | — | 24.5 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
+| 1907 | 永豐餘 | — | 24.5 | HOLD | C | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
 | 2723 | 美食-KY | — | 66.5 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
 | 2727 | 王品 | — | 236.0 | HOLD | D | — | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
 | 9907 | 統一實 | — | 16.4 | HOLD | B | — | style1_pullback | — | — | — | 18 | [空頭] | BULL |  |
