@@ -1,4 +1,4 @@
-# TIERING REPORT — 20260513_104916
+# TIERING REPORT — 20260513_122307
 
 ## 1. 統計摘要
 
@@ -34,20 +34,20 @@
 
 | Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
 |-------|----------|-----|----|---|----|----------|-------|---|---|--------|
-| 2474 | double_volume | +1.6% | inf | 2 | -3.8% | N/A | X | X | X | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 0056 | double_volume | +1.3% | 2.08 | 7 | -10.0% | 0.27 | X | O | X | FAIL：PF_lower=0.27, exp=+1.3%, n=7, holdout=[A_new=NA B=O C=NA] |
-| 2324 | double_volume | -0.0% | 0.94 | 5 | -9.2% | 0.02 | X | X | O | FAIL：test expectancy=-0.0% < 0（負期望值） |
-| 2412 | double_volume | -0.3% | 0.77 | 4 | -4.2% | N/A | X | X | X | FAIL：test expectancy=-0.3% < 0（負期望值） |
-| 2912 | double_volume | -0.4% | 0.69 | 3 | -5.2% | N/A | X | O | X | FAIL：test expectancy=-0.4% < 0（負期望值） |
-| 2379 | double_volume | -0.7% | 0.63 | 3 | -6.7% | N/A | X | X | X | FAIL：test expectancy=-0.7% < 0（負期望值） |
-| 9921 | double_volume | -1.0% | 0.63 | 6 | -12.1% | 0.14 | X | O | X | FAIL：test expectancy=-1.0% < 0（負期望值） |
-| 3045 | double_volume | -1.6% | 0.35 | 5 | -12.0% | 0.00 | X | O | X | FAIL：test expectancy=-1.6% < 0（負期望值） |
-| 5880 | double_volume | -1.9% | 0.18 | 9 | -18.2% | 0.03 | X | X | O | FAIL：test expectancy=-1.9% < 0（負期望值） |
-| 2356 | double_volume | -2.0% | 0.51 | 10 | -29.2% | 0.11 | X | O | X | FAIL：test expectancy=-2.0% < 0（負期望值） |
-| 2105 | double_volume | -2.4% | 0.25 | 11 | -25.3% | 0.00 | X | X | X | FAIL：test expectancy=-2.4% < 0（負期望值） |
-| 1101 | double_volume | -3.4% | 0.00 | 8 | -24.7% | 0.00 | X | O | X | FAIL：test expectancy=-3.4% < 0（負期望值） |
-| 2002 | double_volume | -3.5% | 0.16 | 6 | -21.5% | 0.00 | X | O | X | FAIL：test expectancy=-3.5% < 0（負期望值） |
-| 2207 | double_volume | -4.4% | 0.07 | 19 | -58.1% | 0.00 | X | X | X | FAIL：test expectancy=-4.4% < 0（負期望值） |
-| 1227 | double_volume | -4.5% | 0.00 | 1 | -9.5% | N/A | X | X | X | FAIL：test expectancy=-4.5% < 0（負期望值） |
-| 9940 | double_volume | -4.6% | 0.00 | 7 | -28.4% | 0.00 | X | X | X | FAIL：test expectancy=-4.6% < 0（負期望值） |
-| 2886 | double_volume | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 9921 | failed_breakdown | +2.2% | 1.67 | 14 | -12.6% | 0.55 | X | O | O | FAIL：PF_lower=0.55, exp=+2.2%, n=14, holdout=[A_new=NA B=O C=O] |
+| 2105 | failed_breakdown | +2.2% | 2.00 | 9 | -17.0% | 0.36 | X | O | O | FAIL：PF_lower=0.36, exp=+2.2%, n=9, holdout=[A_new=NA B=O C=O] |
+| 3045 | failed_breakdown | +1.0% | 2.27 | 3 | -6.0% | N/A | X | O | O | FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 2324 | failed_breakdown | +1.0% | 1.38 | 5 | -11.1% | 0.08 | X | X | O | FAIL：PF_lower=0.08, exp=+1.0%, n=5, holdout=[A_new=NA B=X C=O] |
+| 2207 | failed_breakdown | +1.0% | 1.32 | 10 | -19.2% | 0.29 | X | X | O | FAIL：PF_lower=0.29, exp=+1.0%, n=10, holdout=[A_new=NA B=X C=O] |
+| 1227 | failed_breakdown | +0.0% | 0.95 | 18 | -15.8% | 0.22 | X | O | X | FAIL：PF_lower=0.22, exp=+0.0%, n=18, holdout=[A_new=NA B=O C=X] |
+| 5880 | failed_breakdown | -0.3% | 0.80 | 8 | -10.0% | 0.08 | X | X | O | FAIL：test expectancy=-0.3% < 0（負期望值） |
+| 0056 | failed_breakdown | -1.1% | 0.56 | 4 | -11.5% | N/A | X | O | X | FAIL：test expectancy=-1.1% < 0（負期望值） |
+| 2356 | failed_breakdown | -1.3% | 0.65 | 10 | -28.0% | 0.08 | X | X | O | FAIL：test expectancy=-1.3% < 0（負期望值） |
+| 2886 | failed_breakdown | -1.4% | 0.47 | 17 | -26.1% | 0.10 | X | X | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
+| 2912 | failed_breakdown | -1.8% | 0.36 | 18 | -37.2% | 0.01 | X | O | X | FAIL：test expectancy=-1.8% < 0（負期望值） |
+| 1101 | failed_breakdown | -1.8% | 0.40 | 10 | -23.4% | 0.00 | X | O | X | FAIL：test expectancy=-1.8% < 0（負期望值） |
+| 9940 | failed_breakdown | -1.9% | 0.44 | 10 | -25.7% | 0.00 | X | X | X | FAIL：test expectancy=-1.9% < 0（負期望值） |
+| 2412 | failed_breakdown | -3.7% | 0.00 | 3 | -10.8% | N/A | X | X | X | FAIL：test expectancy=-3.7% < 0（負期望值） |
+| 2002 | failed_breakdown | -3.8% | 0.08 | 7 | -26.9% | 0.00 | X | X | X | FAIL：test expectancy=-3.8% < 0（負期望值） |
+| 2474 | failed_breakdown | -4.7% | 0.00 | 3 | -13.5% | N/A | X | X | X | FAIL：test expectancy=-4.7% < 0（負期望值） |
+| 2379 | failed_breakdown | -5.7% | 0.00 | 5 | -29.9% | 0.00 | X | O | X | FAIL：test expectancy=-5.7% < 0（負期望值） |
