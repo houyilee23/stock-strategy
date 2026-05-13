@@ -90,7 +90,7 @@ _最後更新：**2026-05-13**_
 | [8046](output/reports/per_stock/8046.md) | 南電 | 880.0 | HOLD | C | 15% | 58 | [多頭] | BULL |
 | [5347](output/reports/per_stock/5347.md) | 世界先進 | 151.0 | HOLD | C | — | 66 | [多頭] | BULL |
 | [6488](output/reports/per_stock/6488.md) | 環球晶 | 606.0 | HOLD | C | — | 62 | [多頭] | BULL |
-| [2412](output/reports/per_stock/2412.md) | 中華電 | 137.5 | HOLD | F | — | 59 | [多頭] | BULL |
+| [2412](output/reports/per_stock/2412.md) | 中華電 | 137.5 | HOLD | B | — | 59 | [多頭] | BULL |
 | [3045](output/reports/per_stock/3045.md) | 台灣大 | 112.0 | HOLD | F | — | 60 | [多頭] | BULL |
 | [4904](output/reports/per_stock/4904.md) | 遠傳 | 96.9 | HOLD | C | 15% | 58 | [多頭] | BULL |
 | [2881](output/reports/per_stock/2881.md) | 富邦金 | 94.7 | HOLD | C | — | 63 | [空頭] | BULL |

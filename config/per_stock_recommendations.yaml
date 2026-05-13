@@ -1,4 +1,4 @@
-# Phase 18: trials=300 simple_dip + failed_breakdown
+# Phase 19: trend_confirm_hold + low_volume_reversal
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -804,22 +804,31 @@
   tier: C
   tradeable: true
 '2412':
-  bnh_cagr: 0.06482040447603232
-  bnh_div_yield: 0.03871656699280798
-  bnh_holdable: false
-  bnh_max_dd: -0.1640624999999999
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 中華電
-  params_ref: mean_reversion.yaml#per_stock.2412
-  position_pct_max: 0.0
-  template: mean_reversion
-  test_expectancy: 0.0128
-  test_max_dd: -0.0844
-  test_n_trades: 5
-  test_pf: 3.797
-  tier: F
-  tradeable: false
+  best_template: trend_confirm_hold
+  bootstrap:
+    n_iterations: 1000
+    n_original: 6
+    pf_lower: 1.039
+    pf_mean: 4.413
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: trend_confirm_hold.yaml#per_stock.2412
+  position_pct_recommended: 0.3
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: trend_confirm_hold
+  test_alpha_vs_0050: -0.2256
+  test_cagr: 0.0443
+  test_expectancy: 0.0384
+  test_max_dd: -0.0846
+  test_n_trades: 6
+  test_pf: 6.79
+  tier: B
+  tier_reason: PF_lower=1.04 ≥ 1.0, exp=+3.8% ≥ 2%, n=6≥5, holdout=[A_new=NA B=NA
+    C=NA]
+  verdict: WEAK
 '2426':
   best_template: double_pullback
   bootstrap:

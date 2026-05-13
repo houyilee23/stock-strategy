@@ -41,7 +41,7 @@
 | 8046 | 南電 | — | 880.0 | HOLD | C | 15% | mean_reversion | — | — | — | 58 | [多頭] | BULL |  |
 | 5347 | 世界先進 | — | 151.0 | HOLD | C | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 6488 | 環球晶 | — | 606.0 | HOLD | C | — | style1_pullback | — | — | — | 62 | [多頭] | BULL |  |
-| 2412 | 中華電 | — | 137.5 | HOLD | F | — | style1_pullback | — | 135.5~135.5 | 133.3 | 59 | [多頭] | BULL | 觀察中 RSI=59.4 |
+| 2412 | 中華電 | — | 137.5 | HOLD | B | — | style1_pullback | — | 135.5~135.5 | 133.3 | 59 | [多頭] | BULL | 觀察中 RSI=59.4 |
 | 3045 | 台灣大 | — | 112.0 | HOLD | F | — | style1_pullback | — | 109.5~110.0 | 108.1 | 60 | [多頭] | BULL | 觀察中 RSI=59.8 |
 | 4904 | 遠傳 | — | 96.9 | HOLD | C | 15% | style1_pullback | — | 95.2~95.5 | 89.6 | 58 | [多頭] | BULL | 觀察中 RSI=57.6 |
 | 2881 | 富邦金 | — | 94.7 | HOLD | C | — | style1_pullback | — | — | — | 63 | [空頭] | BULL |  |

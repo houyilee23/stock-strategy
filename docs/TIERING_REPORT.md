@@ -1,4 +1,4 @@
-# TIERING REPORT — 20260513_171205
+# TIERING REPORT — 20260513_184655
 
 ## 1. 統計摘要
 
@@ -34,16 +34,16 @@
 
 | Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
 |-------|----------|-----|----|---|----|----------|-------|---|---|--------|
-| 9921 | failed_breakdown | +2.2% | 1.67 | 14 | -12.6% | 0.55 | X | O | O | FAIL：PF_lower=0.55, exp=+2.2%, n=14, holdout=[A_new=NA B=O C=O] |
-| 2105 | failed_breakdown | +2.2% | 2.00 | 9 | -17.0% | 0.36 | X | O | O | FAIL：PF_lower=0.36, exp=+2.2%, n=9, holdout=[A_new=NA B=O C=O] |
-| 3045 | failed_breakdown | +1.0% | 2.27 | 3 | -6.0% | N/A | X | O | O | FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 1227 | failed_breakdown | -0.0% | 0.94 | 19 | -17.4% | 0.23 | X | O | X | FAIL：test expectancy=-0.0% < 0（負期望值） |
-| 5880 | failed_breakdown | -0.3% | 0.80 | 8 | -10.0% | 0.08 | X | X | O | FAIL：test expectancy=-0.3% < 0（負期望值） |
-| 0056 | failed_breakdown | -1.1% | 0.56 | 4 | -11.5% | N/A | X | O | X | FAIL：test expectancy=-1.1% < 0（負期望值） |
-| 2886 | failed_breakdown | -1.4% | 0.47 | 17 | -26.1% | 0.10 | X | X | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
-| 2912 | failed_breakdown | -1.8% | 0.36 | 18 | -37.2% | 0.01 | X | O | X | FAIL：test expectancy=-1.8% < 0（負期望值） |
-| 1101 | failed_breakdown | -1.8% | 0.40 | 10 | -23.4% | 0.00 | X | O | X | FAIL：test expectancy=-1.8% < 0（負期望值） |
-| 9940 | failed_breakdown | -1.9% | 0.44 | 10 | -25.7% | 0.00 | X | X | X | FAIL：test expectancy=-1.9% < 0（負期望值） |
-| 2412 | failed_breakdown | -3.7% | 0.00 | 3 | -10.8% | N/A | X | X | X | FAIL：test expectancy=-3.7% < 0（負期望值） |
-| 2002 | failed_breakdown | -3.8% | 0.08 | 7 | -26.9% | 0.00 | X | X | X | FAIL：test expectancy=-3.8% < 0（負期望值） |
-| 2474 | failed_breakdown | -4.7% | 0.00 | 3 | -13.5% | N/A | X | X | X | FAIL：test expectancy=-4.7% < 0（負期望值） |
+| 2886 | low_volume_reversal | +1.3% | 1.76 | 11 | -12.2% | 0.49 | X | X | X | FAIL：PF_lower=0.49, exp=+1.3%, n=11, holdout=[A_new=NA B=X C=X] |
+| 0056 | low_volume_reversal | +0.7% | 1.34 | 32 | -32.6% | 0.58 | X | O | X | FAIL：PF_lower=0.58, exp=+0.7%, n=32, holdout=[A_new=NA B=O C=X] |
+| 3045 | low_volume_reversal | +0.3% | 1.18 | 25 | -18.3% | 0.41 | X | O | O | FAIL：PF_lower=0.41, exp=+0.3%, n=25, holdout=[A_new=NA B=O C=O] |
+| 2412 | low_volume_reversal | +0.3% | 1.18 | 27 | -13.4% | 0.53 | X | X | X | FAIL：PF_lower=0.53, exp=+0.3%, n=27, holdout=[A_new=NA B=X C=X] |
+| 2002 | low_volume_reversal | -0.4% | 0.83 | 13 | -19.3% | 0.16 | X | O | O | FAIL：test expectancy=-0.4% < 0（負期望值） |
+| 2474 | low_volume_reversal | -0.9% | 0.53 | 31 | -29.8% | 0.22 | X | X | O | FAIL：test expectancy=-0.9% < 0（負期望值） |
+| 1101 | low_volume_reversal | -1.3% | 0.60 | 15 | -22.0% | 0.12 | X | O | X | FAIL：test expectancy=-1.3% < 0（負期望值） |
+| 9940 | low_volume_reversal | -1.4% | 0.45 | 37 | -50.8% | 0.14 | X | X | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
+| 5880 | low_volume_reversal | -1.4% | 0.49 | 19 | -40.2% | 0.11 | X | O | X | FAIL：test expectancy=-1.4% < 0（負期望值） |
+| 1227 | low_volume_reversal | -1.8% | 0.23 | 25 | -42.6% | 0.02 | X | X | X | FAIL：test expectancy=-1.8% < 0（負期望值） |
+| 2105 | low_volume_reversal | -2.4% | 0.42 | 17 | -41.0% | 0.03 | X | X | X | FAIL：test expectancy=-2.4% < 0（負期望值） |
+| 2912 | low_volume_reversal | -2.5% | 0.27 | 19 | -41.2% | 0.04 | X | X | O | FAIL：test expectancy=-2.5% < 0（負期望值） |
+| 9921 | low_volume_reversal | -4.6% | 0.28 | 33 | -80.6% | 0.05 | X | X | X | FAIL：test expectancy=-4.6% < 0（負期望值） |
