@@ -6,7 +6,7 @@ compare each retrain's per_stock_best.yaml against the current recommendations
 and upgrade any stock whose new tier is strictly higher.
 
 Usage:
-  python scripts/apply_retrain_upgrades.py <run_dir_1> [run_dir_2 ...]
+  python scripts/apply_retrain_upgrades.py [--add-new] <run_dir_1> [run_dir_2 ...]
 
 The run_dirs are short ids under output/auto_iterate/ (e.g. 20260514_133546).
 This script:
@@ -14,6 +14,8 @@ This script:
   - For each stock that improves tier, replaces the entire entry in
     config/per_stock_recommendations.yaml with the new per_stock_best.yaml row
     (verbose tradeable format). Drops BNH fields since the stock is no longer F.
+  - With --add-new flag: also adds stocks not currently in recommendations
+    (uses verbose format directly; no BNH side info).
   - Prints a summary of upgrades.
 
 After running this, the user should run:
@@ -65,10 +67,15 @@ def best_candidate(sid: str, runs: List[Tuple[str, dict]]) -> Tuple[str, dict] |
 
 
 def main():
-    if len(sys.argv) < 2:
+    args = sys.argv[1:]
+    add_new = False
+    if "--add-new" in args:
+        add_new = True
+        args = [a for a in args if a != "--add-new"]
+    if not args:
         print(__doc__)
         sys.exit(1)
-    run_ids = sys.argv[1:]
+    run_ids = args
     runs: List[Tuple[str, dict]] = []
     for rid in run_ids:
         psb_path = os.path.join(AUTO_ITER_DIR, rid, "per_stock_best.yaml")
@@ -79,6 +86,7 @@ def main():
     recs = load_yaml(RECS_PATH)
 
     upgrades = []
+    additions = []
     no_change = []
     downgrades_skipped = []
 
@@ -90,9 +98,10 @@ def main():
                 candidate_sids.add(str(k))
 
     for sid in sorted(candidate_sids):
-        cur = recs.get(sid, {})
-        cur_tier = cur.get("tier", "F") if isinstance(cur, dict) else "F"
-        cur_score = TIER_ORDER.get(cur_tier, 0)
+        in_recs = sid in recs and isinstance(recs.get(sid), dict)
+        cur = recs.get(sid, {}) if in_recs else {}
+        cur_tier = cur.get("tier", "F") if in_recs else None
+        cur_score = TIER_ORDER.get(cur_tier, 0) if in_recs else -1
 
         best = best_candidate(sid, runs)
         if best is None:
@@ -100,6 +109,22 @@ def main():
         run_id, new_entry = best
         new_tier = new_entry.get("tier", "F")
         new_score = TIER_ORDER.get(new_tier, 0)
+
+        if not in_recs and not add_new:
+            # Skip new stocks unless --add-new
+            continue
+
+        if not in_recs and add_new:
+            # Add new stock
+            template = new_entry.get("best_template") or new_entry.get("template")
+            new_full = dict(new_entry)
+            new_full["template"] = template
+            new_full["position_pct_max"] = new_entry.get("position_pct_recommended", 0.0)
+            new_full["tradeable"] = new_tier in ("S", "A", "B", "C")
+            new_full["params_ref"] = new_entry.get("params_ref") or f"{template}.yaml#per_stock.{sid}"
+            recs[sid] = new_full
+            additions.append((sid, new_tier, template, run_id))
+            continue
 
         if new_score > cur_score:
             # Upgrade — replace entry with new (tradeable shape)
@@ -119,16 +144,28 @@ def main():
         else:
             no_change.append((sid, cur_tier))
 
-    if not upgrades:
-        print("\n  [i] No upgrades found.")
-    else:
+    if additions:
+        print(f"\n  Additions ({len(additions)}):")
+        print(f"  {'sid':<8} {'tier':<5} {'template':<24} {'run_id':<20}")
+        print("  " + "-"*65)
+        for sid, nt, tmpl, rid in additions:
+            print(f"  {sid:<8} {nt:<5} {tmpl:<24} {rid:<20}")
+
+    if not upgrades and not additions:
+        print("\n  [i] No changes.")
+        return
+
+    if upgrades:
         print(f"\n  Upgrades ({len(upgrades)}):")
         print(f"  {'sid':<8} {'old':<3} -> {'new':<3} {'template':<24} {'run_id':<20}")
         print("  " + "-"*65)
         for sid, ot, nt, tmpl, rid in upgrades:
             print(f"  {sid:<8} {ot:<3} -> {nt:<3} {tmpl:<24} {rid:<20}")
+    else:
+        print("\n  [i] No upgrades found.")
 
-        # Write back
+    # Write back (if we have any changes)
+    if upgrades or additions:
         # Preserve header comment if exists
         header = ""
         if os.path.exists(RECS_PATH):

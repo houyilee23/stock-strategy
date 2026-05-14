@@ -134,3 +134,32 @@
 | 2606 | 裕民 | — | 64.6 | HOLD | D | — | style1_pullback | — | — | — | 59 | [多頭] | BULL |  |
 | 2609 | 陽明 | — | 48.6 | HOLD | C | 15% | style1_pullback | — | — | — | 36 | [空頭] | BULL |  |
 | 4147 | 中裕 | — | 49.7 | HOLD | D | — | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
+| 3014 | 聯陽 | — | 139.0 | HOLD | C | 15% | style1_pullback | — | — | — | 72 | [空頭] | BULL |  |
+| 3036 | 文曄 | — | 271.5 | HOLD | C | 15% | style1_pullback | — | — | — | 70 | [多頭] | BULL |  |
+| 3044 | 健鼎 | — | 512.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 3105 | 穩懋 | — | 495.5 | HOLD | F | — | style1_pullback | — | — | — | 52 | [多頭] | BULL |  |
+| 3406 | 玉晶光 | — | 560.0 | HOLD | F | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 3454 | 晶睿 | — | 99.4 | HOLD | C | 15% | style1_pullback | — | 99.4~100.4 | 97.0 | 64 | [多頭] | BULL | 觀察中 RSI=63.5 |
+| 3533 | 嘉澤 | — | 2450.0 | HOLD | D | 10% | style1_pullback | — | 2360.0~2545.0 | 1623.5 | 48 | [多頭] | BULL | 觀察中 RSI=47.8 |
+| 3653 | 健策 | — | 3365.0 | HOLD | B | 30% | style1_pullback | — | 3310.0~3530.0 | 2769.9 | 35 | [多頭] | BULL | 觀察中 RSI=35.1 |
+| 3702 | 大聯大 | — | 111.0 | HOLD | B | 30% | style1_pullback | — | — | — | 67 | [多頭] | BULL |  |
+| 4915 | 致伸 | — | 70.3 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
+| 5483 | 中美晶 | — | 148.5 | HOLD | F | — | style1_pullback | — | — | — | 59 | [多頭] | BULL |  |
+| 6191 | 精成科 | — | 92.5 | HOLD | C | 15% | style1_pullback | — | — | — | 38 | [空頭] | BULL |  |
+| 6491 | 晶碩 | — | 289.5 | HOLD | C | 15% | style1_pullback | — | — | — | 57 | [空頭] | BULL |  |
+| 6533 | 晶心科 | — | 233.5 | HOLD | F | — | style1_pullback | — | — | — | 53 | [空頭] | BULL |  |
+| 6781 | AES-KY | — | 1185.0 | HOLD | F | — | style1_pullback | — | — | — | 54 | [空頭] | BULL |  |
+| 2354 | 鴻準 | — | 59.0 | HOLD | F | — | style1_pullback | — | — | — | 57 | [空頭] | BULL |  |
+| 2451 | 創見 | — | 344.5 | HOLD | F | — | style1_pullback | — | — | — | 69 | [多頭] | BULL |  |
+| 2820 | 華票 | — | 16.8 | HOLD | F | — | style1_pullback | — | 16.8~16.9 | 16.6 | 43 | [多頭] | BULL | 觀察中 RSI=43.1 |
+| 2845 | 遠東銀 | — | 12.1 | HOLD | F | — | style1_pullback | — | — | — | 27 | [空頭] | BULL |  |
+| 1314 | 中石化 | — | 6.9 | HOLD | F | — | style1_pullback | — | — | — | 43 | [空頭] | BULL |  |
+| 1535 | 中宇 | — | 49.4 | HOLD | F | — | style1_pullback | — | — | — | 31 | [空頭] | BULL |  |
+| 1789 | 神隆 | — | 19.1 | HOLD | C | 15% | style1_pullback | — | — | — | 35 | [空頭] | BULL |  |
+| 2015 | 豐興 | — | 63.1 | HOLD | F | — | style1_pullback | — | — | — | 51 | [空頭] | BULL |  |
+| 4763 | 材料-KY | — | 42.2 | HOLD | C | 15% | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
+| 4137 | 麗豐-KY | — | 106.5 | HOLD | F | — | style1_pullback | — | 105.0~106.0 | 104.4 | 48 | [多頭] | BULL | 觀察中 RSI=48.4 |
+| 4174 | 浩鼎 | — | 32.7 | HOLD | F | — | style1_pullback | — | 32.2~32.6 | 31.4 | 38 | [多頭] | BULL | 觀察中 RSI=38.0 |
+| 6446 | 藥華藥 | — | 782.0 | HOLD | F | — | style1_pullback | — | — | — | 74 | [多頭] | BULL |  |
+| 2542 | 興富發 | — | 43.1 | HOLD | F | — | style1_pullback | — | — | — | 74 | [空頭] | BULL |  |
+| 2722 | 夏都 | — | 23.3 | HOLD | F | — | style1_pullback | — | — | — | 44 | [空頭] | BULL |  |
