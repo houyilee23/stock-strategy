@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-05-14**_
+_最後更新：**2026-05-15**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -186,8 +186,8 @@ _最後更新：**2026-05-14**_
 | [3014](output/reports/per_stock/3014.md) | 聯陽 | 139.0 | HOLD | C | 15% | 72 | [空頭] | BULL |
 | [3036](output/reports/per_stock/3036.md) | 文曄 | 271.5 | HOLD | C | 15% | 70 | [多頭] | BULL |
 | [3044](output/reports/per_stock/3044.md) | 健鼎 | 512.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
-| [3105](output/reports/per_stock/3105.md) | 穩懋 | 495.5 | HOLD | F | — | 52 | [多頭] | BULL |
-| [3406](output/reports/per_stock/3406.md) | 玉晶光 | 560.0 | HOLD | F | — | 66 | [多頭] | BULL |
+| [3105](output/reports/per_stock/3105.md) | 穩懋 | 495.5 | HOLD | D | 10% | 52 | [多頭] | BULL |
+| [3406](output/reports/per_stock/3406.md) | 玉晶光 | 560.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
 | [3454](output/reports/per_stock/3454.md) | 晶睿 | 99.4 | HOLD | C | 15% | 64 | [多頭] | BULL |
 | [3533](output/reports/per_stock/3533.md) | 嘉澤 | 2450.0 | HOLD | D | 10% | 48 | [多頭] | BULL |
 | [3653](output/reports/per_stock/3653.md) | 健策 | 3365.0 | HOLD | B | 30% | 35 | [多頭] | BULL |
@@ -197,10 +197,10 @@ _最後更新：**2026-05-14**_
 | [6191](output/reports/per_stock/6191.md) | 精成科 | 92.5 | HOLD | C | 15% | 38 | [空頭] | BULL |
 | [6491](output/reports/per_stock/6491.md) | 晶碩 | 289.5 | HOLD | C | 15% | 57 | [空頭] | BULL |
 | [6533](output/reports/per_stock/6533.md) | 晶心科 | 233.5 | HOLD | F | — | 53 | [空頭] | BULL |
-| [6781](output/reports/per_stock/6781.md) | AES-KY | 1185.0 | HOLD | F | — | 54 | [空頭] | BULL |
+| [6781](output/reports/per_stock/6781.md) | AES-KY | 1185.0 | HOLD | A | 50% | 54 | [空頭] | BULL |
 | [2354](output/reports/per_stock/2354.md) | 鴻準 | 59.0 | HOLD | F | — | 57 | [空頭] | BULL |
-| [2451](output/reports/per_stock/2451.md) | 創見 | 344.5 | HOLD | F | — | 69 | [多頭] | BULL |
-| [2820](output/reports/per_stock/2820.md) | 華票 | 16.8 | HOLD | F | — | 43 | [多頭] | BULL |
+| [2451](output/reports/per_stock/2451.md) | 創見 | 344.5 | HOLD | B | 30% | 69 | [多頭] | BULL |
+| [2820](output/reports/per_stock/2820.md) | 華票 | 16.8 | HOLD | C | 15% | 43 | [多頭] | BULL |
 | [2845](output/reports/per_stock/2845.md) | 遠東銀 | 12.1 | HOLD | F | — | 27 | [空頭] | BULL |
 | [1314](output/reports/per_stock/1314.md) | 中石化 | 6.9 | HOLD | F | — | 43 | [空頭] | BULL |
 | [1535](output/reports/per_stock/1535.md) | 中宇 | 49.4 | HOLD | F | — | 31 | [空頭] | BULL |
@@ -210,12 +210,12 @@ _最後更新：**2026-05-14**_
 | [4137](output/reports/per_stock/4137.md) | 麗豐-KY | 106.5 | HOLD | F | — | 48 | [多頭] | BULL |
 | [4174](output/reports/per_stock/4174.md) | 浩鼎 | 32.7 | HOLD | F | — | 38 | [多頭] | BULL |
 | [6446](output/reports/per_stock/6446.md) | 藥華藥 | 782.0 | HOLD | F | — | 74 | [多頭] | BULL |
-| [2542](output/reports/per_stock/2542.md) | 興富發 | 43.1 | HOLD | F | — | 74 | [空頭] | BULL |
+| [2542](output/reports/per_stock/2542.md) | 興富發 | 43.1 | HOLD | C | 15% | 74 | [空頭] | BULL |
 | [2722](output/reports/per_stock/2722.md) | 夏都 | 23.3 | HOLD | F | — | 44 | [空頭] | BULL |
 
 ## 歷史報告
 
-- [2026/05](output/reports/2026/05/) — 31 份
+- [2026/05](output/reports/2026/05/) — 34 份
 - [2026/04](output/reports/2026/04/) — 10 份
 
 ---
