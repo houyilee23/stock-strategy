@@ -145,7 +145,7 @@ _最後更新：**2026-05-14**_
 | [6531](output/reports/per_stock/6531.md) | 愛普 | 1040.0 | HOLD | C | — | 75 | [多頭] | BULL |
 | [8069](output/reports/per_stock/8069.md) | 元太 | 162.0 | HOLD | C | — | 63 | [空頭] | BULL |
 | [8081](output/reports/per_stock/8081.md) | 致新 | 256.5 | HOLD | C | — | 55 | [多頭] | BULL |
-| [1582](output/reports/per_stock/1582.md) | 信邦 | 92.0 | HOLD | F | — | 49 | [多頭] | BULL |
+| [1582](output/reports/per_stock/1582.md) | 信邦 | 92.0 | HOLD | C | — | 49 | [多頭] | BULL |
 | [2059](output/reports/per_stock/2059.md) | 川湖 | 5250.0 | HOLD | B | — | 72 | [多頭] | BULL |
 | [3596](output/reports/per_stock/3596.md) | 智易 | 183.0 | HOLD | C | — | 61 | [空頭] | BULL |
 | [5388](output/reports/per_stock/5388.md) | 中磊 | 79.4 | HOLD | D | — | 47 | [空頭] | BULL |
@@ -165,7 +165,7 @@ _最後更新：**2026-05-14**_
 | [1503](output/reports/per_stock/1503.md) | 士電 | 201.5 | HOLD | C | — | 55 | [多頭] | BULL |
 | [1504](output/reports/per_stock/1504.md) | 東元 | 73.2 | HOLD | D | — | 67 | [空頭] | BULL |
 | [1521](output/reports/per_stock/1521.md) | 大億 | 25.2 | HOLD | F | — | 52 | [多頭] | BULL |
-| [2049](output/reports/per_stock/2049.md) | 上銀 | 364.5 | HOLD | F | — | 80 | [多頭] | BULL |
+| [2049](output/reports/per_stock/2049.md) | 上銀 | 364.5 | HOLD | C | — | 80 | [多頭] | BULL |
 | [2371](output/reports/per_stock/2371.md) | 大同 | 30.0 | HOLD | F | — | 40 | [空頭] | BULL |
 | [9933](output/reports/per_stock/9933.md) | 中鼎工程 | 36.8 | HOLD | F | — | 53 | [多頭] | BULL |
 | [2009](output/reports/per_stock/2009.md) | 第一銅 | 41.2 | HOLD | C | — | 58 | [多頭] | BULL |
@@ -173,7 +173,7 @@ _最後更新：**2026-05-14**_
 | [1736](output/reports/per_stock/1736.md) | 喬山 | 117.5 | HOLD | B | — | 44 | [空頭] | BULL |
 | [2227](output/reports/per_stock/2227.md) | 裕隆 | 50.6 | HOLD | F | — | 37 | [空頭] | BULL |
 | [1234](output/reports/per_stock/1234.md) | 黑松 | 34.5 | HOLD | D | — | 24 | [空頭] | BULL |
-| [1456](output/reports/per_stock/1456.md) | 儒鴻 | 13.8 | HOLD | F | — | 49 | [多頭] | BULL |
+| [1456](output/reports/per_stock/1456.md) | 儒鴻 | 13.8 | HOLD | C | — | 49 | [多頭] | BULL |
 | [1717](output/reports/per_stock/1717.md) | 長興 | 80.4 | HOLD | A | — | 57 | [多頭] | BULL |
 | [1722](output/reports/per_stock/1722.md) | 台肥 | 46.7 | HOLD | D | — | 51 | [空頭] | BULL |
 | [1907](output/reports/per_stock/1907.md) | 永豐餘 | 24.5 | HOLD | C | — | 49 | [空頭] | BULL |

@@ -96,7 +96,7 @@
 | 6531 | 愛普 | — | 1040.0 | HOLD | C | — | style1_pullback | — | — | — | 75 | [多頭] | BULL |  |
 | 8069 | 元太 | — | 162.0 | HOLD | C | — | style1_pullback | — | — | — | 63 | [空頭] | BULL |  |
 | 8081 | 致新 | — | 256.5 | HOLD | C | — | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
-| 1582 | 信邦 | — | 92.0 | HOLD | F | — | style1_pullback | — | 87.9~89.7 | 74.3 | 49 | [多頭] | BULL | 觀察中 RSI=48.7 |
+| 1582 | 信邦 | — | 92.0 | HOLD | C | — | style1_pullback | — | 87.9~89.7 | 74.3 | 49 | [多頭] | BULL | 觀察中 RSI=48.7 |
 | 2059 | 川湖 | — | 5250.0 | HOLD | B | — | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
 | 3596 | 智易 | — | 183.0 | HOLD | C | — | style1_pullback | — | — | — | 61 | [空頭] | BULL |  |
 | 5388 | 中磊 | — | 79.4 | HOLD | D | — | style1_pullback | — | — | — | 47 | [空頭] | BULL |  |
@@ -116,7 +116,7 @@
 | 1503 | 士電 | — | 201.5 | HOLD | C | — | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
 | 1504 | 東元 | — | 73.2 | HOLD | D | — | style1_pullback | — | — | — | 67 | [空頭] | BULL |  |
 | 1521 | 大億 | — | 25.2 | HOLD | F | — | style1_pullback | — | 25.0~25.1 | 25.0 | 52 | [多頭] | BULL | 觀察中 RSI=52.2 |
-| 2049 | 上銀 | — | 364.5 | HOLD | F | — | style1_pullback | — | — | — | 80 | [多頭] | BULL |  |
+| 2049 | 上銀 | — | 364.5 | HOLD | C | — | style1_pullback | — | — | — | 80 | [多頭] | BULL |  |
 | 2371 | 大同 | — | 30.0 | HOLD | F | — | style1_pullback | — | — | — | 40 | [空頭] | BULL |  |
 | 9933 | 中鼎工程 | — | 36.8 | HOLD | F | — | style1_pullback | — | 36.6~37.0 | 32.5 | 53 | [多頭] | BULL | 觀察中 RSI=52.7 |
 | 2009 | 第一銅 | — | 41.2 | HOLD | C | — | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
@@ -124,7 +124,7 @@
 | 1736 | 喬山 | — | 117.5 | HOLD | B | — | style1_pullback | — | — | — | 44 | [空頭] | BULL |  |
 | 2227 | 裕隆 | — | 50.6 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
 | 1234 | 黑松 | — | 34.5 | HOLD | D | — | style1_pullback | — | — | — | 24 | [空頭] | BULL |  |
-| 1456 | 儒鴻 | — | 13.8 | HOLD | F | — | style1_pullback | — | 13.8~13.9 | 12.9 | 49 | [多頭] | BULL | 觀察中 RSI=49.3 |
+| 1456 | 儒鴻 | — | 13.8 | HOLD | C | — | style1_pullback | — | 13.8~13.9 | 12.9 | 49 | [多頭] | BULL | 觀察中 RSI=49.3 |
 | 1717 | 長興 | — | 80.4 | HOLD | A | — | style1_pullback | — | — | — | 57 | [多頭] | BULL |  |
 | 1722 | 台肥 | — | 46.7 | HOLD | D | — | style1_pullback | — | — | — | 51 | [空頭] | BULL |  |
 | 1907 | 永豐餘 | — | 24.5 | HOLD | C | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |

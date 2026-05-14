@@ -1,4 +1,4 @@
-# Phase 23: ema_cross + 3day_reversal + atr_band_breakout + vwap_revert
+# Phase 24: golden_cross + pivot_break + inside_day + keltner
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -281,29 +281,29 @@
   tier: C
   tradeable: true
 '1456':
-  best_template: low_vol_pullback
+  best_template: golden_cross
   bootstrap:
     n_iterations: 1000
-    n_original: 3
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 9
+    pf_lower: 0.819
+    pf_mean: 3.542
+    pf_upper: 5.0
   holdouts:
     A_new: null
-    B: null
+    B: false
     C: null
-  params_ref: low_vol_pullback.yaml#per_stock.1456
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  test_alpha_vs_0050: -0.2626
-  test_cagr: 0.0074
-  test_expectancy: 0.0152
-  test_max_dd: -0.0959
-  test_n_trades: 3
-  test_pf: 1.471
-  tier: F
-  tier_reason: FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE）
-  verdict: INSUFFICIENT
+  params_ref: golden_cross.yaml#per_stock.1456
+  position_pct_recommended: 0.15
+  template: golden_cross
+  test_alpha_vs_0050: -0.1613
+  test_cagr: 0.1086
+  test_expectancy: 0.0706
+  test_max_dd: -0.1715
+  test_n_trades: 9
+  test_pf: 2.576
+  tier: C
+  tier_reason: PF_lower=0.82 ≥ 0.7, exp=+7.1% ≥ 1%, n=9≥5, holdout=[A_new=NA B=X C=NA]
+  verdict: PASS
 '1503':
   best_template: narrow_range_breakout
   bootstrap:
@@ -397,29 +397,31 @@
   tier: C
   tradeable: true
 '1582':
-  best_template: trend_pullback
+  best_template: keltner_breakout
   bootstrap:
     n_iterations: 1000
-    n_original: 1
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 16
+    pf_lower: 0.755
+    pf_mean: 2.57
+    pf_upper: 5.0
   holdouts:
     A_new: null
     B: null
-    C: null
-  params_ref: trend_pullback.yaml#per_stock.1582
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  test_alpha_vs_0050: -0.2235
-  test_cagr: 0.0464
-  test_expectancy: 0.2738
-  test_max_dd: -0.1292
-  test_n_trades: 1
-  test_pf: null
-  tier: F
-  tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
-  verdict: INSUFFICIENT
+    C: true
+  params_ref: keltner_breakout.yaml#per_stock.1582
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: keltner_breakout
+  test_alpha_vs_0050: -0.1842
+  test_cagr: 0.0858
+  test_expectancy: 0.0316
+  test_max_dd: -0.2388
+  test_n_trades: 16
+  test_pf: 1.992
+  tier: C
+  tier_reason: PF_lower=0.75 ≥ 0.7, exp=+3.2% ≥ 1%, n=16≥5, holdout=[A_new=NA B=NA
+    C=O]
+  verdict: WEAK
 '1605':
   best_template: atr_band_breakout
   bootstrap:
@@ -689,29 +691,30 @@
     C=O]
   verdict: WEAK
 '2049':
-  best_template: volume_breakout
+  best_template: golden_cross
   bootstrap:
     n_iterations: 1000
-    n_original: 13
-    pf_lower: 0.285
-    pf_mean: 2.115
-    pf_upper: 5.0
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
   holdouts:
     A_new: null
-    B: true
+    B: null
     C: null
-  params_ref: volume_breakout.yaml#per_stock.2049
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  test_alpha_vs_0050: -0.2395
-  test_cagr: 0.0304
-  test_expectancy: 0.0147
-  test_max_dd: -0.1622
-  test_n_trades: 13
-  test_pf: 1.6
-  tier: F
-  tier_reason: FAIL：PF_lower=0.29, exp=+1.5%, n=13, holdout=[A_new=NA B=O C=NA]
-  verdict: WEAK
+  params_ref: golden_cross.yaml#per_stock.2049
+  position_pct_recommended: 0.15
+  template: golden_cross
+  test_alpha_vs_0050: -0.239
+  test_cagr: 0.0309
+  test_expectancy: 0.0597
+  test_max_dd: -0.0753
+  test_n_trades: 3
+  test_pf: 4.722
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=4.72 ≥ 3.0, exp=+6.0% ≥ 5%, |DD|=8% ≤ 25%,
+    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  verdict: INSUFFICIENT
 '2059':
   best_template: donchian_breakout
   bootstrap:
