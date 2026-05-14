@@ -42,7 +42,7 @@
 | 5347 | 世界先進 | — | 151.0 | HOLD | C | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 6488 | 環球晶 | — | 606.0 | HOLD | C | — | style1_pullback | — | — | — | 62 | [多頭] | BULL |  |
 | 2412 | 中華電 | — | 137.5 | HOLD | B | — | style1_pullback | — | 135.5~135.5 | 133.3 | 59 | [多頭] | BULL | 觀察中 RSI=59.4 |
-| 3045 | 台灣大 | — | 112.0 | HOLD | F | — | style1_pullback | — | 109.5~110.0 | 108.1 | 60 | [多頭] | BULL | 觀察中 RSI=59.8 |
+| 3045 | 台灣大 | — | 112.0 | HOLD | D | — | style1_pullback | — | 109.5~110.0 | 108.1 | 60 | [多頭] | BULL | 觀察中 RSI=59.8 |
 | 4904 | 遠傳 | — | 96.9 | HOLD | C | 15% | style1_pullback | — | 95.2~95.5 | 89.6 | 58 | [多頭] | BULL | 觀察中 RSI=57.6 |
 | 2881 | 富邦金 | — | 94.7 | HOLD | C | — | style1_pullback | — | — | — | 63 | [空頭] | BULL |  |
 | 2882 | 國泰金 | — | 77.3 | HOLD | B | 30% | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
@@ -84,7 +84,7 @@
 | 00919 | 群益台灣精選高息（2023 IPO，歷史短） | — | 25.6 | HOLD | C | 15% | style1_pullback | — | — | — | 74 | [多頭] | BULL |  |
 | 00940 | 元大台灣價值高息（2024 IPO，歷史很短） | — | 11.2 | HOLD | C | — | style1_pullback | — | — | — | 74 | [多頭] | BULL |  |
 | 00981A | 主動統一台股增長 | — | 29.3 | HOLD | — | — | style1_pullback | — | — | — | 70 | [多頭] | BULL |  |
-| 2458 | 義隆電 | — | 142.5 | HOLD | F | — | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
+| 2458 | 義隆電 | — | 142.5 | HOLD | D | — | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
 | 3035 | 智原 | — | 194.0 | HOLD | B | — | style1_pullback | — | — | — | 61 | [空頭] | BULL |  |
 | 3081 | 聯亞光電 | — | 2620.0 | HOLD | B | — | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
 | 3443 | 創意 | — | 5330.0 | HOLD | S | — | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |

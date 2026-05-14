@@ -91,7 +91,7 @@ _最後更新：**2026-05-14**_
 | [5347](output/reports/per_stock/5347.md) | 世界先進 | 151.0 | HOLD | C | — | 66 | [多頭] | BULL |
 | [6488](output/reports/per_stock/6488.md) | 環球晶 | 606.0 | HOLD | C | — | 62 | [多頭] | BULL |
 | [2412](output/reports/per_stock/2412.md) | 中華電 | 137.5 | HOLD | B | — | 59 | [多頭] | BULL |
-| [3045](output/reports/per_stock/3045.md) | 台灣大 | 112.0 | HOLD | F | — | 60 | [多頭] | BULL |
+| [3045](output/reports/per_stock/3045.md) | 台灣大 | 112.0 | HOLD | D | — | 60 | [多頭] | BULL |
 | [4904](output/reports/per_stock/4904.md) | 遠傳 | 96.9 | HOLD | C | 15% | 58 | [多頭] | BULL |
 | [2881](output/reports/per_stock/2881.md) | 富邦金 | 94.7 | HOLD | C | — | 63 | [空頭] | BULL |
 | [2882](output/reports/per_stock/2882.md) | 國泰金 | 77.3 | HOLD | B | 30% | 55 | [多頭] | BULL |
@@ -133,7 +133,7 @@ _最後更新：**2026-05-14**_
 | [00919](output/reports/per_stock/00919.md) | 群益台灣精選高息（2023 IPO，歷史短） | 25.6 | HOLD | C | 15% | 74 | [多頭] | BULL |
 | [00940](output/reports/per_stock/00940.md) | 元大台灣價值高息（2024 IPO，歷史很短） | 11.2 | HOLD | C | — | 74 | [多頭] | BULL |
 | [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 29.3 | HOLD | — | — | 70 | [多頭] | BULL |
-| [2458](output/reports/per_stock/2458.md) | 義隆電 | 142.5 | HOLD | F | — | 55 | [多頭] | BULL |
+| [2458](output/reports/per_stock/2458.md) | 義隆電 | 142.5 | HOLD | D | — | 55 | [多頭] | BULL |
 | [3035](output/reports/per_stock/3035.md) | 智原 | 194.0 | HOLD | B | — | 61 | [空頭] | BULL |
 | [3081](output/reports/per_stock/3081.md) | 聯亞光電 | 2620.0 | HOLD | B | — | 58 | [多頭] | BULL |
 | [3443](output/reports/per_stock/3443.md) | 創意 | 5330.0 | HOLD | S | — | 72 | [多頭] | BULL |

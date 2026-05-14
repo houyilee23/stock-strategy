@@ -1,4 +1,4 @@
-# Phase 24: golden_cross + pivot_break + inside_day + keltner
+# Phase 25: outside_day + monthly_anchor + linreg + yearly_low_revert
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -1302,29 +1302,30 @@
   tier: B
   tradeable: true
 '2458':
-  best_template: mean_reversion
+  best_template: monthly_anchor
   bootstrap:
     n_iterations: 1000
-    n_original: 1
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 32
+    pf_lower: 0.508
+    pf_mean: 1.435
+    pf_upper: 3.04
   holdouts:
     A_new: null
-    B: false
-    C: null
-  params_ref: mean_reversion.yaml#per_stock.2458
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  test_alpha_vs_0050: -0.246
-  test_cagr: 0.0239
-  test_expectancy: 0.1344
-  test_max_dd: -0.0344
-  test_n_trades: 1
-  test_pf: null
-  tier: F
-  tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
-  verdict: INSUFFICIENT
+    B: true
+    C: true
+  params_ref: monthly_anchor.yaml#per_stock.2458
+  position_pct_recommended: 0.1
+  template: monthly_anchor
+  test_alpha_vs_0050: -0.2419
+  test_cagr: 0.028
+  test_expectancy: 0.0059
+  test_max_dd: -0.27
+  test_n_trades: 32
+  test_pf: 1.212
+  tier: D
+  tier_reason: BORDERLINE：PF_lower=0.51 ≥ 0.5, exp=+0.6% ≥ 0%, n=32≥5, holdout=[A_new=NA
+    B=O C=O]（紙上交易）
+  verdict: FAIL
 '2474':
   best_template: simple_dip_buy
   bootstrap:
@@ -1975,22 +1976,30 @@
     C=O]
   verdict: WEAK
 '3045':
-  bnh_cagr: 0.05595026497876887
-  bnh_div_yield: 0.03616129142982496
-  bnh_holdable: false
-  bnh_max_dd: -0.16187946126367547
-  bnh_position_pct_max: 0.0
-  bnh_tier: F
-  name: 台灣大
-  params_ref: low_vol_pullback.yaml#per_stock.3045
-  position_pct_max: 0.0
-  template: low_vol_pullback
-  test_expectancy: 0.0302
-  test_max_dd: -0.0324
-  test_n_trades: 2
-  test_pf: 2.803
-  tier: F
-  tradeable: false
+  best_template: monthly_anchor
+  bootstrap:
+    n_iterations: 1000
+    n_original: 32
+    pf_lower: 0.544
+    pf_mean: 1.435
+    pf_upper: 3.092
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: monthly_anchor.yaml#per_stock.3045
+  position_pct_recommended: 0.1
+  template: monthly_anchor
+  test_alpha_vs_0050: -0.2534
+  test_cagr: 0.0166
+  test_expectancy: 0.0032
+  test_max_dd: -0.1747
+  test_n_trades: 32
+  test_pf: 1.241
+  tier: D
+  tier_reason: BORDERLINE：PF_lower=0.54 ≥ 0.5, exp=+0.3% ≥ 0%, n=32≥5, holdout=[A_new=NA
+    B=O C=O]（紙上交易）
+  verdict: FAIL
 '3081':
   best_template: gap_continuation
   bootstrap:
