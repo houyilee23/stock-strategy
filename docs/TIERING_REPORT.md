@@ -1,16 +1,16 @@
-# TIERING REPORT — 20260514_023341
+# TIERING REPORT — 20260514_053311
 
 ## 1. 統計摘要
 
 | Tier | 數量 | 部位上限 | 描述 |
 |------|------|----------|------|
 | S | 0 | 100% | ROBUST：訊號模式直接用，單檔上限 100% |
-| A | 0 | 50% | STRONG：可用，建議 50% 部位 |
+| A | 1 | 50% | STRONG：可用，建議 50% 部位 |
 | B | 0 | 30% | MODERATE：可用，建議 30% 部位 + 嚴格 trailing stop |
 | C | 0 | 15% | WEAK：紙上交易 3 個月再啟用，最大 15% |
-| F | 32 | 0% | FAIL：移出 universe |
+| F | 28 | 0% | FAIL：移出 universe |
 
-**可操作標的合計（S+A+B+C）= 0 / 33**  （目標 ≥ 20）
+**可操作標的合計（S+A+B+C）= 1 / 29**  （目標 ≥ 20）
 
 ## 2. 各 Tier 個股清單
 
@@ -18,9 +18,11 @@
 
 （無）
 
-### Tier A — 部位上限 50% （共 0 檔）
+### Tier A — 部位上限 50% （共 1 檔）
 
-（無）
+| Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
+|-------|----------|-----|----|---|----|----------|-------|---|---|--------|
+| 1717 | three_day_reversal | +4.7% | inf | 7 | -7.6% | 5.00 | X | X | X | PF_lower=5.00 ≥ 1.5, exp=+4.7% ≥ 3%, n=7≥6, holdout=[A_new=NA B=NA C=NA], gate=PF_lower≥2.0 自動晉升 |
 
 ### Tier B — 部位上限 30% （共 0 檔）
 
@@ -30,39 +32,35 @@
 
 （無）
 
-### Tier F — 部位上限 0% （共 32 檔）
+### Tier F — 部位上限 0% （共 28 檔）
 
 | Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
 |-------|----------|-----|----|---|----|----------|-------|---|---|--------|
-| 2823 | coppock_buy | +3.8% | inf | 1 | -2.2% | N/A | X | X | X | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2014 | coppock_buy | +3.6% | 2.04 | 7 | -9.3% | 0.19 | X | X | X | FAIL：PF_lower=0.19, exp=+3.6%, n=7, holdout=[A_new=NA B=NA C=NA] |
-| 1582 | coppock_buy | +2.2% | 2.16 | 12 | -22.0% | 0.10 | X | X | X | FAIL：PF_lower=0.10, exp=+2.2%, n=12, holdout=[A_new=NA B=X C=X] |
-| 8069 | coppock_buy | +1.8% | 1.27 | 16 | -27.3% | 0.43 | X | X | O | FAIL：PF_lower=0.43, exp=+1.8%, n=16, holdout=[A_new=NA B=X C=O] |
-| 2009 | coppock_buy | +1.5% | 1.32 | 13 | -22.7% | 0.00 | X | X | O | FAIL：PF_lower=0.00, exp=+1.5%, n=13, holdout=[A_new=NA B=X C=O] |
-| 8454 | coppock_buy | +1.2% | 1.18 | 7 | -20.3% | 0.00 | X | X | X | FAIL：PF_lower=0.00, exp=+1.2%, n=7, holdout=[A_new=NA B=NA C=X] |
-| 2049 | coppock_buy | +0.8% | 1.12 | 20 | -36.1% | 0.27 | X | O | O | FAIL：PF_lower=0.27, exp=+0.8%, n=20, holdout=[A_new=NA B=O C=O] |
-| 2723 | coppock_buy | +0.3% | 0.95 | 12 | -22.8% | 0.02 | X | X | O | FAIL：PF_lower=0.02, exp=+0.3%, n=12, holdout=[A_new=NA B=X C=O] |
-| 2105 | coppock_buy | +0.1% | 0.96 | 19 | -27.3% | 0.02 | X | X | X | FAIL：PF_lower=0.02, exp=+0.1%, n=19, holdout=[A_new=NA B=X C=X] |
-| 2886 | coppock_buy | -0.3% | 0.82 | 20 | -29.9% | 0.12 | X | O | O | FAIL：test expectancy=-0.3% < 0（負期望值） |
-| 2609 | coppock_buy | -0.3% | 0.81 | 17 | -35.3% | 0.23 | X | X | X | FAIL：test expectancy=-0.3% < 0（負期望值） |
-| 0056 | coppock_buy | -0.5% | 0.67 | 13 | -19.3% | 0.00 | X | X | X | FAIL：test expectancy=-0.5% < 0（負期望值） |
-| 9940 | coppock_buy | -0.6% | 0.68 | 28 | -36.8% | 0.16 | X | X | X | FAIL：test expectancy=-0.6% < 0（負期望值） |
-| 5269 | coppock_buy | -0.7% | 0.76 | 16 | -28.9% | 0.16 | X | O | O | FAIL：test expectancy=-0.7% < 0（負期望值） |
-| 9933 | coppock_buy | -0.7% | 0.69 | 17 | -27.3% | 0.23 | X | X | X | FAIL：test expectancy=-0.7% < 0（負期望值） |
-| 1101 | coppock_buy | -0.8% | 0.64 | 18 | -33.5% | 0.09 | X | O | O | FAIL：test expectancy=-0.8% < 0（負期望值） |
-| 1456 | coppock_buy | -0.9% | 0.66 | 28 | -50.8% | 0.20 | X | X | X | FAIL：test expectancy=-0.9% < 0（負期望值） |
-| 4961 | coppock_buy | -0.9% | 0.61 | 16 | -47.7% | 0.00 | X | O | O | FAIL：test expectancy=-0.9% < 0（負期望值） |
-| 3045 | coppock_buy | -1.0% | 0.48 | 23 | -27.3% | 0.10 | X | X | X | FAIL：test expectancy=-1.0% < 0（負期望值） |
-| 5880 | coppock_buy | -1.1% | 0.50 | 21 | -33.8% | 0.06 | X | X | O | FAIL：test expectancy=-1.1% < 0（負期望值） |
-| 1907 | coppock_buy | -1.2% | 0.68 | 16 | -39.6% | 0.02 | X | X | X | FAIL：test expectancy=-1.2% < 0（負期望值） |
-| 2867 | coppock_buy | -1.2% | 0.58 | 18 | -43.2% | 0.02 | X | X | X | FAIL：test expectancy=-1.2% < 0（負期望值） |
-| 2912 | coppock_buy | -1.2% | 0.39 | 15 | -23.3% | 0.09 | X | O | O | FAIL：test expectancy=-1.2% < 0（負期望值） |
-| 9921 | coppock_buy | -1.3% | 0.41 | 19 | -30.1% | 0.00 | X | O | X | FAIL：test expectancy=-1.3% < 0（負期望值） |
-| 3481 | coppock_buy | -1.3% | 0.61 | 15 | -54.6% | 0.14 | X | X | X | FAIL：test expectancy=-1.3% < 0（負期望值） |
-| 2371 | coppock_buy | -1.6% | 0.44 | 27 | -42.5% | 0.16 | X | O | X | FAIL：test expectancy=-1.6% < 0（負期望值） |
-| 1717 | coppock_buy | -1.8% | 0.37 | 21 | -53.7% | 0.02 | X | X | X | FAIL：test expectancy=-1.8% < 0（負期望值） |
-| 2458 | coppock_buy | -2.2% | 0.39 | 21 | -52.5% | 0.02 | X | O | X | FAIL：test expectancy=-2.2% < 0（負期望值） |
-| 5876 | coppock_buy | -2.3% | 0.20 | 30 | -52.4% | 0.02 | X | O | X | FAIL：test expectancy=-2.3% < 0（負期望值） |
-| 2227 | coppock_buy | -2.5% | 0.15 | 26 | -53.7% | 0.00 | X | X | X | FAIL：test expectancy=-2.5% < 0（負期望值） |
-| 1227 | coppock_buy | -2.5% | 0.07 | 24 | -47.3% | 0.00 | X | X | X | FAIL：test expectancy=-2.5% < 0（負期望值） |
-| 1521 | coppock_buy | -7.6% | 0.12 | 19 | -100.0% | 0.00 | X | X | X | FAIL：test expectancy=-7.6% < 0（負期望值） |
+| 2723 | three_day_reversal | +10.3% | inf | 1 | -1.9% | N/A | X | X | X | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 2014 | three_day_reversal | +2.3% | 1.39 | 9 | -35.0% | 0.42 | X | X | X | FAIL：PF_lower=0.42, exp=+2.3%, n=9, holdout=[A_new=NA B=NA C=X] |
+| 2458 | three_day_reversal | +1.4% | 1.56 | 6 | -11.6% | 0.28 | X | X | X | FAIL：PF_lower=0.28, exp=+1.4%, n=6, holdout=[A_new=NA B=NA C=X] |
+| 5876 | three_day_reversal | +0.4% | 1.43 | 2 | -3.6% | N/A | X | O | X | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 3481 | three_day_reversal | -0.5% | 0.82 | 6 | -30.8% | 0.12 | X | X | X | FAIL：test expectancy=-0.5% < 0（負期望值） |
+| 2912 | three_day_reversal | -1.1% | 0.47 | 2 | -4.5% | N/A | X | X | X | FAIL：test expectancy=-1.1% < 0（負期望值） |
+| 1456 | three_day_reversal | -1.1% | 0.64 | 18 | -36.6% | 0.14 | X | X | X | FAIL：test expectancy=-1.1% < 0（負期望值） |
+| 5880 | three_day_reversal | -1.2% | 0.47 | 14 | -25.5% | 0.07 | X | X | X | FAIL：test expectancy=-1.2% < 0（負期望值） |
+| 2609 | three_day_reversal | -1.3% | 0.63 | 10 | -30.4% | 0.13 | X | X | X | FAIL：test expectancy=-1.3% < 0（負期望值） |
+| 2886 | three_day_reversal | -1.5% | 0.44 | 2 | -7.2% | N/A | X | X | X | FAIL：test expectancy=-1.5% < 0（負期望值） |
+| 2867 | three_day_reversal | -1.7% | 0.43 | 13 | -32.0% | 0.00 | X | X | X | FAIL：test expectancy=-1.7% < 0（負期望值） |
+| 9940 | three_day_reversal | -1.8% | 0.14 | 6 | -12.0% | 0.00 | X | X | X | FAIL：test expectancy=-1.8% < 0（負期望值） |
+| 1582 | three_day_reversal | -1.9% | 0.49 | 16 | -36.8% | 0.12 | X | X | X | FAIL：test expectancy=-1.9% < 0（負期望值） |
+| 2105 | three_day_reversal | -1.9% | 0.52 | 10 | -29.6% | 0.03 | X | X | X | FAIL：test expectancy=-1.9% < 0（負期望值） |
+| 4961 | three_day_reversal | -2.1% | 0.55 | 9 | -21.8% | 0.09 | X | O | X | FAIL：test expectancy=-2.1% < 0（負期望值） |
+| 2049 | three_day_reversal | -2.9% | 0.18 | 4 | -15.4% | N/A | X | O | X | FAIL：test expectancy=-2.9% < 0（負期望值） |
+| 2009 | three_day_reversal | -3.1% | 0.43 | 4 | -19.0% | N/A | X | O | X | FAIL：test expectancy=-3.1% < 0（負期望值） |
+| 9933 | three_day_reversal | -3.1% | 0.00 | 1 | -6.5% | N/A | X | X | X | FAIL：test expectancy=-3.1% < 0（負期望值） |
+| 8454 | three_day_reversal | -4.5% | 0.24 | 4 | -18.2% | N/A | X | X | X | FAIL：test expectancy=-4.5% < 0（負期望值） |
+| 1101 | three_day_reversal | -4.8% | 0.00 | 2 | -10.2% | N/A | X | O | X | FAIL：test expectancy=-4.8% < 0（負期望值） |
+| 2371 | three_day_reversal | -5.0% | 0.17 | 5 | -23.1% | 0.00 | X | O | X | FAIL：test expectancy=-5.0% < 0（負期望值） |
+| 0056 | three_day_reversal | -5.0% | 0.00 | 1 | -7.7% | N/A | X | X | X | FAIL：test expectancy=-5.0% < 0（負期望值） |
+| 1521 | three_day_reversal | -7.1% | 0.00 | 2 | -13.8% | N/A | X | X | X | FAIL：test expectancy=-7.1% < 0（負期望值） |
+| 5269 | three_day_reversal | -7.8% | 0.08 | 6 | -44.1% | 0.00 | X | O | X | FAIL：test expectancy=-7.8% < 0（負期望值） |
+| 1227 | three_day_reversal | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2227 | three_day_reversal | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2823 | three_day_reversal | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 3045 | three_day_reversal | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |

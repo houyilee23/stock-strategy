@@ -1,4 +1,4 @@
-# Phase 22: yearly_high + failed_breakdown + 3_white_soldiers + coppock
+# Phase 23: ema_cross + 3day_reversal + atr_band_breakout + vwap_revert
 
 '0056':
   bnh_cagr: 0.1289699698821516
@@ -446,29 +446,30 @@
     C=O]
   verdict: PASS
 '1717':
-  best_template: gap_continuation
+  best_template: three_day_reversal
   bootstrap:
     n_iterations: 1000
-    n_original: 12
-    pf_lower: 0.367
-    pf_mean: 2.542
+    n_original: 7
+    pf_lower: 5.0
+    pf_mean: 5.0
     pf_upper: 5.0
   holdouts:
     A_new: null
     B: null
-    C: false
-  params_ref: gap_continuation.yaml#per_stock.1717
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  test_alpha_vs_0050: -0.1861
-  test_cagr: 0.0838
-  test_expectancy: 0.0456
-  test_max_dd: -0.2373
-  test_n_trades: 12
-  test_pf: 2.326
-  tier: F
-  tier_reason: FAIL：PF_lower=0.37, exp=+4.6%, n=12, holdout=[A_new=NA B=NA C=X]
-  verdict: WEAK
+    C: null
+  params_ref: three_day_reversal.yaml#per_stock.1717
+  position_pct_recommended: 0.5
+  template: three_day_reversal
+  test_alpha_vs_0050: -0.2093
+  test_cagr: 0.0606
+  test_expectancy: 0.0468
+  test_max_dd: -0.0763
+  test_n_trades: 7
+  test_pf: null
+  tier: A
+  tier_reason: PF_lower=5.00 ≥ 1.5, exp=+4.7% ≥ 3%, n=7≥6, holdout=[A_new=NA B=NA
+    C=NA], gate=PF_lower≥2.0 自動晉升
+  verdict: SUSPICIOUS_PERFECT
 '1722':
   best_template: mean_reversion
   bootstrap:
@@ -612,29 +613,31 @@
     B=NA C=X]（紙上交易）
   verdict: WEAK
 '2009':
-  best_template: bollinger_squeeze
+  best_template: vwap_revert
   bootstrap:
     n_iterations: 1000
-    n_original: 4
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 24
+    pf_lower: 0.855
+    pf_mean: 3.33
+    pf_upper: 5.0
   holdouts:
     A_new: null
-    B: null
-    C: null
-  params_ref: bollinger_squeeze.yaml#per_stock.2009
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  test_alpha_vs_0050: -0.2526
-  test_cagr: 0.0174
-  test_expectancy: 0.0471
-  test_max_dd: -0.4278
-  test_n_trades: 4
-  test_pf: 1.267
-  tier: F
-  tier_reason: FAIL：test n_trades=4 < 5（樣本不足，未達 LOW_N_RESCUE）
-  verdict: INSUFFICIENT
+    B: true
+    C: false
+  params_ref: vwap_revert.yaml#per_stock.2009
+  position_pct_recommended: 0.15
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: vwap_revert
+  test_alpha_vs_0050: -0.1868
+  test_cagr: 0.0832
+  test_expectancy: 0.0193
+  test_max_dd: -0.1924
+  test_n_trades: 24
+  test_pf: 2.7
+  tier: C
+  tier_reason: PF_lower=0.86 ≥ 0.7, exp=+1.9% ≥ 1%, n=24≥5, holdout=[A_new=NA B=O
+    C=X]
+  verdict: WEAK
 '2014':
   best_template: bollinger_squeeze
   bootstrap:
@@ -2783,29 +2786,31 @@
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '8454':
-  best_template: momentum_hold
+  best_template: vwap_revert
   bootstrap:
     n_iterations: 1000
-    n_original: 2
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 12
+    pf_lower: 0.568
+    pf_mean: 2.644
+    pf_upper: 5.0
   holdouts:
     A_new: null
-    B: false
-    C: null
-  params_ref: momentum_hold.yaml#per_stock.8454
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  test_alpha_vs_0050: -0.1282
-  test_cagr: 0.1417
-  test_expectancy: 0.5152
-  test_max_dd: -0.2672
-  test_n_trades: 2
-  test_pf: null
-  tier: F
-  tier_reason: FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE）
-  verdict: INSUFFICIENT
+    B: true
+    C: false
+  params_ref: vwap_revert.yaml#per_stock.8454
+  position_pct_recommended: 0.1
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: vwap_revert
+  test_alpha_vs_0050: -0.2342
+  test_cagr: 0.0357
+  test_expectancy: 0.0173
+  test_max_dd: -0.1264
+  test_n_trades: 12
+  test_pf: 2.035
+  tier: D
+  tier_reason: BORDERLINE：PF_lower=0.57 ≥ 0.5, exp=+1.7% ≥ 0%, n=12≥5, holdout=[A_new=NA
+    B=O C=X]（紙上交易）
+  verdict: WEAK
 '9907':
   best_template: simple_dip_buy
   bootstrap:

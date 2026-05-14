@@ -151,7 +151,7 @@ _最後更新：**2026-05-14**_
 | [5388](output/reports/per_stock/5388.md) | 中磊 | 79.4 | HOLD | D | — | 47 | [空頭] | BULL |
 | [6121](output/reports/per_stock/6121.md) | 新普 | 390.0 | HOLD | A | — | 70 | [空頭] | BULL |
 | [6285](output/reports/per_stock/6285.md) | 啟碁 | 270.5 | HOLD | A | — | 64 | [多頭] | BULL |
-| [8454](output/reports/per_stock/8454.md) | 富邦媒 | 196.0 | HOLD | F | — | 67 | [空頭] | BULL |
+| [8454](output/reports/per_stock/8454.md) | 富邦媒 | 196.0 | HOLD | D | — | 67 | [空頭] | BULL |
 | [2409](output/reports/per_stock/2409.md) | 友達 | 20.2 | HOLD | C | — | 64 | [多頭] | BULL |
 | [3481](output/reports/per_stock/3481.md) | 群創 | 37.5 | HOLD | F | — | 80 | [多頭] | BULL |
 | [5314](output/reports/per_stock/5314.md) | 世紀 | 74.1 | HOLD | C | — | 45 | [空頭] | BULL |
@@ -168,13 +168,13 @@ _最後更新：**2026-05-14**_
 | [2049](output/reports/per_stock/2049.md) | 上銀 | 364.5 | HOLD | F | — | 80 | [多頭] | BULL |
 | [2371](output/reports/per_stock/2371.md) | 大同 | 30.0 | HOLD | F | — | 40 | [空頭] | BULL |
 | [9933](output/reports/per_stock/9933.md) | 中鼎工程 | 36.8 | HOLD | F | — | 53 | [多頭] | BULL |
-| [2009](output/reports/per_stock/2009.md) | 第一銅 | 41.2 | HOLD | F | — | 58 | [多頭] | BULL |
+| [2009](output/reports/per_stock/2009.md) | 第一銅 | 41.2 | HOLD | C | — | 58 | [多頭] | BULL |
 | [2014](output/reports/per_stock/2014.md) | 中鴻 | 17.9 | HOLD | F | — | 50 | [多頭] | BULL |
 | [1736](output/reports/per_stock/1736.md) | 喬山 | 117.5 | HOLD | B | — | 44 | [空頭] | BULL |
 | [2227](output/reports/per_stock/2227.md) | 裕隆 | 50.6 | HOLD | F | — | 37 | [空頭] | BULL |
 | [1234](output/reports/per_stock/1234.md) | 黑松 | 34.5 | HOLD | D | — | 24 | [空頭] | BULL |
 | [1456](output/reports/per_stock/1456.md) | 儒鴻 | 13.8 | HOLD | F | — | 49 | [多頭] | BULL |
-| [1717](output/reports/per_stock/1717.md) | 長興 | 80.4 | HOLD | F | — | 57 | [多頭] | BULL |
+| [1717](output/reports/per_stock/1717.md) | 長興 | 80.4 | HOLD | A | — | 57 | [多頭] | BULL |
 | [1722](output/reports/per_stock/1722.md) | 台肥 | 46.7 | HOLD | D | — | 51 | [空頭] | BULL |
 | [1907](output/reports/per_stock/1907.md) | 永豐餘 | 24.5 | HOLD | C | — | 49 | [空頭] | BULL |
 | [2723](output/reports/per_stock/2723.md) | 美食-KY | 66.5 | HOLD | F | — | 49 | [空頭] | BULL |

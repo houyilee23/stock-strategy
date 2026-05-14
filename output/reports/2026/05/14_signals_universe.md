@@ -102,7 +102,7 @@
 | 5388 | 中磊 | — | 79.4 | HOLD | D | — | style1_pullback | — | — | — | 47 | [空頭] | BULL |  |
 | 6121 | 新普 | — | 390.0 | HOLD | A | — | style1_pullback | — | — | — | 70 | [空頭] | BULL |  |
 | 6285 | 啟碁 | — | 270.5 | HOLD | A | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
-| 8454 | 富邦媒 | — | 196.0 | HOLD | F | — | style1_pullback | — | — | — | 67 | [空頭] | BULL |  |
+| 8454 | 富邦媒 | — | 196.0 | HOLD | D | — | style1_pullback | — | — | — | 67 | [空頭] | BULL |  |
 | 2409 | 友達 | — | 20.2 | HOLD | C | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
 | 3481 | 群創 | — | 37.5 | HOLD | F | — | style1_pullback | — | — | — | 80 | [多頭] | BULL |  |
 | 5314 | 世紀 | — | 74.1 | HOLD | C | — | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
@@ -119,13 +119,13 @@
 | 2049 | 上銀 | — | 364.5 | HOLD | F | — | style1_pullback | — | — | — | 80 | [多頭] | BULL |  |
 | 2371 | 大同 | — | 30.0 | HOLD | F | — | style1_pullback | — | — | — | 40 | [空頭] | BULL |  |
 | 9933 | 中鼎工程 | — | 36.8 | HOLD | F | — | style1_pullback | — | 36.6~37.0 | 32.5 | 53 | [多頭] | BULL | 觀察中 RSI=52.7 |
-| 2009 | 第一銅 | — | 41.2 | HOLD | F | — | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
+| 2009 | 第一銅 | — | 41.2 | HOLD | C | — | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
 | 2014 | 中鴻 | — | 17.9 | HOLD | F | — | style1_pullback | — | 17.9~18.0 | 16.4 | 50 | [多頭] | BULL | 觀察中 RSI=49.6 |
 | 1736 | 喬山 | — | 117.5 | HOLD | B | — | style1_pullback | — | — | — | 44 | [空頭] | BULL |  |
 | 2227 | 裕隆 | — | 50.6 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
 | 1234 | 黑松 | — | 34.5 | HOLD | D | — | style1_pullback | — | — | — | 24 | [空頭] | BULL |  |
 | 1456 | 儒鴻 | — | 13.8 | HOLD | F | — | style1_pullback | — | 13.8~13.9 | 12.9 | 49 | [多頭] | BULL | 觀察中 RSI=49.3 |
-| 1717 | 長興 | — | 80.4 | HOLD | F | — | style1_pullback | — | — | — | 57 | [多頭] | BULL |  |
+| 1717 | 長興 | — | 80.4 | HOLD | A | — | style1_pullback | — | — | — | 57 | [多頭] | BULL |  |
 | 1722 | 台肥 | — | 46.7 | HOLD | D | — | style1_pullback | — | — | — | 51 | [空頭] | BULL |  |
 | 1907 | 永豐餘 | — | 24.5 | HOLD | C | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
 | 2723 | 美食-KY | — | 66.5 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
