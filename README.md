@@ -153,7 +153,7 @@ _最後更新：**2026-05-14**_
 | [6285](output/reports/per_stock/6285.md) | 啟碁 | 270.5 | HOLD | A | — | 64 | [多頭] | BULL |
 | [8454](output/reports/per_stock/8454.md) | 富邦媒 | 196.0 | HOLD | D | — | 67 | [空頭] | BULL |
 | [2409](output/reports/per_stock/2409.md) | 友達 | 20.2 | HOLD | C | — | 64 | [多頭] | BULL |
-| [3481](output/reports/per_stock/3481.md) | 群創 | 37.5 | HOLD | F | — | 80 | [多頭] | BULL |
+| [3481](output/reports/per_stock/3481.md) | 群創 | 37.5 | HOLD | C | 15% | 80 | [多頭] | BULL |
 | [5314](output/reports/per_stock/5314.md) | 世紀 | 74.1 | HOLD | C | — | 45 | [空頭] | BULL |
 | [2812](output/reports/per_stock/2812.md) | 台中銀 | 19.4 | HOLD | C | — | 27 | [空頭] | BULL |
 | [2823](output/reports/per_stock/2823.md) | 中壽 | 30.6 | HOLD | F | — | 53 | [多頭] | BULL |
@@ -181,7 +181,7 @@ _最後更新：**2026-05-14**_
 | [2727](output/reports/per_stock/2727.md) | 王品 | 236.0 | HOLD | D | — | 65 | [多頭] | BULL |
 | [9907](output/reports/per_stock/9907.md) | 統一實 | 16.4 | HOLD | B | — | 18 | [空頭] | BULL |
 | [2606](output/reports/per_stock/2606.md) | 裕民 | 64.3 | HOLD | D | — | 58 | [多頭] | BULL |
-| [2609](output/reports/per_stock/2609.md) | 陽明 | 49.2 | HOLD | F | — | 39 | [空頭] | BULL |
+| [2609](output/reports/per_stock/2609.md) | 陽明 | 49.2 | HOLD | C | 15% | 39 | [空頭] | BULL |
 | [4147](output/reports/per_stock/4147.md) | 中裕 | 49.7 | HOLD | D | — | 45 | [空頭] | BULL |
 
 ## 歷史報告

@@ -104,7 +104,7 @@
 | 6285 | 啟碁 | — | 270.5 | HOLD | A | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
 | 8454 | 富邦媒 | — | 196.0 | HOLD | D | — | style1_pullback | — | — | — | 67 | [空頭] | BULL |  |
 | 2409 | 友達 | — | 20.2 | HOLD | C | — | style1_pullback | — | — | — | 64 | [多頭] | BULL |  |
-| 3481 | 群創 | — | 37.5 | HOLD | F | — | style1_pullback | — | — | — | 80 | [多頭] | BULL |  |
+| 3481 | 群創 | — | 37.5 | HOLD | C | 15% | style1_pullback | — | — | — | 80 | [多頭] | BULL |  |
 | 5314 | 世紀 | — | 74.1 | HOLD | C | — | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
 | 2812 | 台中銀 | — | 19.4 | HOLD | C | — | style1_pullback | — | — | — | 27 | [空頭] | BULL |  |
 | 2823 | 中壽 | — | 30.6 | HOLD | F | — | style1_pullback | — | 30.4~30.8 | 27.2 | 53 | [多頭] | BULL | 觀察中 RSI=52.9 |
@@ -132,5 +132,5 @@
 | 2727 | 王品 | — | 236.0 | HOLD | D | — | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
 | 9907 | 統一實 | — | 16.4 | HOLD | B | — | style1_pullback | — | — | — | 18 | [空頭] | BULL |  |
 | 2606 | 裕民 | — | 64.3 | HOLD | D | — | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
-| 2609 | 陽明 | — | 49.2 | HOLD | F | — | style1_pullback | — | — | — | 39 | [空頭] | BULL |  |
+| 2609 | 陽明 | — | 49.2 | HOLD | C | 15% | style1_pullback | — | — | — | 39 | [空頭] | BULL |  |
 | 4147 | 中裕 | — | 49.7 | HOLD | D | — | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |

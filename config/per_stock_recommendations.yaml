@@ -1,5 +1,4 @@
-# Phase 25: outside_day + monthly_anchor + linreg + yearly_low_revert
-
+# Applied retrain upgrades from: 20260514_133546, 20260514_133548, 20260514_133550, 20260514_133552
 '0056':
   bnh_cagr: 0.1289699698821516
   bnh_div_yield: 0.07019098723652485
@@ -1403,29 +1402,32 @@
     B=O C=O]（紙上交易）
   verdict: DD_BREACH
 '2609':
-  best_template: gap_continuation
+  best_template: deep_dip_long_hold
   bootstrap:
     n_iterations: 1000
-    n_original: 13
-    pf_lower: 0.194
-    pf_mean: 2.664
+    n_original: 6
+    pf_lower: 0.875
+    pf_mean: 3.914
     pf_upper: 5.0
   holdouts:
     A_new: null
     B: null
     C: false
-  params_ref: gap_continuation.yaml#per_stock.2609
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  test_alpha_vs_0050: -0.1431
-  test_cagr: 0.1268
-  test_expectancy: 0.1235
-  test_max_dd: -0.6529
-  test_n_trades: 13
-  test_pf: 1.302
-  tier: F
-  tier_reason: FAIL：PF_lower=0.19, exp=+12.4%, n=13, holdout=[A_new=NA B=NA C=X]
-  verdict: DD_BREACH
+  params_ref: deep_dip_long_hold.yaml#per_stock.2609
+  position_pct_max: 0.15
+  position_pct_recommended: 0.15
+  template: deep_dip_long_hold
+  test_alpha_vs_0050: -0.1465
+  test_cagr: 0.1234
+  test_expectancy: 0.1249
+  test_max_dd: -0.2589
+  test_n_trades: 6
+  test_pf: 3.477
+  tier: C
+  tier_reason: PF_lower=0.87 ≥ 0.7, exp=+12.5% ≥ 1%, n=6≥5, holdout=[A_new=NA B=NA
+    C=X]
+  tradeable: true
+  verdict: PASS
 '2615':
   best_template: yearly_high_break
   bootstrap:
@@ -2091,29 +2093,32 @@
     gate=any holdout PASS
   verdict: SUSPICIOUS_PERFECT
 '3481':
-  best_template: donchian_breakout
+  best_template: deep_dip_long_hold
   bootstrap:
     n_iterations: 1000
-    n_original: 8
-    pf_lower: 0.103
-    pf_mean: 2.642
+    n_original: 17
+    pf_lower: 0.874
+    pf_mean: 2.911
     pf_upper: 5.0
   holdouts:
     A_new: null
-    B: null
-    C: null
-  params_ref: donchian_breakout.yaml#per_stock.3481
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  test_alpha_vs_0050: -0.2064
-  test_cagr: 0.0636
-  test_expectancy: 0.0566
-  test_max_dd: -0.2394
-  test_n_trades: 8
-  test_pf: 1.828
-  tier: F
-  tier_reason: FAIL：PF_lower=0.10, exp=+5.7%, n=8, holdout=[A_new=NA B=NA C=NA]
-  verdict: PASS
+    B: false
+    C: false
+  params_ref: deep_dip_long_hold.yaml#per_stock.3481
+  position_pct_max: 0.15
+  position_pct_recommended: 0.15
+  template: deep_dip_long_hold
+  test_alpha_vs_0050: -0.12
+  test_cagr: 0.15
+  test_expectancy: 0.0523
+  test_max_dd: -0.4724
+  test_n_trades: 17
+  test_pf: 3.158
+  tier: C
+  tier_reason: PF_lower=0.87 ≥ 0.7, exp=+5.2% ≥ 1%, n=17≥5, holdout=[A_new=NA B=X
+    C=X]
+  tradeable: true
+  verdict: DD_BREACH
 '3596':
   best_template: gap_continuation
   bootstrap:
