@@ -1,4 +1,4 @@
-# TIERING REPORT — 20260515_020559
+# TIERING REPORT — 20260515_134309
 
 ## 1. 統計摘要
 
@@ -7,10 +7,10 @@
 | S | 0 | 100% | ROBUST：訊號模式直接用，單檔上限 100% |
 | A | 0 | 50% | STRONG：可用，建議 50% 部位 |
 | B | 0 | 30% | MODERATE：可用，建議 30% 部位 + 嚴格 trailing stop |
-| C | 0 | 15% | WEAK：紙上交易 3 個月再啟用，最大 15% |
-| F | 32 | 0% | FAIL：移出 universe |
+| C | 1 | 15% | WEAK：紙上交易 3 個月再啟用，最大 15% |
+| F | 23 | 0% | FAIL：移出 universe |
 
-**可操作標的合計（S+A+B+C）= 0 / 32**  （目標 ≥ 20）
+**可操作標的合計（S+A+B+C）= 1 / 24**  （目標 ≥ 20）
 
 ## 2. 各 Tier 個股清單
 
@@ -26,43 +26,36 @@
 
 （無）
 
-### Tier C — 部位上限 15% （共 0 檔）
-
-（無）
-
-### Tier F — 部位上限 0% （共 32 檔）
+### Tier C — 部位上限 15% （共 1 檔）
 
 | Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
 |-------|----------|-----|----|---|----|----------|-------|---|---|--------|
-| 1314 | trend_confirm_hold | +9.5% | 3.59 | 2 | -11.4% | N/A | X | X | X | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 4915 | trend_confirm_hold | +8.9% | 5.82 | 2 | -15.1% | N/A | X | X | X | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2867 | trend_confirm_hold | +4.3% | 2.49 | 3 | -15.4% | N/A | X | O | X | FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2354 | trend_confirm_hold | +4.3% | inf | 2 | -2.9% | N/A | X | X | X | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 0056 | trend_confirm_hold | +2.5% | 2.02 | 2 | -7.3% | N/A | X | X | X | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 5269 | trend_confirm_hold | +1.7% | 1.27 | 2 | -11.7% | N/A | X | O | O | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2371 | trend_confirm_hold | +1.0% | 1.04 | 2 | -11.6% | N/A | X | X | X | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
-| 2014 | trend_confirm_hold | -0.2% | 0.83 | 3 | -26.7% | N/A | X | O | O | FAIL：test expectancy=-0.2% < 0（負期望值） |
-| 2015 | trend_confirm_hold | -1.2% | 0.00 | 1 | -7.0% | N/A | X | O | X | FAIL：test expectancy=-1.2% < 0（負期望值） |
-| 6446 | trend_confirm_hold | -1.3% | 0.61 | 3 | -17.3% | N/A | X | O | X | FAIL：test expectancy=-1.3% < 0（負期望值） |
-| 2723 | trend_confirm_hold | -1.5% | 0.65 | 2 | -11.5% | N/A | X | X | X | FAIL：test expectancy=-1.5% < 0（負期望值） |
-| 2105 | trend_confirm_hold | -2.4% | 0.62 | 3 | -23.5% | N/A | X | X | O | FAIL：test expectancy=-2.4% < 0（負期望值） |
-| 2886 | trend_confirm_hold | -2.6% | 0.47 | 3 | -17.5% | N/A | X | X | X | FAIL：test expectancy=-2.6% < 0（負期望值） |
-| 2912 | trend_confirm_hold | -3.5% | 0.00 | 1 | -5.1% | N/A | X | X | O | FAIL：test expectancy=-3.5% < 0（負期望值） |
-| 2227 | trend_confirm_hold | -4.6% | 0.00 | 1 | -5.7% | N/A | X | X | X | FAIL：test expectancy=-4.6% < 0（負期望值） |
-| 5880 | trend_confirm_hold | -4.7% | 0.00 | 2 | -10.7% | N/A | X | X | X | FAIL：test expectancy=-4.7% < 0（負期望值） |
-| 4137 | trend_confirm_hold | -4.9% | 0.00 | 2 | -9.7% | N/A | X | X | X | FAIL：test expectancy=-4.9% < 0（負期望值） |
-| 1227 | trend_confirm_hold | -4.9% | 0.00 | 1 | -8.3% | N/A | X | X | X | FAIL：test expectancy=-4.9% < 0（負期望值） |
-| 2845 | trend_confirm_hold | -5.6% | 0.00 | 3 | -18.6% | N/A | X | X | X | FAIL：test expectancy=-5.6% < 0（負期望值） |
-| 1101 | trend_confirm_hold | -5.8% | 0.00 | 2 | -15.8% | N/A | X | X | X | FAIL：test expectancy=-5.8% < 0（負期望值） |
-| 1535 | trend_confirm_hold | -6.0% | 0.00 | 2 | -12.5% | N/A | X | X | O | FAIL：test expectancy=-6.0% < 0（負期望值） |
-| 6533 | trend_confirm_hold | -7.0% | 0.00 | 2 | -17.1% | N/A | X | O | X | FAIL：test expectancy=-7.0% < 0（負期望值） |
-| 5483 | trend_confirm_hold | -8.9% | 0.00 | 2 | -23.4% | N/A | X | X | X | FAIL：test expectancy=-8.9% < 0（負期望值） |
-| 2451 | trend_confirm_hold | -9.3% | 0.00 | 1 | -11.5% | N/A | X | X | X | FAIL：test expectancy=-9.3% < 0（負期望值） |
-| 1521 | trend_confirm_hold | -10.7% | 0.00 | 1 | -10.7% | N/A | X | X | X | FAIL：test expectancy=-10.7% < 0（負期望值） |
-| 4961 | trend_confirm_hold | -10.9% | 0.00 | 2 | -22.8% | N/A | X | X | X | FAIL：test expectancy=-10.9% < 0（負期望值） |
-| 2722 | trend_confirm_hold | N/A | inf | 0 | -0.0% | N/A | X | X | O | FAIL：test expectancy=-inf% < 0（負期望值） |
-| 2823 | trend_confirm_hold | N/A | inf | 0 | -N/A | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
-| 4174 | trend_confirm_hold | N/A | inf | 0 | -0.0% | N/A | X | O | X | FAIL：test expectancy=-inf% < 0（負期望值） |
-| 5876 | trend_confirm_hold | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
-| 9933 | trend_confirm_hold | N/A | inf | 0 | -0.0% | N/A | X | O | X | FAIL：test expectancy=-inf% < 0（負期望值） |
-| 9940 | trend_confirm_hold | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2354 | three_day_reversal | +4.9% | 4.18 | 5 | -10.0% | 0.84 | X | X | X | PF_lower=0.84 ≥ 0.7, exp=+4.9% ≥ 1%, n=5≥5, holdout=[A_new=NA B=X C=NA] |
+
+### Tier F — 部位上限 0% （共 23 檔）
+
+| Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
+|-------|----------|-----|----|---|----|----------|-------|---|---|--------|
+| 6446 | three_day_reversal | +10.0% | inf | 2 | -5.8% | N/A | X | X | O | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 2722 | three_day_reversal | +9.2% | inf | 1 | -0.0% | N/A | X | X | X | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 5483 | three_day_reversal | +7.0% | inf | 2 | -9.7% | N/A | X | O | X | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 2723 | three_day_reversal | +5.4% | inf | 1 | -0.1% | N/A | X | O | X | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 9940 | three_day_reversal | +2.3% | inf | 1 | -0.8% | N/A | X | X | O | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 2105 | three_day_reversal | -0.1% | 0.91 | 10 | -24.2% | 0.17 | X | X | O | FAIL：test expectancy=-0.1% < 0（負期望值） |
+| 2845 | three_day_reversal | -1.3% | 0.66 | 7 | -26.4% | 0.00 | X | X | O | FAIL：test expectancy=-1.3% < 0（負期望值） |
+| 5880 | three_day_reversal | -1.6% | 0.00 | 3 | -5.2% | N/A | X | O | O | FAIL：test expectancy=-1.6% < 0（負期望值） |
+| 5876 | three_day_reversal | -1.9% | 0.00 | 1 | -3.6% | N/A | X | O | X | FAIL：test expectancy=-1.9% < 0（負期望值） |
+| 2867 | three_day_reversal | -2.1% | 0.25 | 6 | -14.3% | 0.00 | X | X | X | FAIL：test expectancy=-2.1% < 0（負期望值） |
+| 2015 | three_day_reversal | -5.0% | 0.11 | 6 | -32.6% | 0.00 | X | O | X | FAIL：test expectancy=-5.0% < 0（負期望值） |
+| 1101 | three_day_reversal | -5.1% | 0.00 | 2 | -10.7% | N/A | X | O | X | FAIL：test expectancy=-5.1% < 0（負期望值） |
+| 1227 | three_day_reversal | -5.1% | 0.00 | 4 | -21.4% | N/A | X | X | X | FAIL：test expectancy=-5.1% < 0（負期望值） |
+| 2227 | three_day_reversal | -5.9% | 0.13 | 5 | -28.4% | 0.00 | X | O | X | FAIL：test expectancy=-5.9% < 0（負期望值） |
+| 4961 | three_day_reversal | -7.2% | 0.00 | 1 | -9.7% | N/A | X | O | X | FAIL：test expectancy=-7.2% < 0（負期望值） |
+| 2371 | three_day_reversal | -9.3% | 0.00 | 1 | -9.3% | N/A | X | X | X | FAIL：test expectancy=-9.3% < 0（負期望值） |
+| 5269 | three_day_reversal | -10.8% | 0.00 | 1 | -11.0% | N/A | X | O | X | FAIL：test expectancy=-10.8% < 0（負期望值） |
+| 4174 | three_day_reversal | -13.5% | 0.00 | 3 | -36.2% | N/A | X | X | O | FAIL：test expectancy=-13.5% < 0（負期望值） |
+| 1521 | three_day_reversal | -25.1% | 0.06 | 4 | -100.0% | N/A | X | X | O | FAIL：test expectancy=-25.1% < 0（負期望值） |
+| 1535 | three_day_reversal | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2823 | three_day_reversal | N/A | inf | 0 | -N/A | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2912 | three_day_reversal | N/A | inf | 0 | -0.0% | N/A | X | X | O | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 4137 | three_day_reversal | N/A | inf | 0 | -0.0% | N/A | X | O | X | FAIL：test expectancy=-inf% < 0（負期望值） |
