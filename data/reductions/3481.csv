@@ -1,1 +1,4 @@
-﻿
+﻿date,stock_id,ClosingPriceonTheLastTradingDay,PostReductionReferencePrice,LimitUp,LimitDown,OpeningReferencePrice,ExrightReferencePrice,ReasonforCapitalReduction
+2022-10-11,3481,10.45,10.49,11.5,9.45,10.5,-1.0,Cash refund
+2023-08-28,3481,14.35,14.57,16.0,13.15,14.55,-1.0,Cash refund
+2024-08-26,3481,14.55,15.17,16.65,13.7,15.15,-1.0,Cash refund
