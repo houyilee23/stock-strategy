@@ -328,7 +328,23 @@ def assign_tier(
                 f"holdout=[{ho_str}]（紙上交易 3 個月）"
             )
 
-    # F：n<5（除非通過 Q5b-lite 補救）
+    # ── D_LOW_N_RESCUE：n=3-4 高品質但 holdout 不全 PASS ──
+    # 與 Q5b-lite C_RESCUE 並行，門檻更嚴 raw_PF≥5 但 holdout 容忍度高（允許混合）
+    # 目的：搶救「測試期訊號極強、但 1 個 holdout 失敗」的小樣本個股，到 D 紙上交易
+    if n in (3, 4):
+        raw_pf_strict = (
+            raw_pf is not None and not _is_nan(raw_pf)
+            and (math.isinf(raw_pf) or raw_pf >= 5.0)
+        )
+        if raw_pf_strict and exp >= 0.05 and dd_abs <= 0.25:
+            raw_pf_s = "inf" if math.isinf(raw_pf) else f"{raw_pf:.2f}"
+            return "D", (
+                f"D_LOW_N_RESCUE：n={n}, raw_PF={raw_pf_s} ≥ 5.0, "
+                f"exp={exp:+.1%} ≥ 5%, |DD|={dd_abs:.0%} ≤ 25%, "
+                f"holdout=[{ho_str}]（小樣本極強訊號，邊界紙上交易）"
+            )
+
+    # F：n<5（除非通過 Q5b-lite 或 D_LOW_N_RESCUE 補救）
     if n < 5:
         return "F", f"FAIL：test n_trades={n} < 5（樣本不足，未達 LOW_N_RESCUE）"
 
