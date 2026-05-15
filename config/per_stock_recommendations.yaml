@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260515_134254, 20260515_134259, 20260515_134304, 20260515_134309
+# Applied retrain upgrades from: 20260515_195218, 20260515_195231, 20260515_195236, 20260515_195242, 20260515_195257, 20260515_195302
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -2894,32 +2894,33 @@
     B=X C=O]（紙上交易）
   verdict: WEAK
 '5483':
-  best_template: trend_pullback
+  best_template: ao_zero_cross
   bootstrap:
     n_iterations: 1000
-    n_original: 3
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 6
+    pf_lower: 0.538
+    pf_mean: 3.281
+    pf_upper: 5.0
   holdouts:
     A_new: null
-    B: null
-    C: null
-  params_ref: trend_pullback.yaml#per_stock.5483
-  position_pct_max: 0.0
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  template: trend_pullback
-  test_alpha_vs_0050: -0.2638
-  test_cagr: 0.0062
-  test_expectancy: 0.0167
-  test_max_dd: -0.2047
-  test_n_trades: 3
-  test_pf: 1.244
-  tier: F
-  tier_reason: FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE）
+    B: true
+    C: false
+  params_ref: ao_zero_cross.yaml#per_stock.5483
+  position_pct_max: 0.1
+  position_pct_recommended: 0.1
+  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: ao_zero_cross
+  test_alpha_vs_0050: -0.4072
+  test_cagr: 0.1383
+  test_expectancy: 0.046
+  test_max_dd: -0.1647
+  test_n_trades: 6
+  test_pf: 3.074
+  tier: D
+  tier_reason: BORDERLINE：PF_lower=0.54 ≥ 0.5, exp=+4.6% ≥ 0%, n=6≥5, holdout=[A_new=NA
+    B=O C=X]（紙上交易）
   tradeable: false
-  verdict: INSUFFICIENT
+  verdict: WEAK
 '5871':
   name: 中租-KY
   params_ref: mean_reversion.yaml#per_stock.5871
@@ -3148,32 +3149,32 @@
     C=O], gate=any holdout PASS
   verdict: SUSPICIOUS_PERFECT
 '6446':
-  best_template: donchian_breakout
+  best_template: atr_band_breakout
   bootstrap:
     n_iterations: 1000
-    n_original: 10
-    pf_lower: 0.0
-    pf_mean: 3.333
+    n_original: 5
+    pf_lower: 0.627
+    pf_mean: 4.069
     pf_upper: 5.0
   holdouts:
     A_new: null
-    B: false
-    C: false
-  params_ref: donchian_breakout.yaml#per_stock.6446
-  position_pct_max: 0.0
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  template: donchian_breakout
-  test_alpha_vs_0050: -0.0952
-  test_cagr: 0.1748
-  test_expectancy: 0.2012
-  test_max_dd: -0.4471
-  test_n_trades: 10
-  test_pf: 2.136
-  tier: F
-  tier_reason: FAIL：PF_lower=0.00, exp=+20.1%, n=10, holdout=[A_new=NA B=X C=X]
+    B: true
+    C: true
+  params_ref: atr_band_breakout.yaml#per_stock.6446
+  position_pct_max: 0.1
+  position_pct_recommended: 0.1
+  template: atr_band_breakout
+  test_alpha_vs_0050: -0.3967
+  test_cagr: 0.1488
+  test_expectancy: 0.0701
+  test_max_dd: -0.0992
+  test_n_trades: 5
+  test_pf: 4.858
+  tier: D
+  tier_reason: BORDERLINE：PF_lower=0.63 ≥ 0.5, exp=+7.0% ≥ 0%, n=5≥5, holdout=[A_new=NA
+    B=O C=O]（紙上交易）
   tradeable: false
-  verdict: DD_BREACH
+  verdict: PASS
 '6488':
   best_template: support_bounce
   bootstrap:

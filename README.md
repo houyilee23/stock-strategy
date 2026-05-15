@@ -193,7 +193,7 @@ _最後更新：**2026-05-15**_
 | [3653](output/reports/per_stock/3653.md) | 健策 | 3465.0 | HOLD | B | 30% | 37 | [多頭] | BULL |
 | [3702](output/reports/per_stock/3702.md) | 大聯大 | 110.0 | HOLD | B | 30% | 65 | [多頭] | BULL |
 | [4915](output/reports/per_stock/4915.md) | 致伸 | 72.7 | HOLD | B | 30% | 49 | [空頭] | BULL |
-| [5483](output/reports/per_stock/5483.md) | 中美晶 | 148.5 | HOLD | F | — | 59 | [多頭] | BULL |
+| [5483](output/reports/per_stock/5483.md) | 中美晶 | 148.5 | HOLD | D | 10% | 59 | [多頭] | BULL |
 | [6191](output/reports/per_stock/6191.md) | 精成科 | 90.8 | HOLD | C | 15% | 36 | [空頭] | BULL |
 | [6491](output/reports/per_stock/6491.md) | 晶碩 | 294.5 | HOLD | C | 15% | 62 | [空頭] | BULL |
 | [6533](output/reports/per_stock/6533.md) | 晶心科 | 227.0 | HOLD | C | 15% | 50 | [空頭] | BULL |
@@ -209,9 +209,24 @@ _最後更新：**2026-05-15**_
 | [4763](output/reports/per_stock/4763.md) | 材料-KY | 41.6 | HOLD | C | 15% | 42 | [空頭] | BULL |
 | [4137](output/reports/per_stock/4137.md) | 麗豐-KY | 104.0 | HOLD | F | — | 40 | [空頭] | BULL |
 | [4174](output/reports/per_stock/4174.md) | 浩鼎 | 32.7 | HOLD | F | — | 38 | [多頭] | BULL |
-| [6446](output/reports/per_stock/6446.md) | 藥華藥 | 826.0 | HOLD | F | — | 78 | [多頭] | BULL |
+| [6446](output/reports/per_stock/6446.md) | 藥華藥 | 826.0 | HOLD | D | 10% | 78 | [多頭] | BULL |
 | [2542](output/reports/per_stock/2542.md) | 興富發 | 43.8 | HOLD | C | 15% | 76 | [空頭] | BULL |
 | [2722](output/reports/per_stock/2722.md) | 夏都 | 23.1 | HOLD | F | — | 41 | [空頭] | BULL |
+| [2492](output/reports/per_stock/2492.md) | 華新科（MLCC，top-30 市值） | — | N/A | — | — | — | — | BULL |
+| [2880](output/reports/per_stock/2880.md) | 華南金（大型金控） | — | N/A | — | — | — | — | BULL |
+| [2855](output/reports/per_stock/2855.md) | 統一證 | — | N/A | — | — | — | — | BULL |
+| [2392](output/reports/per_stock/2392.md) | 正崴（光學連接） | — | N/A | — | — | — | — | BULL |
+| [2393](output/reports/per_stock/2393.md) | 億光（LED leader） | — | N/A | — | — | — | — | BULL |
+| [2347](output/reports/per_stock/2347.md) | 聯強（電子通路 top） | — | N/A | — | — | — | — | BULL |
+| [5904](output/reports/per_stock/5904.md) | 寶雅（美妝零售） | — | N/A | — | — | — | — | BULL |
+| [6804](output/reports/per_stock/6804.md) | 大樹（藥局零售） | — | N/A | — | — | — | — | BULL |
+| [9941](output/reports/per_stock/9941.md) | 裕融（汽車租賃 leader） | — | N/A | — | — | — | — | BULL |
+| [5522](output/reports/per_stock/5522.md) | 遠雄 | — | N/A | — | — | — | — | BULL |
+| [6188](output/reports/per_stock/6188.md) | 廣明（光碟） | — | N/A | — | — | — | — | BULL |
+| [1565](output/reports/per_stock/1565.md) | 精華（隱形眼鏡 leader） | — | N/A | — | — | — | — | BULL |
+| [8016](output/reports/per_stock/8016.md) | 矽創（IC 設計） | — | N/A | — | — | — | — | BULL |
+| [6510](output/reports/per_stock/6510.md) | 精測（半導體探針卡） | — | N/A | — | — | — | — | BULL |
+| [4148](output/reports/per_stock/4148.md) | 全宇生技 | — | N/A | — | — | — | — | BULL |
 
 ## 歷史報告
 
