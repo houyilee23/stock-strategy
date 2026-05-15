@@ -27,12 +27,6 @@
   tradeable: true
   verdict: SUSPICIOUS_PERFECT
 006208:
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 富邦台50
   params_ref: bollinger_squeeze.yaml#per_stock.006208
   position_pct_max: 0.15
@@ -69,12 +63,6 @@
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 00919:
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 群益台灣精選高息
   params_ref: momentum_hold.yaml#per_stock.00919
   position_pct_max: 0.15
@@ -222,12 +210,6 @@
     B=X C=X]（紙上交易）
   verdict: WEAK
 '1301':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 台塑
   params_ref: gap_continuation.yaml#per_stock.1301
   position_pct_max: 0.5
@@ -239,12 +221,6 @@
   tier: A
   tradeable: true
 '1303':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 南亞
   params_ref: gap_continuation.yaml#per_stock.1303
   position_pct_max: 0.5
@@ -284,12 +260,6 @@
   tradeable: false
   verdict: WEAK
 '1326':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 台化
   params_ref: low_vol_pullback.yaml#per_stock.1326
   position_pct_max: 0.3
@@ -301,12 +271,6 @@
   tier: B
   tradeable: true
 '1402':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 遠東新
   params_ref: low_vol_pullback.yaml#per_stock.1402
   position_pct_max: 0.15
@@ -444,12 +408,6 @@
   tradeable: false
   verdict: FAIL
 '1560':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 中砂
   params_ref: mean_reversion.yaml#per_stock.1560
   position_pct_max: 0.15
@@ -612,12 +570,6 @@
   tradeable: true
   verdict: INSUFFICIENT
 '1802':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 台玻
   params_ref: low_vol_pullback.yaml#per_stock.1802
   position_pct_max: 1.0
@@ -977,12 +929,6 @@
     holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '2317':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 鴻海
   params_ref: gap_continuation.yaml#per_stock.2317
   position_pct_max: 0.5
@@ -1044,12 +990,6 @@
     holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '2330':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 台積電
   params_ref: gap_continuation.yaml#per_stock.2330
   position_pct_max: 0.15
@@ -1061,12 +1001,6 @@
   tier: C
   tradeable: true
 '2337':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 旺宏
   params_ref: low_vol_pullback.yaml#per_stock.2337
   position_pct_max: 0.15
@@ -1128,12 +1062,6 @@
     C=O]
   verdict: PASS
 '2353':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 宏碁
   params_ref: donchian_breakout.yaml#per_stock.2353
   position_pct_max: 0.15
@@ -1223,12 +1151,6 @@
     C=O]
   verdict: WEAK
 '2369':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: '2369'
   params_ref: low_vol_pullback.yaml#per_stock.2369
   position_pct_max: 0.15
@@ -1264,12 +1186,6 @@
   tier_reason: FAIL：test expectancy=-0.3% < 0（負期望值）
   verdict: INSUFFICIENT
 '2376':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 技嘉
   params_ref: momentum_hold.yaml#per_stock.2376
   position_pct_max: 0.15
@@ -1306,12 +1222,6 @@
     C=O]
   verdict: SUSPICIOUS_PERFECT
 '2382':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 廣達
   params_ref: low_vol_pullback.yaml#per_stock.2382
   position_pct_max: 0.15
@@ -1323,12 +1233,6 @@
   tier: C
   tradeable: true
 '2383':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 台光電
   params_ref: donchian_breakout.yaml#per_stock.2383
   position_pct_max: 0.3
@@ -1340,12 +1244,6 @@
   tier: B
   tradeable: true
 '2408':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 南亞科
   params_ref: chip_momentum.yaml#per_stock.2408
   position_pct_max: 0.15
@@ -1459,12 +1357,6 @@
   tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '2454':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 聯發科
   params_ref: monthly_revenue_event.yaml#per_stock.2454
   position_pct_max: 0.3
@@ -1914,12 +1806,6 @@
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '2882':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 國泰金
   params_ref: low_vol_pullback.yaml#per_stock.2882
   position_pct_max: 0.3
@@ -1931,12 +1817,6 @@
   tier: B
   tradeable: true
 '2883':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 開發金
   params_ref: mean_reversion.yaml#per_stock.2883
   position_pct_max: 0.15
@@ -2168,12 +2048,6 @@
   tier: F
   tradeable: false
 '3008':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 大立光
   params_ref: mean_reversion.yaml#per_stock.3008
   position_pct_max: 0.15
@@ -2212,12 +2086,6 @@
   tradeable: true
   verdict: PASS
 '3017':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 奇鋐
   params_ref: gap_continuation.yaml#per_stock.3017
   position_pct_max: 0.5
@@ -2436,12 +2304,6 @@
   tradeable: false
   verdict: DD_BREACH
 '3189':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: '3189'
   params_ref: chip_momentum.yaml#per_stock.3189
   position_pct_max: 0.3
@@ -2714,12 +2576,6 @@
   tradeable: true
   verdict: WEAK
 '3711':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 日月光投控
   params_ref: low_vol_pullback.yaml#per_stock.3711
   position_pct_max: 0.15
@@ -2838,12 +2694,6 @@
   tradeable: true
   verdict: WEAK
 '4904':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 遠傳
   params_ref: momentum_hold.yaml#per_stock.4904
   position_pct_max: 0.15
@@ -2907,12 +2757,6 @@
   tier_reason: PF_lower=0.73 ≥ 0.7, exp=+3.0% ≥ 1%, n=6≥5, holdout=[A_new=NA B=O C=O]
   verdict: WEAK
 '4958':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 臻鼎-KY
   params_ref: gap_continuation.yaml#per_stock.4958
   position_pct_max: 0.15
@@ -3077,12 +2921,6 @@
   tradeable: false
   verdict: INSUFFICIENT
 '5871':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 中租-KY
   params_ref: mean_reversion.yaml#per_stock.5871
   position_pct_max: 0.15
@@ -3415,12 +3253,6 @@
     holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '6515':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 穎崴
   params_ref: gap_continuation.yaml#per_stock.6515
   position_pct_max: 0.3
@@ -3510,12 +3342,6 @@
     C=O]
   verdict: WEAK
 '6770':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: 力積電
   params_ref: low_vol_pullback.yaml#per_stock.6770
   position_pct_max: 0.3
@@ -3554,12 +3380,6 @@
   tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '8046':
-  bnh_cagr: null
-  bnh_div_yield: null
-  bnh_holdable: false
-  bnh_max_dd: null
-  bnh_position_pct_max: 0.0
-  bnh_tier: null
   name: '8046'
   params_ref: mean_reversion.yaml#per_stock.8046
   position_pct_max: 0.15

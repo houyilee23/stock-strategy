@@ -379,6 +379,24 @@ def assign_tier(
             f"holdout=[{ho_str}]"
         )
 
+    # ── C_HIGH_QUALITY_RESCUE：n=5-9 高品質訊號但 bootstrap CI 偏寬 ──
+    # 條件：n ∈ [5, 9]、raw_PF ≥ 3.0、exp ≥ 5%、|DD| ≤ 25%、無 holdout FAIL
+    # 目的：搶救 bootstrap 因小樣本變異大而 PF_lower 不及格，但實際訊號很強的個股
+    #       （補 Q5b-lite 在 n=3-4 之外的中樣本段）
+    if 5 <= n <= 9:
+        raw_pf_ok = (
+            raw_pf is not None and not _is_nan(raw_pf)
+            and (math.isinf(raw_pf) or raw_pf >= 3.0)
+        )
+        no_holdout_fail = (n_fail == 0)
+        if raw_pf_ok and exp >= 0.05 and dd_abs <= 0.25 and no_holdout_fail:
+            raw_pf_s = "inf" if math.isinf(raw_pf) else f"{raw_pf:.2f}"
+            return "C", (
+                f"C_HIGH_Q_RESCUE：n={n}, raw_PF={raw_pf_s} ≥ 3.0, "
+                f"exp={exp_s} ≥ 5%, |DD|={dd_abs:.0%} ≤ 25%, "
+                f"holdout=[{ho_str}]（小樣本高品質訊號，紙上交易 3 個月）"
+            )
+
     # D：邊界正期望（PF_lower≥0.5 + exp>0% + n≥5）
     d_rule = TIER_RULES["D"]
     if (pf_lower >= d_rule["pf_lower"]

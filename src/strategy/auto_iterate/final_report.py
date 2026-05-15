@@ -52,9 +52,42 @@ def _load_watchlists() -> Dict[str, List[str]]:
     return {k: list(v) for k, v in wl.items() if k != "exception"}
 
 
+def _watchlist_name_map() -> dict:
+    """Parse config/watchlists.yaml inline comments → {sid: name} mapping.
+
+    Cached on first call. The watchlist comments are the source of truth for
+    Chinese names since they're maintained by hand; this saves us from keeping
+    a duplicate hardcoded map in sync.
+    """
+    cached = getattr(_watchlist_name_map, "_cache", None)
+    if cached is not None:
+        return cached
+    import re
+    path = os.path.join(BASE_DIR, "config", "watchlists.yaml")
+    out: dict = {}
+    if not os.path.exists(path):
+        _watchlist_name_map._cache = out  # type: ignore
+        return out
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            m = re.match(r'\s*-\s*"([\w\d]+)"\s*#\s*(.+)', line)
+            if not m:
+                continue
+            sid, name = m.group(1).strip(), m.group(2).strip()
+            # Drop parenthetical notes / trailing comments
+            name = re.split(r"[（(\[/、\\s]", name, maxsplit=1)[0].strip()
+            if name and sid not in out:
+                out[sid] = name
+    _watchlist_name_map._cache = out  # type: ignore
+    return out
+
+
 def _stock_label(sid: str) -> str:
-    """Lookup short label from watchlist comments — fallback to sid."""
-    # Inline names for the 71 stocks (39 original + 32 research_todo).
+    """Lookup short label — prefer watchlist comments, fallback to hardcoded, then sid."""
+    wl_names = _watchlist_name_map()
+    if sid in wl_names:
+        return wl_names[sid]
+    # Hardcoded fallback for stocks not in watchlist (e.g. legacy/exception lists).
     names = {
         # ── Original 39 (Takeshi/Katie/research) ──
         "0050": "元大台灣50",
