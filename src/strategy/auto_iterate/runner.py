@@ -778,7 +778,16 @@ def run_auto_iterate(
     if templates_to_run is None:
         templates_to_run = TEMPLATE_NAMES
 
-    run_id  = resume_run_id or datetime.now().strftime("%Y%m%d_%H%M%S")
+    # run_id 用秒精度，若 dir 已存在（多 process 同秒啟動），加 PID 後綴避免衝突
+    if resume_run_id:
+        run_id = resume_run_id
+    else:
+        base = datetime.now().strftime("%Y%m%d_%H%M%S")
+        run_id = base
+        base_path = os.path.join(BASE_DIR, "output", "auto_iterate", run_id)
+        # 若同秒已有其他 process 占用 → 加 PID 後綴
+        if os.path.exists(base_path):
+            run_id = f"{base}_{os.getpid()}"
     out_dir = os.path.join(BASE_DIR, "output", "auto_iterate", run_id)
     os.makedirs(out_dir, exist_ok=True)
 

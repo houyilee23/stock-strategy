@@ -178,3 +178,13 @@
 | 8016 | 矽創（IC 設計） | — | 274.0 | HOLD | B | 30% | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
 | 6510 | 精測（半導體探針卡） | — | 3735.0 | HOLD | A | 50% | style1_pullback | — | — | — | 51 | [多頭] | BULL |  |
 | 4148 | 全宇生技 | — | 35.0 | HOLD | C | 15% | style1_pullback | — | — | — | 36 | [空頭] | BULL |  |
+| 3324 | 雙鴻（伺服器散熱） | — | 995.0 | HOLD | C | 15% | style1_pullback | — | 990.0~1015.0 | 921.1 | 41 | [多頭] | BULL | 觀察中 RSI=41.1 |
+| 6526 | 達發（5G IC / 達創 Hub） | — | 688.0 | HOLD | C | 15% | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |
+| 8341 | 日友（廢棄物處理） | — | 76.5 | HOLD | C | 15% | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
+| 1909 | 榮成（紙業） | — | 9.0 | HOLD | F | — | style1_pullback | — | — | — | 39 | [空頭] | BULL |  |
+| 9904 | 寶成（製鞋 OEM, Nike 大客） | — | 26.0 | HOLD | F | — | style1_pullback | — | — | — | 36 | [空頭] | BULL |  |
+| 2367 | 燿華（PCB） | — | 61.8 | HOLD | D | 10% | style1_pullback | — | — | 55.9 | 46 | [多頭] | BULL | 持倉中 持9日 |
+| 2455 | 全新（GaAs IC） | — | 358.5 | HOLD | A | 50% | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
+| 6443 | 元晶（太陽能） | — | 38.2 | HOLD | C | 15% | style1_pullback | — | 37.3~38.5 | 26.5 | 46 | [多頭] | BULL | 觀察中 RSI=45.7 |
+| 3526 | 凡甲（連接器） | — | 374.0 | HOLD | F | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 5536 | 聖暉（廠房工程） | — | 1025.0 | HOLD | B | 30% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |

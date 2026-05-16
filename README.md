@@ -227,6 +227,16 @@ _最後更新：**2026-05-16**_
 | [8016](output/reports/per_stock/8016.md) | 矽創（IC 設計） | 274.0 | HOLD | B | 30% | 65 | [多頭] | BULL |
 | [6510](output/reports/per_stock/6510.md) | 精測（半導體探針卡） | 3735.0 | HOLD | A | 50% | 51 | [多頭] | BULL |
 | [4148](output/reports/per_stock/4148.md) | 全宇生技 | 35.0 | HOLD | C | 15% | 36 | [空頭] | BULL |
+| [3324](output/reports/per_stock/3324.md) | 雙鴻（伺服器散熱） | 995.0 | HOLD | C | 15% | 41 | [多頭] | BULL |
+| [6526](output/reports/per_stock/6526.md) | 達發（5G IC / 達創 Hub） | 688.0 | HOLD | C | 15% | 63 | [多頭] | BULL |
+| [8341](output/reports/per_stock/8341.md) | 日友（廢棄物處理） | 76.5 | HOLD | C | 15% | 58 | [空頭] | BULL |
+| [1909](output/reports/per_stock/1909.md) | 榮成（紙業） | 9.0 | HOLD | F | — | 39 | [空頭] | BULL |
+| [9904](output/reports/per_stock/9904.md) | 寶成（製鞋 OEM, Nike 大客） | 26.0 | HOLD | F | — | 36 | [空頭] | BULL |
+| [2367](output/reports/per_stock/2367.md) | 燿華（PCB） | 61.8 | HOLD | D | 10% | 46 | [多頭] | BULL |
+| [2455](output/reports/per_stock/2455.md) | 全新（GaAs IC） | 358.5 | HOLD | A | 50% | 58 | [多頭] | BULL |
+| [6443](output/reports/per_stock/6443.md) | 元晶（太陽能） | 38.2 | HOLD | C | 15% | 46 | [多頭] | BULL |
+| [3526](output/reports/per_stock/3526.md) | 凡甲（連接器） | 374.0 | HOLD | F | — | 66 | [多頭] | BULL |
+| [5536](output/reports/per_stock/5536.md) | 聖暉（廠房工程） | 1025.0 | HOLD | B | 30% | 72 | [多頭] | BULL |
 
 ## 歷史報告
 
