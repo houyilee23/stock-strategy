@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260516_081205, 20260516_081208, 20260516_081211, 20260516_081214, 20260516_081217, 20260516_081220
+# Applied retrain upgrades from: 20260516_090500, 20260516_090503, 20260516_090506, 20260516_090509, 20260516_090512, 20260516_090515
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -2806,38 +2806,32 @@
   tradeable: true
   verdict: DD_BREACH
 '3526':
-  best_template: low_vol_pullback
-  bnh_cagr: 0.20528365760728584
-  bnh_div_yield: 0.047524167041711377
-  bnh_holdable: true
-  bnh_max_dd: -0.4678331997591132
-  bnh_position_pct_max: 0.3
-  bnh_tier: BNH_A
+  best_template: monthly_anchor
   bootstrap:
     n_iterations: 1000
-    n_original: 2
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 18
+    pf_lower: 0.514
+    pf_mean: 1.844
+    pf_upper: 5.0
   holdouts:
     A_new: null
-    B: null
-    C: null
-  params_ref: low_vol_pullback.yaml#per_stock.3526
-  position_pct_max: 0.0
-  position_pct_recommended: 0.0
-  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
-  template: low_vol_pullback
-  test_alpha_vs_0050: -0.5303
-  test_cagr: 0.0153
-  test_expectancy: 0.0192
-  test_max_dd: -0.0388
-  test_n_trades: 2
-  test_pf: 1.893
-  tier: F
-  tier_reason: FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE）
+    B: true
+    C: false
+  params_ref: monthly_anchor.yaml#per_stock.3526
+  position_pct_max: 0.1
+  position_pct_recommended: 0.1
+  template: monthly_anchor
+  test_alpha_vs_0050: -0.4832
+  test_cagr: 0.0624
+  test_expectancy: 0.0095
+  test_max_dd: -0.2279
+  test_n_trades: 18
+  test_pf: 1.329
+  tier: D
+  tier_reason: BORDERLINE：PF_lower=0.51 ≥ 0.5, exp=+0.9% ≥ 0%, n=18≥5, holdout=[A_new=NA
+    B=O C=X]（紙上交易）
   tradeable: false
-  verdict: INSUFFICIENT
+  verdict: FAIL
 '3533':
   best_template: gap_continuation
   bootstrap:

@@ -186,5 +186,5 @@
 | 2367 | 燿華（PCB） | — | 61.8 | HOLD | D | 10% | style1_pullback | — | — | 55.9 | 46 | [多頭] | BULL | 持倉中 持9日 |
 | 2455 | 全新（GaAs IC） | — | 358.5 | HOLD | A | 50% | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
 | 6443 | 元晶（太陽能） | — | 38.2 | HOLD | C | 15% | style1_pullback | — | 37.3~38.5 | 26.5 | 46 | [多頭] | BULL | 觀察中 RSI=45.7 |
-| 3526 | 凡甲（連接器） | — | 374.0 | HOLD | F | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 3526 | 凡甲（連接器） | — | 374.0 | HOLD | D | 10% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 5536 | 聖暉（廠房工程） | — | 1025.0 | HOLD | B | 30% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |

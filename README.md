@@ -235,7 +235,7 @@ _最後更新：**2026-05-16**_
 | [2367](output/reports/per_stock/2367.md) | 燿華（PCB） | 61.8 | HOLD | D | 10% | 46 | [多頭] | BULL |
 | [2455](output/reports/per_stock/2455.md) | 全新（GaAs IC） | 358.5 | HOLD | A | 50% | 58 | [多頭] | BULL |
 | [6443](output/reports/per_stock/6443.md) | 元晶（太陽能） | 38.2 | HOLD | C | 15% | 46 | [多頭] | BULL |
-| [3526](output/reports/per_stock/3526.md) | 凡甲（連接器） | 374.0 | HOLD | F | — | 66 | [多頭] | BULL |
+| [3526](output/reports/per_stock/3526.md) | 凡甲（連接器） | 374.0 | HOLD | D | 10% | 66 | [多頭] | BULL |
 | [5536](output/reports/per_stock/5536.md) | 聖暉（廠房工程） | 1025.0 | HOLD | B | 30% | 72 | [多頭] | BULL |
 
 ## 歷史報告
