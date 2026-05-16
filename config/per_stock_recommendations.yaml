@@ -358,6 +358,12 @@
   verdict: DD_BREACH
 '1521':
   best_template: low_vol_pullback
+  bnh_cagr: -0.08088151698103319
+  bnh_div_yield: 0.03359920210979128
+  bnh_holdable: false
+  bnh_max_dd: -1.0
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 4
@@ -420,6 +426,12 @@
   tradeable: true
 '1565':
   best_template: gap_continuation
+  bnh_cagr: -0.08811951628958736
+  bnh_div_yield: 0.049573186861064
+  bnh_holdable: false
+  bnh_max_dd: -0.7682614824732654
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 3
@@ -739,6 +751,12 @@
   verdict: INSUFFICIENT
 '2015':
   best_template: mean_reversion
+  bnh_cagr: 0.11680909524419913
+  bnh_div_yield: 0.054671439532557285
+  bnh_holdable: false
+  bnh_max_dd: -0.39391010529624504
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 2
@@ -882,6 +900,12 @@
   verdict: SUSPICIOUS_PERFECT
 '2227':
   best_template: mean_reversion
+  bnh_cagr: -0.05800161149462468
+  bnh_div_yield: 0.05606673357777952
+  bnh_holdable: false
+  bnh_max_dd: -0.6813102378996001
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 2
@@ -1218,6 +1242,12 @@
   tradeable: true
 '2371':
   best_template: momentum_hold
+  bnh_cagr: 0.2219437135918252
+  bnh_div_yield: 0.0
+  bnh_holdable: false
+  bnh_max_dd: -1.0
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 2
@@ -1300,6 +1330,12 @@
   tradeable: true
 '2392':
   best_template: narrow_range_breakout
+  bnh_cagr: 0.14117089802344052
+  bnh_div_yield: 0.048505047172492974
+  bnh_holdable: false
+  bnh_max_dd: -0.5968438608598788
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 9
@@ -1711,6 +1747,12 @@
   verdict: WEAK
 '2722':
   best_template: gap_continuation
+  bnh_cagr: 0.005945498459188681
+  bnh_div_yield: 0.008996478352223964
+  bnh_holdable: false
+  bnh_max_dd: -1.0
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 5
@@ -1738,6 +1780,12 @@
   verdict: PASS
 '2723':
   best_template: trend_pullback
+  bnh_cagr: -0.06269807649666093
+  bnh_div_yield: 0.031098617484021256
+  bnh_holdable: false
+  bnh_max_dd: -0.8467715738256152
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 1
@@ -1838,6 +1886,12 @@
   verdict: WEAK
 '2823':
   best_template: mean_reversion
+  bnh_cagr: -0.00957605459783406
+  bnh_div_yield: null
+  bnh_holdable: false
+  bnh_max_dd: -1.0
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 1
@@ -2780,6 +2834,12 @@
   tradeable: true
 '4137':
   best_template: chip_streak
+  bnh_cagr: -0.04215541992885796
+  bnh_div_yield: null
+  bnh_holdable: false
+  bnh_max_dd: -0.6882352941176451
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 4
@@ -2859,6 +2919,12 @@
   verdict: INSUFFICIENT
 '4174':
   best_template: mean_reversion
+  bnh_cagr: -0.18037473072031784
+  bnh_div_yield: null
+  bnh_holdable: false
+  bnh_max_dd: -0.8418994413407823
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 1
@@ -2988,6 +3054,12 @@
   tradeable: true
 '4961':
   best_template: donchian_breakout
+  bnh_cagr: 0.28661411573133044
+  bnh_div_yield: null
+  bnh_holdable: false
+  bnh_max_dd: -0.7649076517150397
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 7
@@ -3142,6 +3214,12 @@
   verdict: WEAK
 '5522':
   best_template: simple_dip_buy
+  bnh_cagr: 0.18157375516294616
+  bnh_div_yield: 0.0785969400282758
+  bnh_holdable: true
+  bnh_max_dd: -0.34714159546016066
+  bnh_position_pct_max: 0.3
+  bnh_tier: BNH_A
   bootstrap:
     n_iterations: 1000
     n_original: 5
@@ -3180,6 +3258,12 @@
   tradeable: true
 '5876':
   best_template: gap_continuation
+  bnh_cagr: 0.04851068494285515
+  bnh_div_yield: null
+  bnh_holdable: false
+  bnh_max_dd: -0.3986254295532651
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 1
@@ -3203,10 +3287,10 @@
   tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
   verdict: INSUFFICIENT
 '5880':
-  bnh_cagr: 0.1439623059298316
-  bnh_div_yield: 0.02860100114891497
+  bnh_cagr: 0.070364938509065
+  bnh_div_yield: null
   bnh_holdable: false
-  bnh_max_dd: -0.25348837209302344
+  bnh_max_dd: -0.25348837209302333
   bnh_position_pct_max: 0.0
   bnh_tier: F
   name: 合庫金
@@ -3710,6 +3794,12 @@
   verdict: SUSPICIOUS_PERFECT
 '6804':
   best_template: low_vol_pullback
+  bnh_cagr: -0.1410975438207992
+  bnh_div_yield: 0.02669075394280956
+  bnh_holdable: false
+  bnh_max_dd: -1.0
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 0
@@ -3970,6 +4060,12 @@
   tradeable: false
 '9941':
   best_template: narrow_range_breakout
+  bnh_cagr: 0.1582912472860083
+  bnh_div_yield: 0.03458749416177656
+  bnh_holdable: false
+  bnh_max_dd: -0.46694402740479246
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
   bootstrap:
     n_iterations: 1000
     n_original: 4
