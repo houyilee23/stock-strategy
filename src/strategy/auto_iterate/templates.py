@@ -548,6 +548,33 @@ SEARCH_SPACES = {
         "stop_pct":          {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
         "max_hold_days":     {"type": "categorical", "choices": [10, 20, 40]},
     },
+    # ── Phase 2 ensembles (5/17, regime-aware) ──────────────
+    "ensemble_regime_dip": {
+        "rsi_period":        {"type": "categorical", "choices": [7, 14, 21]},
+        "rsi_thresh":        {"type": "int", "low": 25, "high": 40, "step": 5},
+        "ma_period":         {"type": "categorical", "choices": [20, 50, 100]},
+        "dip_pct":           {"type": "float", "low": 0.02, "high": 0.08, "step": 0.01},
+        "allow_neutral":     {"type": "categorical", "choices": [True, False]},
+        "take_profit_pct":   {"type": "float", "low": 0.03, "high": 0.15, "step": 0.02},
+        "max_hold_days":     {"type": "categorical", "choices": [10, 20, 40, 80]},
+    },
+    "ensemble_breakout_pullback": {
+        "ma_breakout":       {"type": "categorical", "choices": [50, 100, 200]},
+        "breakout_threshold": {"type": "float", "low": 0.03, "high": 0.15, "step": 0.02},
+        "lookback_window":   {"type": "categorical", "choices": [20, 40, 60]},
+        "pullback_range":    {"type": "float", "low": 0.01, "high": 0.05, "step": 0.005},
+        "atr_stop_k":        {"type": "float", "low": 1.5, "high": 3.5, "step": 0.5},
+        "take_profit_pct":   {"type": "float", "low": 0.05, "high": 0.20, "step": 0.025},
+        "max_hold_days":     {"type": "categorical", "choices": [20, 40, 80]},
+    },
+    "ensemble_dual_momentum": {
+        "roc_period":        {"type": "categorical", "choices": [20, 60, 120]},
+        "roc_thresh":        {"type": "float", "low": 0.0, "high": 0.15, "step": 0.025},
+        "ma_period":         {"type": "categorical", "choices": [50, 100, 200]},
+        "take_profit_pct":   {"type": "float", "low": 0.05, "high": 0.20, "step": 0.025},
+        "stop_pct":          {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "max_hold_days":     {"type": "categorical", "choices": [20, 40, 80, 160]},
+    },
 }
 
 TEMPLATE_NAMES = list(SEARCH_SPACES.keys())
@@ -3845,6 +3872,224 @@ def generate_ensemble_dip_or_bounce(df: pd.DataFrame, params: dict, regime=None,
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_ensemble_regime_dip(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Regime-aware dip buying: only takes dip signals in non-BEAR regime.
+
+    Combines:
+        - Regime filter: 0050 regime != BEAR (passed as `regime` arg)
+        - Dip signal: close < SMA(ma_p) × (1 - dip_pct) AND RSI < rsi_thresh
+        - Both must hold simultaneously
+
+    Designed for stocks that work in trending markets but get washed out in bear
+    phases. Common in cyclical names that have edge in BULL/NEUTRAL only.
+    """
+    close = df["close"]
+    rsi_p = int(params["rsi_period"])
+    rsi_thresh = float(params["rsi_thresh"])
+    ma_p = int(params["ma_period"])
+    dip_pct = float(params["dip_pct"])
+    tp_pct = float(params["take_profit_pct"])
+    max_hold = int(params["max_hold_days"])
+    allow_neutral = bool(params.get("allow_neutral", True))
+
+    rsi_v = rsi(close, rsi_p)
+    ma = sma(close, ma_p)
+
+    # Regime filter — if regime arg provided, use it; else assume always OK
+    if regime is not None:
+        if allow_neutral:
+            regime_ok = (regime != "BEAR")
+        else:
+            regime_ok = (regime == "BULL")
+    else:
+        regime_ok = pd.Series([True] * len(df), index=df.index)
+
+    dip_signal = (close < ma * (1 - dip_pct)) & (rsi_v < rsi_thresh)
+    dip_signal = dip_signal.fillna(False) & ma.notna() & rsi_v.notna()
+    buy_signal = dip_signal & regime_ok
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            if tp_hit or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_ensemble_breakout_pullback(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Two-stage entry: wait for breakout above MA, then enter on pullback to MA.
+
+    Stage 1: Within last `lookback_window` days, was there a recent close >
+             MA(ma_breakout) × (1 + breakout_threshold)? (breakout occurred)
+    Stage 2: NOW close is back within pullback_range of MA(ma_breakout)
+             (price has pulled back from the breakout high).
+    Both must hold → BUY (the "buy the pullback after breakout" pattern).
+
+    Exit: TP + ATR stop + max_hold + immediate exit if close < MA(ma_breakout)×0.95.
+
+    Designed for trending stocks that have clean breakouts followed by orderly
+    consolidations — classic Mark Minervini / O'Neil entry style.
+    """
+    close = df["close"]
+    high = df["high"]
+    low = df["low"]
+    ma_p = int(params["ma_breakout"])
+    breakout_threshold = float(params["breakout_threshold"])
+    lookback_window = int(params["lookback_window"])
+    pullback_range = float(params["pullback_range"])
+    tp_pct = float(params["take_profit_pct"])
+    atr_k = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+
+    ma = sma(close, ma_p)
+    atr_s = atr(df, 14)
+
+    # Stage 1: breakout above MA × (1 + threshold) in last N days
+    breakout_level = ma * (1 + breakout_threshold)
+    had_breakout = (close > breakout_level).rolling(lookback_window, min_periods=1).max() > 0
+
+    # Stage 2: now close is back near MA (within pullback_range)
+    pullback_low = ma * (1 - pullback_range)
+    pullback_high = ma * (1 + pullback_range)
+    near_ma = (close >= pullback_low) & (close <= pullback_high)
+
+    buy_signal = had_breakout.shift(1).fillna(False) & near_ma & ma.notna()
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    sl_level = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        m = ma.iloc[i]
+        a = atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            ma_break_down = (not np.isnan(m)) and c < m * 0.95
+            if tp_hit or sl_hit or ma_break_down or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c) and not np.isnan(a):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                sl_level = c - a * atr_k
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_ensemble_dual_momentum(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Dual momentum: stock momentum AND market regime both positive.
+
+    Buy when:
+        - Stock ROC(roc_p) >= roc_thresh (stock has positive momentum)
+        - 0050 regime is BULL (passed via regime arg; if None, fallback to RSI)
+        - close > SMA(ma_p) (above intermediate-term MA)
+
+    Exit on TP or if stock momentum turns negative or max_hold reached.
+
+    The idea: combining stock-specific and market-wide momentum reduces drawdowns
+    in regime shifts while maintaining solid upside in trending markets.
+    """
+    close = df["close"]
+    roc_p = int(params["roc_period"])
+    roc_thresh = float(params["roc_thresh"])
+    ma_p = int(params["ma_period"])
+    tp_pct = float(params["take_profit_pct"])
+    stop_pct = float(params["stop_pct"])
+    max_hold = int(params["max_hold_days"])
+
+    roc_v = close.pct_change(roc_p)
+    ma = sma(close, ma_p)
+
+    # Regime filter
+    if regime is not None:
+        regime_ok = (regime == "BULL")
+    else:
+        # Fallback: use 200-MA upslope as regime proxy
+        ma200 = sma(close, 200)
+        regime_ok = (close > ma200) & (ma200 > ma200.shift(20))
+
+    momentum_signal = (roc_v >= roc_thresh) & (close > ma) & ma.notna() & roc_v.notna()
+    buy_signal = momentum_signal & regime_ok
+
+    # Momentum-turn exit
+    momentum_neg = roc_v < 0
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+                target_sl[i] = entry_price * (1 - stop_pct)
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(target_sl[i])) and c <= target_sl[i]
+            momentum_turn = bool(momentum_neg.iloc[i])
+            if tp_hit or sl_hit or momentum_turn or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
 TEMPLATE_GENERATORS = {
     "trend_pullback":         generate_T1,
     "donchian_breakout":      generate_T2,
@@ -3907,4 +4152,8 @@ TEMPLATE_GENERATORS = {
     "ensemble_oversold_vote":   generate_ensemble_oversold_vote,
     "ensemble_trend_confirm":   generate_ensemble_trend_confirm,
     "ensemble_dip_or_bounce":   generate_ensemble_dip_or_bounce,
+    # ── Phase 2 ensembles (5/17, regime-aware) ──────────────
+    "ensemble_regime_dip":      generate_ensemble_regime_dip,
+    "ensemble_breakout_pullback": generate_ensemble_breakout_pullback,
+    "ensemble_dual_momentum":   generate_ensemble_dual_momentum,
 }
