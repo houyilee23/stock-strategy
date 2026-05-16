@@ -79,7 +79,7 @@
 | 2618 | 長榮航 | — | 34.6 | HOLD | C | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
 | 0050 | 元大台灣50（2025/06 4:1 拆分樣本） | — | 95.4 | HOLD | — | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
 | 0056 | 元大高股息 | — | 44.5 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
-| 006208 | 富邦台50 | — | 220.4 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 006208 | 富邦台50 | — | 220.4 | HOLD | B | 30% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 00878 | 國泰永續高股息 | — | 27.9 | HOLD | C | — | style1_pullback | — | — | — | 77 | [多頭] | BULL |  |
 | 00919 | 群益台灣精選高息（2023 IPO，歷史短） | — | 25.8 | HOLD | C | 15% | style1_pullback | — | — | — | 73 | [多頭] | BULL |  |
 | 00940 | 元大台灣價值高息（2024 IPO，歷史很短） | — | 10.9 | HOLD | C | — | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |

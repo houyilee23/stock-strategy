@@ -128,7 +128,7 @@ _最後更新：**2026-05-17**_
 | [2618](output/reports/per_stock/2618.md) | 長榮航 | 34.6 | HOLD | C | — | 49 | [空頭] | BULL |
 | [0050](output/reports/per_stock/0050.md) | 元大台灣50（2025/06 4:1 拆分樣本） | 95.4 | HOLD | — | — | 68 | [多頭] | BULL |
 | [0056](output/reports/per_stock/0056.md) | 元大高股息 | 44.5 | HOLD | C | 15% | 66 | [多頭] | BULL |
-| [006208](output/reports/per_stock/006208.md) | 富邦台50 | 220.4 | HOLD | C | 15% | 66 | [多頭] | BULL |
+| [006208](output/reports/per_stock/006208.md) | 富邦台50 | 220.4 | HOLD | B | 30% | 66 | [多頭] | BULL |
 | [00878](output/reports/per_stock/00878.md) | 國泰永續高股息 | 27.9 | HOLD | C | — | 77 | [多頭] | BULL |
 | [00919](output/reports/per_stock/00919.md) | 群益台灣精選高息（2023 IPO，歷史短） | 25.8 | HOLD | C | 15% | 73 | [多頭] | BULL |
 | [00940](output/reports/per_stock/00940.md) | 元大台灣價值高息（2024 IPO，歷史很短） | 10.9 | HOLD | C | — | 63 | [多頭] | BULL |

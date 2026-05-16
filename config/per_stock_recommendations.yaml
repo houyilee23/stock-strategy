@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260516_213436, 20260516_213439
+# Applied retrain upgrades from: 20260516_213442, 20260516_213445
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -27,16 +27,33 @@
   tradeable: true
   verdict: SUSPICIOUS_PERFECT
 006208:
+  best_template: ensemble_breakout_vote
+  bootstrap:
+    n_iterations: 1000
+    n_original: 5
+    pf_lower: 1.707
+    pf_mean: 4.603
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: null
   name: 富邦台50
-  params_ref: bollinger_squeeze.yaml#per_stock.006208
-  position_pct_max: 0.15
-  template: bollinger_squeeze
-  test_expectancy: 0.0797
-  test_max_dd: -0.0671
-  test_n_trades: 4
-  test_pf: 13.791
-  tier: C
+  params_ref: ensemble_breakout_vote.yaml#per_stock.006208
+  position_pct_max: 0.3
+  position_pct_recommended: 0.3
+  template: ensemble_breakout_vote
+  test_alpha_vs_0050: -0.2938
+  test_cagr: 0.2517
+  test_expectancy: 0.1128
+  test_max_dd: -0.1058
+  test_n_trades: 5
+  test_pf: 10.764
+  tier: B
+  tier_reason: PF_lower=1.71 ≥ 1.0, exp=+11.3% ≥ 2%, n=5≥5, holdout=[A_new=NA B=O
+    C=NA]
   tradeable: true
+  verdict: SUSPICIOUS_PERFECT
 00878:
   best_template: yearly_high_break
   bootstrap:
