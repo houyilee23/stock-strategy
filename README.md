@@ -36,7 +36,7 @@ _最後更新：**2026-05-16**_
 | 股票 | 名稱 | 收盤 | 動作 | Tier | 倉位 | RSI | 趨勢 | Regime |
 |------|------|------|------|------|------|-----|------|--------|
 | [2330](output/reports/per_stock/2330.md) | 台積電 | 2265.0 | HOLD | C | 15% | 61 | [多頭] | BULL |
-| [2303](output/reports/per_stock/2303.md) | 聯電 | 110.0 | HOLD | C | — | 75 | [多頭] | BULL |
+| [2303](output/reports/per_stock/2303.md) | 聯電 | 110.0 | HOLD | A | 50% | 75 | [多頭] | BULL |
 | [2426](output/reports/per_stock/2426.md) | 鼎元 | 61.9 | HOLD | B | — | 55 | [多頭] | BULL |
 | [1560](output/reports/per_stock/1560.md) | 中砂（CMP） | 642.0 | HOLD | C | 15% | 68 | [多頭] | BULL |
 | [9940](output/reports/per_stock/9940.md) | 信義 | 18.2 | HOLD | F | — | 18 | [空頭] | BULL |
@@ -54,8 +54,8 @@ _最後更新：**2026-05-16**_
 | [2330](output/reports/per_stock/2330.md) | 台積電 | 2265.0 | HOLD | C | 15% | 61 | [多頭] | BULL |
 | [2454](output/reports/per_stock/2454.md) | 聯發科 | 3260.0 | HOLD | B | 30% | 65 | [多頭] | BULL |
 | [2317](output/reports/per_stock/2317.md) | 鴻海 | 248.5 | HOLD | A | 50% | 66 | [空頭] | BULL |
-| [2303](output/reports/per_stock/2303.md) | 聯電 | 110.0 | HOLD | C | — | 75 | [多頭] | BULL |
-| [2308](output/reports/per_stock/2308.md) | 台達電 | 2075.0 | HOLD | C | — | 55 | [多頭] | BULL |
+| [2303](output/reports/per_stock/2303.md) | 聯電 | 110.0 | HOLD | A | 50% | 75 | [多頭] | BULL |
+| [2308](output/reports/per_stock/2308.md) | 台達電 | 2075.0 | HOLD | B | 30% | 55 | [多頭] | BULL |
 | [3711](output/reports/per_stock/3711.md) | 日月光投控 | 547.0 | HOLD | C | 15% | 70 | [多頭] | BULL |
 | [2383](output/reports/per_stock/2383.md) | 台光電 | 4615.0 | HOLD | B | 30% | 60 | [多頭] | BULL |
 | [2345](output/reports/per_stock/2345.md) | 智邦 | 2505.0 | HOLD | B | — | 60 | [多頭] | BULL |
@@ -74,7 +74,7 @@ _最後更新：**2026-05-16**_
 | [2376](output/reports/per_stock/2376.md) | 技嘉 | 326.5 | HOLD | C | 15% | 72 | [空頭] | BULL |
 | [2356](output/reports/per_stock/2356.md) | 英業達 | 52.2 | HOLD | C | — | 67 | [多頭] | BULL |
 | [2353](output/reports/per_stock/2353.md) | 宏碁 | 27.7 | HOLD | C | 15% | 49 | [空頭] | BULL |
-| [3661](output/reports/per_stock/3661.md) | 世芯-KY | 4605.0 | HOLD | C | — | 59 | [多頭] | BULL |
+| [3661](output/reports/per_stock/3661.md) | 世芯-KY | 4605.0 | HOLD | A | 50% | 59 | [多頭] | BULL |
 | [2426](output/reports/per_stock/2426.md) | 鼎元 | 61.9 | HOLD | B | — | 55 | [多頭] | BULL |
 | [1560](output/reports/per_stock/1560.md) | 中砂（CMP） | 642.0 | HOLD | C | 15% | 68 | [多頭] | BULL |
 | [2324](output/reports/per_stock/2324.md) | 仁寶 | 28.6 | HOLD | C | — | 43 | [空頭] | BULL |
@@ -99,7 +99,7 @@ _最後更新：**2026-05-16**_
 | [2884](output/reports/per_stock/2884.md) | 玉山金 | 31.9 | HOLD | C | — | 46 | [空頭] | BULL |
 | [2885](output/reports/per_stock/2885.md) | 元大金 | 54.8 | HOLD | C | — | 63 | [多頭] | BULL |
 | [2886](output/reports/per_stock/2886.md) | 兆豐金 | 39.4 | HOLD | D | 10% | 49 | [空頭] | BULL |
-| [2891](output/reports/per_stock/2891.md) | 中信金 | 54.8 | HOLD | C | — | 55 | [多頭] | BULL |
+| [2891](output/reports/per_stock/2891.md) | 中信金 | 54.8 | HOLD | A | 50% | 55 | [多頭] | BULL |
 | [2892](output/reports/per_stock/2892.md) | 第一金 | 29.3 | HOLD | C | — | 57 | [空頭] | BULL |
 | [5880](output/reports/per_stock/5880.md) | 合庫金 | 22.9 | HOLD | F | — | 40 | [空頭] | BULL |
 | [5871](output/reports/per_stock/5871.md) | 中租-KY | 106.0 | HOLD | C | 15% | 35 | [空頭] | BULL |
@@ -158,14 +158,14 @@ _最後更新：**2026-05-16**_
 | [2812](output/reports/per_stock/2812.md) | 台中銀 | 18.8 | HOLD | C | — | 18 | [空頭] | BULL |
 | [2823](output/reports/per_stock/2823.md) | 中壽 | 30.6 | HOLD | F | — | 53 | [多頭] | BULL |
 | [2867](output/reports/per_stock/2867.md) | 三商壽 | 7.7 | HOLD | D | 10% | 47 | [多頭] | BULL |
-| [2887](output/reports/per_stock/2887.md) | 台新金 | 23.8 | HOLD | C | — | 50 | [多頭] | BULL |
+| [2887](output/reports/per_stock/2887.md) | 台新金 | 23.8 | HOLD | B | 30% | 50 | [多頭] | BULL |
 | [2888](output/reports/per_stock/2888.md) | 新光金 | 11.8 | HOLD | C | — | 58 | [空頭] | BULL |
 | [2890](output/reports/per_stock/2890.md) | 永豐金 | 30.2 | HOLD | C | — | 35 | [多頭] | BULL |
 | [5876](output/reports/per_stock/5876.md) | 上海商銀 | 40.1 | HOLD | F | — | 59 | [空頭] | BULL |
 | [1503](output/reports/per_stock/1503.md) | 士電 | 190.0 | HOLD | C | — | 43 | [多頭] | BULL |
 | [1504](output/reports/per_stock/1504.md) | 東元 | 69.4 | HOLD | D | — | 55 | [空頭] | BULL |
 | [1521](output/reports/per_stock/1521.md) | 大億 | 24.5 | HOLD | F | — | 42 | [空頭] | BULL |
-| [2049](output/reports/per_stock/2049.md) | 上銀 | 392.5 | HOLD | C | — | 84 | [多頭] | BULL |
+| [2049](output/reports/per_stock/2049.md) | 上銀 | 392.5 | HOLD | B | 30% | 84 | [多頭] | BULL |
 | [2371](output/reports/per_stock/2371.md) | 大同 | 29.1 | HOLD | F | — | 35 | [空頭] | BULL |
 | [9933](output/reports/per_stock/9933.md) | 中鼎工程 | 37.6 | HOLD | B | 30% | 58 | [多頭] | BULL |
 | [2009](output/reports/per_stock/2009.md) | 第一銅 | 38.9 | HOLD | C | — | 46 | [空頭] | BULL |
@@ -184,7 +184,7 @@ _最後更新：**2026-05-16**_
 | [2609](output/reports/per_stock/2609.md) | 陽明 | 48.0 | HOLD | C | 15% | 33 | [空頭] | BULL |
 | [4147](output/reports/per_stock/4147.md) | 中裕 | 49.7 | HOLD | A | 50% | 45 | [空頭] | BULL |
 | [3014](output/reports/per_stock/3014.md) | 聯陽 | 136.0 | HOLD | C | 15% | 64 | [空頭] | BULL |
-| [3036](output/reports/per_stock/3036.md) | 文曄 | 270.0 | HOLD | C | 15% | 69 | [多頭] | BULL |
+| [3036](output/reports/per_stock/3036.md) | 文曄 | 270.0 | HOLD | A | 50% | 69 | [多頭] | BULL |
 | [3044](output/reports/per_stock/3044.md) | 健鼎 | 477.5 | HOLD | C | 15% | 56 | [多頭] | BULL |
 | [3105](output/reports/per_stock/3105.md) | 穩懋 | 495.5 | HOLD | D | 10% | 52 | [多頭] | BULL |
 | [3406](output/reports/per_stock/3406.md) | 玉晶光 | 588.0 | HOLD | C | 15% | 71 | [多頭] | BULL |
