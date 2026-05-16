@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-05-16**_
+_最後更新：**2026-05-17**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -134,7 +134,7 @@ _最後更新：**2026-05-16**_
 | [00940](output/reports/per_stock/00940.md) | 元大台灣價值高息（2024 IPO，歷史很短） | 10.9 | HOLD | C | — | 63 | [多頭] | BULL |
 | [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.4 | HOLD | — | — | 60 | [多頭] | BULL |
 | [2458](output/reports/per_stock/2458.md) | 義隆電 | 142.5 | HOLD | D | — | 53 | [多頭] | BULL |
-| [3035](output/reports/per_stock/3035.md) | 智原 | 190.0 | HOLD | B | — | 57 | [空頭] | BULL |
+| [3035](output/reports/per_stock/3035.md) | 智原 | 190.0 | HOLD | A | 50% | 57 | [空頭] | BULL |
 | [3081](output/reports/per_stock/3081.md) | 聯亞光電 | 2620.0 | HOLD | B | — | 58 | [多頭] | BULL |
 | [3443](output/reports/per_stock/3443.md) | 創意 | 4845.0 | HOLD | S | — | 60 | [多頭] | BULL |
 | [4961](output/reports/per_stock/4961.md) | 天鈺 | 169.0 | HOLD | F | — | 59 | [空頭] | BULL |
@@ -240,7 +240,7 @@ _最後更新：**2026-05-16**_
 
 ## 歷史報告
 
-- [2026/05](output/reports/2026/05/) — 37 份
+- [2026/05](output/reports/2026/05/) — 40 份
 - [2026/04](output/reports/2026/04/) — 10 份
 
 ---
