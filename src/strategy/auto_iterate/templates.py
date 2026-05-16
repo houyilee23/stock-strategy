@@ -575,6 +575,28 @@ SEARCH_SPACES = {
         "stop_pct":          {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
         "max_hold_days":     {"type": "categorical", "choices": [20, 40, 80, 160]},
     },
+    "ensemble_triple_confirm": {
+        "trend_ma":          {"type": "categorical", "choices": [50, 100, 200]},
+        "rsi_period":        {"type": "categorical", "choices": [7, 14, 21]},
+        "rsi_min":           {"type": "int", "low": 45, "high": 55, "step": 5},
+        "rsi_lookback":      {"type": "int", "low": 3, "high": 10, "step": 1},
+        "vol_period":        {"type": "categorical", "choices": [10, 20, 60]},
+        "vol_ratio":         {"type": "float", "low": 1.0, "high": 2.0, "step": 0.25},
+        "atr_stop_k":        {"type": "float", "low": 1.5, "high": 3.5, "step": 0.5},
+        "take_profit_pct":   {"type": "float", "low": 0.04, "high": 0.15, "step": 0.02},
+        "max_hold_days":     {"type": "categorical", "choices": [20, 40, 80]},
+        "stop_buffer":       {"type": "float", "low": 0.90, "high": 0.98, "step": 0.02},
+    },
+    "ensemble_bullish_divergence": {
+        "rsi_period":        {"type": "categorical", "choices": [7, 14, 21]},
+        "lookback_window":   {"type": "categorical", "choices": [10, 20, 40, 60]},
+        "tolerance":         {"type": "float", "low": 0.0, "high": 0.03, "step": 0.005},
+        "div_threshold":     {"type": "int", "low": 5, "high": 20, "step": 5},
+        "rsi_max":           {"type": "int", "low": 35, "high": 50, "step": 5},
+        "atr_stop_k":        {"type": "float", "low": 1.5, "high": 3.5, "step": 0.5},
+        "take_profit_pct":   {"type": "float", "low": 0.04, "high": 0.15, "step": 0.02},
+        "max_hold_days":     {"type": "categorical", "choices": [10, 20, 40]},
+    },
 }
 
 TEMPLATE_NAMES = list(SEARCH_SPACES.keys())
@@ -4017,6 +4039,160 @@ def generate_ensemble_breakout_pullback(df: pd.DataFrame, params: dict, regime=N
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+def generate_ensemble_triple_confirm(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Strict 3-filter intersection (trend + momentum + volume).
+
+    All three must hold simultaneously:
+        - Trend: close > SMA(trend_ma) (above long-term MA)
+        - Momentum: RSI(rsi_p) > rsi_min AND RSI rising (RSI > RSI[lookback])
+        - Volume: volume > volume_ma(vol_n) × vol_ratio
+
+    Exits: TP, ATR stop, max_hold, OR loss of trend (close < SMA × stop_buffer).
+    High-quality but low-frequency signals — designed for strong trends where
+    all three classic confirmations align.
+    """
+    close = df["close"]
+    volume = df["volume"]
+    trend_ma_n = int(params["trend_ma"])
+    rsi_p = int(params["rsi_period"])
+    rsi_min = float(params["rsi_min"])
+    rsi_lookback = int(params["rsi_lookback"])
+    vol_n = int(params["vol_period"])
+    vol_ratio = float(params["vol_ratio"])
+    tp_pct = float(params["take_profit_pct"])
+    atr_k = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+    stop_buffer = float(params["stop_buffer"])
+
+    ma = sma(close, trend_ma_n)
+    rsi_v = rsi(close, rsi_p)
+    vol_avg = volume_ma(volume, vol_n)
+    atr_s = atr(df, 14)
+
+    trend_ok = (close > ma) & ma.notna()
+    momentum_ok = (rsi_v > rsi_min) & (rsi_v > rsi_v.shift(rsi_lookback)) & rsi_v.notna()
+    volume_ok = (volume > vol_avg * vol_ratio) & vol_avg.notna()
+
+    buy_signal = trend_ok & momentum_ok & volume_ok
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    sl_level = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        m = ma.iloc[i]
+        a = atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            trend_lost = (not np.isnan(m)) and c < m * stop_buffer
+            if tp_hit or sl_hit or trend_lost or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c) and not np.isnan(a):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                sl_level = c - a * atr_k
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_ensemble_bullish_divergence(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Bullish RSI divergence: price makes lower low while RSI makes higher low.
+
+    Detection (within `lookback_window` days):
+        - Two local lows: current (today) and a prior one (locally min)
+        - Current close <= prior_low_close × (1 + tolerance) (similar/lower price)
+        - Current RSI(rsi_p) > prior RSI by `div_threshold` (RSI higher)
+
+    Enter on confirmation: BUY if divergence detected AND close > 1-day-ago close
+    (price now turning up).
+
+    Exit: TP + ATR stop + max_hold. Classic mean-reversion at exhaustion.
+    """
+    close = df["close"]
+    rsi_p = int(params["rsi_period"])
+    lookback_window = int(params["lookback_window"])
+    tolerance = float(params["tolerance"])
+    div_threshold = float(params["div_threshold"])
+    rsi_max = float(params["rsi_max"])  # only enter if current RSI still oversold-ish
+    tp_pct = float(params["take_profit_pct"])
+    atr_k = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+
+    rsi_v = rsi(close, rsi_p)
+    atr_s = atr(df, 14)
+
+    # For each day, find the min close in last lookback_window days
+    # (excluding today). If today's close is approximately that low but RSI is higher → divergence.
+    prior_low_close = close.shift(1).rolling(lookback_window, min_periods=1).min()
+    # Index where the prior low occurred — using close index find argmin
+    # For simplicity, also compute RSI at the prior low time using shift trick
+    # Approximation: prior RSI = min RSI in same window
+    prior_low_rsi = rsi_v.shift(1).rolling(lookback_window, min_periods=1).min()
+
+    similar_low = close <= prior_low_close * (1 + tolerance)
+    higher_rsi = rsi_v > (prior_low_rsi + div_threshold)
+    oversold = rsi_v < rsi_max
+    turning_up = close > close.shift(1)
+
+    divergence = similar_low & higher_rsi & oversold & turning_up
+    buy_signal = divergence.fillna(False) & rsi_v.notna() & prior_low_close.notna()
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    sl_level = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        a = atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            if tp_hit or sl_hit or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c) and not np.isnan(a):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                sl_level = c - a * atr_k
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
 def generate_ensemble_dual_momentum(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
     """Dual momentum: stock momentum AND market regime both positive.
 
@@ -4156,4 +4332,6 @@ TEMPLATE_GENERATORS = {
     "ensemble_regime_dip":      generate_ensemble_regime_dip,
     "ensemble_breakout_pullback": generate_ensemble_breakout_pullback,
     "ensemble_dual_momentum":   generate_ensemble_dual_momentum,
+    "ensemble_triple_confirm":  generate_ensemble_triple_confirm,
+    "ensemble_bullish_divergence": generate_ensemble_bullish_divergence,
 }
