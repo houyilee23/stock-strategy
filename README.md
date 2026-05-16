@@ -213,8 +213,8 @@ _最後更新：**2026-05-17**_
 | [2542](output/reports/per_stock/2542.md) | 興富發 | 43.8 | HOLD | C | 15% | 76 | [空頭] | BULL |
 | [2722](output/reports/per_stock/2722.md) | 夏都 | 23.1 | HOLD | F | — | 41 | [空頭] | BULL |
 | [2492](output/reports/per_stock/2492.md) | 華新科（MLCC，top-30 市值） | 206.0 | HOLD | A | 50% | 72 | [多頭] | BULL |
-| [2880](output/reports/per_stock/2880.md) | 華南金（大型金控） | 32.4 | HOLD | D | 10% | 38 | [多頭] | BULL |
-| [2855](output/reports/per_stock/2855.md) | 統一證 | 40.8 | HOLD | D | 10% | 65 | [多頭] | BULL |
+| [2880](output/reports/per_stock/2880.md) | 華南金（大型金控） | 32.4 | HOLD | C | 15% | 38 | [多頭] | BULL |
+| [2855](output/reports/per_stock/2855.md) | 統一證 | 40.8 | HOLD | C | 15% | 65 | [多頭] | BULL |
 | [2392](output/reports/per_stock/2392.md) | 正崴（光學連接） | 33.8 | HOLD | F | — | 49 | [空頭] | BULL |
 | [2393](output/reports/per_stock/2393.md) | 億光（LED leader） | 62.5 | HOLD | B | 30% | 30 | [多頭] | BULL |
 | [2347](output/reports/per_stock/2347.md) | 聯強（電子通路 top） | 82.4 | HOLD | A | 50% | 51 | [多頭] | BULL |

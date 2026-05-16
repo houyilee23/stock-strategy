@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260516_213442, 20260516_213445
+# Applied retrain upgrades from: 20260517_034624, 20260517_034627, 20260517_034632
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -2054,33 +2054,32 @@
   tradeable: false
   verdict: WEAK
 '2855':
-  best_template: monthly_anchor
+  best_template: ensemble_dual_momentum
   bootstrap:
     n_iterations: 1000
-    n_original: 14
-    pf_lower: 0.575
-    pf_mean: 2.654
+    n_original: 5
+    pf_lower: 0.684
+    pf_mean: 3.887
     pf_upper: 5.0
   holdouts:
     A_new: null
-    B: false
-    C: false
-  params_ref: monthly_anchor.yaml#per_stock.2855
-  position_pct_max: 0.1
-  position_pct_recommended: 0.1
-  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
-  template: monthly_anchor
-  test_alpha_vs_0050: -0.4477
-  test_cagr: 0.0978
-  test_expectancy: 0.017
-  test_max_dd: -0.2422
-  test_n_trades: 14
-  test_pf: 1.951
-  tier: D
-  tier_reason: BORDERLINE：PF_lower=0.58 ≥ 0.5, exp=+1.7% ≥ 0%, n=14≥5, holdout=[A_new=NA
-    B=X C=X]（紙上交易）
-  tradeable: false
-  verdict: WEAK
+    B: null
+    C: null
+  params_ref: ensemble_dual_momentum.yaml#per_stock.2855
+  position_pct_max: 0.15
+  position_pct_recommended: 0.15
+  template: ensemble_dual_momentum
+  test_alpha_vs_0050: -0.3562
+  test_cagr: 0.1893
+  test_expectancy: 0.0901
+  test_max_dd: -0.1543
+  test_n_trades: 5
+  test_pf: 4.744
+  tier: C
+  tier_reason: C_HIGH_Q_RESCUE：n=5, raw_PF=4.74 ≥ 3.0, exp=+9.0% ≥ 5%, |DD|=15% ≤
+    25%, holdout=[A_new=NA B=NA C=NA]（小樣本高品質訊號，紙上交易 3 個月）
+  tradeable: true
+  verdict: PASS
 '2867':
   best_template: psar_flip
   bootstrap:
@@ -2110,33 +2109,32 @@
   tradeable: false
   verdict: WEAK
 '2880':
-  best_template: narrow_range_breakout
+  best_template: ensemble_dual_momentum
   bootstrap:
     n_iterations: 1000
-    n_original: 11
-    pf_lower: 0.52
-    pf_mean: 2.789
-    pf_upper: 5.0
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
   holdouts:
     A_new: null
     B: true
-    C: true
-  params_ref: narrow_range_breakout.yaml#per_stock.2880
-  position_pct_max: 0.1
-  position_pct_recommended: 0.1
-  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
-  template: narrow_range_breakout
-  test_alpha_vs_0050: -0.4608
-  test_cagr: 0.0847
-  test_expectancy: 0.0236
-  test_max_dd: -0.1616
-  test_n_trades: 11
-  test_pf: 2.235
-  tier: D
-  tier_reason: BORDERLINE：PF_lower=0.52 ≥ 0.5, exp=+2.4% ≥ 0%, n=11≥5, holdout=[A_new=NA
-    B=O C=O]（紙上交易）
-  tradeable: false
-  verdict: WEAK
+    C: null
+  params_ref: ensemble_dual_momentum.yaml#per_stock.2880
+  position_pct_max: 0.15
+  position_pct_recommended: 0.15
+  template: ensemble_dual_momentum
+  test_alpha_vs_0050: -0.3586
+  test_cagr: 0.1869
+  test_expectancy: 0.0896
+  test_max_dd: -0.1417
+  test_n_trades: 4
+  test_pf: 5.726
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=4, raw_PF=5.73 ≥ 3.0, exp=+9.0% ≥ 5%, |DD|=14% ≤ 25%,
+    holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  tradeable: true
+  verdict: INSUFFICIENT
 '2881':
   best_template: three_white_soldiers
   bootstrap:

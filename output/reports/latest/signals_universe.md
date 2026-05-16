@@ -164,8 +164,8 @@
 | 2542 | 興富發 | — | 43.8 | HOLD | C | 15% | style1_pullback | — | — | — | 76 | [空頭] | BULL |  |
 | 2722 | 夏都 | — | 23.1 | HOLD | F | — | style1_pullback | — | — | — | 41 | [空頭] | BULL |  |
 | 2492 | 華新科（MLCC，top-30 市值） | — | 206.0 | HOLD | A | 50% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
-| 2880 | 華南金（大型金控） | — | 32.4 | HOLD | D | 10% | style1_pullback | — | 32.4~32.5 | 31.3 | 38 | [多頭] | BULL | 觀察中 RSI=38.4 |
-| 2855 | 統一證 | — | 40.8 | HOLD | D | 10% | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
+| 2880 | 華南金（大型金控） | — | 32.4 | HOLD | C | 15% | style1_pullback | — | 32.4~32.5 | 31.3 | 38 | [多頭] | BULL | 觀察中 RSI=38.4 |
+| 2855 | 統一證 | — | 40.8 | HOLD | C | 15% | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
 | 2392 | 正崴（光學連接） | — | 33.8 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
 | 2393 | 億光（LED leader） | — | 62.5 | HOLD | B | 30% | style1_pullback | — | 62.4~65.7 | 62.4 | 30 | [多頭] | BULL | 觀察中 RSI=29.9 |
 | 2347 | 聯強（電子通路 top） | — | 82.4 | HOLD | A | 50% | style1_pullback | — | 82.4~82.4 | 66.4 | 51 | [多頭] | BULL | 觀察中 RSI=51.2 |
