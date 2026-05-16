@@ -1,4 +1,4 @@
-# TIERING REPORT — 20260516_090509
+# TIERING REPORT — 20260516_142823
 
 ## 1. 統計摘要
 
@@ -8,9 +8,9 @@
 | A | 0 | 50% | STRONG：可用，建議 50% 部位 |
 | B | 0 | 30% | MODERATE：可用，建議 30% 部位 + 嚴格 trailing stop |
 | C | 0 | 15% | WEAK：紙上交易 3 個月再啟用，最大 15% |
-| F | 3 | 0% | FAIL：移出 universe |
+| F | 27 | 0% | FAIL：移出 universe |
 
-**可操作標的合計（S+A+B+C）= 0 / 3**  （目標 ≥ 20）
+**可操作標的合計（S+A+B+C）= 0 / 27**  （目標 ≥ 20）
 
 ## 2. 各 Tier 個股清單
 
@@ -30,10 +30,34 @@
 
 （無）
 
-### Tier F — 部位上限 0% （共 3 檔）
+### Tier F — 部位上限 0% （共 27 檔）
 
 | Stock | Template | Exp | PF | n | DD | PF_lower | A_new | B | C | Reason |
 |-------|----------|-----|----|---|----|----------|-------|---|---|--------|
-| 3526 | psar_flip | +1.5% | 1.42 | 10 | -19.0% | 0.31 | X | X | X | FAIL：PF_lower=0.31, exp=+1.5%, n=10, holdout=[A_new=NA B=X C=X] |
-| 1909 | psar_flip | -0.3% | 0.83 | 16 | -20.1% | 0.17 | X | X | X | FAIL：test expectancy=-0.3% < 0（負期望值） |
-| 9904 | psar_flip | -0.5% | 0.77 | 10 | -11.7% | 0.13 | X | X | O | FAIL：test expectancy=-0.5% < 0（負期望值） |
+| 2855 | ensemble_trend_confirm | +14.1% | inf | 1 | -5.9% | N/A | X | X | X | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 2867 | ensemble_trend_confirm | +9.6% | inf | 1 | -1.6% | N/A | X | X | X | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 3526 | ensemble_trend_confirm | +6.9% | inf | 1 | -0.9% | N/A | X | X | X | FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 2880 | ensemble_trend_confirm | +2.5% | 1.70 | 2 | -12.0% | N/A | X | X | O | FAIL：test n_trades=2 < 5（樣本不足，未達 LOW_N_RESCUE） |
+| 3045 | ensemble_trend_confirm | -1.5% | 0.52 | 2 | -7.4% | N/A | X | X | O | FAIL：test expectancy=-1.5% < 0（負期望值） |
+| 2886 | ensemble_trend_confirm | -4.6% | 0.00 | 1 | -7.4% | N/A | X | O | O | FAIL：test expectancy=-4.6% < 0（負期望值） |
+| 1504 | ensemble_trend_confirm | -5.0% | 0.00 | 3 | -18.0% | N/A | X | X | X | FAIL：test expectancy=-5.0% < 0（負期望值） |
+| 2367 | ensemble_trend_confirm | -7.4% | 0.00 | 1 | -8.5% | N/A | X | O | X | FAIL：test expectancy=-7.4% < 0（負期望值） |
+| 9921 | ensemble_trend_confirm | -10.8% | 0.00 | 1 | -12.7% | N/A | X | X | X | FAIL：test expectancy=-10.8% < 0（負期望值） |
+| 1234 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 1314 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 1535 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | O | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 1722 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2002 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2347 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2458 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2606 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2727 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 2845 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 3105 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 3533 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | O | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 4147 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 5388 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | O | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 5483 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 5904 | ensemble_trend_confirm | N/A | inf | 0 | -1.6% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 6446 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | O | X | FAIL：test expectancy=-inf% < 0（負期望值） |
+| 8454 | ensemble_trend_confirm | N/A | inf | 0 | -0.0% | N/A | X | X | X | FAIL：test expectancy=-inf% < 0（負期望值） |

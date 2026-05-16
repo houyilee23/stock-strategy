@@ -58,7 +58,7 @@
 | 1303 | 南亞 | — | 85.3 | HOLD | A | 50% | gap_continuation | — | — | — | 47 | [多頭] | BULL |  |
 | 1326 | 台化 | — | 44.5 | HOLD | B | 30% | low_vol_pullback | TP 50 / SL 38 | — | — | 38 | [多頭] | BULL |  |
 | 6505 | 台塑化 | — | 51.3 | HOLD | C | — | style1_pullback | — | 51.3~52.3 | 48.2 | 42 | [多頭] | BULL | 觀察中 RSI=41.9 |
-| 2002 | 中鋼 | — | 18.1 | HOLD | D | — | style1_pullback | — | — | — | 32 | [空頭] | BULL |  |
+| 2002 | 中鋼 | — | 18.1 | HOLD | C | 15% | style1_pullback | — | — | — | 32 | [空頭] | BULL |  |
 | 1809 | 中釉（陶瓷） | — | 38.6 | HOLD | B | — | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
 | 1101 | 台泥 | — | 24.1 | HOLD | F | — | style1_pullback | — | 24.0~24.4 | 23.7 | 43 | [多頭] | BULL | 觀察中 RSI=43.4 |
 | 1102 | 亞泥 | — | 34.4 | HOLD | C | — | style1_pullback | — | — | — | 40 | [空頭] | BULL |  |
@@ -133,7 +133,7 @@
 | 9907 | 統一實 | — | 16.1 | HOLD | B | — | style1_pullback | — | — | — | 15 | [空頭] | BULL |  |
 | 2606 | 裕民 | — | 62.8 | HOLD | D | — | style1_pullback | — | — | — | 50 | [多頭] | BULL |  |
 | 2609 | 陽明 | — | 48.0 | HOLD | C | 15% | style1_pullback | — | — | — | 33 | [空頭] | BULL |  |
-| 4147 | 中裕 | — | 49.7 | HOLD | D | — | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
+| 4147 | 中裕 | — | 49.7 | HOLD | A | 50% | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
 | 3014 | 聯陽 | — | 136.0 | HOLD | C | 15% | style1_pullback | — | — | — | 64 | [空頭] | BULL |  |
 | 3036 | 文曄 | — | 270.0 | HOLD | C | 15% | style1_pullback | — | — | — | 69 | [多頭] | BULL |  |
 | 3044 | 健鼎 | — | 477.5 | HOLD | C | 15% | style1_pullback | — | — | — | 56 | [多頭] | BULL |  |
@@ -168,7 +168,7 @@
 | 2855 | 統一證 | — | 40.8 | HOLD | D | 10% | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
 | 2392 | 正崴（光學連接） | — | 33.8 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
 | 2393 | 億光（LED leader） | — | 62.5 | HOLD | B | 30% | style1_pullback | — | 62.4~65.7 | 62.4 | 30 | [多頭] | BULL | 觀察中 RSI=29.9 |
-| 2347 | 聯強（電子通路 top） | — | 82.4 | HOLD | D | 10% | style1_pullback | — | 82.4~82.4 | 66.4 | 51 | [多頭] | BULL | 觀察中 RSI=51.2 |
+| 2347 | 聯強（電子通路 top） | — | 82.4 | HOLD | A | 50% | style1_pullback | — | 82.4~82.4 | 66.4 | 51 | [多頭] | BULL | 觀察中 RSI=51.2 |
 | 5904 | 寶雅（美妝零售） | — | 546.0 | HOLD | D | 10% | style1_pullback | — | 535.0~553.0 | 468.6 | 50 | [多頭] | BULL | 觀察中 RSI=49.9 |
 | 6804 | 大樹（藥局零售） | — | 15.1 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
 | 9941 | 裕融（汽車租賃 leader） | — | 73.1 | HOLD | F | — | style1_pullback | — | — | — | 32 | [空頭] | BULL |  |

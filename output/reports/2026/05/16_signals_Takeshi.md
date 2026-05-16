@@ -7,7 +7,7 @@
 | 6505 | 台塑化 | — | 51.3 | HOLD | C | — | style1_pullback | — | 51.3~52.3 | 48.2 | 42 | [多頭] | BULL | 觀察中 RSI=41.9 |
 | 1303 | 南亞 | — | 85.3 | HOLD | A | 50% | gap_continuation | — | — | — | 47 | [多頭] | BULL |  |
 | 1809 | 中釉（陶瓷） | — | 38.6 | HOLD | B | — | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
-| 2002 | 中鋼 | — | 18.1 | HOLD | D | — | style1_pullback | — | — | — | 32 | [空頭] | BULL |  |
+| 2002 | 中鋼 | — | 18.1 | HOLD | C | 15% | style1_pullback | — | — | — | 32 | [空頭] | BULL |  |
 | 6271 | 同欣電 | ✅ | 177.0 | HOLD | C | — | style1_pullback | — | 176.5~180.1 | 134.1 | 51 | [多頭] | BULL | 觀察中 RSI=51.5 (持10股 @179.90) |
 | 4958 | 臻鼎-KY | ✅ | 401.0 | HOLD | C | 15% | gap_continuation | — | — | — | 60 | [多頭] | BULL | (持4股 @415.50) |
 | 2382 | 廣達 | — | 306.0 | HOLD | C | 15% | low_vol_pullback | — | — | — | 41 | [多頭] | BULL |  |
