@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260516_142815, 20260516_142817, 20260516_142820, 20260516_142823, 20260516_142826
+# Applied retrain upgrades from: 20260516_165818, 20260516_165821, 20260516_165824
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -842,30 +842,32 @@
     C=O]
   verdict: WEAK
 '2049':
-  best_template: golden_cross
+  best_template: ensemble_dip_vote
   bootstrap:
     n_iterations: 1000
-    n_original: 3
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 5
+    pf_lower: 5.0
+    pf_mean: 5.0
+    pf_upper: 5.0
   holdouts:
     A_new: null
-    B: null
-    C: null
-  params_ref: golden_cross.yaml#per_stock.2049
-  position_pct_recommended: 0.15
-  template: golden_cross
-  test_alpha_vs_0050: -0.239
-  test_cagr: 0.0309
-  test_expectancy: 0.0597
-  test_max_dd: -0.0753
-  test_n_trades: 3
-  test_pf: 4.722
-  tier: C
-  tier_reason: LOW_N_RESCUE：n=3, raw_PF=4.72 ≥ 3.0, exp=+6.0% ≥ 5%, |DD|=8% ≤ 25%,
-    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
-  verdict: INSUFFICIENT
+    B: true
+    C: true
+  params_ref: ensemble_dip_vote.yaml#per_stock.2049
+  position_pct_max: 0.3
+  position_pct_recommended: 0.3
+  template: ensemble_dip_vote
+  test_alpha_vs_0050: -0.3145
+  test_cagr: 0.2311
+  test_expectancy: 0.1016
+  test_max_dd: -0.1423
+  test_n_trades: 5
+  test_pf: null
+  tier: B
+  tier_reason: PF_lower=5.00 ≥ 1.0, exp=+10.2% ≥ 2%, n=5≥5, holdout=[A_new=NA B=O
+    C=O]
+  tradeable: true
+  verdict: SUSPICIOUS_PERFECT
 '2059':
   best_template: donchian_breakout
   bootstrap:
@@ -962,56 +964,59 @@
   tier_reason: FAIL：test expectancy=-0.9% < 0（負期望值）
   verdict: INSUFFICIENT
 '2303':
-  best_template: narrow_range_breakout
+  best_template: ensemble_dip_vote
+  bootstrap:
+    n_iterations: 1000
+    n_original: 7
+    pf_lower: 5.0
+    pf_mean: 5.0
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: false
+    C: true
+  params_ref: ensemble_dip_vote.yaml#per_stock.2303
+  position_pct_max: 0.5
+  position_pct_recommended: 0.5
+  template: ensemble_dip_vote
+  test_alpha_vs_0050: -0.3815
+  test_cagr: 0.164
+  test_expectancy: 0.0515
+  test_max_dd: -0.0896
+  test_n_trades: 7
+  test_pf: null
+  tier: A
+  tier_reason: PF_lower=5.00 ≥ 1.5, exp=+5.1% ≥ 3%, n=7≥6, holdout=[A_new=NA B=X C=O],
+    gate=any holdout PASS
+  tradeable: true
+  verdict: SUSPICIOUS_PERFECT
+'2308':
+  best_template: ensemble_dip_or_bounce
   bootstrap:
     n_iterations: 1000
     n_original: 14
-    pf_lower: 0.794
-    pf_mean: 3.191
+    pf_lower: 1.156
+    pf_mean: 3.436
     pf_upper: 5.0
   holdouts:
     A_new: null
     B: true
-    C: null
-  params_ref: narrow_range_breakout.yaml#per_stock.2303
-  position_pct_recommended: 0.15
-  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
-  template: narrow_range_breakout
-  test_alpha_vs_0050: -0.1899
-  test_cagr: 0.0801
-  test_expectancy: 0.0317
-  test_max_dd: -0.2227
+    C: true
+  params_ref: ensemble_dip_or_bounce.yaml#per_stock.2308
+  position_pct_max: 0.3
+  position_pct_recommended: 0.3
+  template: ensemble_dip_or_bounce
+  test_alpha_vs_0050: -0.1272
+  test_cagr: 0.4183
+  test_expectancy: 0.0573
+  test_max_dd: -0.1918
   test_n_trades: 14
-  test_pf: 2.527
-  tier: C
-  tier_reason: PF_lower=0.79 ≥ 0.7, exp=+3.2% ≥ 1%, n=14≥5, holdout=[A_new=NA B=O
-    C=NA]
-  verdict: WEAK
-'2308':
-  best_template: three_day_reversal
-  bootstrap:
-    n_iterations: 1000
-    n_original: 3
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
-  holdouts:
-    A_new: null
-    B: true
-    C: null
-  params_ref: three_day_reversal.yaml#per_stock.2308
-  position_pct_recommended: 0.15
-  template: three_day_reversal
-  test_alpha_vs_0050: -0.2428
-  test_cagr: 0.0272
-  test_expectancy: 0.0506
-  test_max_dd: -0.1089
-  test_n_trades: 3
-  test_pf: 4.916
-  tier: C
-  tier_reason: LOW_N_RESCUE：n=3, raw_PF=4.92 ≥ 3.0, exp=+5.1% ≥ 5%, |DD|=11% ≤ 25%,
-    holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
-  verdict: INSUFFICIENT
+  test_pf: 3.404
+  tier: B
+  tier_reason: PF_lower=1.16 ≥ 1.0, exp=+5.7% ≥ 2%, n=14≥5, holdout=[A_new=NA B=O
+    C=O]
+  tradeable: true
+  verdict: PASS
 '2317':
   name: 鴻海
   params_ref: gap_continuation.yaml#per_stock.2317
@@ -2242,30 +2247,31 @@
   tradeable: false
   verdict: WEAK
 '2887':
-  best_template: trend_confirm_hold
+  best_template: ensemble_dip_vote
   bootstrap:
     n_iterations: 1000
-    n_original: 3
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 5
+    pf_lower: 5.0
+    pf_mean: 5.0
+    pf_upper: 5.0
   holdouts:
     A_new: null
-    B: null
-    C: null
-  params_ref: trend_confirm_hold.yaml#per_stock.2887
-  position_pct_recommended: 0.15
-  template: trend_confirm_hold
-  test_alpha_vs_0050: -0.1407
-  test_cagr: 0.1292
-  test_expectancy: 0.2411
-  test_max_dd: -0.0921
-  test_n_trades: 3
+    B: false
+    C: true
+  params_ref: ensemble_dip_vote.yaml#per_stock.2887
+  position_pct_max: 0.3
+  position_pct_recommended: 0.3
+  template: ensemble_dip_vote
+  test_alpha_vs_0050: -0.3868
+  test_cagr: 0.1587
+  test_expectancy: 0.0705
+  test_max_dd: -0.9999
+  test_n_trades: 5
   test_pf: null
-  tier: C
-  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+24.1% ≥ 5%, |DD|=9% ≤ 25%,
-    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
-  verdict: INSUFFICIENT
+  tier: B
+  tier_reason: PF_lower=5.00 ≥ 1.0, exp=+7.1% ≥ 2%, n=5≥5, holdout=[A_new=NA B=X C=O]
+  tradeable: true
+  verdict: DD_BREACH
 '2888':
   best_template: mean_reversion
   bootstrap:
@@ -2315,30 +2321,32 @@
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '2891':
-  best_template: narrow_range_breakout
+  best_template: ensemble_dip_or_bounce
   bootstrap:
     n_iterations: 1000
-    n_original: 23
-    pf_lower: 0.926
-    pf_mean: 2.596
+    n_original: 14
+    pf_lower: 1.688
+    pf_mean: 4.356
     pf_upper: 5.0
   holdouts:
     A_new: null
-    B: false
+    B: true
     C: false
-  params_ref: narrow_range_breakout.yaml#per_stock.2891
-  position_pct_recommended: 0.15
+  params_ref: ensemble_dip_or_bounce.yaml#per_stock.2891
+  position_pct_max: 0.5
+  position_pct_recommended: 0.5
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
-  template: narrow_range_breakout
-  test_alpha_vs_0050: -0.1572
-  test_cagr: 0.1128
-  test_expectancy: 0.028
-  test_max_dd: -0.1941
-  test_n_trades: 23
-  test_pf: 2.1
-  tier: C
-  tier_reason: PF_lower=0.93 ≥ 0.7, exp=+2.8% ≥ 1%, n=23≥5, holdout=[A_new=NA B=X
-    C=X]
+  template: ensemble_dip_or_bounce
+  test_alpha_vs_0050: -0.2928
+  test_cagr: 0.2527
+  test_expectancy: 0.0389
+  test_max_dd: -0.0992
+  test_n_trades: 14
+  test_pf: 5.18
+  tier: A
+  tier_reason: PF_lower=1.69 ≥ 1.5, exp=+3.9% ≥ 3%, n=14≥6, holdout=[A_new=NA B=O
+    C=X], gate=any holdout PASS
+  tradeable: true
   verdict: WEAK
 '2892':
   best_template: support_bounce
@@ -2483,32 +2491,32 @@
     C=O]
   verdict: WEAK
 '3036':
-  best_template: chip_momentum
+  best_template: ensemble_oversold_vote
   bootstrap:
     n_iterations: 1000
-    n_original: 22
-    pf_lower: 0.809
-    pf_mean: 2.68
+    n_original: 7
+    pf_lower: 3.683
+    pf_mean: 4.927
     pf_upper: 5.0
   holdouts:
     A_new: null
-    B: null
-    C: false
-  params_ref: chip_momentum.yaml#per_stock.3036
-  position_pct_max: 0.15
-  position_pct_recommended: 0.15
-  template: chip_momentum
-  test_alpha_vs_0050: -0.0745
-  test_cagr: 0.1954
-  test_expectancy: 0.0548
-  test_max_dd: -1.0
-  test_n_trades: 22
-  test_pf: 1.823
-  tier: C
-  tier_reason: PF_lower=0.81 ≥ 0.7, exp=+5.5% ≥ 1%, n=22≥5, holdout=[A_new=NA B=NA
-    C=X]
+    B: false
+    C: true
+  params_ref: ensemble_oversold_vote.yaml#per_stock.3036
+  position_pct_max: 0.5
+  position_pct_recommended: 0.5
+  template: ensemble_oversold_vote
+  test_alpha_vs_0050: -0.2325
+  test_cagr: 0.3131
+  test_expectancy: 0.0959
+  test_max_dd: -0.1824
+  test_n_trades: 7
+  test_pf: 20.987
+  tier: A
+  tier_reason: PF_lower=3.68 ≥ 1.5, exp=+9.6% ≥ 3%, n=7≥6, holdout=[A_new=NA B=X C=O],
+    gate=any holdout PASS
   tradeable: true
-  verdict: DD_BREACH
+  verdict: SUSPICIOUS_PERFECT
 '3037':
   best_template: narrow_range_breakout
   bootstrap:
@@ -2913,30 +2921,32 @@
   tradeable: true
   verdict: PASS
 '3661':
-  best_template: yearly_high_break
+  best_template: ensemble_oversold_vote
   bootstrap:
     n_iterations: 1000
-    n_original: 11
-    pf_lower: 0.826
-    pf_mean: 3.126
+    n_original: 6
+    pf_lower: 5.0
+    pf_mean: 5.0
     pf_upper: 5.0
   holdouts:
     A_new: null
     B: true
-    C: null
-  params_ref: yearly_high_break.yaml#per_stock.3661
-  position_pct_recommended: 0.15
-  template: yearly_high_break
-  test_alpha_vs_0050: -0.1046
-  test_cagr: 0.1654
-  test_expectancy: 0.0931
-  test_max_dd: -0.3561
-  test_n_trades: 11
-  test_pf: 1.996
-  tier: C
-  tier_reason: PF_lower=0.83 ≥ 0.7, exp=+9.3% ≥ 1%, n=11≥5, holdout=[A_new=NA B=O
-    C=NA]
-  verdict: DD_BREACH
+    C: true
+  params_ref: ensemble_oversold_vote.yaml#per_stock.3661
+  position_pct_max: 0.5
+  position_pct_recommended: 0.5
+  template: ensemble_oversold_vote
+  test_alpha_vs_0050: -0.1735
+  test_cagr: 0.372
+  test_expectancy: 0.1311
+  test_max_dd: -0.1527
+  test_n_trades: 6
+  test_pf: null
+  tier: A
+  tier_reason: PF_lower=5.00 ≥ 1.5, exp=+13.1% ≥ 3%, n=6≥6, holdout=[A_new=NA B=O
+    C=O], gate=any holdout PASS
+  tradeable: true
+  verdict: SUSPICIOUS_PERFECT
 '3702':
   best_template: low_vol_pullback
   bootstrap:
