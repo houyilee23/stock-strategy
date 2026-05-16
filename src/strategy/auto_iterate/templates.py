@@ -497,6 +497,57 @@ SEARCH_SPACES = {
         "volume_filter":       {"type": "categorical", "choices": [True, False]},
         "volume_avg_period":   {"type": "int", "low": 5, "high": 30, "step": 5},
     },
+    # ── Ensemble / composite strategies (5/16) ──────────────────────
+    "ensemble_dip_vote": {
+        "rsi_period":        {"type": "categorical", "choices": [7, 14, 21]},
+        "rsi_thresh":        {"type": "int", "low": 25, "high": 40, "step": 5},
+        "ma_period":         {"type": "categorical", "choices": [20, 50, 100, 200]},
+        "dip_pct":           {"type": "float", "low": 0.02, "high": 0.08, "step": 0.01},
+        "low_lookback":      {"type": "categorical", "choices": [10, 20, 60, 120]},
+        "take_profit_pct":   {"type": "float", "low": 0.03, "high": 0.15, "step": 0.02},
+        "max_hold_days":     {"type": "categorical", "choices": [10, 20, 40, 60]},
+    },
+    "ensemble_breakout_vote": {
+        "donchian_n":        {"type": "categorical", "choices": [20, 55, 120]},
+        "ma_period":         {"type": "categorical", "choices": [50, 100, 200]},
+        "breakout_pct":      {"type": "float", "low": 0.0, "high": 0.05, "step": 0.01},
+        "vol_period":        {"type": "categorical", "choices": [10, 20, 60]},
+        "vol_ratio":         {"type": "float", "low": 1.0, "high": 2.5, "step": 0.25},
+        "atr_stop_k":        {"type": "float", "low": 1.5, "high": 4.0, "step": 0.5},
+        "take_profit_pct":   {"type": "float", "low": 0.04, "high": 0.20, "step": 0.02},
+        "max_hold_days":     {"type": "categorical", "choices": [10, 20, 40, 80]},
+    },
+    "ensemble_oversold_vote": {
+        "rsi_period":        {"type": "categorical", "choices": [7, 14, 21]},
+        "rsi_thresh":        {"type": "int", "low": 25, "high": 40, "step": 5},
+        "roc_period":        {"type": "categorical", "choices": [5, 10, 20]},
+        "roc_thresh":        {"type": "float", "low": -0.12, "high": -0.03, "step": 0.02},
+        "bb_period":         {"type": "categorical", "choices": [20, 30, 50]},
+        "bb_std":            {"type": "float", "low": 1.5, "high": 3.0, "step": 0.5},
+        "take_profit_pct":   {"type": "float", "low": 0.03, "high": 0.12, "step": 0.02},
+        "max_hold_days":     {"type": "categorical", "choices": [10, 20, 40]},
+    },
+    "ensemble_trend_confirm": {
+        "trend_long_ma":     {"type": "categorical", "choices": [100, 150, 200]},
+        "trend_short_ma":    {"type": "categorical", "choices": [20, 30, 50]},
+        "rsi_period":        {"type": "categorical", "choices": [7, 14]},
+        "rsi_low":           {"type": "int", "low": 25, "high": 40, "step": 5},
+        "rsi_recover":       {"type": "int", "low": 40, "high": 55, "step": 5},
+        "vol_period":        {"type": "categorical", "choices": [10, 20, 60]},
+        "vol_ratio":         {"type": "float", "low": 1.0, "high": 2.0, "step": 0.25},
+        "atr_stop_k":        {"type": "float", "low": 1.5, "high": 4.0, "step": 0.5},
+        "take_profit_pct":   {"type": "float", "low": 0.04, "high": 0.15, "step": 0.02},
+        "max_hold_days":     {"type": "categorical", "choices": [20, 40, 80]},
+    },
+    "ensemble_dip_or_bounce": {
+        "rsi_period":        {"type": "categorical", "choices": [7, 14, 21]},
+        "rsi_thresh":        {"type": "int", "low": 30, "high": 45, "step": 5},
+        "trend_ma":          {"type": "categorical", "choices": [50, 100, 200]},
+        "decline_days":      {"type": "int", "low": 2, "high": 5, "step": 1},
+        "take_profit_pct":   {"type": "float", "low": 0.04, "high": 0.12, "step": 0.02},
+        "stop_pct":          {"type": "float", "low": 0.03, "high": 0.10, "step": 0.01},
+        "max_hold_days":     {"type": "categorical", "choices": [10, 20, 40]},
+    },
 }
 
 TEMPLATE_NAMES = list(SEARCH_SPACES.keys())
@@ -3430,6 +3481,370 @@ def generate_psar_flip(df: pd.DataFrame, params: dict, regime=None, chip_data=No
                           "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
 
 
+# ════════════════════════════════════════════════════════════════════
+# Ensemble / Composite Strategies
+#
+# These combine multiple sub-filters or sub-signals to produce stronger
+# entry confirmation. Two patterns are used:
+#
+#   - vote_K_of_N: BUY when at least K of N independent filters fire
+#     (reduces false positives vs single template; risks fewer trades)
+#
+#   - trend_filter_AND_entry: a long-term trend filter must hold AND
+#     an entry signal must fire (intersection; only trades in favorable regime)
+#
+# Designed to fill the gap where individual templates produce too many
+# false positives (low PF) or too few trades (low n).
+# ════════════════════════════════════════════════════════════════════
+
+
+def generate_ensemble_dip_vote(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """3 dip filters vote → BUY when at least 2 of 3 agree on same day.
+
+    Filters:
+        f1: RSI(rsi_period) < rsi_thresh (oversold momentum)
+        f2: close < SMA(ma_period) × (1 - dip_pct) (price below trend MA)
+        f3: close <= rolling_min(close, low_lookback) (touched recent low)
+
+    Exit: TP_pct profit target OR max_hold_days elapsed.
+    """
+    close = df["close"]
+    rsi_p = int(params["rsi_period"])
+    rsi_thresh = float(params["rsi_thresh"])
+    ma_p = int(params["ma_period"])
+    dip = float(params["dip_pct"])
+    low_n = int(params["low_lookback"])
+    tp_pct = float(params["take_profit_pct"])
+    max_hold = int(params["max_hold_days"])
+
+    rsi_v = rsi(close, rsi_p)
+    ma = sma(close, ma_p)
+    rolling_min = close.rolling(low_n, min_periods=low_n).min()
+
+    f1 = (rsi_v < rsi_thresh) & rsi_v.notna()
+    f2 = (close < ma * (1 - dip)) & ma.notna()
+    f3 = (close <= rolling_min) & rolling_min.notna()
+    vote = f1.astype(int).fillna(0) + f2.astype(int).fillna(0) + f3.astype(int).fillna(0)
+    buy_signal = vote >= 2
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            if tp_hit or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_ensemble_breakout_vote(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """3 breakout filters vote → BUY when at least 2 of 3 agree.
+
+    Filters:
+        f1: close > Donchian_high(donchian_n)[i-1] (breakout above prior N-day high)
+        f2: close > SMA(ma_p) × (1 + breakout_pct) (price above trend MA by buffer)
+        f3: volume > volume_ma(vol_n) × vol_ratio (volume confirmation)
+
+    Exit: ATR-based trailing stop + TP_pct + max_hold.
+    """
+    close = df["close"]
+    high = df["high"]
+    volume = df["volume"]
+    donchian_n = int(params["donchian_n"])
+    ma_p = int(params["ma_period"])
+    breakout_pct = float(params["breakout_pct"])
+    vol_n = int(params["vol_period"])
+    vol_ratio = float(params["vol_ratio"])
+    tp_pct = float(params["take_profit_pct"])
+    atr_k = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+
+    donchian_high = high.rolling(donchian_n, min_periods=donchian_n).max().shift(1)
+    ma = sma(close, ma_p)
+    vol_avg = volume_ma(volume, vol_n)
+    atr_s = atr(df, 14)
+
+    f1 = (close > donchian_high) & donchian_high.notna()
+    f2 = (close > ma * (1 + breakout_pct)) & ma.notna()
+    f3 = (volume > vol_avg * vol_ratio) & vol_avg.notna()
+    vote = f1.astype(int).fillna(0) + f2.astype(int).fillna(0) + f3.astype(int).fillna(0)
+    buy_signal = vote >= 2
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    sl_level = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        a = atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            if tp_hit or sl_hit or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c) and not np.isnan(a):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                sl_level = c - a * atr_k
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_ensemble_oversold_vote(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """3 oversold indicators vote → BUY when at least 2 of 3 agree.
+
+    Filters:
+        f1: RSI(rsi_p) < rsi_thresh (oversold)
+        f2: ROC(roc_p) < roc_thresh (price decline over N days)
+        f3: close < BB_lower(bb_p, bb_std) (below lower Bollinger band)
+
+    Exit: TP + time_stop.
+    """
+    close = df["close"]
+    rsi_p = int(params["rsi_period"])
+    rsi_thresh = float(params["rsi_thresh"])
+    roc_p = int(params["roc_period"])
+    roc_thresh = float(params["roc_thresh"])
+    bb_p = int(params["bb_period"])
+    bb_std = float(params["bb_std"])
+    tp_pct = float(params["take_profit_pct"])
+    max_hold = int(params["max_hold_days"])
+
+    rsi_v = rsi(close, rsi_p)
+    roc_v = close.pct_change(roc_p)
+    bb = bollinger(close, bb_p, bb_std)
+    bb_lower = bb["lower"]
+
+    f1 = (rsi_v < rsi_thresh) & rsi_v.notna()
+    f2 = (roc_v < roc_thresh) & roc_v.notna()
+    f3 = (close < bb_lower) & bb_lower.notna()
+    vote = f1.astype(int).fillna(0) + f2.astype(int).fillna(0) + f3.astype(int).fillna(0)
+    buy_signal = vote >= 2
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            if tp_hit or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_ensemble_trend_confirm(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """Trend filter AND oversold entry signal (intersection).
+
+    Trend gate (must hold):
+        close > SMA(trend_long_ma)   ← only trade in long-term uptrend
+        close > SMA(trend_short_ma)  ← short-term recently bullish
+
+    Entry trigger:
+        RSI(rsi_p) crosses up from < rsi_low to >= rsi_recover
+        AND volume > volume_ma(vol_n) × vol_ratio
+
+    Exit: TP + ATR stop + max_hold.
+    """
+    close = df["close"]
+    volume = df["volume"]
+    trend_long = int(params["trend_long_ma"])
+    trend_short = int(params["trend_short_ma"])
+    rsi_p = int(params["rsi_period"])
+    rsi_low = float(params["rsi_low"])
+    rsi_recover = float(params["rsi_recover"])
+    vol_n = int(params["vol_period"])
+    vol_ratio = float(params["vol_ratio"])
+    tp_pct = float(params["take_profit_pct"])
+    atr_k = float(params["atr_stop_k"])
+    max_hold = int(params["max_hold_days"])
+
+    ma_long = sma(close, trend_long)
+    ma_short = sma(close, trend_short)
+    rsi_v = rsi(close, rsi_p)
+    vol_avg = volume_ma(volume, vol_n)
+    atr_s = atr(df, 14)
+
+    # Trend gate
+    trend_ok = ((close > ma_long) & (close > ma_short)) & ma_long.notna() & ma_short.notna()
+    # RSI cross-up: yesterday < rsi_low, today >= rsi_recover
+    rsi_cross_up = (rsi_v.shift(1) < rsi_low) & (rsi_v >= rsi_recover)
+    # Volume confirmation
+    vol_ok = (volume > vol_avg * vol_ratio) & vol_avg.notna()
+
+    buy_signal = trend_ok & rsi_cross_up & vol_ok
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    sl_level = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        a = atr_s.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+            target_sl[i] = sl_level
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(sl_level)) and c < sl_level
+            if tp_hit or sl_hit or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c) and not np.isnan(a):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                sl_level = c - a * atr_k
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
+def generate_ensemble_dip_or_bounce(df: pd.DataFrame, params: dict, regime=None, chip_data=None) -> pd.DataFrame:
+    """OR-style ensemble: BUY when ANY of 3 dip patterns trigger (union, more trades).
+
+    Designed for low-vol stocks where individual templates are too sparse.
+    Trades whenever ANY of:
+        f1: RSI < rsi_thresh AND close > MA(trend_ma) (oversold but in uptrend)
+        f2: hammer pattern AND close < open AND lower_shadow >= 2× body
+        f3: 3-day decline AND today's close > open (reversal day)
+
+    Exit: TP + max_hold + stop_pct.
+    """
+    close = df["close"]
+    open_ = df["open"]
+    high = df["high"]
+    low = df["low"]
+    rsi_p = int(params["rsi_period"])
+    rsi_thresh = float(params["rsi_thresh"])
+    trend_ma_n = int(params["trend_ma"])
+    decline_days = int(params["decline_days"])
+    tp_pct = float(params["take_profit_pct"])
+    stop_pct = float(params["stop_pct"])
+    max_hold = int(params["max_hold_days"])
+
+    rsi_v = rsi(close, rsi_p)
+    ma = sma(close, trend_ma_n)
+
+    # f1: oversold but uptrend
+    f1 = (rsi_v < rsi_thresh) & (close > ma) & rsi_v.notna() & ma.notna()
+
+    # f2: hammer pattern
+    body = (close - open_).abs()
+    upper_shadow = high - close.where(close >= open_, open_)
+    lower_shadow = close.where(close < open_, open_) - low
+    f2 = (lower_shadow >= 2 * body) & (lower_shadow > upper_shadow) & (body > 0)
+
+    # f3: N-day decline + reversal
+    is_down = close < close.shift(1)
+    n_consec_down = is_down.rolling(decline_days).sum() == decline_days
+    is_reversal = close > open_
+    f3 = n_consec_down.shift(1).fillna(False) & is_reversal
+
+    buy_signal = f1 | f2 | f3
+
+    n = len(df)
+    action = ["HOLD"] * n
+    target_buy = [np.nan] * n
+    target_tp = [np.nan] * n
+    target_sl = [np.nan] * n
+    in_pos = False
+    hold_days = 0
+    entry_price = np.nan
+    for i in range(n):
+        c = close.iloc[i]
+        if in_pos:
+            hold_days += 1
+            if not np.isnan(entry_price):
+                target_tp[i] = entry_price * (1 + tp_pct)
+                target_sl[i] = entry_price * (1 - stop_pct)
+            tp_hit = (not np.isnan(target_tp[i])) and c >= target_tp[i]
+            sl_hit = (not np.isnan(target_sl[i])) and c <= target_sl[i]
+            if tp_hit or sl_hit or hold_days >= max_hold:
+                action[i] = "SELL"
+                in_pos = False
+                hold_days = 0
+                target_tp[i] = np.nan
+                target_sl[i] = np.nan
+        else:
+            if bool(buy_signal.iloc[i]) and not np.isnan(c):
+                action[i] = "BUY"
+                target_buy[i] = c
+                in_pos = True
+                entry_price = c
+                hold_days = 0
+    return pd.DataFrame({"action": action, "target_buy": target_buy,
+                          "target_tp": target_tp, "target_sl": target_sl}, index=df.index)
+
+
 TEMPLATE_GENERATORS = {
     "trend_pullback":         generate_T1,
     "donchian_breakout":      generate_T2,
@@ -3486,4 +3901,10 @@ TEMPLATE_GENERATORS = {
     "low_volume_reversal":    generate_low_volume_reversal,
     "chip_streak":            generate_signals_chip_streak,
     "monthly_revenue_event":  generate_signals_monthly_revenue_event,
+    # ── Ensemble / composite (5/16 新加) ────────────────────
+    "ensemble_dip_vote":        generate_ensemble_dip_vote,
+    "ensemble_breakout_vote":   generate_ensemble_breakout_vote,
+    "ensemble_oversold_vote":   generate_ensemble_oversold_vote,
+    "ensemble_trend_confirm":   generate_ensemble_trend_confirm,
+    "ensemble_dip_or_bounce":   generate_ensemble_dip_or_bounce,
 }
