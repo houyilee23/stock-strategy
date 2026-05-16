@@ -232,33 +232,32 @@
   tier: A
   tradeable: true
 '1314':
-  best_template: gap_down_revert
+  best_template: ensemble_oversold_vote
   bootstrap:
     n_iterations: 1000
-    n_original: 6
-    pf_lower: 0.515
-    pf_mean: 2.825
-    pf_upper: 5.0
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
   holdouts:
     A_new: null
     B: true
-    C: false
-  params_ref: gap_down_revert.yaml#per_stock.1314
-  position_pct_max: 0.1
-  position_pct_recommended: 0.1
-  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
-  template: gap_down_revert
-  test_alpha_vs_0050: -0.4917
-  test_cagr: 0.0538
-  test_expectancy: 0.0215
-  test_max_dd: -0.1138
-  test_n_trades: 6
-  test_pf: 2.395
-  tier: D
-  tier_reason: BORDERLINE：PF_lower=0.52 ≥ 0.5, exp=+2.2% ≥ 0%, n=6≥5, holdout=[A_new=NA
-    B=O C=X]（紙上交易）
-  tradeable: false
-  verdict: WEAK
+    C: true
+  params_ref: ensemble_oversold_vote.yaml#per_stock.1314
+  position_pct_max: 0.15
+  position_pct_recommended: 0.15
+  template: ensemble_oversold_vote
+  test_alpha_vs_0050: -0.4159
+  test_cagr: 0.1296
+  test_expectancy: 0.0991
+  test_max_dd: -0.0872
+  test_n_trades: 3
+  test_pf: null
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+9.9% ≥ 5%, |DD|=9% ≤ 25%,
+    holdout=[A_new=NA B=O C=O]（紙上交易 3 個月）
+  tradeable: true
+  verdict: INSUFFICIENT
 '1326':
   name: 台化
   params_ref: low_vol_pullback.yaml#per_stock.1326
@@ -1896,29 +1895,32 @@
   tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
   verdict: INSUFFICIENT
 '2727':
-  best_template: chip_momentum
+  best_template: ensemble_dip_vote
   bootstrap:
     n_iterations: 1000
-    n_original: 7
-    pf_lower: 0.564
-    pf_mean: 3.934
-    pf_upper: 5.0
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
   holdouts:
     A_new: null
-    B: null
-    C: false
-  params_ref: chip_momentum.yaml#per_stock.2727
-  position_pct_recommended: 0.1
-  test_alpha_vs_0050: -0.0798
-  test_cagr: 0.1902
-  test_expectancy: 0.1908
-  test_max_dd: -0.2649
-  test_n_trades: 7
-  test_pf: 3.522
-  tier: D
-  tier_reason: BORDERLINE：PF_lower=0.56 ≥ 0.5, exp=+19.1% ≥ 0%, n=7≥5, holdout=[A_new=NA
-    B=NA C=X]（紙上交易）
-  verdict: PASS
+    B: true
+    C: true
+  params_ref: ensemble_dip_vote.yaml#per_stock.2727
+  position_pct_max: 0.15
+  position_pct_recommended: 0.15
+  template: ensemble_dip_vote
+  test_alpha_vs_0050: -0.4224
+  test_cagr: 0.1231
+  test_expectancy: 0.0936
+  test_max_dd: -0.0618
+  test_n_trades: 3
+  test_pf: null
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+9.4% ≥ 5%, |DD|=6% ≤ 25%,
+    holdout=[A_new=NA B=O C=O]（紙上交易 3 個月）
+  tradeable: true
+  verdict: INSUFFICIENT
 '2812':
   best_template: momentum_hold
   bootstrap:
@@ -2806,32 +2808,32 @@
   tradeable: true
   verdict: DD_BREACH
 '3526':
-  best_template: monthly_anchor
+  best_template: ensemble_dip_vote
   bootstrap:
     n_iterations: 1000
-    n_original: 18
-    pf_lower: 0.514
-    pf_mean: 1.844
-    pf_upper: 5.0
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
   holdouts:
     A_new: null
     B: true
-    C: false
-  params_ref: monthly_anchor.yaml#per_stock.3526
-  position_pct_max: 0.1
-  position_pct_recommended: 0.1
-  template: monthly_anchor
-  test_alpha_vs_0050: -0.4832
-  test_cagr: 0.0624
-  test_expectancy: 0.0095
-  test_max_dd: -0.2279
-  test_n_trades: 18
-  test_pf: 1.329
-  tier: D
-  tier_reason: BORDERLINE：PF_lower=0.51 ≥ 0.5, exp=+0.9% ≥ 0%, n=18≥5, holdout=[A_new=NA
-    B=O C=X]（紙上交易）
-  tradeable: false
-  verdict: FAIL
+    C: true
+  params_ref: ensemble_dip_vote.yaml#per_stock.3526
+  position_pct_max: 0.15
+  position_pct_recommended: 0.15
+  template: ensemble_dip_vote
+  test_alpha_vs_0050: -0.4789
+  test_cagr: 0.0666
+  test_expectancy: 0.0516
+  test_max_dd: -0.0312
+  test_n_trades: 3
+  test_pf: null
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+5.2% ≥ 5%, |DD|=3% ≤ 25%,
+    holdout=[A_new=NA B=O C=O]（紙上交易 3 個月）
+  tradeable: true
+  verdict: INSUFFICIENT
 '3533':
   best_template: gap_continuation
   bootstrap:

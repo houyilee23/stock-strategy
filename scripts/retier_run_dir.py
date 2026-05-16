@@ -59,6 +59,12 @@ def main():
             holdouts = e.get("holdouts") or {}
             if n is None or exp is None:
                 continue
+            # pf=None typically means all winning trades (avg_loss=0 → PF=inf
+            # but YAML can't serialize inf → reads back as None). Treat as inf
+            # so Q5b-lite / C_HIGH_Q / D_LOW_N rescues can fire.
+            if pf is None:
+                import math as _math
+                pf = _math.inf
             # If boot is None / missing pf_lower → use empty dict (assign_tier
             # normalizes to 0.0). Q5b-lite / C_HIGH_Q / D_LOW_N rescues use
             # raw_pf, not pf_lower, so they still work.

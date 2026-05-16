@@ -129,7 +129,7 @@
 | 1722 | 台肥 | — | 45.8 | HOLD | D | — | style1_pullback | — | — | — | 46 | [空頭] | BULL |  |
 | 1907 | 永豐餘 | — | 25.0 | HOLD | C | — | style1_pullback | — | — | — | 56 | [空頭] | BULL |  |
 | 2723 | 美食-KY | — | 64.2 | HOLD | F | — | style1_pullback | — | — | — | 38 | [空頭] | BULL |  |
-| 2727 | 王品 | — | 236.5 | HOLD | D | — | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
+| 2727 | 王品 | — | 236.5 | HOLD | C | 15% | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
 | 9907 | 統一實 | — | 16.1 | HOLD | B | — | style1_pullback | — | — | — | 15 | [空頭] | BULL |  |
 | 2606 | 裕民 | — | 62.8 | HOLD | D | — | style1_pullback | — | — | — | 50 | [多頭] | BULL |  |
 | 2609 | 陽明 | — | 48.0 | HOLD | C | 15% | style1_pullback | — | — | — | 33 | [空頭] | BULL |  |
@@ -153,7 +153,7 @@
 | 2451 | 創見 | — | 336.0 | HOLD | B | 30% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 2820 | 華票 | — | 16.7 | HOLD | C | 15% | style1_pullback | — | 16.6~16.8 | 16.6 | 41 | [多頭] | BULL | 觀察中 RSI=41.3 |
 | 2845 | 遠東銀 | — | 12.1 | HOLD | D | 10% | style1_pullback | — | — | — | 27 | [空頭] | BULL |  |
-| 1314 | 中石化 | — | 6.7 | HOLD | D | 10% | style1_pullback | — | — | — | 41 | [空頭] | BULL |  |
+| 1314 | 中石化 | — | 6.7 | HOLD | C | 15% | style1_pullback | — | — | — | 41 | [空頭] | BULL |  |
 | 1535 | 中宇 | — | 49.2 | HOLD | D | 10% | style1_pullback | — | — | — | 30 | [空頭] | BULL |  |
 | 1789 | 神隆 | — | 19.1 | HOLD | C | 15% | style1_pullback | — | — | — | 34 | [空頭] | BULL |  |
 | 2015 | 豐興 | — | 62.6 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
@@ -186,5 +186,5 @@
 | 2367 | 燿華（PCB） | — | 61.8 | HOLD | D | 10% | style1_pullback | — | — | 55.9 | 46 | [多頭] | BULL | 持倉中 持9日 |
 | 2455 | 全新（GaAs IC） | — | 358.5 | HOLD | A | 50% | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
 | 6443 | 元晶（太陽能） | — | 38.2 | HOLD | C | 15% | style1_pullback | — | 37.3~38.5 | 26.5 | 46 | [多頭] | BULL | 觀察中 RSI=45.7 |
-| 3526 | 凡甲（連接器） | — | 374.0 | HOLD | D | 10% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 3526 | 凡甲（連接器） | — | 374.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 5536 | 聖暉（廠房工程） | — | 1025.0 | HOLD | B | 30% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |

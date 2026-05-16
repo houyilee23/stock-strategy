@@ -178,7 +178,7 @@ _最後更新：**2026-05-16**_
 | [1722](output/reports/per_stock/1722.md) | 台肥 | 45.8 | HOLD | D | — | 46 | [空頭] | BULL |
 | [1907](output/reports/per_stock/1907.md) | 永豐餘 | 25.0 | HOLD | C | — | 56 | [空頭] | BULL |
 | [2723](output/reports/per_stock/2723.md) | 美食-KY | 64.2 | HOLD | F | — | 38 | [空頭] | BULL |
-| [2727](output/reports/per_stock/2727.md) | 王品 | 236.5 | HOLD | D | — | 65 | [多頭] | BULL |
+| [2727](output/reports/per_stock/2727.md) | 王品 | 236.5 | HOLD | C | 15% | 65 | [多頭] | BULL |
 | [9907](output/reports/per_stock/9907.md) | 統一實 | 16.1 | HOLD | B | — | 15 | [空頭] | BULL |
 | [2606](output/reports/per_stock/2606.md) | 裕民 | 62.8 | HOLD | D | — | 50 | [多頭] | BULL |
 | [2609](output/reports/per_stock/2609.md) | 陽明 | 48.0 | HOLD | C | 15% | 33 | [空頭] | BULL |
@@ -202,7 +202,7 @@ _最後更新：**2026-05-16**_
 | [2451](output/reports/per_stock/2451.md) | 創見 | 336.0 | HOLD | B | 30% | 66 | [多頭] | BULL |
 | [2820](output/reports/per_stock/2820.md) | 華票 | 16.7 | HOLD | C | 15% | 41 | [多頭] | BULL |
 | [2845](output/reports/per_stock/2845.md) | 遠東銀 | 12.1 | HOLD | D | 10% | 27 | [空頭] | BULL |
-| [1314](output/reports/per_stock/1314.md) | 中石化 | 6.7 | HOLD | D | 10% | 41 | [空頭] | BULL |
+| [1314](output/reports/per_stock/1314.md) | 中石化 | 6.7 | HOLD | C | 15% | 41 | [空頭] | BULL |
 | [1535](output/reports/per_stock/1535.md) | 中宇 | 49.2 | HOLD | D | 10% | 30 | [空頭] | BULL |
 | [1789](output/reports/per_stock/1789.md) | 神隆 | 19.1 | HOLD | C | 15% | 34 | [空頭] | BULL |
 | [2015](output/reports/per_stock/2015.md) | 豐興 | 62.6 | HOLD | F | — | 49 | [空頭] | BULL |
@@ -235,7 +235,7 @@ _最後更新：**2026-05-16**_
 | [2367](output/reports/per_stock/2367.md) | 燿華（PCB） | 61.8 | HOLD | D | 10% | 46 | [多頭] | BULL |
 | [2455](output/reports/per_stock/2455.md) | 全新（GaAs IC） | 358.5 | HOLD | A | 50% | 58 | [多頭] | BULL |
 | [6443](output/reports/per_stock/6443.md) | 元晶（太陽能） | 38.2 | HOLD | C | 15% | 46 | [多頭] | BULL |
-| [3526](output/reports/per_stock/3526.md) | 凡甲（連接器） | 374.0 | HOLD | D | 10% | 66 | [多頭] | BULL |
+| [3526](output/reports/per_stock/3526.md) | 凡甲（連接器） | 374.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
 | [5536](output/reports/per_stock/5536.md) | 聖暉（廠房工程） | 1025.0 | HOLD | B | 30% | 72 | [多頭] | BULL |
 
 ## 歷史報告
