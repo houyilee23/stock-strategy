@@ -1,5 +1,25 @@
 # 台股個股策略系統
 
+> **修改程式前必讀**：`docs/ARCHITECTURE.md` — 模組地圖、資料流、「我要改 X 該編哪檔」查找表
+
+## Token-efficient 修改路徑（Claude 用）
+
+當被要求修改 X，先去 ARCHITECTURE.md 的「查找表」找對應檔案，不要全 repo 搜尋：
+
+| 想做的事 | 載入哪些檔案 |
+|---|---|
+| 新增策略 template | `templates/<category>.py` + `templates/search_spaces.py` + `templates/__init__.py`（僅這 3 個） |
+| 改 Tier 規則 | `tiering.py`（單檔，429 行） |
+| 改 backtest 引擎 | `backtest_one.py`（單檔，187 行） |
+| 改 BNH 評估 | `tiering.py` + `bnh.py` |
+| 改 signals 輸出 | `src/strategy/runner.py` + `main.py.cmd_signals()` |
+| 改 web UI | `scripts/build_html.py` |
+| 改 markdown 報告 | `scripts/build_per_stock_reports.py` |
+| 新 fetcher | `scripts/fetch_*.py`（看現有的當範本） |
+| Tier 規則改後重評現有 results | `scripts/retier_run_dir.py <run_id>` |
+
+詳細工作流見 `docs/ARCHITECTURE.md`。
+
 ## 環境
 
 **家裡 PC（D:\stock，目前位置）**：Python 3.13.13 from Microsoft Store，已在 PATH 中。
