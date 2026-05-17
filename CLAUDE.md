@@ -52,6 +52,9 @@ python main.py screen | fetch | fetch-adjusted | fetch-revenue | update
 ## 重要文件
 
 ### 設計規格（不要動，主要參考）
+- `docs/ARCHITECTURE.md` — **★★ 系統架構文件（2026-05-18 重構後）★★**
+  - 模組總覽、資料流圖、「我要改 X 該編哪個檔案」查找表
+  - **修改程式前必讀** — 省下找檔案的 token
 - `docs/SPEC_strategy_system.md` — 設計規格（single source of truth）
 - `docs/SONNET_BUILD_PLAN.md` — 實作四階段計畫 + 自我驗證
 - `docs/CHECKPOINTS.md` — Opus 審查節點
@@ -76,12 +79,20 @@ python main.py screen | fetch | fetch-adjusted | fetch-revenue | update
 - `scripts/rebuild_per_stock_best.py <run_id>` — 多 process 共用 dir 時，從 template yaml 重建 PSB
 - `scripts/refresh_bnh_evaluations.py` — 重算所有 F-tier 個股的 BNH (買進長持) 替代評估
 
-### 策略系統（templates.py，65 個 templates）
-- **55 個單一 templates** — trend_pullback / donchian_breakout / mean_reversion ...
-- **10 個 ensemble templates**（5/16-5/17 新增）：
+### 策略系統（src/strategy/auto_iterate/templates/ package，65 個 templates，5/18 拆分）
+- `core_t1_t9.py` (9 funcs)         — T1-T9 原始模板
+- `reversal_dips.py` (23 funcs)     — mean-reversion / dip / oversold
+- `trend_breakouts.py` (21 funcs)   — trend / breakout / momentum
+- `composite_advanced.py` (2 funcs) — chip_streak / monthly_revenue_event
+- `ensembles.py` (10 funcs)         — composite-vote 策略
   - Phase 1 (vote-based)：dip_vote, breakout_vote, oversold_vote, trend_confirm, dip_or_bounce
   - Phase 2 (regime-aware)：regime_dip, breakout_pullback, dual_momentum
   - Phase 3 (intersection)：triple_confirm, bullish_divergence
+- `search_spaces.py`                — SEARCH_SPACES + sample_template_params
+- `__init__.py`                     — 公開 API + TEMPLATE_GENERATORS registry
+
+**新增 template 步驟**：見 `docs/ARCHITECTURE.md` 的「策略模板新增流程」
+
 - **2 個 rescue rules** in tiering.py：
   - C_HIGH_Q_RESCUE: n∈[5,9] + raw_PF≥3 + exp≥5% + |DD|≤25% + no holdout FAIL → C
   - D_LOW_N_RESCUE: n∈[3,4] + raw_PF≥5 + exp≥5% + |DD|≤25% → D（容忍 holdout）
