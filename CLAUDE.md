@@ -69,6 +69,23 @@ python main.py screen | fetch | fetch-adjusted | fetch-revenue | update
 - `config/watchlists.yaml` — **個人觀察清單（gitignore，公開 repo 中不存在）**
 - `config/watchlists.example.yaml` — 範本，家裡 PC 第一次設定要 copy 一份
 
+### 工具腳本（5/15-5/17 新增）
+- `scripts/apply_retrain_upgrades.py [--add-new] <run_id1> ...` — 將 auto_iterate run 的結果套用為個股升級（或加入新股）
+- `scripts/retier_recommendations.py` — tiering 規則改後，對 recommendations.yaml 重新評級
+- `scripts/retier_run_dir.py <run_id1> ...` — 對 auto_iterate run dir 的 per_stock_best.yaml 重新評級
+- `scripts/rebuild_per_stock_best.py <run_id>` — 多 process 共用 dir 時，從 template yaml 重建 PSB
+- `scripts/refresh_bnh_evaluations.py` — 重算所有 F-tier 個股的 BNH (買進長持) 替代評估
+
+### 策略系統（templates.py，65 個 templates）
+- **55 個單一 templates** — trend_pullback / donchian_breakout / mean_reversion ...
+- **10 個 ensemble templates**（5/16-5/17 新增）：
+  - Phase 1 (vote-based)：dip_vote, breakout_vote, oversold_vote, trend_confirm, dip_or_bounce
+  - Phase 2 (regime-aware)：regime_dip, breakout_pullback, dual_momentum
+  - Phase 3 (intersection)：triple_confirm, bullish_divergence
+- **2 個 rescue rules** in tiering.py：
+  - C_HIGH_Q_RESCUE: n∈[5,9] + raw_PF≥3 + exp≥5% + |DD|≤25% + no holdout FAIL → C
+  - D_LOW_N_RESCUE: n∈[3,4] + raw_PF≥5 + exp≥5% + |DD|≤25% → D（容忍 holdout）
+
 ## 重要約束
 
 1. **時間防穿越**：所有訊號只能用 T 日及之前資料；成交在 T+1 開盤
