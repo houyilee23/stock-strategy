@@ -62,7 +62,7 @@ _最後更新：**2026-05-17**_
 | [3037](output/reports/per_stock/3037.md) | 欣興 | 821.0 | HOLD | C | — | 56 | [多頭] | BULL |
 | [3017](output/reports/per_stock/3017.md) | 奇鋐 | 2455.0 | HOLD | A | 50% | 49 | [多頭] | BULL |
 | [6669](output/reports/per_stock/6669.md) | 緯穎 | 5115.0 | HOLD | B | — | 59 | [多頭] | BULL |
-| [2360](output/reports/per_stock/2360.md) | 致茂 | 2240.0 | HOLD | C | — | 57 | [多頭] | BULL |
+| [2360](output/reports/per_stock/2360.md) | 致茂 | 2240.0 | HOLD | B | 30% | 57 | [多頭] | BULL |
 | [6515](output/reports/per_stock/6515.md) | 穎崴 | 9780.0 | HOLD | B | 30% | 53 | [多頭] | BULL |
 | [2327](output/reports/per_stock/2327.md) | 國巨 | 455.5 | HOLD | C | — | 80 | [多頭] | BULL |
 | [2379](output/reports/per_stock/2379.md) | 瑞昱 | 536.0 | HOLD | B | — | 49 | [空頭] | BULL |

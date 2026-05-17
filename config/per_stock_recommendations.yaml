@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260517_094608, 20260517_094610
+# Applied retrain upgrades from: 20260517_145421, 20260517_145429, 20260517_145437
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -1258,31 +1258,32 @@
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
 '2360':
-  best_template: narrow_range_breakout
+  best_template: ensemble_dual_momentum
   bootstrap:
     n_iterations: 1000
-    n_original: 26
-    pf_lower: 0.925
-    pf_mean: 2.532
+    n_original: 16
+    pf_lower: 1.34
+    pf_mean: 3.67
     pf_upper: 5.0
   holdouts:
     A_new: null
-    B: true
-    C: true
-  params_ref: narrow_range_breakout.yaml#per_stock.2360
-  position_pct_recommended: 0.15
-  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
-  template: narrow_range_breakout
-  test_alpha_vs_0050: -0.1826
-  test_cagr: 0.0874
-  test_expectancy: 0.0188
-  test_max_dd: -0.1861
-  test_n_trades: 26
-  test_pf: 2.25
-  tier: C
-  tier_reason: PF_lower=0.93 ≥ 0.7, exp=+1.9% ≥ 1%, n=26≥5, holdout=[A_new=NA B=O
-    C=O]
-  verdict: WEAK
+    B: false
+    C: null
+  params_ref: ensemble_dual_momentum.yaml#per_stock.2360
+  position_pct_max: 0.3
+  position_pct_recommended: 0.3
+  template: ensemble_dual_momentum
+  test_alpha_vs_0050: -0.0405
+  test_cagr: 0.505
+  test_expectancy: 0.0673
+  test_max_dd: -0.2098
+  test_n_trades: 16
+  test_pf: 3.889
+  tier: B
+  tier_reason: PF_lower=1.34 ≥ 1.0, exp=+6.7% ≥ 2%, n=16≥5, holdout=[A_new=NA B=X
+    C=NA]
+  tradeable: true
+  verdict: PASS
 '2367':
   best_template: gap_continuation
   bootstrap:
