@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260517_034624, 20260517_034627, 20260517_034632
+# Applied retrain upgrades from: 20260517_094608, 20260517_094610
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -1481,29 +1481,32 @@
   tier: C
   tradeable: true
 '2409':
-  best_template: mean_reversion
+  best_template: ensemble_regime_dip
   bootstrap:
     n_iterations: 1000
-    n_original: 3
-    pf_lower: null
-    pf_mean: null
-    pf_upper: null
+    n_original: 5
+    pf_lower: 1.24
+    pf_mean: 4.317
+    pf_upper: 5.0
   holdouts:
     A_new: null
     B: null
-    C: null
-  params_ref: mean_reversion.yaml#per_stock.2409
-  position_pct_recommended: 0.15
-  test_alpha_vs_0050: -0.1812
-  test_cagr: 0.0887
-  test_expectancy: 0.1644
-  test_max_dd: -0.1651
-  test_n_trades: 3
-  test_pf: null
-  tier: C
-  tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+16.4% ≥ 5%, |DD|=17% ≤ 25%,
-    holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
-  verdict: INSUFFICIENT
+    C: true
+  params_ref: ensemble_regime_dip.yaml#per_stock.2409
+  position_pct_max: 0.3
+  position_pct_recommended: 0.3
+  template: ensemble_regime_dip
+  test_alpha_vs_0050: -0.4115
+  test_cagr: 0.1341
+  test_expectancy: 0.0611
+  test_max_dd: -0.115
+  test_n_trades: 5
+  test_pf: 7.477
+  tier: B
+  tier_reason: PF_lower=1.24 ≥ 1.0, exp=+6.1% ≥ 2%, n=5≥5, holdout=[A_new=NA B=NA
+    C=O]
+  tradeable: true
+  verdict: PASS
 '2412':
   best_template: trend_confirm_hold
   bootstrap:
@@ -3786,31 +3789,32 @@
   tradeable: false
   verdict: PASS
 '6488':
-  best_template: support_bounce
+  best_template: ensemble_triple_confirm
   bootstrap:
     n_iterations: 1000
-    n_original: 11
-    pf_lower: 0.772
-    pf_mean: 2.833
+    n_original: 8
+    pf_lower: 1.682
+    pf_mean: 4.444
     pf_upper: 5.0
   holdouts:
     A_new: null
     B: true
-    C: false
-  params_ref: support_bounce.yaml#per_stock.6488
-  position_pct_recommended: 0.15
-  recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
-  template: support_bounce
-  test_alpha_vs_0050: -0.1811
-  test_cagr: 0.0888
-  test_expectancy: 0.0472
-  test_max_dd: -0.2078
-  test_n_trades: 11
-  test_pf: 2.13
-  tier: C
-  tier_reason: PF_lower=0.77 ≥ 0.7, exp=+4.7% ≥ 1%, n=11≥5, holdout=[A_new=NA B=O
-    C=X]
-  verdict: WEAK
+    C: null
+  params_ref: ensemble_triple_confirm.yaml#per_stock.6488
+  position_pct_max: 0.5
+  position_pct_recommended: 0.5
+  template: ensemble_triple_confirm
+  test_alpha_vs_0050: -0.2798
+  test_cagr: 0.2658
+  test_expectancy: 0.0729
+  test_max_dd: -0.1509
+  test_n_trades: 8
+  test_pf: 8.909
+  tier: A
+  tier_reason: PF_lower=1.68 ≥ 1.5, exp=+7.3% ≥ 3%, n=8≥6, holdout=[A_new=NA B=O C=NA],
+    gate=any holdout PASS
+  tradeable: true
+  verdict: PASS
 '6491':
   best_template: mean_reversion
   bootstrap:

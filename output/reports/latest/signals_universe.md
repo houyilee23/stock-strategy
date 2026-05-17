@@ -40,7 +40,7 @@
 | 3189 | 景碩 | — | 486.0 | HOLD | B | 30% | chip_momentum | — | — | — | 55 | [多頭] | BULL |  |
 | 8046 | 南電 | — | 786.0 | BUY | C | 15% | mean_reversion | 買 823.1 | — | — | 47 | [多頭] | BULL |  |
 | 5347 | 世界先進 | — | 151.0 | HOLD | C | — | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
-| 6488 | 環球晶 | — | 606.0 | HOLD | C | — | style1_pullback | — | — | — | 62 | [多頭] | BULL |  |
+| 6488 | 環球晶 | — | 606.0 | HOLD | A | 50% | style1_pullback | — | — | — | 62 | [多頭] | BULL |  |
 | 2412 | 中華電 | — | 138.0 | HOLD | B | — | style1_pullback | — | 137.0~138.4 | 133.4 | 62 | [多頭] | BULL | 觀察中 RSI=61.8 |
 | 3045 | 台灣大 | — | 114.5 | HOLD | D | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
 | 4904 | 遠傳 | — | 98.3 | HOLD | C | 15% | style1_pullback | — | 97.9~98.9 | 89.8 | 62 | [多頭] | BULL | 觀察中 RSI=62.2 |
@@ -103,7 +103,7 @@
 | 6121 | 新普 | — | 390.0 | HOLD | A | — | style1_pullback | — | — | — | 70 | [空頭] | BULL |  |
 | 6285 | 啟碁 | — | 260.0 | HOLD | A | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
 | 8454 | 富邦媒 | — | 187.5 | HOLD | D | — | style1_pullback | — | — | — | 55 | [空頭] | BULL |  |
-| 2409 | 友達 | — | 19.1 | HOLD | C | — | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
+| 2409 | 友達 | — | 19.1 | HOLD | B | 30% | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
 | 3481 | 群創 | — | 36.1 | HOLD | C | 15% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
 | 5314 | 世紀 | — | 74.1 | HOLD | C | — | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
 | 2812 | 台中銀 | — | 18.8 | HOLD | C | — | style1_pullback | — | — | — | 18 | [空頭] | BULL |  |

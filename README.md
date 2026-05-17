@@ -89,7 +89,7 @@ _最後更新：**2026-05-17**_
 | [3189](output/reports/per_stock/3189.md) | 景碩 | 486.0 | HOLD | B | 30% | 55 | [多頭] | BULL |
 | [8046](output/reports/per_stock/8046.md) | 南電 | 786.0 | 🟢 **BUY** | C | 15% | 47 | [多頭] | BULL |
 | [5347](output/reports/per_stock/5347.md) | 世界先進 | 151.0 | HOLD | C | — | 66 | [多頭] | BULL |
-| [6488](output/reports/per_stock/6488.md) | 環球晶 | 606.0 | HOLD | C | — | 62 | [多頭] | BULL |
+| [6488](output/reports/per_stock/6488.md) | 環球晶 | 606.0 | HOLD | A | 50% | 62 | [多頭] | BULL |
 | [2412](output/reports/per_stock/2412.md) | 中華電 | 138.0 | HOLD | B | — | 62 | [多頭] | BULL |
 | [3045](output/reports/per_stock/3045.md) | 台灣大 | 114.5 | HOLD | D | — | 68 | [多頭] | BULL |
 | [4904](output/reports/per_stock/4904.md) | 遠傳 | 98.3 | HOLD | C | 15% | 62 | [多頭] | BULL |
@@ -152,7 +152,7 @@ _最後更新：**2026-05-17**_
 | [6121](output/reports/per_stock/6121.md) | 新普 | 390.0 | HOLD | A | — | 70 | [空頭] | BULL |
 | [6285](output/reports/per_stock/6285.md) | 啟碁 | 260.0 | HOLD | A | — | 60 | [多頭] | BULL |
 | [8454](output/reports/per_stock/8454.md) | 富邦媒 | 187.5 | HOLD | D | — | 55 | [空頭] | BULL |
-| [2409](output/reports/per_stock/2409.md) | 友達 | 19.1 | HOLD | C | — | 55 | [多頭] | BULL |
+| [2409](output/reports/per_stock/2409.md) | 友達 | 19.1 | HOLD | B | 30% | 55 | [多頭] | BULL |
 | [3481](output/reports/per_stock/3481.md) | 群創 | 36.1 | HOLD | C | 15% | 72 | [多頭] | BULL |
 | [5314](output/reports/per_stock/5314.md) | 世紀 | 74.1 | HOLD | C | — | 45 | [空頭] | BULL |
 | [2812](output/reports/per_stock/2812.md) | 台中銀 | 18.8 | HOLD | C | — | 18 | [空頭] | BULL |
