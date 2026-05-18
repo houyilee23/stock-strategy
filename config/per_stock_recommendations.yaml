@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260518_103126, 20260518_103131, 20260518_103139, 20260518_103148, 20260518_103157, 20260518_103204, 20260518_103212
+# Applied retrain upgrades from: 20260518_110730, 20260518_110735, 20260518_110740, 20260518_110745, 20260518_110750, 20260518_110755, 20260518_110800, 20260518_110805
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -1140,6 +1140,33 @@
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=15.72 ≥ 3.0, exp=+10.3% ≥ 5%, |DD|=19% ≤ 25%,
     holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
+'2328':
+  best_template: simple_dip_buy
+  bootstrap:
+    n_iterations: 1000
+    n_original: 6
+    pf_lower: 5.0
+    pf_mean: 5.0
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: simple_dip_buy.yaml#per_stock.2328
+  position_pct_max: 0.5
+  position_pct_recommended: 0.5
+  template: simple_dip_buy
+  test_alpha_vs_0050: -0.3503
+  test_cagr: 0.1952
+  test_expectancy: 0.0865
+  test_max_dd: -0.211
+  test_n_trades: 6
+  test_pf: null
+  tier: A
+  tier_reason: PF_lower=5.00 ≥ 1.5, exp=+8.6% ≥ 3%, n=6≥6, holdout=[A_new=NA B=O C=O],
+    gate=any holdout PASS
+  tradeable: true
+  verdict: SUSPICIOUS_PERFECT
 '2330':
   name: 台積電
   params_ref: gap_continuation.yaml#per_stock.2330
@@ -1239,6 +1266,33 @@
     C=X], gate=PF_lower≥2.0 自動晉升
   tradeable: true
   verdict: SUSPICIOUS_PERFECT
+'2352':
+  best_template: narrow_range_breakout
+  bootstrap:
+    n_iterations: 1000
+    n_original: 4
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: false
+    C: false
+  params_ref: narrow_range_breakout.yaml#per_stock.2352
+  position_pct_max: 0.0
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  template: narrow_range_breakout
+  test_alpha_vs_0050: -0.5967
+  test_cagr: -0.0512
+  test_expectancy: -0.0238
+  test_max_dd: -0.1563
+  test_n_trades: 4
+  test_pf: 0.538
+  tier: F
+  tier_reason: FAIL：test expectancy=-2.4% < 0（負期望值）
+  tradeable: false
+  verdict: INSUFFICIENT
 '2353':
   name: 宏碁
   params_ref: donchian_breakout.yaml#per_stock.2353
@@ -2775,6 +2829,33 @@
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=8.58 ≥ 3.0, exp=+5.6% ≥ 5%, |DD|=5% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
   verdict: INSUFFICIENT
+'3323':
+  best_template: simple_dip_buy
+  bootstrap:
+    n_iterations: 1000
+    n_original: 6
+    pf_lower: 5.0
+    pf_mean: 5.0
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: true
+  params_ref: simple_dip_buy.yaml#per_stock.3323
+  position_pct_max: 0.5
+  position_pct_recommended: 0.5
+  template: simple_dip_buy
+  test_alpha_vs_0050: -0.233
+  test_cagr: 0.3125
+  test_expectancy: 0.1113
+  test_max_dd: -0.103
+  test_n_trades: 6
+  test_pf: null
+  tier: A
+  tier_reason: PF_lower=5.00 ≥ 1.5, exp=+11.1% ≥ 3%, n=6≥6, holdout=[A_new=NA B=O
+    C=O], gate=any holdout PASS
+  tradeable: true
+  verdict: SUSPICIOUS_PERFECT
 '3324':
   best_template: mean_reversion
   bootstrap:
@@ -3354,6 +3435,33 @@
   test_pf: 21.562
   tier: B
   tier_reason: PF_lower=3.52 ≥ 1.0, exp=+3.0% ≥ 2%, n=5≥5, holdout=[A_new=NA B=O C=X]
+  tradeable: true
+  verdict: SUSPICIOUS_PERFECT
+'5274':
+  best_template: chip_momentum
+  bootstrap:
+    n_iterations: 1000
+    n_original: 9
+    pf_lower: 3.838
+    pf_mean: 4.934
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: true
+    C: false
+  params_ref: chip_momentum.yaml#per_stock.5274
+  position_pct_max: 1.0
+  position_pct_recommended: 1.0
+  template: chip_momentum
+  test_alpha_vs_0050: 0.1332
+  test_cagr: 0.6788
+  test_expectancy: 0.1604
+  test_max_dd: -0.1896
+  test_n_trades: 9
+  test_pf: 29.61
+  tier: S
+  tier_reason: PF_lower=3.84 ≥ 2.0, exp=+16.0% ≥ 5%, n=9≥8, holdout=[A_new=NA B=O
+    C=X], gate=any holdout PASS
   tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '5314':
@@ -4154,6 +4262,33 @@
   tier_reason: FAIL：test expectancy=-inf% < 0（負期望值）
   tradeable: false
   verdict: INSUFFICIENT
+'7769':
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 7
+    pf_lower: 5.0
+    pf_mean: 5.0
+    pf_upper: 5.0
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: low_vol_pullback.yaml#per_stock.7769
+  position_pct_max: 0.5
+  position_pct_recommended: 0.5
+  template: low_vol_pullback
+  test_alpha_vs_0050: -0.1147
+  test_cagr: 0.4309
+  test_expectancy: 0.0793
+  test_max_dd: -0.1958
+  test_n_trades: 7
+  test_pf: null
+  tier: A
+  tier_reason: PF_lower=5.00 ≥ 1.5, exp=+7.9% ≥ 3%, n=7≥6, holdout=[A_new=NA B=NA
+    C=NA], gate=PF_lower≥2.0 自動晉升
+  tradeable: true
+  verdict: SUSPICIOUS_PERFECT
 '8016':
   best_template: simple_dip_buy
   bootstrap:
