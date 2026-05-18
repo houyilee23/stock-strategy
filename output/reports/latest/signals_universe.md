@@ -27,7 +27,7 @@
 | 2353 | 宏碁 | — | 27.7 | HOLD | C | 15% | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
 | 3661 | 世芯-KY | — | 4605.0 | HOLD | A | 50% | style1_pullback | — | — | — | 59 | [多頭] | BULL |  |
 | 2426 | 鼎元 | — | 61.9 | HOLD | B | 30% | style1_pullback | — | — | — | 55 | [多頭] | BULL |  |
-| 1560 | 中砂（CMP） | — | 642.0 | HOLD | C | 15% | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
+| 1560 | 中砂 | — | 642.0 | HOLD | C | 15% | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
 | 2324 | 仁寶 | — | 28.6 | HOLD | C | 15% | style1_pullback | — | — | — | 43 | [空頭] | BULL |  |
 | 2344 | 華邦電 | — | 129.5 | HOLD | B | 30% | style1_pullback | — | — | — | 69 | [多頭] | BULL |  |
 | 6271 | 同欣電 | — | 177.0 | HOLD | C | 15% | style1_pullback | — | 176.5~180.1 | 134.1 | 51 | [多頭] | BULL | 觀察中 RSI=51.5 |
@@ -59,7 +59,7 @@
 | 1326 | 台化 | — | 44.5 | HOLD | B | 30% | low_vol_pullback | TP 50 / SL 38 | — | — | 38 | [多頭] | BULL |  |
 | 6505 | 台塑化 | — | 51.3 | HOLD | C | 15% | style1_pullback | — | 51.3~52.3 | 48.2 | 42 | [多頭] | BULL | 觀察中 RSI=41.9 |
 | 2002 | 中鋼 | — | 18.1 | HOLD | C | 15% | style1_pullback | — | — | — | 32 | [空頭] | BULL |  |
-| 1809 | 中釉（陶瓷） | — | 38.6 | HOLD | B | 30% | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
+| 1809 | 中釉 | — | 38.6 | HOLD | B | 30% | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
 | 1101 | 台泥 | — | 24.1 | HOLD | F | — | style1_pullback | — | 24.0~24.4 | 23.7 | 43 | [多頭] | BULL | 觀察中 RSI=43.4 |
 | 1102 | 亞泥 | — | 34.4 | HOLD | C | 15% | style1_pullback | — | — | — | 40 | [空頭] | BULL |  |
 | 1227 | 佳格 | — | 28.5 | HOLD | F | — | style1_pullback | — | — | — | 33 | [空頭] | BULL |  |
@@ -77,13 +77,13 @@
 | 2603 | 長榮 | — | 200.5 | HOLD | C | 15% | style1_pullback | — | 200.5~205.2 | 192.7 | 42 | [多頭] | BULL | 觀察中 RSI=42.2 |
 | 2615 | 萬海 | — | 74.2 | HOLD | B | 30% | style1_pullback | — | — | — | 43 | [空頭] | BULL |  |
 | 2618 | 長榮航 | — | 34.6 | HOLD | C | 15% | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
-| 0050 | 元大台灣50（2025/06 4:1 拆分樣本） | — | 95.4 | HOLD | — | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
+| 0050 | 元大台灣50 | — | 95.4 | HOLD | — | — | style1_pullback | — | — | — | 68 | [多頭] | BULL |  |
 | 0056 | 元大高股息 | — | 44.5 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 006208 | 富邦台50 | — | 220.4 | HOLD | B | 30% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 00878 | 國泰永續高股息 | — | 27.9 | HOLD | C | 15% | style1_pullback | — | — | — | 77 | [多頭] | BULL |  |
-| 00919 | 群益台灣精選高息（2023 IPO，歷史短） | — | 25.8 | HOLD | C | 15% | style1_pullback | — | — | — | 73 | [多頭] | BULL |  |
-| 00940 | 元大台灣價值高息（2024 IPO，歷史很短） | — | 10.9 | HOLD | C | 15% | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |
-| 00981A | 主動統一台股增長（個人持倉，untestable F） | — | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
+| 00919 | 群益台灣精選高息 | — | 25.8 | HOLD | C | 15% | style1_pullback | — | — | — | 73 | [多頭] | BULL |  |
+| 00940 | 元大台灣價值高息 | — | 10.9 | HOLD | C | 15% | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |
+| 00981A | 主動統一台股增長 | — | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
 | 2458 | 義隆電 | — | 142.5 | HOLD | D | 10% | style1_pullback | — | — | — | 53 | [多頭] | BULL |  |
 | 3035 | 智原 | — | 190.0 | HOLD | A | 50% | style1_pullback | — | — | — | 57 | [空頭] | BULL |  |
 | 3081 | 聯亞光電 | — | 2620.0 | HOLD | B | 30% | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
@@ -163,36 +163,36 @@
 | 6446 | 藥華藥 | — | 826.0 | HOLD | D | 10% | style1_pullback | — | — | — | 78 | [多頭] | BULL |  |
 | 2542 | 興富發 | — | 43.8 | HOLD | C | 15% | style1_pullback | — | — | — | 76 | [空頭] | BULL |  |
 | 2722 | 夏都 | — | 23.1 | HOLD | F | — | style1_pullback | — | — | — | 41 | [空頭] | BULL |  |
-| 2492 | 華新科（MLCC，top-30 市值） | — | 206.0 | HOLD | A | 50% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
-| 2880 | 華南金（大型金控） | — | 32.4 | HOLD | C | 15% | style1_pullback | — | 32.4~32.5 | 31.3 | 38 | [多頭] | BULL | 觀察中 RSI=38.4 |
+| 2492 | 華新科 | — | 206.0 | HOLD | A | 50% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
+| 2880 | 華南金 | — | 32.4 | HOLD | C | 15% | style1_pullback | — | 32.4~32.5 | 31.3 | 38 | [多頭] | BULL | 觀察中 RSI=38.4 |
 | 2855 | 統一證 | — | 40.8 | HOLD | C | 15% | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
-| 2392 | 正崴（光學連接） | — | 33.8 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
-| 2393 | 億光（LED leader） | — | 62.5 | HOLD | B | 30% | style1_pullback | — | 62.4~65.7 | 62.4 | 30 | [多頭] | BULL | 觀察中 RSI=29.9 |
-| 2347 | 聯強（電子通路 top） | — | 82.4 | HOLD | A | 50% | style1_pullback | — | 82.4~82.4 | 66.4 | 51 | [多頭] | BULL | 觀察中 RSI=51.2 |
-| 5904 | 寶雅（美妝零售） | — | 546.0 | HOLD | D | 10% | style1_pullback | — | 535.0~553.0 | 468.6 | 50 | [多頭] | BULL | 觀察中 RSI=49.9 |
-| 6804 | 大樹（藥局零售） | — | 15.1 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
-| 9941 | 裕融（汽車租賃 leader） | — | 73.1 | HOLD | F | — | style1_pullback | — | — | — | 32 | [空頭] | BULL |  |
+| 2392 | 正崴 | — | 33.8 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
+| 2393 | 億光 | — | 62.5 | HOLD | B | 30% | style1_pullback | — | 62.4~65.7 | 62.4 | 30 | [多頭] | BULL | 觀察中 RSI=29.9 |
+| 2347 | 聯強 | — | 82.4 | HOLD | A | 50% | style1_pullback | — | 82.4~82.4 | 66.4 | 51 | [多頭] | BULL | 觀察中 RSI=51.2 |
+| 5904 | 寶雅 | — | 546.0 | HOLD | D | 10% | style1_pullback | — | 535.0~553.0 | 468.6 | 50 | [多頭] | BULL | 觀察中 RSI=49.9 |
+| 6804 | 大樹 | — | 15.1 | HOLD | F | — | style1_pullback | — | — | — | 37 | [空頭] | BULL |  |
+| 9941 | 裕融 | — | 73.1 | HOLD | F | — | style1_pullback | — | — | — | 32 | [空頭] | BULL |  |
 | 5522 | 遠雄 | — | 70.7 | HOLD | F | — | style1_pullback | — | 69.7~69.7 | 65.0 | 53 | [多頭] | BULL | 觀察中 RSI=52.9 |
-| 6188 | 廣明（光碟） | — | 84.3 | HOLD | A | 50% | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
-| 1565 | 精華（隱形眼鏡 leader） | — | 93.6 | HOLD | F | — | style1_pullback | — | — | — | 22 | [空頭] | BULL |  |
-| 8016 | 矽創（IC 設計） | — | 274.0 | HOLD | B | 30% | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
-| 6510 | 精測（半導體探針卡） | — | 3735.0 | HOLD | A | 50% | style1_pullback | — | — | — | 51 | [多頭] | BULL |  |
+| 6188 | 廣明 | — | 84.3 | HOLD | A | 50% | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
+| 1565 | 精華 | — | 93.6 | HOLD | F | — | style1_pullback | — | — | — | 22 | [空頭] | BULL |  |
+| 8016 | 矽創 | — | 274.0 | HOLD | B | 30% | style1_pullback | — | — | — | 65 | [多頭] | BULL |  |
+| 6510 | 精測 | — | 3735.0 | HOLD | A | 50% | style1_pullback | — | — | — | 51 | [多頭] | BULL |  |
 | 4148 | 全宇生技 | — | 35.0 | HOLD | C | 15% | style1_pullback | — | — | — | 36 | [空頭] | BULL |  |
-| 3324 | 雙鴻（伺服器散熱） | — | 995.0 | HOLD | C | 15% | style1_pullback | — | 990.0~1015.0 | 921.1 | 41 | [多頭] | BULL | 觀察中 RSI=41.1 |
-| 6526 | 達發（5G IC / 達創 Hub） | — | 688.0 | HOLD | C | 15% | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |
-| 8341 | 日友（廢棄物處理） | — | 76.5 | HOLD | C | 15% | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
-| 1909 | 榮成（紙業） | — | 9.0 | HOLD | F | — | style1_pullback | — | — | — | 39 | [空頭] | BULL |  |
-| 9904 | 寶成（製鞋 OEM, Nike 大客） | — | 26.0 | HOLD | F | — | style1_pullback | — | — | — | 36 | [空頭] | BULL |  |
-| 2367 | 燿華（PCB） | — | 61.8 | HOLD | D | 10% | style1_pullback | — | — | 55.9 | 46 | [多頭] | BULL | 持倉中 持9日 |
-| 2455 | 全新（GaAs IC） | — | 358.5 | HOLD | A | 50% | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
-| 6443 | 元晶（太陽能） | — | 38.2 | HOLD | C | 15% | style1_pullback | — | 37.3~38.5 | 26.5 | 46 | [多頭] | BULL | 觀察中 RSI=45.7 |
-| 3526 | 凡甲（連接器） | — | 374.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
-| 5536 | 聖暉（廠房工程） | — | 1025.0 | HOLD | B | 30% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
-| 2328 | 廣宇（A-tier, simple_dip_buy） | — | 50.9 | HOLD | A | 50% | style1_pullback | — | — | — | 54 | [空頭] | BULL |  |
-| 2352 | 佳世達（F-tier） | — | 25.2 | HOLD | F | — | style1_pullback | — | — | — | 52 | [空頭] | BULL |  |
-| 3227 | 原相（C-tier, gap_continuation, 個人持倉） | — | 220.0 | HOLD | C | 15% | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
-| 3323 | 加百裕（A-tier, simple_dip_buy） | — | 34.7 | HOLD | A | 50% | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
-| 5274 | 信驊（S-tier! chip_momentum 大發現） | — | 17195.0 | HOLD | S | 100% | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
-| 7769 | 鴻勁（A-tier, low_vol_pullback, 1.4 年資料） | — | 6895.0 | HOLD | A | 50% | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
-| 00965 | 個人持倉 ETF | — | 25.2 | HOLD | F | — | style1_pullback | — | 25.2~25.6 | 23.4 | 42 | [多頭] | BULL | 觀察中 RSI=41.6 |
-| 00981A | 主動統一台股增長（個人持倉，untestable F） | — | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
+| 3324 | 雙鴻 | — | 995.0 | HOLD | C | 15% | style1_pullback | — | 990.0~1015.0 | 921.1 | 41 | [多頭] | BULL | 觀察中 RSI=41.1 |
+| 6526 | 達發 | — | 688.0 | HOLD | C | 15% | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |
+| 8341 | 日友 | — | 76.5 | HOLD | C | 15% | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
+| 1909 | 榮成 | — | 9.0 | HOLD | F | — | style1_pullback | — | — | — | 39 | [空頭] | BULL |  |
+| 9904 | 寶成 | — | 26.0 | HOLD | F | — | style1_pullback | — | — | — | 36 | [空頭] | BULL |  |
+| 2367 | 燿華 | — | 61.8 | HOLD | D | 10% | style1_pullback | — | — | 55.9 | 46 | [多頭] | BULL | 持倉中 持9日 |
+| 2455 | 全新 | — | 358.5 | HOLD | A | 50% | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
+| 6443 | 元晶 | — | 38.2 | HOLD | C | 15% | style1_pullback | — | 37.3~38.5 | 26.5 | 46 | [多頭] | BULL | 觀察中 RSI=45.7 |
+| 3526 | 凡甲 | — | 374.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
+| 5536 | 聖暉 | — | 1025.0 | HOLD | B | 30% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
+| 2328 | 廣宇 | — | 50.9 | HOLD | A | 50% | style1_pullback | — | — | — | 54 | [空頭] | BULL |  |
+| 2352 | 佳世達 | — | 25.2 | HOLD | F | — | style1_pullback | — | — | — | 52 | [空頭] | BULL |  |
+| 3227 | 原相 | — | 220.0 | HOLD | C | 15% | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
+| 3323 | 加百裕 | — | 34.7 | HOLD | A | 50% | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
+| 5274 | 信驊 | — | 17195.0 | HOLD | S | 100% | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
+| 7769 | 鴻勁 | — | 6895.0 | HOLD | A | 50% | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
+| 00965 | 個人持倉 | — | 25.2 | HOLD | F | — | style1_pullback | — | 25.2~25.6 | 23.4 | 42 | [多頭] | BULL | 觀察中 RSI=41.6 |
+| 00981A | 主動統一台股增長 | — | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |

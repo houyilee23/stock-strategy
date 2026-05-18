@@ -16,7 +16,7 @@ _最後更新：**2026-05-18**_
 | [1326](output/reports/per_stock/1326.md) | 台化 | 44.5 | HOLD | B | 30% | 38 | [多頭] | BULL |
 | [6505](output/reports/per_stock/6505.md) | 台塑化 | 51.3 | HOLD | C | 15% | 42 | [多頭] | BULL |
 | [1303](output/reports/per_stock/1303.md) | 南亞 | 85.3 | HOLD | A | 50% | 47 | [多頭] | BULL |
-| [1809](output/reports/per_stock/1809.md) | 中釉（陶瓷） | 38.6 | HOLD | B | 30% | 71 | [多頭] | BULL |
+| [1809](output/reports/per_stock/1809.md) | 中釉 | 38.6 | HOLD | B | 30% | 71 | [多頭] | BULL |
 | [2002](output/reports/per_stock/2002.md) | 中鋼 | 18.1 | HOLD | C | 15% | 32 | [空頭] | BULL |
 | [6271](output/reports/per_stock/6271.md) | 同欣電 | 177.0 | HOLD | C | 15% | 51 | [多頭] | BULL |
 | [4958](output/reports/per_stock/4958.md) | 臻鼎-KY | 401.0 | HOLD | C | 15% | 60 | [多頭] | BULL |
@@ -24,7 +24,7 @@ _最後更新：**2026-05-18**_
 | [2337](output/reports/per_stock/2337.md) | 旺宏 | 162.5 | HOLD | C | 15% | 56 | [多頭] | BULL |
 | [2408](output/reports/per_stock/2408.md) | 南亞科 | 311.5 | HOLD | C | 15% | 63 | [多頭] | BULL |
 | [6770](output/reports/per_stock/6770.md) | 力積電 | 62.8 | HOLD | B | 30% | 59 | [多頭] | BULL |
-| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長（個人持倉，untestable F） | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
+| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
 | [2369](output/reports/per_stock/2369.md) | 菱生 | 29.7 | 🟢 **BUY** | C | 15% | 46 | [多頭] | BULL |
 | [3189](output/reports/per_stock/3189.md) | 景碩 | 486.0 | HOLD | B | 30% | 55 | [多頭] | BULL |
 | [8046](output/reports/per_stock/8046.md) | 南電 | 786.0 | 🟢 **BUY** | C | 15% | 47 | [多頭] | BULL |
@@ -38,7 +38,7 @@ _最後更新：**2026-05-18**_
 | [2330](output/reports/per_stock/2330.md) | 台積電 | 2265.0 | HOLD | C | 15% | 61 | [多頭] | BULL |
 | [2303](output/reports/per_stock/2303.md) | 聯電 | 110.0 | HOLD | A | 50% | 75 | [多頭] | BULL |
 | [2426](output/reports/per_stock/2426.md) | 鼎元 | 61.9 | HOLD | B | 30% | 55 | [多頭] | BULL |
-| [1560](output/reports/per_stock/1560.md) | 中砂（CMP） | 642.0 | HOLD | C | 15% | 68 | [多頭] | BULL |
+| [1560](output/reports/per_stock/1560.md) | 中砂 | 642.0 | HOLD | C | 15% | 68 | [多頭] | BULL |
 | [9940](output/reports/per_stock/9940.md) | 信義 | 18.2 | HOLD | F | — | 18 | [空頭] | BULL |
 | [1227](output/reports/per_stock/1227.md) | 佳格 | 28.5 | HOLD | F | — | 33 | [空頭] | BULL |
 | [1301](output/reports/per_stock/1301.md) | 台塑 | 45.7 | HOLD | A | 50% | 36 | [多頭] | BULL |
@@ -76,7 +76,7 @@ _最後更新：**2026-05-18**_
 | [2353](output/reports/per_stock/2353.md) | 宏碁 | 27.7 | HOLD | C | 15% | 49 | [空頭] | BULL |
 | [3661](output/reports/per_stock/3661.md) | 世芯-KY | 4605.0 | HOLD | A | 50% | 59 | [多頭] | BULL |
 | [2426](output/reports/per_stock/2426.md) | 鼎元 | 61.9 | HOLD | B | 30% | 55 | [多頭] | BULL |
-| [1560](output/reports/per_stock/1560.md) | 中砂（CMP） | 642.0 | HOLD | C | 15% | 68 | [多頭] | BULL |
+| [1560](output/reports/per_stock/1560.md) | 中砂 | 642.0 | HOLD | C | 15% | 68 | [多頭] | BULL |
 | [2324](output/reports/per_stock/2324.md) | 仁寶 | 28.6 | HOLD | C | 15% | 43 | [空頭] | BULL |
 | [2344](output/reports/per_stock/2344.md) | 華邦電 | 129.5 | HOLD | B | 30% | 69 | [多頭] | BULL |
 | [6271](output/reports/per_stock/6271.md) | 同欣電 | 177.0 | HOLD | C | 15% | 51 | [多頭] | BULL |
@@ -108,7 +108,7 @@ _最後更新：**2026-05-18**_
 | [1326](output/reports/per_stock/1326.md) | 台化 | 44.5 | HOLD | B | 30% | 38 | [多頭] | BULL |
 | [6505](output/reports/per_stock/6505.md) | 台塑化 | 51.3 | HOLD | C | 15% | 42 | [多頭] | BULL |
 | [2002](output/reports/per_stock/2002.md) | 中鋼 | 18.1 | HOLD | C | 15% | 32 | [空頭] | BULL |
-| [1809](output/reports/per_stock/1809.md) | 中釉（陶瓷） | 38.6 | HOLD | B | 30% | 71 | [多頭] | BULL |
+| [1809](output/reports/per_stock/1809.md) | 中釉 | 38.6 | HOLD | B | 30% | 71 | [多頭] | BULL |
 | [1101](output/reports/per_stock/1101.md) | 台泥 | 24.1 | HOLD | F | — | 43 | [多頭] | BULL |
 | [1102](output/reports/per_stock/1102.md) | 亞泥 | 34.4 | HOLD | C | 15% | 40 | [空頭] | BULL |
 | [1227](output/reports/per_stock/1227.md) | 佳格 | 28.5 | HOLD | F | — | 33 | [空頭] | BULL |
@@ -126,13 +126,13 @@ _最後更新：**2026-05-18**_
 | [2603](output/reports/per_stock/2603.md) | 長榮 | 200.5 | HOLD | C | 15% | 42 | [多頭] | BULL |
 | [2615](output/reports/per_stock/2615.md) | 萬海 | 74.2 | HOLD | B | 30% | 43 | [空頭] | BULL |
 | [2618](output/reports/per_stock/2618.md) | 長榮航 | 34.6 | HOLD | C | 15% | 49 | [空頭] | BULL |
-| [0050](output/reports/per_stock/0050.md) | 元大台灣50（2025/06 4:1 拆分樣本） | 95.4 | HOLD | — | — | 68 | [多頭] | BULL |
+| [0050](output/reports/per_stock/0050.md) | 元大台灣50 | 95.4 | HOLD | — | — | 68 | [多頭] | BULL |
 | [0056](output/reports/per_stock/0056.md) | 元大高股息 | 44.5 | HOLD | C | 15% | 66 | [多頭] | BULL |
 | [006208](output/reports/per_stock/006208.md) | 富邦台50 | 220.4 | HOLD | B | 30% | 66 | [多頭] | BULL |
 | [00878](output/reports/per_stock/00878.md) | 國泰永續高股息 | 27.9 | HOLD | C | 15% | 77 | [多頭] | BULL |
-| [00919](output/reports/per_stock/00919.md) | 群益台灣精選高息（2023 IPO，歷史短） | 25.8 | HOLD | C | 15% | 73 | [多頭] | BULL |
-| [00940](output/reports/per_stock/00940.md) | 元大台灣價值高息（2024 IPO，歷史很短） | 10.9 | HOLD | C | 15% | 63 | [多頭] | BULL |
-| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長（個人持倉，untestable F） | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
+| [00919](output/reports/per_stock/00919.md) | 群益台灣精選高息 | 25.8 | HOLD | C | 15% | 73 | [多頭] | BULL |
+| [00940](output/reports/per_stock/00940.md) | 元大台灣價值高息 | 10.9 | HOLD | C | 15% | 63 | [多頭] | BULL |
+| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
 | [2458](output/reports/per_stock/2458.md) | 義隆電 | 142.5 | HOLD | D | 10% | 53 | [多頭] | BULL |
 | [3035](output/reports/per_stock/3035.md) | 智原 | 190.0 | HOLD | A | 50% | 57 | [空頭] | BULL |
 | [3081](output/reports/per_stock/3081.md) | 聯亞光電 | 2620.0 | HOLD | B | 30% | 58 | [多頭] | BULL |
@@ -212,39 +212,39 @@ _最後更新：**2026-05-18**_
 | [6446](output/reports/per_stock/6446.md) | 藥華藥 | 826.0 | HOLD | D | 10% | 78 | [多頭] | BULL |
 | [2542](output/reports/per_stock/2542.md) | 興富發 | 43.8 | HOLD | C | 15% | 76 | [空頭] | BULL |
 | [2722](output/reports/per_stock/2722.md) | 夏都 | 23.1 | HOLD | F | — | 41 | [空頭] | BULL |
-| [2492](output/reports/per_stock/2492.md) | 華新科（MLCC，top-30 市值） | 206.0 | HOLD | A | 50% | 72 | [多頭] | BULL |
-| [2880](output/reports/per_stock/2880.md) | 華南金（大型金控） | 32.4 | HOLD | C | 15% | 38 | [多頭] | BULL |
+| [2492](output/reports/per_stock/2492.md) | 華新科 | 206.0 | HOLD | A | 50% | 72 | [多頭] | BULL |
+| [2880](output/reports/per_stock/2880.md) | 華南金 | 32.4 | HOLD | C | 15% | 38 | [多頭] | BULL |
 | [2855](output/reports/per_stock/2855.md) | 統一證 | 40.8 | HOLD | C | 15% | 65 | [多頭] | BULL |
-| [2392](output/reports/per_stock/2392.md) | 正崴（光學連接） | 33.8 | HOLD | F | — | 49 | [空頭] | BULL |
-| [2393](output/reports/per_stock/2393.md) | 億光（LED leader） | 62.5 | HOLD | B | 30% | 30 | [多頭] | BULL |
-| [2347](output/reports/per_stock/2347.md) | 聯強（電子通路 top） | 82.4 | HOLD | A | 50% | 51 | [多頭] | BULL |
-| [5904](output/reports/per_stock/5904.md) | 寶雅（美妝零售） | 546.0 | HOLD | D | 10% | 50 | [多頭] | BULL |
-| [6804](output/reports/per_stock/6804.md) | 大樹（藥局零售） | 15.1 | HOLD | F | — | 37 | [空頭] | BULL |
-| [9941](output/reports/per_stock/9941.md) | 裕融（汽車租賃 leader） | 73.1 | HOLD | F | — | 32 | [空頭] | BULL |
+| [2392](output/reports/per_stock/2392.md) | 正崴 | 33.8 | HOLD | F | — | 49 | [空頭] | BULL |
+| [2393](output/reports/per_stock/2393.md) | 億光 | 62.5 | HOLD | B | 30% | 30 | [多頭] | BULL |
+| [2347](output/reports/per_stock/2347.md) | 聯強 | 82.4 | HOLD | A | 50% | 51 | [多頭] | BULL |
+| [5904](output/reports/per_stock/5904.md) | 寶雅 | 546.0 | HOLD | D | 10% | 50 | [多頭] | BULL |
+| [6804](output/reports/per_stock/6804.md) | 大樹 | 15.1 | HOLD | F | — | 37 | [空頭] | BULL |
+| [9941](output/reports/per_stock/9941.md) | 裕融 | 73.1 | HOLD | F | — | 32 | [空頭] | BULL |
 | [5522](output/reports/per_stock/5522.md) | 遠雄 | 70.7 | HOLD | F | — | 53 | [多頭] | BULL |
-| [6188](output/reports/per_stock/6188.md) | 廣明（光碟） | 84.3 | HOLD | A | 50% | 45 | [空頭] | BULL |
-| [1565](output/reports/per_stock/1565.md) | 精華（隱形眼鏡 leader） | 93.6 | HOLD | F | — | 22 | [空頭] | BULL |
-| [8016](output/reports/per_stock/8016.md) | 矽創（IC 設計） | 274.0 | HOLD | B | 30% | 65 | [多頭] | BULL |
-| [6510](output/reports/per_stock/6510.md) | 精測（半導體探針卡） | 3735.0 | HOLD | A | 50% | 51 | [多頭] | BULL |
+| [6188](output/reports/per_stock/6188.md) | 廣明 | 84.3 | HOLD | A | 50% | 45 | [空頭] | BULL |
+| [1565](output/reports/per_stock/1565.md) | 精華 | 93.6 | HOLD | F | — | 22 | [空頭] | BULL |
+| [8016](output/reports/per_stock/8016.md) | 矽創 | 274.0 | HOLD | B | 30% | 65 | [多頭] | BULL |
+| [6510](output/reports/per_stock/6510.md) | 精測 | 3735.0 | HOLD | A | 50% | 51 | [多頭] | BULL |
 | [4148](output/reports/per_stock/4148.md) | 全宇生技 | 35.0 | HOLD | C | 15% | 36 | [空頭] | BULL |
-| [3324](output/reports/per_stock/3324.md) | 雙鴻（伺服器散熱） | 995.0 | HOLD | C | 15% | 41 | [多頭] | BULL |
-| [6526](output/reports/per_stock/6526.md) | 達發（5G IC / 達創 Hub） | 688.0 | HOLD | C | 15% | 63 | [多頭] | BULL |
-| [8341](output/reports/per_stock/8341.md) | 日友（廢棄物處理） | 76.5 | HOLD | C | 15% | 58 | [空頭] | BULL |
-| [1909](output/reports/per_stock/1909.md) | 榮成（紙業） | 9.0 | HOLD | F | — | 39 | [空頭] | BULL |
-| [9904](output/reports/per_stock/9904.md) | 寶成（製鞋 OEM, Nike 大客） | 26.0 | HOLD | F | — | 36 | [空頭] | BULL |
-| [2367](output/reports/per_stock/2367.md) | 燿華（PCB） | 61.8 | HOLD | D | 10% | 46 | [多頭] | BULL |
-| [2455](output/reports/per_stock/2455.md) | 全新（GaAs IC） | 358.5 | HOLD | A | 50% | 58 | [多頭] | BULL |
-| [6443](output/reports/per_stock/6443.md) | 元晶（太陽能） | 38.2 | HOLD | C | 15% | 46 | [多頭] | BULL |
-| [3526](output/reports/per_stock/3526.md) | 凡甲（連接器） | 374.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
-| [5536](output/reports/per_stock/5536.md) | 聖暉（廠房工程） | 1025.0 | HOLD | B | 30% | 72 | [多頭] | BULL |
-| [2328](output/reports/per_stock/2328.md) | 廣宇（A-tier, simple_dip_buy） | 50.9 | HOLD | A | 50% | 54 | [空頭] | BULL |
-| [2352](output/reports/per_stock/2352.md) | 佳世達（F-tier） | 25.2 | HOLD | F | — | 52 | [空頭] | BULL |
-| [3227](output/reports/per_stock/3227.md) | 原相（C-tier, gap_continuation, 個人持倉） | 220.0 | HOLD | C | 15% | 58 | [空頭] | BULL |
-| [3323](output/reports/per_stock/3323.md) | 加百裕（A-tier, simple_dip_buy） | 34.7 | HOLD | A | 50% | 49 | [空頭] | BULL |
-| [5274](output/reports/per_stock/5274.md) | 信驊（S-tier! chip_momentum 大發現） | 17195.0 | HOLD | S | 100% | 60 | [多頭] | BULL |
-| [7769](output/reports/per_stock/7769.md) | 鴻勁（A-tier, low_vol_pullback, 1.4 年資料） | 6895.0 | HOLD | A | 50% | 71 | [多頭] | BULL |
-| [00965](output/reports/per_stock/00965.md) | 個人持倉 ETF | 25.2 | HOLD | F | — | 42 | [多頭] | BULL |
-| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長（個人持倉，untestable F） | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
+| [3324](output/reports/per_stock/3324.md) | 雙鴻 | 995.0 | HOLD | C | 15% | 41 | [多頭] | BULL |
+| [6526](output/reports/per_stock/6526.md) | 達發 | 688.0 | HOLD | C | 15% | 63 | [多頭] | BULL |
+| [8341](output/reports/per_stock/8341.md) | 日友 | 76.5 | HOLD | C | 15% | 58 | [空頭] | BULL |
+| [1909](output/reports/per_stock/1909.md) | 榮成 | 9.0 | HOLD | F | — | 39 | [空頭] | BULL |
+| [9904](output/reports/per_stock/9904.md) | 寶成 | 26.0 | HOLD | F | — | 36 | [空頭] | BULL |
+| [2367](output/reports/per_stock/2367.md) | 燿華 | 61.8 | HOLD | D | 10% | 46 | [多頭] | BULL |
+| [2455](output/reports/per_stock/2455.md) | 全新 | 358.5 | HOLD | A | 50% | 58 | [多頭] | BULL |
+| [6443](output/reports/per_stock/6443.md) | 元晶 | 38.2 | HOLD | C | 15% | 46 | [多頭] | BULL |
+| [3526](output/reports/per_stock/3526.md) | 凡甲 | 374.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
+| [5536](output/reports/per_stock/5536.md) | 聖暉 | 1025.0 | HOLD | B | 30% | 72 | [多頭] | BULL |
+| [2328](output/reports/per_stock/2328.md) | 廣宇 | 50.9 | HOLD | A | 50% | 54 | [空頭] | BULL |
+| [2352](output/reports/per_stock/2352.md) | 佳世達 | 25.2 | HOLD | F | — | 52 | [空頭] | BULL |
+| [3227](output/reports/per_stock/3227.md) | 原相 | 220.0 | HOLD | C | 15% | 58 | [空頭] | BULL |
+| [3323](output/reports/per_stock/3323.md) | 加百裕 | 34.7 | HOLD | A | 50% | 49 | [空頭] | BULL |
+| [5274](output/reports/per_stock/5274.md) | 信驊 | 17195.0 | HOLD | S | 100% | 60 | [多頭] | BULL |
+| [7769](output/reports/per_stock/7769.md) | 鴻勁 | 6895.0 | HOLD | A | 50% | 71 | [多頭] | BULL |
+| [00965](output/reports/per_stock/00965.md) | 個人持倉 | 25.2 | HOLD | F | — | 42 | [多頭] | BULL |
+| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
 
 ## 歷史報告
 

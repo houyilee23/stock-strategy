@@ -522,15 +522,18 @@ def run_signals(stock_ids: list, account_name: str, cfg: dict = None) -> None:
     # Markdown 報表（補股名 dict）
     # 優先 watchlists.yaml 註解（人寫的最準），其次 per_stock_recommendations.yaml
     # 注意：final_report.py 對沒名字的股票會 fallback 寫 name=stock_id，要過濾掉
+    # 截斷規則：遇到半形+全形括號 / 分隔符 / 空白 即停（避免註解後的「(說明)」混入）
     stock_names = {}
     try:
         import re
         wl_path = os.path.join(BASE_DIR, "config", "watchlists.yaml")
         with open(wl_path, encoding="utf-8") as f:
             for line in f:
-                m = re.match(r'^\s*-\s*"([^"]+)"\s*#\s*(.+?)(?:\s*\(|\s*$)', line)
+                m = re.match(r'^\s*-\s*"([^"]+)"\s*#\s*(.+)', line)
                 if m:
-                    sid, name = m.group(1), m.group(2).strip()
+                    sid, raw = m.group(1), m.group(2).strip()
+                    # 截斷於 ( （ [ 【 / 、 空白
+                    name = re.split(r"[（(\[【/、\s]", raw, maxsplit=1)[0].strip()
                     if name and name != sid:
                         stock_names[sid] = name
     except Exception:
