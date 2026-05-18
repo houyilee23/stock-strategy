@@ -83,7 +83,7 @@
 | 00878 | 國泰永續高股息 | — | 27.9 | HOLD | C | — | style1_pullback | — | — | — | 77 | [多頭] | BULL |  |
 | 00919 | 群益台灣精選高息（2023 IPO，歷史短） | — | 25.8 | HOLD | C | 15% | style1_pullback | — | — | — | 73 | [多頭] | BULL |  |
 | 00940 | 元大台灣價值高息（2024 IPO，歷史很短） | — | 10.9 | HOLD | C | — | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |
-| 00981A | 主動統一台股增長 | — | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
+| 00981A | 主動統一台股增長（個人持倉，untestable F） | — | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
 | 2458 | 義隆電 | — | 142.5 | HOLD | D | — | style1_pullback | — | — | — | 53 | [多頭] | BULL |  |
 | 3035 | 智原 | — | 190.0 | HOLD | A | 50% | style1_pullback | — | — | — | 57 | [空頭] | BULL |  |
 | 3081 | 聯亞光電 | — | 2620.0 | HOLD | B | — | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |
@@ -188,3 +188,11 @@
 | 6443 | 元晶（太陽能） | — | 38.2 | HOLD | C | 15% | style1_pullback | — | 37.3~38.5 | 26.5 | 46 | [多頭] | BULL | 觀察中 RSI=45.7 |
 | 3526 | 凡甲（連接器） | — | 374.0 | HOLD | C | 15% | style1_pullback | — | — | — | 66 | [多頭] | BULL |  |
 | 5536 | 聖暉（廠房工程） | — | 1025.0 | HOLD | B | 30% | style1_pullback | — | — | — | 72 | [多頭] | BULL |  |
+| 2328 | 廣宇（A-tier, simple_dip_buy） | — | 50.9 | HOLD | A | 50% | style1_pullback | — | — | — | 54 | [空頭] | BULL |  |
+| 2352 | 佳世達（F-tier） | — | 25.2 | HOLD | F | — | style1_pullback | — | — | — | 52 | [空頭] | BULL |  |
+| 3227 | 原相（C-tier, gap_continuation, 個人持倉） | — | 220.0 | HOLD | C | 15% | style1_pullback | — | — | — | 58 | [空頭] | BULL |  |
+| 3323 | 加百裕（A-tier, simple_dip_buy） | — | 34.7 | HOLD | A | 50% | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
+| 5274 | 信驊（S-tier! chip_momentum 大發現） | — | 17195.0 | HOLD | S | 100% | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
+| 7769 | 鴻勁（A-tier, low_vol_pullback, 1.4 年資料） | — | 6895.0 | HOLD | A | 50% | style1_pullback | — | — | — | 71 | [多頭] | BULL |  |
+| 00965 | 個人持倉 ETF | — | 25.2 | HOLD | F | — | style1_pullback | — | 25.2~25.6 | 23.4 | 42 | [多頭] | BULL | 觀察中 RSI=41.6 |
+| 00981A | 主動統一台股增長（個人持倉，untestable F） | — | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |

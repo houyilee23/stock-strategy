@@ -132,7 +132,7 @@ _最後更新：**2026-05-18**_
 | [00878](output/reports/per_stock/00878.md) | 國泰永續高股息 | 27.9 | HOLD | C | — | 77 | [多頭] | BULL |
 | [00919](output/reports/per_stock/00919.md) | 群益台灣精選高息（2023 IPO，歷史短） | 25.8 | HOLD | C | 15% | 73 | [多頭] | BULL |
 | [00940](output/reports/per_stock/00940.md) | 元大台灣價值高息（2024 IPO，歷史很短） | 10.9 | HOLD | C | — | 63 | [多頭] | BULL |
-| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
+| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長（個人持倉，untestable F） | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
 | [2458](output/reports/per_stock/2458.md) | 義隆電 | 142.5 | HOLD | D | — | 53 | [多頭] | BULL |
 | [3035](output/reports/per_stock/3035.md) | 智原 | 190.0 | HOLD | A | 50% | 57 | [空頭] | BULL |
 | [3081](output/reports/per_stock/3081.md) | 聯亞光電 | 2620.0 | HOLD | B | — | 58 | [多頭] | BULL |
@@ -237,6 +237,14 @@ _最後更新：**2026-05-18**_
 | [6443](output/reports/per_stock/6443.md) | 元晶（太陽能） | 38.2 | HOLD | C | 15% | 46 | [多頭] | BULL |
 | [3526](output/reports/per_stock/3526.md) | 凡甲（連接器） | 374.0 | HOLD | C | 15% | 66 | [多頭] | BULL |
 | [5536](output/reports/per_stock/5536.md) | 聖暉（廠房工程） | 1025.0 | HOLD | B | 30% | 72 | [多頭] | BULL |
+| [2328](output/reports/per_stock/2328.md) | 廣宇（A-tier, simple_dip_buy） | 50.9 | HOLD | A | 50% | 54 | [空頭] | BULL |
+| [2352](output/reports/per_stock/2352.md) | 佳世達（F-tier） | 25.2 | HOLD | F | — | 52 | [空頭] | BULL |
+| [3227](output/reports/per_stock/3227.md) | 原相（C-tier, gap_continuation, 個人持倉） | 220.0 | HOLD | C | 15% | 58 | [空頭] | BULL |
+| [3323](output/reports/per_stock/3323.md) | 加百裕（A-tier, simple_dip_buy） | 34.7 | HOLD | A | 50% | 49 | [空頭] | BULL |
+| [5274](output/reports/per_stock/5274.md) | 信驊（S-tier! chip_momentum 大發現） | 17195.0 | HOLD | S | 100% | 60 | [多頭] | BULL |
+| [7769](output/reports/per_stock/7769.md) | 鴻勁（A-tier, low_vol_pullback, 1.4 年資料） | 6895.0 | HOLD | A | 50% | 71 | [多頭] | BULL |
+| [00965](output/reports/per_stock/00965.md) | 個人持倉 ETF | 25.2 | HOLD | F | — | 42 | [多頭] | BULL |
+| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長（個人持倉，untestable F） | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
 
 ## 歷史報告
 
