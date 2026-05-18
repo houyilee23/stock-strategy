@@ -704,16 +704,23 @@ def render_stock_html(sid: str, name: str, rec: dict,
 # ===== 7. main ================================================================
 
 def _build_stock_names_from_watchlists() -> dict:
-    """從 watchlists.yaml 註解解析人讀股名（最準），過濾 name==sid 的偽值。"""
+    """從 watchlists.yaml 註解解析人讀股名（最準），只保留股名本身。
+
+    解析規則：拿 `- "<sid>"   # <name>...` 註解後第一段，遇到下列字元就截斷：
+      ( （ [ 【 / 、 空白
+    這樣 "信驊（S-tier 大發現）" → "信驊"，"中砂（CMP）" → "中砂"。
+    """
     import re
     path = os.path.join(BASE_DIR, "config", "watchlists.yaml")
     names = {}
     try:
         with open(path, encoding="utf-8") as f:
             for line in f:
-                m = re.match(r'^\s*-\s*"([^"]+)"\s*#\s*(.+?)(?:\s*\(|\s*$)', line)
+                m = re.match(r'^\s*-\s*"([^"]+)"\s*#\s*(.+)', line)
                 if m:
                     sid, name = m.group(1), m.group(2).strip()
+                    # 截斷於下列字元（半形+全形括號/分隔符/空白）
+                    name = re.split(r"[（(\[【/、\s]", name, maxsplit=1)[0].strip()
                     if name and name != sid:
                         names[sid] = name
     except Exception:

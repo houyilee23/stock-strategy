@@ -115,13 +115,21 @@ def main():
             continue
 
         if not in_recs and add_new:
-            # Add new stock
+            # Add new stock — populate name from watchlist comments
             template = new_entry.get("best_template") or new_entry.get("template")
             new_full = dict(new_entry)
             new_full["template"] = template
             new_full["position_pct_max"] = new_entry.get("position_pct_recommended", 0.0)
             new_full["tradeable"] = new_tier in ("S", "A", "B", "C")
             new_full["params_ref"] = new_entry.get("params_ref") or f"{template}.yaml#per_stock.{sid}"
+            # name fallback: try watchlist parser
+            try:
+                from src.strategy.auto_iterate.final_report import _stock_label
+                _n = _stock_label(sid)
+                if _n and _n != sid:
+                    new_full["name"] = _n
+            except Exception:
+                pass
             recs[sid] = new_full
             additions.append((sid, new_tier, template, run_id))
             continue
@@ -134,9 +142,17 @@ def main():
             new_full["position_pct_max"] = new_entry.get("position_pct_recommended", 0.0)
             new_full["tradeable"] = new_tier in ("S", "A", "B", "C")
             new_full["params_ref"] = new_entry.get("params_ref") or f"{template}.yaml#per_stock.{sid}"
-            # Keep name if previously present
+            # name 優先順序：保留舊 entry name → watchlist → 不放
             if isinstance(cur, dict) and "name" in cur:
                 new_full["name"] = cur["name"]
+            else:
+                try:
+                    from src.strategy.auto_iterate.final_report import _stock_label
+                    _n = _stock_label(sid)
+                    if _n and _n != sid:
+                        new_full["name"] = _n
+                except Exception:
+                    pass
             recs[sid] = new_full
             upgrades.append((sid, cur_tier, new_tier, template, run_id))
         elif new_score < cur_score:

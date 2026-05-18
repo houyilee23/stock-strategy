@@ -36,19 +36,45 @@ OUT_DIR = os.path.join(BASE_DIR, "output", "reports", "per_stock")
 
 
 def load_per_stock_params(stock_id: str, template: str) -> dict | None:
-    """從 merged auto_iterate 結果讀該檔 best_params。"""
-    merged_dir = os.path.join(BASE_DIR, "output", "auto_iterate", "merged_20260426_120034")
-    yaml_path = os.path.join(merged_dir, f"{template}.yaml")
-    if not os.path.exists(yaml_path):
+    """從 auto_iterate 結果讀該檔 best_params。
+
+    搜尋順序：
+      1. 既有的 merged_* dir（合併版，最快）
+      2. 所有 20260*_* run dir 的 <template>.yaml（從最新往舊找）
+    新加入的個股（如透過 --add-new 加入）不會在 merged_ 裡，要回退到
+    個別 run dir 找。
+    """
+    auto_dir = os.path.join(BASE_DIR, "output", "auto_iterate")
+    if not os.path.isdir(auto_dir):
         return None
-    with open(yaml_path, encoding="utf-8") as f:
-        data = yaml.safe_load(f) or {}
-    # YAML 結構：top-level → per_stock → {stock_id} → best_params
-    per_stock = data.get("per_stock", {}) if isinstance(data, dict) else {}
-    rec = per_stock.get(stock_id)
-    if not isinstance(rec, dict):
-        return None
-    return rec.get("best_params")
+
+    candidate_dirs = []
+    # 先試 merged_*（最快）
+    for d in sorted(os.listdir(auto_dir), reverse=True):
+        if d.startswith("merged_"):
+            candidate_dirs.append(d)
+    # 再試所有 run dir（新到舊）
+    for d in sorted(os.listdir(auto_dir), reverse=True):
+        if d.startswith("2026") and not d.startswith("merged_"):
+            candidate_dirs.append(d)
+
+    for d in candidate_dirs:
+        yaml_path = os.path.join(auto_dir, d, f"{template}.yaml")
+        if not os.path.exists(yaml_path):
+            continue
+        try:
+            with open(yaml_path, encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {}
+        except Exception:
+            continue
+        per_stock = data.get("per_stock", {}) if isinstance(data, dict) else {}
+        rec = per_stock.get(stock_id) or per_stock.get(str(stock_id))
+        if not isinstance(rec, dict):
+            continue
+        params = rec.get("best_params")
+        if params:
+            return params
+    return None
 
 
 def run_backtest_one(stock_id: str, template: str, params: dict,
@@ -133,6 +159,11 @@ def write_report(stock_id: str, name: str, rec: dict, bt: dict | None) -> str:
     L.append(f"| Profit Factor | {pf:.2f} |" if pf else "| Profit Factor | — |")
     exp = rec.get("test_expectancy")
     L.append(f"| Expectancy（每筆） | {exp*100:+.2f}% |" if exp is not None else "| Expectancy | — |")
+    cagr = rec.get("test_cagr")
+    L.append(f"| 年化 CAGR | {cagr*100:+.1f}% |" if cagr is not None else "| 年化 CAGR | — |")
+    alpha = rec.get("test_alpha_vs_0050")
+    if alpha is not None:
+        L.append(f"| Alpha vs 0050 | {alpha*100:+.1f}% |")
     dd = rec.get("test_max_dd")
     L.append(f"| 最大回撤 | {dd*100:+.1f}% |" if dd is not None else "| 最大回撤 | — |")
     L.append("")
@@ -247,6 +278,9 @@ def main():
     rec_all = _load_recommendations()
     print(f"準備生成 {len(stock_ids)} 檔個股回測報告 → {OUT_DIR}")
 
+    # 名稱查表（fallback：當 recommendations.yaml 缺 name 欄位時用 watchlists 註解）
+    from src.strategy.auto_iterate.final_report import _stock_label
+
     success, failed = 0, []
     for sid in stock_ids:
         rec = rec_all.get(sid, {})
@@ -254,7 +288,8 @@ def main():
             rec = {"name": sid, "tier": "—", "template": "—",
                     "position_pct_max": 0.0, "tradeable": False}
 
-        name = rec.get("name", sid)
+        # name 優先順序：recommendations.yaml name 欄 → watchlist 註解 → sid
+        name = rec.get("name") or _stock_label(sid) or sid
         template = rec.get("template", "")
         pos_max = rec.get("position_pct_max", 0.0) or 0.0
 

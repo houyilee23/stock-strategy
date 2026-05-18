@@ -66,6 +66,7 @@
     A_new: null
     B: null
     C: null
+  name: 國泰永續高股息
   params_ref: yearly_high_break.yaml#per_stock.00878
   position_pct_recommended: 0.15
   template: yearly_high_break
@@ -102,6 +103,7 @@
     A_new: null
     B: null
     C: null
+  name: 元大台灣價值高息
   params_ref: kd_oversold_cross.yaml#per_stock.00940
   position_pct_recommended: 0.15
   template: kd_oversold_cross
@@ -127,6 +129,7 @@
     A_new: null
     B: null
     C: null
+  name: 個人持倉
   params_ref: low_vol_pullback.yaml#per_stock.00965
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -189,6 +192,7 @@
     A_new: null
     B: null
     C: null
+  name: 亞泥
   params_ref: support_bounce.yaml#per_stock.1102
   position_pct_recommended: 0.15
   template: support_bounce
@@ -214,6 +218,7 @@
     A_new: null
     B: null
     C: true
+  name: 統一
   params_ref: failed_breakdown.yaml#per_stock.1216
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -257,6 +262,7 @@
     A_new: null
     B: false
     C: false
+  name: 黑松
   params_ref: narrow_range_breakout.yaml#per_stock.1234
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -305,6 +311,7 @@
     A_new: null
     B: true
     C: true
+  name: 中石化
   params_ref: ensemble_oversold_vote.yaml#per_stock.1314
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -354,6 +361,7 @@
     A_new: null
     B: false
     C: null
+  name: 儒鴻
   params_ref: golden_cross.yaml#per_stock.1456
   position_pct_recommended: 0.15
   template: golden_cross
@@ -378,6 +386,7 @@
     A_new: null
     B: false
     C: false
+  name: 士電
   params_ref: narrow_range_breakout.yaml#per_stock.1503
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -404,6 +413,7 @@
     A_new: null
     B: null
     C: false
+  name: 東元
   params_ref: narrow_range_breakout.yaml#per_stock.1504
   position_pct_recommended: 0.1
   template: narrow_range_breakout
@@ -435,6 +445,7 @@
     A_new: null
     B: null
     C: false
+  name: 大億
   params_ref: low_vol_pullback.yaml#per_stock.1521
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
@@ -459,6 +470,7 @@
     A_new: null
     B: false
     C: true
+  name: 中宇
   params_ref: psar_flip.yaml#per_stock.1535
   position_pct_max: 0.1
   position_pct_recommended: 0.1
@@ -503,6 +515,7 @@
     A_new: null
     B: false
     C: false
+  name: 精華
   params_ref: gap_continuation.yaml#per_stock.1565
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -530,6 +543,7 @@
     A_new: null
     B: null
     C: true
+  name: 信邦
   params_ref: keltner_breakout.yaml#per_stock.1582
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -556,6 +570,7 @@
     A_new: null
     B: true
     C: true
+  name: 華新
   params_ref: atr_band_breakout.yaml#per_stock.1605
   position_pct_recommended: 0.15
   template: atr_band_breakout
@@ -581,6 +596,7 @@
     A_new: null
     B: null
     C: null
+  name: 長興
   params_ref: three_day_reversal.yaml#per_stock.1717
   position_pct_recommended: 0.5
   template: three_day_reversal
@@ -606,6 +622,7 @@
     A_new: null
     B: true
     C: true
+  name: 台肥
   params_ref: mean_reversion.yaml#per_stock.1722
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -631,6 +648,7 @@
     A_new: null
     B: false
     C: true
+  name: 喬山
   params_ref: mean_reversion.yaml#per_stock.1736
   position_pct_recommended: 0.3
   test_alpha_vs_0050: -0.1915
@@ -654,6 +672,7 @@
     A_new: null
     B: null
     C: null
+  name: 神隆
   params_ref: gap_continuation.yaml#per_stock.1789
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -692,6 +711,7 @@
     A_new: null
     B: true
     C: true
+  name: 中釉
   params_ref: vwap_revert.yaml#per_stock.1809
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -718,6 +738,7 @@
     A_new: null
     B: true
     C: false
+  name: 永豐餘
   params_ref: failed_breakdown.yaml#per_stock.1907
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -749,6 +770,7 @@
     A_new: null
     B: false
     C: false
+  name: 榮成
   params_ref: simple_dip_buy.yaml#per_stock.1909
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -776,6 +798,7 @@
     A_new: null
     B: true
     C: true
+  name: 中鋼
   params_ref: ensemble_oversold_vote.yaml#per_stock.2002
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -803,6 +826,7 @@
     A_new: null
     B: true
     C: false
+  name: 第一銅
   params_ref: vwap_revert.yaml#per_stock.2009
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -829,6 +853,7 @@
     A_new: null
     B: true
     C: null
+  name: 中鴻
   params_ref: inside_day_breakout.yaml#per_stock.2014
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -862,6 +887,7 @@
     A_new: null
     B: true
     C: false
+  name: 豐興
   params_ref: mean_reversion.yaml#per_stock.2015
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -889,6 +915,7 @@
     A_new: null
     B: true
     C: true
+  name: 大成鋼
   params_ref: narrow_range_breakout.yaml#per_stock.2027
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -915,6 +942,7 @@
     A_new: null
     B: true
     C: true
+  name: 上銀
   params_ref: ensemble_dip_vote.yaml#per_stock.2049
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -942,6 +970,7 @@
     A_new: null
     B: false
     C: false
+  name: 川湖
   params_ref: donchian_breakout.yaml#per_stock.2059
   position_pct_recommended: 0.3
   test_alpha_vs_0050: 0.0084
@@ -983,6 +1012,7 @@
     A_new: null
     B: true
     C: null
+  name: 和泰車
   params_ref: simple_dip_buy.yaml#per_stock.2207
   position_pct_recommended: 0.3
   template: simple_dip_buy
@@ -1013,6 +1043,7 @@
     A_new: null
     B: null
     C: null
+  name: 裕隆
   params_ref: mean_reversion.yaml#per_stock.2227
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
@@ -1037,6 +1068,7 @@
     A_new: null
     B: false
     C: true
+  name: 聯電
   params_ref: ensemble_dip_vote.yaml#per_stock.2303
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -1064,6 +1096,7 @@
     A_new: null
     B: true
     C: true
+  name: 台達電
   params_ref: ensemble_dip_or_bounce.yaml#per_stock.2308
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -1102,6 +1135,7 @@
     A_new: null
     B: true
     C: true
+  name: 仁寶
   params_ref: simple_dip_buy.yaml#per_stock.2324
   position_pct_recommended: 0.15
   template: simple_dip_buy
@@ -1127,6 +1161,7 @@
     A_new: null
     B: true
     C: null
+  name: 國巨
   params_ref: yearly_high_break.yaml#per_stock.2327
   position_pct_recommended: 0.15
   template: yearly_high_break
@@ -1152,6 +1187,7 @@
     A_new: null
     B: true
     C: true
+  name: 廣宇
   params_ref: simple_dip_buy.yaml#per_stock.2328
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -1201,6 +1237,7 @@
     A_new: null
     B: null
     C: false
+  name: 華邦電
   params_ref: narrow_range_breakout.yaml#per_stock.2344
   position_pct_recommended: 0.3
   template: narrow_range_breakout
@@ -1226,6 +1263,7 @@
     A_new: null
     B: false
     C: true
+  name: 智邦
   params_ref: narrow_range_breakout.yaml#per_stock.2345
   position_pct_recommended: 0.3
   template: narrow_range_breakout
@@ -1251,6 +1289,7 @@
     A_new: null
     B: null
     C: false
+  name: 聯強
   params_ref: ensemble_dip_vote.yaml#per_stock.2347
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -1278,6 +1317,7 @@
     A_new: null
     B: false
     C: false
+  name: 佳世達
   params_ref: narrow_range_breakout.yaml#per_stock.2352
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -1316,6 +1356,7 @@
     A_new: null
     B: false
     C: null
+  name: 鴻準
   params_ref: three_day_reversal.yaml#per_stock.2354
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -1343,6 +1384,7 @@
     A_new: null
     B: null
     C: null
+  name: 英業達
   params_ref: simple_dip_buy.yaml#per_stock.2356
   position_pct_recommended: 0.15
   template: simple_dip_buy
@@ -1368,6 +1410,7 @@
     A_new: null
     B: false
     C: null
+  name: 致茂
   params_ref: ensemble_dual_momentum.yaml#per_stock.2360
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -1395,6 +1438,7 @@
     A_new: null
     B: false
     C: true
+  name: 燿華
   params_ref: gap_continuation.yaml#per_stock.2367
   position_pct_max: 0.1
   position_pct_recommended: 0.1
@@ -1439,6 +1483,7 @@
     A_new: null
     B: true
     C: null
+  name: 大同
   params_ref: momentum_hold.yaml#per_stock.2371
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
@@ -1474,6 +1519,7 @@
     A_new: null
     B: true
     C: true
+  name: 瑞昱
   params_ref: simple_dip_buy.yaml#per_stock.2379
   position_pct_recommended: 0.3
   template: simple_dip_buy
@@ -1527,6 +1573,7 @@
     A_new: null
     B: false
     C: null
+  name: 正崴
   params_ref: narrow_range_breakout.yaml#per_stock.2392
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -1554,6 +1601,7 @@
     A_new: null
     B: null
     C: false
+  name: 億光
   params_ref: low_vol_pullback.yaml#per_stock.2393
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -1592,6 +1640,7 @@
     A_new: null
     B: null
     C: true
+  name: 友達
   params_ref: ensemble_regime_dip.yaml#per_stock.2409
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -1619,6 +1668,7 @@
     A_new: null
     B: null
     C: null
+  name: 中華電
   params_ref: trend_confirm_hold.yaml#per_stock.2412
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -1645,6 +1695,7 @@
     A_new: null
     B: false
     C: null
+  name: 鼎元
   params_ref: double_pullback.yaml#per_stock.2426
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -1671,6 +1722,7 @@
     A_new: null
     B: false
     C: true
+  name: 創見
   params_ref: support_bounce.yaml#per_stock.2451
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -1708,6 +1760,7 @@
     A_new: null
     B: true
     C: true
+  name: 全新
   params_ref: simple_dip_buy.yaml#per_stock.2455
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -1735,6 +1788,7 @@
     A_new: null
     B: true
     C: true
+  name: 義隆電
   params_ref: monthly_anchor.yaml#per_stock.2458
   position_pct_recommended: 0.1
   template: monthly_anchor
@@ -1760,6 +1814,7 @@
     A_new: null
     B: true
     C: null
+  name: 可成
   params_ref: simple_dip_buy.yaml#per_stock.2474
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -1785,6 +1840,7 @@
     A_new: null
     B: false
     C: null
+  name: 華新科
   params_ref: simple_dip_buy.yaml#per_stock.2492
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -1812,6 +1868,7 @@
     A_new: null
     B: null
     C: true
+  name: 興富發
   params_ref: simple_dip_buy.yaml#per_stock.2542
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -1839,6 +1896,7 @@
     A_new: null
     B: true
     C: true
+  name: 長榮
   params_ref: gap_down_revert.yaml#per_stock.2603
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -1865,6 +1923,7 @@
     A_new: null
     B: true
     C: true
+  name: 裕民
   params_ref: simple_dip_buy.yaml#per_stock.2606
   position_pct_recommended: 0.1
   template: simple_dip_buy
@@ -1890,6 +1949,7 @@
     A_new: null
     B: null
     C: false
+  name: 陽明
   params_ref: deep_dip_long_hold.yaml#per_stock.2609
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -1917,6 +1977,7 @@
     A_new: null
     B: null
     C: null
+  name: 萬海
   params_ref: yearly_high_break.yaml#per_stock.2615
   position_pct_recommended: 0.3
   template: yearly_high_break
@@ -1942,6 +2003,7 @@
     A_new: null
     B: true
     C: true
+  name: 長榮航
   params_ref: keltner_breakout.yaml#per_stock.2618
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -1974,6 +2036,7 @@
     A_new: null
     B: null
     C: null
+  name: 夏都
   params_ref: gap_continuation.yaml#per_stock.2722
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -2007,6 +2070,7 @@
     A_new: null
     B: false
     C: null
+  name: 美食-KY
   params_ref: trend_pullback.yaml#per_stock.2723
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
@@ -2031,6 +2095,7 @@
     A_new: null
     B: true
     C: true
+  name: 王品
   params_ref: ensemble_dip_vote.yaml#per_stock.2727
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2058,6 +2123,7 @@
     A_new: null
     B: null
     C: null
+  name: 台中銀
   params_ref: momentum_hold.yaml#per_stock.2812
   position_pct_recommended: 0.15
   test_alpha_vs_0050: -0.1979
@@ -2082,6 +2148,7 @@
     A_new: null
     B: false
     C: false
+  name: 華票
   params_ref: monthly_anchor.yaml#per_stock.2820
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2116,6 +2183,7 @@
     A_new: null
     B: true
     C: null
+  name: 中壽
   params_ref: mean_reversion.yaml#per_stock.2823
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
@@ -2140,6 +2208,7 @@
     A_new: null
     B: true
     C: true
+  name: 遠東銀
   params_ref: psar_flip.yaml#per_stock.2845
   position_pct_max: 0.1
   position_pct_recommended: 0.1
@@ -2168,6 +2237,7 @@
     A_new: null
     B: null
     C: null
+  name: 統一證
   params_ref: ensemble_dual_momentum.yaml#per_stock.2855
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2195,6 +2265,7 @@
     A_new: null
     B: true
     C: null
+  name: 三商壽
   params_ref: psar_flip.yaml#per_stock.2867
   position_pct_max: 0.1
   position_pct_recommended: 0.1
@@ -2223,6 +2294,7 @@
     A_new: null
     B: true
     C: null
+  name: 華南金
   params_ref: ensemble_dual_momentum.yaml#per_stock.2880
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2250,6 +2322,7 @@
     A_new: null
     B: null
     C: null
+  name: 富邦金
   params_ref: three_white_soldiers.yaml#per_stock.2881
   position_pct_recommended: 0.15
   template: three_white_soldiers
@@ -2297,6 +2370,7 @@
     A_new: null
     B: false
     C: false
+  name: 玉山金
   params_ref: support_bounce.yaml#per_stock.2884
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -2323,6 +2397,7 @@
     A_new: null
     B: false
     C: false
+  name: 元大金
   params_ref: yearly_high_break.yaml#per_stock.2885
   position_pct_recommended: 0.15
   template: yearly_high_break
@@ -2376,6 +2451,7 @@
     A_new: null
     B: false
     C: true
+  name: 台新金
   params_ref: ensemble_dip_vote.yaml#per_stock.2887
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -2402,6 +2478,7 @@
     A_new: null
     B: true
     C: true
+  name: 新光金
   params_ref: mean_reversion.yaml#per_stock.2888
   position_pct_recommended: 0.15
   test_alpha_vs_0050: -0.2254
@@ -2426,6 +2503,7 @@
     A_new: null
     B: null
     C: null
+  name: 永豐金
   params_ref: low_vol_pullback.yaml#per_stock.2890
   position_pct_recommended: 0.15
   test_alpha_vs_0050: -0.235
@@ -2450,6 +2528,7 @@
     A_new: null
     B: true
     C: false
+  name: 中信金
   params_ref: ensemble_dip_or_bounce.yaml#per_stock.2891
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -2478,6 +2557,7 @@
     A_new: null
     B: true
     C: true
+  name: 第一金
   params_ref: support_bounce.yaml#per_stock.2892
   position_pct_recommended: 0.15
   template: support_bounce
@@ -2531,6 +2611,7 @@
     A_new: null
     B: null
     C: null
+  name: 聯陽
   params_ref: chip_momentum.yaml#per_stock.3014
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2569,6 +2650,7 @@
     A_new: null
     B: true
     C: null
+  name: 聯詠
   params_ref: narrow_range_breakout.yaml#per_stock.3034
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -2595,6 +2677,7 @@
     A_new: null
     B: false
     C: false
+  name: 智原
   params_ref: ensemble_dip_vote.yaml#per_stock.3035
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -2622,6 +2705,7 @@
     A_new: null
     B: false
     C: true
+  name: 文曄
   params_ref: ensemble_oversold_vote.yaml#per_stock.3036
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -2649,6 +2733,7 @@
     A_new: null
     B: null
     C: true
+  name: 欣興
   params_ref: narrow_range_breakout.yaml#per_stock.3037
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -2675,6 +2760,7 @@
     A_new: null
     B: null
     C: null
+  name: 健鼎
   params_ref: trend_pullback.yaml#per_stock.3044
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2702,6 +2788,7 @@
     A_new: null
     B: true
     C: true
+  name: 台灣大
   params_ref: monthly_anchor.yaml#per_stock.3045
   position_pct_recommended: 0.1
   template: monthly_anchor
@@ -2727,6 +2814,7 @@
     A_new: null
     B: null
     C: false
+  name: 聯亞光電
   params_ref: gap_continuation.yaml#per_stock.3081
   position_pct_recommended: 0.3
   test_alpha_vs_0050: -0.0081
@@ -2751,6 +2839,7 @@
     A_new: null
     B: true
     C: true
+  name: 穩懋
   params_ref: narrow_range_breakout.yaml#per_stock.3105
   position_pct_max: 0.1
   position_pct_recommended: 0.1
@@ -2789,6 +2878,7 @@
     A_new: null
     B: true
     C: null
+  name: 原相
   params_ref: gap_continuation.yaml#per_stock.3227
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2816,6 +2906,7 @@
     A_new: null
     B: null
     C: null
+  name: 緯創
   params_ref: three_day_reversal.yaml#per_stock.3231
   position_pct_recommended: 0.15
   template: three_day_reversal
@@ -2841,6 +2932,7 @@
     A_new: null
     B: true
     C: true
+  name: 加百裕
   params_ref: simple_dip_buy.yaml#per_stock.3323
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -2868,6 +2960,7 @@
     A_new: null
     B: null
     C: true
+  name: 雙鴻
   params_ref: mean_reversion.yaml#per_stock.3324
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2895,6 +2988,7 @@
     A_new: null
     B: false
     C: false
+  name: 玉晶光
   params_ref: narrow_range_breakout.yaml#per_stock.3406
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2923,6 +3017,7 @@
     A_new: null
     B: true
     C: false
+  name: 創意
   params_ref: mean_reversion.yaml#per_stock.3443
   position_pct_recommended: 1.0
   test_alpha_vs_0050: -0.153
@@ -2947,6 +3042,7 @@
     A_new: null
     B: true
     C: true
+  name: 晶睿
   params_ref: mean_reversion.yaml#per_stock.3454
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -2974,6 +3070,7 @@
     A_new: null
     B: false
     C: false
+  name: 群創
   params_ref: deep_dip_long_hold.yaml#per_stock.3481
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -3001,6 +3098,7 @@
     A_new: null
     B: true
     C: true
+  name: 凡甲
   params_ref: ensemble_dip_vote.yaml#per_stock.3526
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -3028,6 +3126,7 @@
     A_new: null
     B: false
     C: false
+  name: 嘉澤
   params_ref: gap_continuation.yaml#per_stock.3533
   position_pct_max: 0.1
   position_pct_recommended: 0.1
@@ -3055,6 +3154,7 @@
     A_new: null
     B: true
     C: null
+  name: 智易
   params_ref: gap_continuation.yaml#per_stock.3596
   position_pct_recommended: 0.15
   test_alpha_vs_0050: -0.2044
@@ -3079,6 +3179,7 @@
     A_new: null
     B: null
     C: true
+  name: 健策
   params_ref: gap_continuation.yaml#per_stock.3653
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -3106,6 +3207,7 @@
     A_new: null
     B: true
     C: true
+  name: 世芯-KY
   params_ref: ensemble_oversold_vote.yaml#per_stock.3661
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -3133,6 +3235,7 @@
     A_new: null
     B: false
     C: null
+  name: 大聯大
   params_ref: low_vol_pullback.yaml#per_stock.3702
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -3177,6 +3280,7 @@
     A_new: null
     B: true
     C: null
+  name: 麗豐-KY
   params_ref: chip_streak.yaml#per_stock.4137
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -3204,6 +3308,7 @@
     A_new: null
     B: false
     C: true
+  name: 中裕
   params_ref: ensemble_dip_vote.yaml#per_stock.4147
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -3231,6 +3336,7 @@
     A_new: null
     B: true
     C: true
+  name: 全宇生技
   params_ref: deep_dip_long_hold.yaml#per_stock.4148
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -3264,6 +3370,7 @@
     A_new: null
     B: null
     C: null
+  name: 浩鼎
   params_ref: mean_reversion.yaml#per_stock.4174
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -3291,6 +3398,7 @@
     A_new: null
     B: false
     C: true
+  name: 材料-KY
   params_ref: donchian_breakout.yaml#per_stock.4763
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -3330,6 +3438,7 @@
     A_new: null
     B: null
     C: true
+  name: 致伸
   params_ref: inside_day_breakout.yaml#per_stock.4915
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -3357,6 +3466,7 @@
     A_new: null
     B: true
     C: true
+  name: 和碩
   params_ref: roc_reversal.yaml#per_stock.4938
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -3399,6 +3509,7 @@
     A_new: null
     B: true
     C: null
+  name: 天鈺
   params_ref: donchian_breakout.yaml#per_stock.4961
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
@@ -3423,6 +3534,7 @@
     A_new: null
     B: true
     C: false
+  name: 祥碩
   params_ref: hammer_revert.yaml#per_stock.5269
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -3449,6 +3561,7 @@
     A_new: null
     B: true
     C: false
+  name: 信驊
   params_ref: chip_momentum.yaml#per_stock.5274
   position_pct_max: 1.0
   position_pct_recommended: 1.0
@@ -3476,6 +3589,7 @@
     A_new: null
     B: null
     C: null
+  name: 世紀
   params_ref: chip_momentum.yaml#per_stock.5314
   position_pct_recommended: 0.15
   test_alpha_vs_0050: -0.1578
@@ -3500,6 +3614,7 @@
     A_new: null
     B: true
     C: false
+  name: 世界先進
   params_ref: vwap_revert.yaml#per_stock.5347
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -3526,6 +3641,7 @@
     A_new: null
     B: false
     C: true
+  name: 中磊
   params_ref: coppock_buy.yaml#per_stock.5388
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -3552,6 +3668,7 @@
     A_new: null
     B: true
     C: false
+  name: 中美晶
   params_ref: ao_zero_cross.yaml#per_stock.5483
   position_pct_max: 0.1
   position_pct_recommended: 0.1
@@ -3586,6 +3703,7 @@
     A_new: null
     B: null
     C: true
+  name: 遠雄
   params_ref: simple_dip_buy.yaml#per_stock.5522
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -3613,6 +3731,7 @@
     A_new: null
     B: true
     C: false
+  name: 聖暉
   params_ref: low_vol_pullback.yaml#per_stock.5536
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -3656,6 +3775,7 @@
     A_new: null
     B: null
     C: null
+  name: 上海商銀
   params_ref: gap_continuation.yaml#per_stock.5876
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
@@ -3697,6 +3817,7 @@
     A_new: null
     B: null
     C: false
+  name: 寶雅
   params_ref: yearly_low_revert.yaml#per_stock.5904
   position_pct_max: 0.1
   position_pct_recommended: 0.1
@@ -3725,6 +3846,7 @@
     A_new: null
     B: null
     C: null
+  name: 彩晶
   params_ref: gap_continuation.yaml#per_stock.6116
   position_pct_recommended: 0.15
   test_alpha_vs_0050: -0.2089
@@ -3749,6 +3871,7 @@
     A_new: null
     B: true
     C: true
+  name: 新普
   params_ref: simple_dip_buy.yaml#per_stock.6121
   position_pct_recommended: 0.5
   template: simple_dip_buy
@@ -3774,6 +3897,7 @@
     A_new: null
     B: true
     C: false
+  name: 合晶
   params_ref: mean_reversion.yaml#per_stock.6182
   position_pct_recommended: 0.3
   test_alpha_vs_0050: -0.146
@@ -3798,6 +3922,7 @@
     A_new: null
     B: null
     C: true
+  name: 廣明
   params_ref: narrow_range_breakout.yaml#per_stock.6188
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -3825,6 +3950,7 @@
     A_new: null
     B: true
     C: null
+  name: 精成科
   params_ref: chip_momentum.yaml#per_stock.6191
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -3852,6 +3978,7 @@
     A_new: null
     B: false
     C: null
+  name: 聯茂
   params_ref: low_vol_pullback.yaml#per_stock.6213
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -3876,6 +4003,7 @@
     A_new: null
     B: true
     C: null
+  name: 同欣電
   params_ref: narrow_range_breakout.yaml#per_stock.6271
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -3902,6 +4030,7 @@
     A_new: null
     B: false
     C: true
+  name: 啟碁
   params_ref: simple_dip_buy.yaml#per_stock.6285
   position_pct_recommended: 0.5
   template: simple_dip_buy
@@ -3927,6 +4056,7 @@
     A_new: null
     B: null
     C: true
+  name: 元晶
   params_ref: chip_momentum.yaml#per_stock.6443
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -3954,6 +4084,7 @@
     A_new: null
     B: true
     C: true
+  name: 藥華藥
   params_ref: atr_band_breakout.yaml#per_stock.6446
   position_pct_max: 0.1
   position_pct_recommended: 0.1
@@ -3981,6 +4112,7 @@
     A_new: null
     B: true
     C: null
+  name: 環球晶
   params_ref: ensemble_triple_confirm.yaml#per_stock.6488
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -4008,6 +4140,7 @@
     A_new: null
     B: null
     C: null
+  name: 晶碩
   params_ref: mean_reversion.yaml#per_stock.6491
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -4035,6 +4168,7 @@
     A_new: null
     B: true
     C: null
+  name: 台塑化
   params_ref: ema_cross.yaml#per_stock.6505
   position_pct_recommended: 0.15
   template: ema_cross
@@ -4060,6 +4194,7 @@
     A_new: null
     B: null
     C: true
+  name: 精測
   params_ref: low_vol_pullback.yaml#per_stock.6510
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -4098,6 +4233,7 @@
     A_new: null
     B: null
     C: true
+  name: 達發
   params_ref: narrow_range_breakout.yaml#per_stock.6526
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -4125,6 +4261,7 @@
     A_new: null
     B: true
     C: null
+  name: 愛普
   params_ref: low_vol_pullback.yaml#per_stock.6531
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -4150,6 +4287,7 @@
     A_new: null
     B: true
     C: false
+  name: 晶心科
   params_ref: yearly_low_revert.yaml#per_stock.6533
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -4177,6 +4315,7 @@
     A_new: null
     B: null
     C: true
+  name: 緯穎
   params_ref: coppock_buy.yaml#per_stock.6669
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -4214,6 +4353,7 @@
     A_new: null
     B: null
     C: true
+  name: AES-KY
   params_ref: simple_dip_buy.yaml#per_stock.6781
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -4247,6 +4387,7 @@
     A_new: null
     B: null
     C: true
+  name: 大樹
   params_ref: low_vol_pullback.yaml#per_stock.6804
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -4274,6 +4415,7 @@
     A_new: null
     B: null
     C: null
+  name: 鴻勁
   params_ref: low_vol_pullback.yaml#per_stock.7769
   position_pct_max: 0.5
   position_pct_recommended: 0.5
@@ -4301,6 +4443,7 @@
     A_new: null
     B: true
     C: false
+  name: 矽創
   params_ref: simple_dip_buy.yaml#per_stock.8016
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -4338,6 +4481,7 @@
     A_new: null
     B: true
     C: true
+  name: 元太
   params_ref: failed_breakdown.yaml#per_stock.8069
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -4364,6 +4508,7 @@
     A_new: null
     B: null
     C: null
+  name: 致新
   params_ref: trend_pullback.yaml#per_stock.8081
   position_pct_recommended: 0.15
   test_alpha_vs_0050: -0.2302
@@ -4388,6 +4533,7 @@
     A_new: null
     B: true
     C: true
+  name: 日友
   params_ref: simple_dip_buy.yaml#per_stock.8341
   position_pct_max: 0.15
   position_pct_recommended: 0.15
@@ -4415,6 +4561,7 @@
     A_new: null
     B: true
     C: false
+  name: 富邦媒
   params_ref: vwap_revert.yaml#per_stock.8454
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -4447,6 +4594,7 @@
     A_new: null
     B: false
     C: null
+  name: 寶成
   params_ref: narrow_range_breakout.yaml#per_stock.9904
   position_pct_max: 0.0
   position_pct_recommended: 0.0
@@ -4474,6 +4622,7 @@
     A_new: null
     B: null
     C: true
+  name: 統一實
   params_ref: simple_dip_buy.yaml#per_stock.9907
   position_pct_recommended: 0.3
   template: simple_dip_buy
@@ -4499,6 +4648,7 @@
     A_new: null
     B: true
     C: null
+  name: 美利達
   params_ref: golden_cross.yaml#per_stock.9914
   position_pct_recommended: 0.15
   template: golden_cross
@@ -4524,6 +4674,7 @@
     A_new: null
     B: true
     C: true
+  name: 巨大
   params_ref: failed_breakdown.yaml#per_stock.9921
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
@@ -4550,6 +4701,7 @@
     A_new: null
     B: false
     C: true
+  name: 中鼎工程
   params_ref: adx_trending_pullback.yaml#per_stock.9933
   position_pct_max: 0.3
   position_pct_recommended: 0.3
@@ -4600,6 +4752,7 @@
     A_new: null
     B: false
     C: true
+  name: 裕融
   params_ref: narrow_range_breakout.yaml#per_stock.9941
   position_pct_max: 0.0
   position_pct_recommended: 0.0

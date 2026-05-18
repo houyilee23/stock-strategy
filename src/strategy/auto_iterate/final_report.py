@@ -74,8 +74,9 @@ def _watchlist_name_map() -> dict:
             if not m:
                 continue
             sid, name = m.group(1).strip(), m.group(2).strip()
-            # Drop parenthetical notes / trailing comments
-            name = re.split(r"[（(\[/、\\s]", name, maxsplit=1)[0].strip()
+            # Drop parenthetical notes / trailing comments (both half-width
+            # and full-width brackets, plus separators / whitespace)
+            name = re.split(r"[（(\[【/、\s]", name, maxsplit=1)[0].strip()
             if name and sid not in out:
                 out[sid] = name
     _watchlist_name_map._cache = out  # type: ignore

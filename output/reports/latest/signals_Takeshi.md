@@ -14,7 +14,7 @@
 | 2337 | 旺宏 | — | 162.5 | HOLD | C | 15% | low_vol_pullback | — | — | — | 56 | [多頭] | BULL |  |
 | 2408 | 南亞科 | — | 311.5 | HOLD | C | 15% | chip_momentum | — | — | — | 63 | [多頭] | BULL |  |
 | 6770 | 力積電 | — | 62.8 | HOLD | B | 30% | low_vol_pullback | TP 68 / SL 48 | — | — | 59 | [多頭] | BULL |  |
-| 00981A | 主動統一台股增長 | ✅ | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL | (持50股 @22.64) |
+| 00981A | 主動統一台股增長（個人持倉，untestable F） | ✅ | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL | (持50股 @22.64) |
 | 2369 | 菱生 | ✅ | 29.7 | BUY | C | 15% | low_vol_pullback | 買 30.2 | — | — | 46 | [多頭] | BULL | (持30股 @31.23，你的 TP 34.0) |
 | 3189 | 景碩 | ✅ | 486.0 | HOLD | B | 30% | chip_momentum | — | — | — | 55 | [多頭] | BULL | (持2股 @533.50) |
 | 8046 | 南電 | ✅ | 786.0 | BUY | C | 15% | mean_reversion | 買 823.1 | — | — | 47 | [多頭] | BULL | (持1股 @970.00) |
