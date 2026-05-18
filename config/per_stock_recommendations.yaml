@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260518_110730, 20260518_110735, 20260518_110740, 20260518_110745, 20260518_110750, 20260518_110755, 20260518_110800, 20260518_110805
+# Normalized format (2026-05-18): unified tradeable + position_pct_max + name
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -68,6 +68,7 @@
     C: null
   name: 國泰永續高股息
   params_ref: yearly_high_break.yaml#per_stock.00878
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: yearly_high_break
   test_alpha_vs_0050: -0.1902
@@ -79,6 +80,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+14.7% ≥ 5%, |DD|=13% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 00919:
   name: 群益台灣精選高息
@@ -105,6 +107,7 @@
     C: null
   name: 元大台灣價值高息
   params_ref: kd_oversold_cross.yaml#per_stock.00940
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: kd_oversold_cross
   test_alpha_vs_0050: -0.2192
@@ -116,6 +119,7 @@
   tier: C
   tier_reason: PF_lower=1.70 ≥ 0.7, exp=+1.8% ≥ 1%, n=6≥5, holdout=[A_new=NA B=NA
     C=NA]
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 00965:
   best_template: low_vol_pullback
@@ -194,6 +198,7 @@
     C: null
   name: 亞泥
   params_ref: support_bounce.yaml#per_stock.1102
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: support_bounce
   test_alpha_vs_0050: -0.2194
@@ -205,6 +210,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=4, raw_PF=14.71 ≥ 3.0, exp=+7.3% ≥ 5%, |DD|=7% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '1216':
   best_template: failed_breakdown
@@ -220,6 +226,7 @@
     C: true
   name: 統一
   params_ref: failed_breakdown.yaml#per_stock.1216
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: failed_breakdown
@@ -232,6 +239,7 @@
   tier: B
   tier_reason: PF_lower=1.17 ≥ 1.0, exp=+2.5% ≥ 2%, n=8≥5, holdout=[A_new=NA B=NA
     C=O]
+  tradeable: true
   verdict: WEAK
 '1227':
   bnh_cagr: -0.04965137917247453
@@ -264,6 +272,7 @@
     C: false
   name: 黑松
   params_ref: narrow_range_breakout.yaml#per_stock.1234
+  position_pct_max: 0.1
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: narrow_range_breakout
@@ -276,6 +285,7 @@
   tier: D
   tier_reason: BORDERLINE：PF_lower=0.51 ≥ 0.5, exp=+1.3% ≥ 0%, n=14≥5, holdout=[A_new=NA
     B=X C=X]（紙上交易）
+  tradeable: false
   verdict: WEAK
 '1301':
   name: 台塑
@@ -363,6 +373,7 @@
     C: null
   name: 儒鴻
   params_ref: golden_cross.yaml#per_stock.1456
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: golden_cross
   test_alpha_vs_0050: -0.1613
@@ -373,6 +384,7 @@
   test_pf: 2.576
   tier: C
   tier_reason: PF_lower=0.82 ≥ 0.7, exp=+7.1% ≥ 1%, n=9≥5, holdout=[A_new=NA B=X C=NA]
+  tradeable: true
   verdict: PASS
 '1503':
   best_template: narrow_range_breakout
@@ -388,6 +400,7 @@
     C: false
   name: 士電
   params_ref: narrow_range_breakout.yaml#per_stock.1503
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: narrow_range_breakout
@@ -400,6 +413,7 @@
   tier: C
   tier_reason: PF_lower=0.95 ≥ 0.7, exp=+4.1% ≥ 1%, n=19≥5, holdout=[A_new=NA B=X
     C=X]
+  tradeable: true
   verdict: WEAK
 '1504':
   best_template: narrow_range_breakout
@@ -415,6 +429,7 @@
     C: false
   name: 東元
   params_ref: narrow_range_breakout.yaml#per_stock.1504
+  position_pct_max: 0.1
   position_pct_recommended: 0.1
   template: narrow_range_breakout
   test_alpha_vs_0050: -0.2126
@@ -426,6 +441,7 @@
   tier: D
   tier_reason: BORDERLINE：PF_lower=0.56 ≥ 0.5, exp=+2.0% ≥ 0%, n=20≥5, holdout=[A_new=NA
     B=NA C=X]（紙上交易）
+  tradeable: false
   verdict: DD_BREACH
 '1521':
   best_template: low_vol_pullback
@@ -447,8 +463,10 @@
     C: false
   name: 大億
   params_ref: low_vol_pullback.yaml#per_stock.1521
+  position_pct_max: 0.0
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  template: low_vol_pullback
   test_alpha_vs_0050: -0.2741
   test_cagr: -0.0041
   test_expectancy: -0.0041
@@ -457,6 +475,7 @@
   test_pf: 0.807
   tier: F
   tier_reason: FAIL：test expectancy=-0.4% < 0（負期望值）
+  tradeable: false
   verdict: INSUFFICIENT
 '1535':
   best_template: psar_flip
@@ -545,6 +564,7 @@
     C: true
   name: 信邦
   params_ref: keltner_breakout.yaml#per_stock.1582
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: keltner_breakout
@@ -557,6 +577,7 @@
   tier: C
   tier_reason: PF_lower=0.75 ≥ 0.7, exp=+3.2% ≥ 1%, n=16≥5, holdout=[A_new=NA B=NA
     C=O]
+  tradeable: true
   verdict: WEAK
 '1605':
   best_template: atr_band_breakout
@@ -572,6 +593,7 @@
     C: true
   name: 華新
   params_ref: atr_band_breakout.yaml#per_stock.1605
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: atr_band_breakout
   test_alpha_vs_0050: -0.1491
@@ -583,6 +605,7 @@
   tier: C
   tier_reason: PF_lower=0.97 ≥ 0.7, exp=+5.3% ≥ 1%, n=13≥5, holdout=[A_new=NA B=O
     C=O]
+  tradeable: true
   verdict: PASS
 '1717':
   best_template: three_day_reversal
@@ -598,6 +621,7 @@
     C: null
   name: 長興
   params_ref: three_day_reversal.yaml#per_stock.1717
+  position_pct_max: 0.5
   position_pct_recommended: 0.5
   template: three_day_reversal
   test_alpha_vs_0050: -0.2093
@@ -609,6 +633,7 @@
   tier: A
   tier_reason: PF_lower=5.00 ≥ 1.5, exp=+4.7% ≥ 3%, n=7≥6, holdout=[A_new=NA B=NA
     C=NA], gate=PF_lower≥2.0 自動晉升
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '1722':
   best_template: mean_reversion
@@ -624,8 +649,10 @@
     C: true
   name: 台肥
   params_ref: mean_reversion.yaml#per_stock.1722
+  position_pct_max: 0.1
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: mean_reversion
   test_alpha_vs_0050: -0.2274
   test_cagr: 0.0425
   test_expectancy: 0.0474
@@ -635,6 +662,7 @@
   tier: D
   tier_reason: BORDERLINE：PF_lower=0.59 ≥ 0.5, exp=+4.7% ≥ 0%, n=5≥5, holdout=[A_new=NA
     B=O C=O]（紙上交易）
+  tradeable: false
   verdict: WEAK
 '1736':
   best_template: mean_reversion
@@ -650,7 +678,9 @@
     C: true
   name: 喬山
   params_ref: mean_reversion.yaml#per_stock.1736
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
+  template: mean_reversion
   test_alpha_vs_0050: -0.1915
   test_cagr: 0.0785
   test_expectancy: 0.0894
@@ -659,6 +689,7 @@
   test_pf: 14.134
   tier: B
   tier_reason: PF_lower=1.48 ≥ 1.0, exp=+8.9% ≥ 2%, n=5≥5, holdout=[A_new=NA B=X C=O]
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '1789':
   best_template: gap_continuation
@@ -713,6 +744,7 @@
     C: true
   name: 中釉
   params_ref: vwap_revert.yaml#per_stock.1809
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: vwap_revert
@@ -725,6 +757,7 @@
   tier: B
   tier_reason: PF_lower=1.14 ≥ 1.0, exp=+3.5% ≥ 2%, n=18≥5, holdout=[A_new=NA B=O
     C=O]
+  tradeable: true
   verdict: WEAK
 '1907':
   best_template: failed_breakdown
@@ -740,6 +773,7 @@
     C: false
   name: 永豐餘
   params_ref: failed_breakdown.yaml#per_stock.1907
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: failed_breakdown
@@ -751,6 +785,7 @@
   test_pf: 6.496
   tier: C
   tier_reason: PF_lower=0.92 ≥ 0.7, exp=+4.1% ≥ 1%, n=6≥5, holdout=[A_new=NA B=O C=X]
+  tradeable: true
   verdict: WEAK
 '1909':
   best_template: simple_dip_buy
@@ -828,6 +863,7 @@
     C: false
   name: 第一銅
   params_ref: vwap_revert.yaml#per_stock.2009
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: vwap_revert
@@ -840,6 +876,7 @@
   tier: C
   tier_reason: PF_lower=0.86 ≥ 0.7, exp=+1.9% ≥ 1%, n=24≥5, holdout=[A_new=NA B=O
     C=X]
+  tradeable: true
   verdict: WEAK
 '2014':
   best_template: inside_day_breakout
@@ -917,6 +954,7 @@
     C: true
   name: 大成鋼
   params_ref: narrow_range_breakout.yaml#per_stock.2027
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: narrow_range_breakout
@@ -929,6 +967,7 @@
   tier: C
   tier_reason: PF_lower=0.93 ≥ 0.7, exp=+2.3% ≥ 1%, n=15≥5, holdout=[A_new=NA B=O
     C=O]
+  tradeable: true
   verdict: WEAK
 '2049':
   best_template: ensemble_dip_vote
@@ -972,7 +1011,9 @@
     C: false
   name: 川湖
   params_ref: donchian_breakout.yaml#per_stock.2059
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
+  template: donchian_breakout
   test_alpha_vs_0050: 0.0084
   test_cagr: 0.2784
   test_expectancy: 0.156
@@ -982,6 +1023,7 @@
   tier: B
   tier_reason: PF_lower=1.76 ≥ 1.0, exp=+15.6% ≥ 2%, n=11≥5, holdout=[A_new=NA B=X
     C=X]
+  tradeable: true
   verdict: PASS
 '2105':
   bnh_cagr: 0.006308558249347618
@@ -1014,6 +1056,7 @@
     C: null
   name: 和泰車
   params_ref: simple_dip_buy.yaml#per_stock.2207
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   template: simple_dip_buy
   test_alpha_vs_0050: -0.2451
@@ -1024,6 +1067,7 @@
   test_pf: null
   tier: B
   tier_reason: PF_lower=5.00 ≥ 1.0, exp=+5.1% ≥ 2%, n=5≥5, holdout=[A_new=NA B=O C=NA]
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '2227':
   best_template: mean_reversion
@@ -1045,8 +1089,10 @@
     C: null
   name: 裕隆
   params_ref: mean_reversion.yaml#per_stock.2227
+  position_pct_max: 0.0
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  template: mean_reversion
   test_alpha_vs_0050: -0.2733
   test_cagr: -0.0034
   test_expectancy: -0.0089
@@ -1055,6 +1101,7 @@
   test_pf: 0.0
   tier: F
   tier_reason: FAIL：test expectancy=-0.9% < 0（負期望值）
+  tradeable: false
   verdict: INSUFFICIENT
 '2303':
   best_template: ensemble_dip_vote
@@ -1137,6 +1184,7 @@
     C: true
   name: 仁寶
   params_ref: simple_dip_buy.yaml#per_stock.2324
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: simple_dip_buy
   test_alpha_vs_0050: -0.2304
@@ -1148,6 +1196,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=4, raw_PF=inf ≥ 3.0, exp=+5.4% ≥ 5%, |DD|=11% ≤ 25%,
     holdout=[A_new=NA B=O C=O]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '2327':
   best_template: yearly_high_break
@@ -1163,6 +1212,7 @@
     C: null
   name: 國巨
   params_ref: yearly_high_break.yaml#per_stock.2327
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: yearly_high_break
   test_alpha_vs_0050: -0.2157
@@ -1174,6 +1224,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=15.72 ≥ 3.0, exp=+10.3% ≥ 5%, |DD|=19% ≤ 25%,
     holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '2328':
   best_template: simple_dip_buy
@@ -1239,6 +1290,7 @@
     C: false
   name: 華邦電
   params_ref: narrow_range_breakout.yaml#per_stock.2344
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   template: narrow_range_breakout
   test_alpha_vs_0050: -0.0698
@@ -1250,6 +1302,7 @@
   tier: B
   tier_reason: PF_lower=1.11 ≥ 1.0, exp=+5.4% ≥ 2%, n=21≥5, holdout=[A_new=NA B=NA
     C=X]
+  tradeable: true
   verdict: PASS
 '2345':
   best_template: narrow_range_breakout
@@ -1265,6 +1318,7 @@
     C: true
   name: 智邦
   params_ref: narrow_range_breakout.yaml#per_stock.2345
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   template: narrow_range_breakout
   test_alpha_vs_0050: -0.0064
@@ -1276,6 +1330,7 @@
   tier: B
   tier_reason: PF_lower=1.39 ≥ 1.0, exp=+7.3% ≥ 2%, n=19≥5, holdout=[A_new=NA B=X
     C=O]
+  tradeable: true
   verdict: PASS
 '2347':
   best_template: ensemble_dip_vote
@@ -1386,6 +1441,7 @@
     C: null
   name: 英業達
   params_ref: simple_dip_buy.yaml#per_stock.2356
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: simple_dip_buy
   test_alpha_vs_0050: -0.2224
@@ -1397,6 +1453,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+8.6% ≥ 5%, |DD|=23% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '2360':
   best_template: ensemble_dual_momentum
@@ -1455,7 +1512,7 @@
   tradeable: false
   verdict: INSUFFICIENT
 '2369':
-  name: '2369'
+  name: 菱生
   params_ref: low_vol_pullback.yaml#per_stock.2369
   position_pct_max: 0.15
   template: low_vol_pullback
@@ -1485,8 +1542,10 @@
     C: null
   name: 大同
   params_ref: momentum_hold.yaml#per_stock.2371
+  position_pct_max: 0.0
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  template: momentum_hold
   test_alpha_vs_0050: -0.2713
   test_cagr: -0.0014
   test_expectancy: -0.0026
@@ -1495,6 +1554,7 @@
   test_pf: 0.85
   tier: F
   tier_reason: FAIL：test expectancy=-0.3% < 0（負期望值）
+  tradeable: false
   verdict: INSUFFICIENT
 '2376':
   name: 技嘉
@@ -1521,6 +1581,7 @@
     C: true
   name: 瑞昱
   params_ref: simple_dip_buy.yaml#per_stock.2379
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   template: simple_dip_buy
   test_alpha_vs_0050: -0.2165
@@ -1532,6 +1593,7 @@
   tier: B
   tier_reason: PF_lower=5.00 ≥ 1.0, exp=+2.9% ≥ 2%, n=10≥5, holdout=[A_new=NA B=O
     C=O]
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '2382':
   name: 廣達
@@ -1670,6 +1732,7 @@
     C: null
   name: 中華電
   params_ref: trend_confirm_hold.yaml#per_stock.2412
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: trend_confirm_hold
@@ -1682,6 +1745,7 @@
   tier: B
   tier_reason: PF_lower=1.04 ≥ 1.0, exp=+3.8% ≥ 2%, n=6≥5, holdout=[A_new=NA B=NA
     C=NA]
+  tradeable: true
   verdict: WEAK
 '2426':
   best_template: double_pullback
@@ -1697,6 +1761,7 @@
     C: null
   name: 鼎元
   params_ref: double_pullback.yaml#per_stock.2426
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: double_pullback
@@ -1709,6 +1774,7 @@
   tier: B
   tier_reason: PF_lower=1.13 ≥ 1.0, exp=+3.5% ≥ 2%, n=31≥5, holdout=[A_new=NA B=X
     C=NA]
+  tradeable: true
   verdict: WEAK
 '2451':
   best_template: support_bounce
@@ -1790,6 +1856,7 @@
     C: true
   name: 義隆電
   params_ref: monthly_anchor.yaml#per_stock.2458
+  position_pct_max: 0.1
   position_pct_recommended: 0.1
   template: monthly_anchor
   test_alpha_vs_0050: -0.2419
@@ -1801,6 +1868,7 @@
   tier: D
   tier_reason: BORDERLINE：PF_lower=0.51 ≥ 0.5, exp=+0.6% ≥ 0%, n=32≥5, holdout=[A_new=NA
     B=O C=O]（紙上交易）
+  tradeable: false
   verdict: FAIL
 '2474':
   best_template: simple_dip_buy
@@ -1816,6 +1884,7 @@
     C: null
   name: 可成
   params_ref: simple_dip_buy.yaml#per_stock.2474
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: simple_dip_buy
@@ -1827,6 +1896,7 @@
   test_pf: 4.698
   tier: C
   tier_reason: PF_lower=0.85 ≥ 0.7, exp=+4.1% ≥ 1%, n=6≥5, holdout=[A_new=NA B=O C=NA]
+  tradeable: true
   verdict: WEAK
 '2492':
   best_template: simple_dip_buy
@@ -1898,6 +1968,7 @@
     C: true
   name: 長榮
   params_ref: gap_down_revert.yaml#per_stock.2603
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: gap_down_revert
@@ -1910,6 +1981,7 @@
   tier: C
   tier_reason: PF_lower=0.85 ≥ 0.7, exp=+1.6% ≥ 1%, n=13≥5, holdout=[A_new=NA B=O
     C=O]
+  tradeable: true
   verdict: WEAK
 '2606':
   best_template: simple_dip_buy
@@ -1925,6 +1997,7 @@
     C: true
   name: 裕民
   params_ref: simple_dip_buy.yaml#per_stock.2606
+  position_pct_max: 0.1
   position_pct_recommended: 0.1
   template: simple_dip_buy
   test_alpha_vs_0050: -0.1898
@@ -1936,6 +2009,7 @@
   tier: D
   tier_reason: BORDERLINE：PF_lower=0.60 ≥ 0.5, exp=+4.5% ≥ 0%, n=11≥5, holdout=[A_new=NA
     B=O C=O]（紙上交易）
+  tradeable: false
   verdict: DD_BREACH
 '2609':
   best_template: deep_dip_long_hold
@@ -1979,6 +2053,7 @@
     C: null
   name: 萬海
   params_ref: yearly_high_break.yaml#per_stock.2615
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   template: yearly_high_break
   test_alpha_vs_0050: -0.1008
@@ -1990,6 +2065,7 @@
   tier: B
   tier_reason: PF_lower=1.02 ≥ 1.0, exp=+10.8% ≥ 2%, n=9≥5, holdout=[A_new=NA B=NA
     C=NA]
+  tradeable: true
   verdict: PASS
 '2618':
   best_template: keltner_breakout
@@ -2005,6 +2081,7 @@
     C: true
   name: 長榮航
   params_ref: keltner_breakout.yaml#per_stock.2618
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: keltner_breakout
@@ -2017,6 +2094,7 @@
   tier: C
   tier_reason: PF_lower=0.73 ≥ 0.7, exp=+3.3% ≥ 1%, n=14≥5, holdout=[A_new=NA B=O
     C=O]
+  tradeable: true
   verdict: WEAK
 '2722':
   best_template: gap_continuation
@@ -2072,8 +2150,10 @@
     C: null
   name: 美食-KY
   params_ref: trend_pullback.yaml#per_stock.2723
+  position_pct_max: 0.0
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  template: trend_pullback
   test_alpha_vs_0050: -0.2218
   test_cagr: 0.0482
   test_expectancy: 0.2854
@@ -2082,6 +2162,7 @@
   test_pf: null
   tier: F
   tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
+  tradeable: false
   verdict: INSUFFICIENT
 '2727':
   best_template: ensemble_dip_vote
@@ -2125,7 +2206,9 @@
     C: null
   name: 台中銀
   params_ref: momentum_hold.yaml#per_stock.2812
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
+  template: momentum_hold
   test_alpha_vs_0050: -0.1979
   test_cagr: 0.0721
   test_expectancy: 0.1004
@@ -2135,6 +2218,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=4, raw_PF=22.14 ≥ 3.0, exp=+10.0% ≥ 5%, |DD|=17% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '2820':
   best_template: monthly_anchor
@@ -2185,8 +2269,10 @@
     C: null
   name: 中壽
   params_ref: mean_reversion.yaml#per_stock.2823
+  position_pct_max: 0.0
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  template: mean_reversion
   test_alpha_vs_0050: -0.1827
   test_cagr: 0.0873
   test_expectancy: 0.0828
@@ -2195,6 +2281,7 @@
   test_pf: null
   tier: F
   tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
+  tradeable: false
   verdict: INSUFFICIENT
 '2845':
   best_template: psar_flip
@@ -2324,6 +2411,7 @@
     C: null
   name: 富邦金
   params_ref: three_white_soldiers.yaml#per_stock.2881
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: three_white_soldiers
   test_alpha_vs_0050: -0.2291
@@ -2335,6 +2423,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+7.4% ≥ 5%, |DD|=9% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '2882':
   name: 國泰金
@@ -2372,6 +2461,7 @@
     C: false
   name: 玉山金
   params_ref: support_bounce.yaml#per_stock.2884
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: support_bounce
@@ -2384,6 +2474,7 @@
   tier: C
   tier_reason: PF_lower=0.97 ≥ 0.7, exp=+3.5% ≥ 1%, n=10≥5, holdout=[A_new=NA B=X
     C=X]
+  tradeable: true
   verdict: WEAK
 '2885':
   best_template: yearly_high_break
@@ -2399,6 +2490,7 @@
     C: false
   name: 元大金
   params_ref: yearly_high_break.yaml#per_stock.2885
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: yearly_high_break
   test_alpha_vs_0050: -0.1881
@@ -2409,6 +2501,7 @@
   test_pf: 3.841
   tier: C
   tier_reason: PF_lower=0.74 ≥ 0.7, exp=+6.7% ≥ 1%, n=7≥5, holdout=[A_new=NA B=X C=X]
+  tradeable: true
   verdict: PASS
 '2886':
   best_template: linreg_slope_revert
@@ -2480,7 +2573,9 @@
     C: true
   name: 新光金
   params_ref: mean_reversion.yaml#per_stock.2888
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
+  template: mean_reversion
   test_alpha_vs_0050: -0.2254
   test_cagr: 0.0445
   test_expectancy: 0.0509
@@ -2490,6 +2585,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=4, raw_PF=56.70 ≥ 3.0, exp=+5.1% ≥ 5%, |DD|=5% ≤ 25%,
     holdout=[A_new=NA B=O C=O]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '2890':
   best_template: low_vol_pullback
@@ -2505,7 +2601,9 @@
     C: null
   name: 永豐金
   params_ref: low_vol_pullback.yaml#per_stock.2890
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
+  template: low_vol_pullback
   test_alpha_vs_0050: -0.235
   test_cagr: 0.0349
   test_expectancy: 0.0749
@@ -2515,6 +2613,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=inf ≥ 3.0, exp=+7.5% ≥ 5%, |DD|=4% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '2891':
   best_template: ensemble_dip_or_bounce
@@ -2559,6 +2658,7 @@
     C: true
   name: 第一金
   params_ref: support_bounce.yaml#per_stock.2892
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: support_bounce
   test_alpha_vs_0050: -0.2167
@@ -2570,6 +2670,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=4, raw_PF=inf ≥ 3.0, exp=+7.2% ≥ 5%, |DD|=6% ≤ 25%,
     holdout=[A_new=NA B=O C=O]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '2912':
   bnh_cagr: 0.05364185590999626
@@ -2652,6 +2753,7 @@
     C: null
   name: 聯詠
   params_ref: narrow_range_breakout.yaml#per_stock.3034
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: narrow_range_breakout
@@ -2664,6 +2766,7 @@
   tier: C
   tier_reason: PF_lower=0.78 ≥ 0.7, exp=+4.2% ≥ 1%, n=13≥5, holdout=[A_new=NA B=O
     C=NA]
+  tradeable: true
   verdict: WEAK
 '3035':
   best_template: ensemble_dip_vote
@@ -2735,6 +2838,7 @@
     C: true
   name: 欣興
   params_ref: narrow_range_breakout.yaml#per_stock.3037
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: narrow_range_breakout
@@ -2747,6 +2851,7 @@
   tier: C
   tier_reason: PF_lower=1.08 ≥ 0.7, exp=+1.7% ≥ 1%, n=32≥5, holdout=[A_new=NA B=NA
     C=O]
+  tradeable: true
   verdict: WEAK
 '3044':
   best_template: trend_pullback
@@ -2790,6 +2895,7 @@
     C: true
   name: 台灣大
   params_ref: monthly_anchor.yaml#per_stock.3045
+  position_pct_max: 0.1
   position_pct_recommended: 0.1
   template: monthly_anchor
   test_alpha_vs_0050: -0.2534
@@ -2801,6 +2907,7 @@
   tier: D
   tier_reason: BORDERLINE：PF_lower=0.54 ≥ 0.5, exp=+0.3% ≥ 0%, n=32≥5, holdout=[A_new=NA
     B=O C=O]（紙上交易）
+  tradeable: false
   verdict: FAIL
 '3081':
   best_template: gap_continuation
@@ -2816,7 +2923,9 @@
     C: false
   name: 聯亞光電
   params_ref: gap_continuation.yaml#per_stock.3081
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
+  template: gap_continuation
   test_alpha_vs_0050: -0.0081
   test_cagr: 0.2618
   test_expectancy: 0.1386
@@ -2826,6 +2935,7 @@
   tier: B
   tier_reason: PF_lower=1.04 ≥ 1.0, exp=+13.9% ≥ 2%, n=12≥5, holdout=[A_new=NA B=NA
     C=X]
+  tradeable: true
   verdict: PASS
 '3105':
   best_template: narrow_range_breakout
@@ -2856,7 +2966,7 @@
   tradeable: false
   verdict: DD_BREACH
 '3189':
-  name: '3189'
+  name: 景碩
   params_ref: chip_momentum.yaml#per_stock.3189
   position_pct_max: 0.3
   template: chip_momentum
@@ -2908,6 +3018,7 @@
     C: null
   name: 緯創
   params_ref: three_day_reversal.yaml#per_stock.3231
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: three_day_reversal
   test_alpha_vs_0050: -0.2398
@@ -2919,6 +3030,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=8.58 ≥ 3.0, exp=+5.6% ≥ 5%, |DD|=5% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '3323':
   best_template: simple_dip_buy
@@ -3019,7 +3131,9 @@
     C: false
   name: 創意
   params_ref: mean_reversion.yaml#per_stock.3443
+  position_pct_max: 1.0
   position_pct_recommended: 1.0
+  template: mean_reversion
   test_alpha_vs_0050: -0.153
   test_cagr: 0.1169
   test_expectancy: 0.0795
@@ -3029,6 +3143,7 @@
   tier: S
   tier_reason: PF_lower=3.24 ≥ 2.0, exp=+8.0% ≥ 5%, n=8≥8, holdout=[A_new=NA B=O C=X],
     gate=any holdout PASS
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '3454':
   best_template: mean_reversion
@@ -3156,7 +3271,9 @@
     C: null
   name: 智易
   params_ref: gap_continuation.yaml#per_stock.3596
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
+  template: gap_continuation
   test_alpha_vs_0050: -0.2044
   test_cagr: 0.0655
   test_expectancy: 0.0924
@@ -3166,6 +3283,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=4, raw_PF=19.03 ≥ 3.0, exp=+9.2% ≥ 5%, |DD|=8% ≤ 25%,
     holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '3653':
   best_template: gap_continuation
@@ -3468,6 +3586,7 @@
     C: true
   name: 和碩
   params_ref: roc_reversal.yaml#per_stock.4938
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: roc_reversal
@@ -3479,6 +3598,7 @@
   test_pf: 3.841
   tier: C
   tier_reason: PF_lower=0.73 ≥ 0.7, exp=+3.0% ≥ 1%, n=6≥5, holdout=[A_new=NA B=O C=O]
+  tradeable: true
   verdict: WEAK
 '4958':
   name: 臻鼎-KY
@@ -3511,8 +3631,10 @@
     C: null
   name: 天鈺
   params_ref: donchian_breakout.yaml#per_stock.4961
+  position_pct_max: 0.0
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  template: donchian_breakout
   test_alpha_vs_0050: -0.2157
   test_cagr: 0.0542
   test_expectancy: 0.0714
@@ -3521,6 +3643,7 @@
   test_pf: 1.504
   tier: F
   tier_reason: FAIL：PF_lower=0.00, exp=+7.1%, n=7, holdout=[A_new=NA B=O C=NA]
+  tradeable: false
   verdict: DD_BREACH
 '5269':
   best_template: hammer_revert
@@ -3591,7 +3714,9 @@
     C: null
   name: 世紀
   params_ref: chip_momentum.yaml#per_stock.5314
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
+  template: chip_momentum
   test_alpha_vs_0050: -0.1578
   test_cagr: 0.1121
   test_expectancy: 0.095
@@ -3601,6 +3726,7 @@
   tier: C
   tier_reason: PF_lower=0.83 ≥ 0.7, exp=+9.5% ≥ 1%, n=31≥5, holdout=[A_new=NA B=NA
     C=NA]
+  tradeable: true
   verdict: DD_BREACH
 '5347':
   best_template: vwap_revert
@@ -3616,6 +3742,7 @@
     C: false
   name: 世界先進
   params_ref: vwap_revert.yaml#per_stock.5347
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: vwap_revert
@@ -3628,6 +3755,7 @@
   tier: C
   tier_reason: PF_lower=0.74 ≥ 0.7, exp=+2.8% ≥ 1%, n=12≥5, holdout=[A_new=NA B=O
     C=X]
+  tradeable: true
   verdict: WEAK
 '5388':
   best_template: coppock_buy
@@ -3643,6 +3771,7 @@
     C: true
   name: 中磊
   params_ref: coppock_buy.yaml#per_stock.5388
+  position_pct_max: 0.1
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: coppock_buy
@@ -3655,6 +3784,7 @@
   tier: D
   tier_reason: BORDERLINE：PF_lower=0.58 ≥ 0.5, exp=+1.3% ≥ 0%, n=18≥5, holdout=[A_new=NA
     B=X C=O]（紙上交易）
+  tradeable: false
   verdict: WEAK
 '5483':
   best_template: ao_zero_cross
@@ -3777,8 +3907,10 @@
     C: null
   name: 上海商銀
   params_ref: gap_continuation.yaml#per_stock.5876
+  position_pct_max: 0.0
   position_pct_recommended: 0.0
   recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  template: gap_continuation
   test_alpha_vs_0050: -0.2624
   test_cagr: 0.0076
   test_expectancy: 0.041
@@ -3787,6 +3919,7 @@
   test_pf: null
   tier: F
   tier_reason: FAIL：test n_trades=1 < 5（樣本不足，未達 LOW_N_RESCUE）
+  tradeable: false
   verdict: INSUFFICIENT
 '5880':
   bnh_cagr: 0.070364938509065
@@ -3848,7 +3981,9 @@
     C: null
   name: 彩晶
   params_ref: gap_continuation.yaml#per_stock.6116
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
+  template: gap_continuation
   test_alpha_vs_0050: -0.2089
   test_cagr: 0.061
   test_expectancy: 0.1207
@@ -3858,6 +3993,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=4.73 ≥ 3.0, exp=+12.1% ≥ 5%, |DD|=19% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '6121':
   best_template: simple_dip_buy
@@ -3873,6 +4009,7 @@
     C: true
   name: 新普
   params_ref: simple_dip_buy.yaml#per_stock.6121
+  position_pct_max: 0.5
   position_pct_recommended: 0.5
   template: simple_dip_buy
   test_alpha_vs_0050: -0.228
@@ -3884,6 +4021,7 @@
   tier: A
   tier_reason: PF_lower=5.00 ≥ 1.5, exp=+3.2% ≥ 3%, n=7≥6, holdout=[A_new=NA B=O C=O],
     gate=any holdout PASS
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '6182':
   best_template: mean_reversion
@@ -3899,7 +4037,9 @@
     C: false
   name: 合晶
   params_ref: mean_reversion.yaml#per_stock.6182
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
+  template: mean_reversion
   test_alpha_vs_0050: -0.146
   test_cagr: 0.124
   test_expectancy: 0.1372
@@ -3909,6 +4049,7 @@
   tier: B
   tier_reason: PF_lower=3.82 ≥ 1.0, exp=+13.7% ≥ 2%, n=5≥5, holdout=[A_new=NA B=O
     C=X]
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '6188':
   best_template: narrow_range_breakout
@@ -3980,8 +4121,10 @@
     C: null
   name: 聯茂
   params_ref: low_vol_pullback.yaml#per_stock.6213
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: low_vol_pullback
   test_alpha_vs_0050: -0.225
   test_cagr: 0.045
   test_expectancy: 0.0312
@@ -3990,6 +4133,7 @@
   test_pf: 3.639
   tier: C
   tier_reason: PF_lower=0.80 ≥ 0.7, exp=+3.1% ≥ 1%, n=8≥5, holdout=[A_new=NA B=X C=NA]
+  tradeable: true
   verdict: WEAK
 '6271':
   best_template: narrow_range_breakout
@@ -4005,6 +4149,7 @@
     C: null
   name: 同欣電
   params_ref: narrow_range_breakout.yaml#per_stock.6271
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: narrow_range_breakout
@@ -4017,6 +4162,7 @@
   tier: C
   tier_reason: PF_lower=0.76 ≥ 0.7, exp=+2.3% ≥ 1%, n=20≥5, holdout=[A_new=NA B=O
     C=NA]
+  tradeable: true
   verdict: WEAK
 '6285':
   best_template: simple_dip_buy
@@ -4032,6 +4178,7 @@
     C: true
   name: 啟碁
   params_ref: simple_dip_buy.yaml#per_stock.6285
+  position_pct_max: 0.5
   position_pct_recommended: 0.5
   template: simple_dip_buy
   test_alpha_vs_0050: -0.1825
@@ -4043,6 +4190,7 @@
   tier: A
   tier_reason: PF_lower=5.00 ≥ 1.5, exp=+3.8% ≥ 3%, n=12≥6, holdout=[A_new=NA B=X
     C=O], gate=any holdout PASS
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '6443':
   best_template: chip_momentum
@@ -4170,6 +4318,7 @@
     C: null
   name: 台塑化
   params_ref: ema_cross.yaml#per_stock.6505
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: ema_cross
   test_alpha_vs_0050: -0.217
@@ -4181,6 +4330,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=7.60 ≥ 3.0, exp=+10.1% ≥ 5%, |DD|=13% ≤ 25%,
     holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '6510':
   best_template: low_vol_pullback
@@ -4263,8 +4413,10 @@
     C: null
   name: 愛普
   params_ref: low_vol_pullback.yaml#per_stock.6531
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
+  template: low_vol_pullback
   test_alpha_vs_0050: -0.2131
   test_cagr: 0.0569
   test_expectancy: 0.0183
@@ -4274,6 +4426,7 @@
   tier: C
   tier_reason: PF_lower=0.94 ≥ 0.7, exp=+1.8% ≥ 1%, n=17≥5, holdout=[A_new=NA B=O
     C=NA]
+  tradeable: true
   verdict: WEAK
 '6533':
   best_template: yearly_low_revert
@@ -4317,6 +4470,7 @@
     C: true
   name: 緯穎
   params_ref: coppock_buy.yaml#per_stock.6669
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: coppock_buy
@@ -4329,6 +4483,7 @@
   tier: B
   tier_reason: PF_lower=1.31 ≥ 1.0, exp=+2.2% ≥ 2%, n=23≥5, holdout=[A_new=NA B=NA
     C=O]
+  tradeable: true
   verdict: WEAK
 '6770':
   name: 力積電
@@ -4459,7 +4614,7 @@
   tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '8046':
-  name: '8046'
+  name: 南電
   params_ref: mean_reversion.yaml#per_stock.8046
   position_pct_max: 0.15
   template: mean_reversion
@@ -4483,6 +4638,7 @@
     C: true
   name: 元太
   params_ref: failed_breakdown.yaml#per_stock.8069
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: failed_breakdown
@@ -4495,6 +4651,7 @@
   tier: C
   tier_reason: PF_lower=0.73 ≥ 0.7, exp=+2.3% ≥ 1%, n=15≥5, holdout=[A_new=NA B=O
     C=O]
+  tradeable: true
   verdict: WEAK
 '8081':
   best_template: trend_pullback
@@ -4510,7 +4667,9 @@
     C: null
   name: 致新
   params_ref: trend_pullback.yaml#per_stock.8081
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
+  template: trend_pullback
   test_alpha_vs_0050: -0.2302
   test_cagr: 0.0397
   test_expectancy: 0.0753
@@ -4520,6 +4679,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=33.71 ≥ 3.0, exp=+7.5% ≥ 5%, |DD|=8% ≤ 25%,
     holdout=[A_new=NA B=NA C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '8341':
   best_template: simple_dip_buy
@@ -4563,6 +4723,7 @@
     C: false
   name: 富邦媒
   params_ref: vwap_revert.yaml#per_stock.8454
+  position_pct_max: 0.1
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: vwap_revert
@@ -4575,6 +4736,7 @@
   tier: D
   tier_reason: BORDERLINE：PF_lower=0.57 ≥ 0.5, exp=+1.7% ≥ 0%, n=12≥5, holdout=[A_new=NA
     B=O C=X]（紙上交易）
+  tradeable: false
   verdict: WEAK
 '9904':
   best_template: narrow_range_breakout
@@ -4624,6 +4786,7 @@
     C: true
   name: 統一實
   params_ref: simple_dip_buy.yaml#per_stock.9907
+  position_pct_max: 0.3
   position_pct_recommended: 0.3
   template: simple_dip_buy
   test_alpha_vs_0050: -0.2396
@@ -4635,6 +4798,7 @@
   tier: B
   tier_reason: PF_lower=5.00 ≥ 1.0, exp=+3.2% ≥ 2%, n=5≥5, holdout=[A_new=NA B=NA
     C=O]
+  tradeable: true
   verdict: SUSPICIOUS_PERFECT
 '9914':
   best_template: golden_cross
@@ -4650,6 +4814,7 @@
     C: null
   name: 美利達
   params_ref: golden_cross.yaml#per_stock.9914
+  position_pct_max: 0.15
   position_pct_recommended: 0.15
   template: golden_cross
   test_alpha_vs_0050: -0.2231
@@ -4661,6 +4826,7 @@
   tier: C
   tier_reason: LOW_N_RESCUE：n=3, raw_PF=5.48 ≥ 3.0, exp=+9.0% ≥ 5%, |DD|=8% ≤ 25%,
     holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  tradeable: true
   verdict: INSUFFICIENT
 '9921':
   best_template: failed_breakdown
@@ -4676,6 +4842,7 @@
     C: true
   name: 巨大
   params_ref: failed_breakdown.yaml#per_stock.9921
+  position_pct_max: 0.1
   position_pct_recommended: 0.1
   recommendation: 可用，但建議縮小部位（expectancy 未達 5% 門檻）
   template: failed_breakdown
@@ -4688,6 +4855,7 @@
   tier: D
   tier_reason: BORDERLINE：PF_lower=0.55 ≥ 0.5, exp=+2.2% ≥ 0%, n=14≥5, holdout=[A_new=NA
     B=O C=O]（紙上交易）
+  tradeable: false
   verdict: WEAK
 '9933':
   best_template: adx_trending_pullback
@@ -4768,98 +4936,3 @@
   tier_reason: FAIL：test expectancy=-2.2% < 0（負期望值）
   tradeable: false
   verdict: INSUFFICIENT
-borderline_candidates:
-  borderline_dd:
-  - expectancy: 0.6363
-    max_dd: -0.3394
-    n_trades: 5
-    note: DD 30-35% 超標，其餘達 PASS 標準
-    pf: 3.922
-    stock: '3035'
-    template: momentum_hold
-  - expectancy: 0.0972
-    max_dd: -0.317
-    n_trades: 13
-    note: DD 30-35% 超標，其餘達 PASS 標準
-    pf: 4.338
-    stock: '3081'
-    template: donchian_breakout
-  - expectancy: 0.1388
-    max_dd: -0.3106
-    n_trades: 7
-    note: DD 30-35% 超標，其餘達 PASS 標準
-    pf: 3.248
-    stock: '1503'
-    template: momentum_hold
-  - expectancy: 0.0557
-    max_dd: -0.3064
-    n_trades: 8
-    note: DD 30-35% 超標，其餘達 PASS 標準
-    pf: 1.713
-    stock: '1504'
-    template: gap_continuation
-  borderline_low_n:
-  - expectancy: 0.0716
-    max_dd: -0.0596
-    n_trades: 4
-    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
-    pf: 5.556
-    stock: '6116'
-    template: mean_reversion
-  - expectancy: 0.1207
-    max_dd: -0.1912
-    n_trades: 3
-    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
-    pf: 4.729
-    stock: '6116'
-    template: gap_continuation
-  - expectancy: 0.1069
-    max_dd: -0.2271
-    n_trades: 3
-    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
-    pf: 3.222
-    stock: '6182'
-    template: trend_pullback
-  - expectancy: 0.0753
-    max_dd: -0.0847
-    n_trades: 3
-    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
-    pf: 33.712
-    stock: '8081'
-    template: trend_pullback
-  - expectancy: 0.0924
-    max_dd: -0.0763
-    n_trades: 4
-    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
-    pf: 19.032
-    stock: '3596'
-    template: gap_continuation
-  - expectancy: 0.1004
-    max_dd: -0.1656
-    n_trades: 4
-    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
-    pf: 22.141
-    stock: '2812'
-    template: momentum_hold
-  - expectancy: 0.0509
-    max_dd: -0.0506
-    n_trades: 4
-    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
-    pf: 56.702
-    stock: '2888'
-    template: mean_reversion
-  - expectancy: 0.0869
-    max_dd: -0.2699
-    n_trades: 3
-    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
-    pf: 2.801
-    stock: '2890'
-    template: momentum_hold
-  - expectancy: 0.2098
-    max_dd: -0.2954
-    n_trades: 4
-    note: n=3-4 樣本不足，但方向性佳（exp>=5%, pf>=1.5, dd<=30%）
-    pf: 2.285
-    stock: '2014'
-    template: bollinger_squeeze
-  note: 以下個股未達 PASS 門檻，但具備觀察價值
