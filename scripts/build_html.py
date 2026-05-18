@@ -93,17 +93,32 @@ def parse_signals_md(path: str) -> list[dict]:
 
 
 def load_per_stock_params(stock_id: str, template: str) -> dict | None:
-    merged_dir = os.path.join(BASE_DIR, "output", "auto_iterate", "merged_20260426_120034")
-    yaml_path = os.path.join(merged_dir, f"{template}.yaml")
-    if not os.path.exists(yaml_path):
+    """搜尋 best_params 從所有 auto_iterate run dir（先 merged_*，後個別 run）。"""
+    auto_dir = os.path.join(BASE_DIR, "output", "auto_iterate")
+    if not os.path.isdir(auto_dir):
         return None
-    with open(yaml_path, encoding="utf-8") as f:
-        data = yaml.safe_load(f) or {}
-    per_stock = data.get("per_stock", {}) if isinstance(data, dict) else {}
-    rec = per_stock.get(stock_id)
-    if not isinstance(rec, dict):
-        return None
-    return rec.get("best_params")
+    # 先試 merged_*（合併版，最快），再試所有 run dir（新到舊）
+    candidates = []
+    for d in sorted(os.listdir(auto_dir), reverse=True):
+        if d.startswith("merged_"):
+            candidates.append(d)
+    for d in sorted(os.listdir(auto_dir), reverse=True):
+        if d.startswith("2026") and not d.startswith("merged_"):
+            candidates.append(d)
+    for d in candidates:
+        yaml_path = os.path.join(auto_dir, d, f"{template}.yaml")
+        if not os.path.exists(yaml_path):
+            continue
+        try:
+            with open(yaml_path, encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {}
+        except Exception:
+            continue
+        per_stock = data.get("per_stock", {}) if isinstance(data, dict) else {}
+        rec = per_stock.get(stock_id) or per_stock.get(str(stock_id))
+        if isinstance(rec, dict) and rec.get("best_params"):
+            return rec["best_params"]
+    return None
 
 
 # ===== 2. 多時段績效 ==========================================================
@@ -809,8 +824,14 @@ def main():
             pos_max = rec.get("position_pct_max", 0.0) or 0.0
             tradeable = rec.get("tradeable", False)
 
+            # 顯示策略 CAGR 不限 tradeable — D-tier 也跑（紙上交易需參考）
+            # F-tier 完全跳過（template 多半是「找不到」或 untestable）
+            tier = rec.get("tier")
+            should_backtest = (template
+                                 and tier in ("S", "A", "B", "C", "D")
+                                 and template != "untestable")
             res, bnh_close = None, None
-            if template and tradeable:
+            if should_backtest:
                 params = load_per_stock_params(sid, template)
                 if params:
                     try:

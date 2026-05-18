@@ -294,7 +294,12 @@ def main():
         pos_max = rec.get("position_pct_max", 0.0) or 0.0
 
         bt = None
-        if template and rec.get("tradeable"):
+        # D-tier 也跑（紙上交易參考）；F-tier / untestable 跳過
+        tier = rec.get("tier")
+        should_backtest = (template
+                             and tier in ("S", "A", "B", "C", "D")
+                             and template != "untestable")
+        if should_backtest:
             params = load_per_stock_params(sid, template)
             if params:
                 try:
