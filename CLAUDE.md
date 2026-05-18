@@ -17,6 +17,8 @@
 | 改 markdown 報告 | `scripts/build_per_stock_reports.py` |
 | 新 fetcher | `scripts/fetch_*.py`（看現有的當範本） |
 | Tier 規則改後重評現有 results | `scripts/retier_run_dir.py <run_id>` |
+| 改 Excel 同步邏輯 | `scripts/sync_positions_from_excel.py` |
+| 改庫存進出建議規則 | `scripts/inventory_analysis.py` |
 
 詳細工作流見 `docs/ARCHITECTURE.md`。
 

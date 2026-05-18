@@ -12,7 +12,8 @@ REM   3. signals for Takeshi / Katie / universe
 REM   4. per_stock backtest reports (Markdown)
 REM   5. README.md
 REM   6. Web UI (root index.html + stock/*.html)
-REM   7. git add commit push
+REM   7. inventory sync + analyze (from Excel 投資款.xlsx)
+REM   8. git add commit push
 REM ============================================================
 
 setlocal
@@ -32,27 +33,30 @@ echo ============================================================ >> "%LOG%"
 echo  Daily update %DATE% %TIME% >> "%LOG%"
 echo ============================================================ >> "%LOG%"
 
-echo [1/7] git pull >> "%LOG%"
+echo [1/8] git pull >> "%LOG%"
 git pull --rebase --autostash >> "%LOG%" 2>&1
 
-echo [2/7] update --all >> "%LOG%"
+echo [2/8] update --all >> "%LOG%"
 "%PYTHON%" main.py update --all >> "%LOG%" 2>&1
 
-echo [3/7] signals (Takeshi / Katie / universe) >> "%LOG%"
+echo [3/8] signals (Takeshi / Katie / universe) >> "%LOG%"
 "%PYTHON%" main.py signals --list Takeshi  >> "%LOG%" 2>&1
 "%PYTHON%" main.py signals --list Katie    >> "%LOG%" 2>&1
 "%PYTHON%" main.py signals --list universe >> "%LOG%" 2>&1
 
-echo [4/7] build_per_stock_reports >> "%LOG%"
+echo [4/8] build_per_stock_reports >> "%LOG%"
 "%PYTHON%" scripts\build_per_stock_reports.py >> "%LOG%" 2>&1
 
-echo [5/7] update_readme >> "%LOG%"
+echo [5/8] update_readme >> "%LOG%"
 "%PYTHON%" scripts\update_readme.py >> "%LOG%" 2>&1
 
-echo [6/7] build_html >> "%LOG%"
+echo [6/8] build_html >> "%LOG%"
 "%PYTHON%" scripts\build_html.py >> "%LOG%" 2>&1
 
-echo [7/7] git commit + push >> "%LOG%"
+echo [7/8] inventory sync + analyze (Excel 投資款.xlsx) >> "%LOG%"
+"%PYTHON%" main.py inventory >> "%LOG%" 2>&1
+
+echo [8/8] git commit + push >> "%LOG%"
 git add -A >> "%LOG%" 2>&1
 git diff --cached --quiet
 if errorlevel 1 (

@@ -5,6 +5,8 @@ config/watchlists.yaml
 **/trades_*.csv
 **/positions_*.csv
 **/positions_snapshot_*.csv
+**/inventory_advice_*.md
+**/inventory_advice_*.csv
 trash/
 **/*.xlsx
 **/*.xls

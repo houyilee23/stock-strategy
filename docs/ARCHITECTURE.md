@@ -55,6 +55,8 @@ D:\stock/
 │   ├── refresh_bnh_evaluations.py   # 重算 F-tier 個股的 BNH (買進長持) 替代評估
 │   ├── compare_recommendations.py   # 比較兩份 recommendations.yaml 差異
 │   ├── audit_templates.py           # 限價單機制下 audit 其他 templates
+│   ├── sync_positions_from_excel.py # 從 Excel 投資款.xlsx 同步交易記錄 (5/18 新增)
+│   ├── inventory_analysis.py        # 個人庫存進出建議分析 (5/18 新增)
 │   ├── build_per_stock_reports.py   # 產出 output/reports/per_stock/{sid}.md
 │   ├── build_html.py                # 產出 stock/{sid}.html + index.html
 │   ├── update_readme.py             # 產出 README.md 給手機 GitHub App
@@ -113,6 +115,8 @@ D:\stock/
 
 | 想要改的東西 | 編這個檔案 |
 |---|---|
+| 改 Excel 同步邏輯 / 帳戶名稱 | `scripts/sync_positions_from_excel.py` |
+| 改庫存進出建議規則 | `scripts/inventory_analysis.py`（`make_recommendation()` 函式） |
 | 新增一個策略 template | `src/strategy/auto_iterate/templates/<category>.py` + `templates/search_spaces.py` + `templates/__init__.py`（加入 TEMPLATE_GENERATORS dict） |
 | 修改 Tier 評級規則（升/降閾值、新 rescue rule） | `src/strategy/auto_iterate/tiering.py` |
 | 修改 Optuna 搜尋邏輯 / 並行 | `src/strategy/auto_iterate/runner.py` |
@@ -177,7 +181,59 @@ D:\stock/
 4. `python scripts/build_per_stock_reports.py`
 5. `python scripts/update_readme.py`
 6. `python scripts/build_html.py`
-7. `git add commit push`
+7. `python main.py inventory`        # sync Excel + 庫存進出分析 (5/18 新增)
+8. `git add commit push`
+
+---
+
+## 工作流：庫存（Excel 同步）
+
+使用者在 `D:\Users\houyi\OneDrive\文件\投資款.xlsx` 的「交易紀錄」sheet
+維護實際買賣交易，系統自動同步並給進出建議：
+
+**Excel 預期格式**（sheet[1] = 「交易紀錄」）：
+| 列 | 欄位 | 範例 |
+|---|---|---|
+| 1 | 日期 | 2026-04-02 |
+| 2 | 動作 | Buy / Sell |
+| 3 | 代號 | 4958 |
+| 4 | 名稱 | 臻鼎-KY |
+| 5 | 股數 | 5 |
+| 6 | 現金流 | -1073 (買入為負) |
+| 7 | 餘額 | 10708 |
+| 8 | 平均成本 | 214.6 (現金流/股數，已含手續費/稅) |
+| 14 | 備註 | (option) |
+
+只匯入 Buy/Sell。其他動作（股利、轉帳、利息）自動略過。
+
+**指令**：
+```bash
+# 一次完整：sync Excel + 跑分析
+python main.py inventory
+
+# 分開操作
+python main.py inventory --sync-only       # 只同步
+python main.py inventory --analyze-only    # 只分析（用既有 trades CSV）
+
+# 換帳戶名稱
+python main.py inventory --account Personal2
+```
+
+**輸出**：
+- `data/trades_Personal.csv` (gitignored — 持倉私資料)
+- `output/reports/inventory_advice_Personal.md` (gitignored — 手機看)
+- `output/reports/inventory_advice_Personal.csv`
+
+**進出建議邏輯**（按優先順序）：
+1. **STOP_LOSS** 🛑 — 嚴重虧損（弱策略 < -15%，強策略 < -25%）
+2. **REDUCE** ⬇️ — Tier F 或 倉位超過 tier 推薦上限 × 1.5
+3. **TAKE_PROFIT** 💰 — 弱策略大幅獲利 > 30%（落袋為安）
+4. **TRIM** ✂️ — 強策略過度獲利 > 50%（適度減碼）
+5. **ADD** ➕ — 倉位過小（<推薦倉位 30%）+ Tier S/A/B + 近 20 日內拉回 >5%
+6. **BNH_HOLD** 💎 — Tier F 但 BNH 評估可長持
+7. **HOLD** ✋ — 維持
+
+dedup 邏輯：用 (date, sid, action, shares) 作 key，重跑 sync 不會產重複交易。
 
 ---
 

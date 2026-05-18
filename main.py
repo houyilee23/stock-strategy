@@ -192,6 +192,55 @@ def cmd_positions(sub: str, args: list):
     run_positions(sub, args)
 
 
+def cmd_inventory(args: list):
+    """庫存進出分析（從 Excel 投資款.xlsx 同步 + 給建議）。
+
+    用法：
+        python main.py inventory                  # sync + 分析（預設 account=Personal）
+        python main.py inventory --sync-only      # 只 sync 不分析
+        python main.py inventory --analyze-only   # 不 sync 直接分析
+        python main.py inventory --account X      # 指定 account
+    """
+    import subprocess
+    args = list(args)
+    account = "Personal"
+    sync_only = False
+    analyze_only = False
+    if "--account" in args:
+        i = args.index("--account")
+        if i + 1 < len(args):
+            account = args[i + 1]
+            args.pop(i + 1)
+            args.pop(i)
+    if "--sync-only" in args:
+        sync_only = True
+        args.remove("--sync-only")
+    if "--analyze-only" in args:
+        analyze_only = True
+        args.remove("--analyze-only")
+
+    if not analyze_only:
+        print("\n" + "="*64)
+        print("  STEP 1/2  從 Excel 同步交易紀錄")
+        print("="*64)
+        rc = subprocess.call([sys.executable,
+                              os.path.join("scripts", "sync_positions_from_excel.py"),
+                              "--account", account])
+        if rc != 0:
+            print(f"[ERR] sync 失敗 (rc={rc})")
+            return
+
+    if not sync_only:
+        print("\n" + "="*64)
+        print("  STEP 2/2  分析庫存進出點")
+        print("="*64)
+        rc = subprocess.call([sys.executable,
+                              os.path.join("scripts", "inventory_analysis.py"),
+                              "--account", account])
+        if rc != 0:
+            print(f"[ERR] analyze 失敗 (rc={rc})")
+
+
 def cmd_signals(args: list):
     """訊號模式：對 watchlist 產出今日建議。"""
     from src.strategy.runner import run_signals
@@ -444,6 +493,17 @@ USAGE = """
   python main.py positions close 1301 95.0                   手動平倉並指定價格
   python main.py positions close 1301 --shares 500           部分平倉（指定股數）
 
+  ── 庫存（Excel 同步）─────────────────────────────────
+  從 Excel 「投資款.xlsx」的「交易紀錄」sheet 同步個人實際持倉，
+  接著對每檔庫存給進出建議（依 tier + 損益 + 倉位偏離）：
+
+  python main.py inventory                           sync + 分析（預設 account=Personal）
+  python main.py inventory --sync-only               只 sync，不分析
+  python main.py inventory --analyze-only            不 sync，只跑分析
+  python main.py inventory --account MyAccount       指定帳戶名稱
+
+  輸出：output/reports/inventory_advice_<account>.md / .csv
+
   ── 清單管理 ──────────────────────────────────────────
   清單設定檔：config/watchlists.yaml
   排除清單：exception（--all 時絕對排除）
@@ -482,6 +542,8 @@ if __name__ == "__main__":
         cmd_optimize(args[1:])
     elif args[0] in ("auto_iterate", "auto-iterate"):
         cmd_auto_iterate(args[1:])
+    elif args[0] == "inventory":
+        cmd_inventory(args[1:])
     else:
         print(f"未知指令：{args[0]}")
         print(USAGE)
