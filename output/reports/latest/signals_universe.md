@@ -83,7 +83,7 @@
 | 00878 | 國泰永續高股息 | — | 27.9 | HOLD | C | — | style1_pullback | — | — | — | 77 | [多頭] | BULL |  |
 | 00919 | 群益台灣精選高息（2023 IPO，歷史短） | — | 25.8 | HOLD | C | 15% | style1_pullback | — | — | — | 73 | [多頭] | BULL |  |
 | 00940 | 元大台灣價值高息（2024 IPO，歷史很短） | — | 10.9 | HOLD | C | — | style1_pullback | — | — | — | 63 | [多頭] | BULL |  |
-| 00981A | 主動統一台股增長 | — | 28.4 | HOLD | — | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
+| 00981A | 主動統一台股增長 | — | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL |  |
 | 2458 | 義隆電 | — | 142.5 | HOLD | D | — | style1_pullback | — | — | — | 53 | [多頭] | BULL |  |
 | 3035 | 智原 | — | 190.0 | HOLD | A | 50% | style1_pullback | — | — | — | 57 | [空頭] | BULL |  |
 | 3081 | 聯亞光電 | — | 2620.0 | HOLD | B | — | style1_pullback | — | — | — | 58 | [多頭] | BULL |  |

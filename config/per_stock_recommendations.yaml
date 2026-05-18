@@ -1,4 +1,4 @@
-# Applied retrain upgrades from: 20260517_145421, 20260517_145429, 20260517_145437
+# Applied retrain upgrades from: 20260518_103126, 20260518_103131, 20260518_103139, 20260518_103148, 20260518_103157, 20260518_103204, 20260518_103212
 '0056':
   best_template: kd_oversold_cross
   bootstrap:
@@ -115,6 +115,51 @@
   tier_reason: PF_lower=1.70 ≥ 0.7, exp=+1.8% ≥ 1%, n=6≥5, holdout=[A_new=NA B=NA
     C=NA]
   verdict: SUSPICIOUS_PERFECT
+00965:
+  best_template: low_vol_pullback
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: null
+    C: null
+  params_ref: low_vol_pullback.yaml#per_stock.00965
+  position_pct_max: 0.0
+  position_pct_recommended: 0.0
+  recommendation: FAIL：所有模板 tier=F，訊號模式不適用，建議走組合模式或直接買 0050
+  template: low_vol_pullback
+  test_alpha_vs_0050: -0.506
+  test_cagr: 0.0395
+  test_expectancy: 0.0191
+  test_max_dd: -0.1373
+  test_n_trades: 3
+  test_pf: 2.91
+  tier: F
+  tier_reason: FAIL：test n_trades=3 < 5（樣本不足，未達 LOW_N_RESCUE）
+  tradeable: false
+  verdict: INSUFFICIENT
+00981A:
+  bnh_cagr: null
+  bnh_div_yield: 0.0
+  bnh_holdable: false
+  bnh_max_dd: null
+  bnh_position_pct_max: 0.0
+  bnh_tier: F
+  name: 主動統一台股增長
+  params_ref: manual.yaml#untestable
+  position_pct_max: 0.0
+  template: untestable
+  test_expectancy: null
+  test_max_dd: null
+  test_n_trades: 0
+  test_pf: null
+  tier: F
+  tier_reason: 新 ETF（2025-05 上市），訓練期 (2017-2023) 無資料，無法回測
+  tradeable: false
 '1101':
   bnh_cagr: 0.07038984218271316
   bnh_div_yield: 0.04178110946214395
@@ -2678,6 +2723,33 @@
   test_pf: 3.037
   tier: B
   tradeable: true
+'3227':
+  best_template: gap_continuation
+  bootstrap:
+    n_iterations: 1000
+    n_original: 3
+    pf_lower: null
+    pf_mean: null
+    pf_upper: null
+  holdouts:
+    A_new: null
+    B: true
+    C: null
+  params_ref: gap_continuation.yaml#per_stock.3227
+  position_pct_max: 0.15
+  position_pct_recommended: 0.15
+  template: gap_continuation
+  test_alpha_vs_0050: -0.4812
+  test_cagr: 0.0643
+  test_expectancy: 0.0506
+  test_max_dd: -0.0447
+  test_n_trades: 3
+  test_pf: 14.107
+  tier: C
+  tier_reason: LOW_N_RESCUE：n=3, raw_PF=14.11 ≥ 3.0, exp=+5.1% ≥ 5%, |DD|=4% ≤ 25%,
+    holdout=[A_new=NA B=O C=NA]（紙上交易 3 個月）
+  tradeable: true
+  verdict: INSUFFICIENT
 '3231':
   best_template: three_day_reversal
   bootstrap:

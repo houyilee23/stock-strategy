@@ -24,7 +24,7 @@ _最後更新：**2026-05-18**_
 | [2337](output/reports/per_stock/2337.md) | 旺宏 | 162.5 | HOLD | C | 15% | 56 | [多頭] | BULL |
 | [2408](output/reports/per_stock/2408.md) | 南亞科 | 311.5 | HOLD | C | 15% | 63 | [多頭] | BULL |
 | [6770](output/reports/per_stock/6770.md) | 力積電 | 62.8 | HOLD | B | 30% | 59 | [多頭] | BULL |
-| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.4 | HOLD | — | — | 60 | [多頭] | BULL |
+| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
 | [2369](output/reports/per_stock/2369.md) | 菱生 | 29.7 | 🟢 **BUY** | C | 15% | 46 | [多頭] | BULL |
 | [3189](output/reports/per_stock/3189.md) | 景碩 | 486.0 | HOLD | B | 30% | 55 | [多頭] | BULL |
 | [8046](output/reports/per_stock/8046.md) | 南電 | 786.0 | 🟢 **BUY** | C | 15% | 47 | [多頭] | BULL |
@@ -132,7 +132,7 @@ _最後更新：**2026-05-18**_
 | [00878](output/reports/per_stock/00878.md) | 國泰永續高股息 | 27.9 | HOLD | C | — | 77 | [多頭] | BULL |
 | [00919](output/reports/per_stock/00919.md) | 群益台灣精選高息（2023 IPO，歷史短） | 25.8 | HOLD | C | 15% | 73 | [多頭] | BULL |
 | [00940](output/reports/per_stock/00940.md) | 元大台灣價值高息（2024 IPO，歷史很短） | 10.9 | HOLD | C | — | 63 | [多頭] | BULL |
-| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.4 | HOLD | — | — | 60 | [多頭] | BULL |
+| [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.4 | HOLD | F | — | 60 | [多頭] | BULL |
 | [2458](output/reports/per_stock/2458.md) | 義隆電 | 142.5 | HOLD | D | — | 53 | [多頭] | BULL |
 | [3035](output/reports/per_stock/3035.md) | 智原 | 190.0 | HOLD | A | 50% | 57 | [空頭] | BULL |
 | [3081](output/reports/per_stock/3081.md) | 聯亞光電 | 2620.0 | HOLD | B | — | 58 | [多頭] | BULL |
