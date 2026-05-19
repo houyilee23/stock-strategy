@@ -313,12 +313,43 @@ a.stock-link:hover {{ text-decoration: underline; }}
 .neg-cagr {{ color: #2a9d3f; }}    /* 負報酬 = 綠 */
 /* 清單成員勾選按鈕 */
 .toggle-btn {{
-  background: none; border: none; padding: 0.1rem 0.3rem;
-  cursor: pointer; font-size: 1.2rem; line-height: 1;
+  background: none; border: none; padding: 0.2rem 0.5rem;
+  cursor: pointer; font-size: 1.3rem; line-height: 1;
+  border-radius: 4px;
 }}
 .toggle-on {{ color: #ffb800; }}    /* 已在清單：黃色實心星 */
 .toggle-off {{ color: #ccc; }}      /* 未在清單：灰色空心星 */
-.toggle-btn:hover {{ transform: scale(1.2); }}
+.toggle-btn:hover {{ transform: scale(1.15); background: rgba(255, 184, 0, 0.1); }}
+/* 股票池分類折疊卡片 */
+.cat-card {{
+  margin-bottom: 0.6rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 6px;
+  background: var(--pico-card-background-color);
+}}
+.cat-card summary {{
+  cursor: pointer;
+  padding: 0.6rem 0.9rem;
+  font-weight: 600;
+  user-select: none;
+  list-style: none;
+}}
+.cat-card summary::-webkit-details-marker {{ display: none; }}
+.cat-card summary::before {{
+  content: "▶";
+  display: inline-block;
+  margin-right: 0.5rem;
+  transition: transform 0.15s;
+  color: var(--pico-primary);
+  font-size: 0.8rem;
+}}
+.cat-card[open] summary::before {{ transform: rotate(90deg); }}
+.cat-card summary:hover {{ background: rgba(0,0,0,0.04); }}
+.cat-body {{
+  padding: 0 0.6rem 0.6rem 0.6rem;
+  overflow-x: auto;
+}}
+.cat-body table {{ margin-bottom: 0; }}
 @media (max-width: 600px) {{
   .banner {{ grid-template-columns: 1fr; }}
   table {{ font-size: 0.75rem; }}
@@ -413,10 +444,20 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
                    if (r["rsi"].isdigit() and int(r["rsi"]) >= 75))
         summaries[acc] = {"buy": buy, "sell": sell, "hot": hot, "n": len(rows)}
 
-    # 第一個帳戶的摘要顯示在 banner（總和也可以）
-    total_buy = sum(s["buy"] for s in summaries.values())
-    total_sell = sum(s["sell"] for s in summaries.values())
-    total_hot = sum(s["hot"] for s in summaries.values())
+    # Banner 統計 — 跨清單以 sid 去重，避免同股在 Takeshi+Katie+universe 被算 3 次
+    buy_sids, sell_sids, hot_sids = set(), set(), set()
+    for acc, rows in accounts_data.items():
+        for r in rows:
+            sid = r["sid"]
+            if r["action"] == "BUY":
+                buy_sids.add(sid)
+            if r["action"] == "SELL":
+                sell_sids.add(sid)
+            if r["rsi"].isdigit() and int(r["rsi"]) >= 75:
+                hot_sids.add(sid)
+    total_buy = len(buy_sids)
+    total_sell = len(sell_sids)
+    total_hot = len(hot_sids)
 
     # 把 accounts_data 轉成 JSON 給 Alpine
     accounts_json = json.dumps(accounts_data, ensure_ascii=False)
@@ -425,6 +466,26 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
         ensure_ascii=False,
     )
     editable_json = json.dumps(editable_account, ensure_ascii=False)
+
+    # 股票池分類（依 watchlists.yaml 註解 group）
+    sid_to_cat = _build_category_map_from_watchlists()
+    universe_by_cat = {}
+    for r in accounts_data.get("universe", []):
+        cat = sid_to_cat.get(r["sid"], "未分類")
+        universe_by_cat.setdefault(cat, []).append(r)
+    # 排序：類別名稱（半導體、金融、傳產 等比較常用的優先）
+    PRIORITY = ["半導體", "金融", "電子", "電信", "傳產", "航運", "鋼鐵",
+                "機械", "化工", "面板", "汽車", "民生", "食品", "紡織",
+                "光學", "通路", "建設", "生技", "醫療", "ETF", "未分類"]
+    def cat_rank(c):
+        for i, kw in enumerate(PRIORITY):
+            if kw in c:
+                return i
+        return 99
+    universe_by_cat_sorted = dict(sorted(
+        universe_by_cat.items(), key=lambda x: (cat_rank(x[0]), x[0])
+    ))
+    universe_by_cat_json = json.dumps(universe_by_cat_sorted, ensure_ascii=False)
 
     # Admin-only: 提供一個切換到使用者頁面的連結
     user_link_html = ""
@@ -537,8 +598,8 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
     return this.effectiveSids(acc).has(sid);
   }},
 
-  // 切換 list 成員資格
-  toggle(sid, acc) {{
+  // 切換 list 成員資格（移除時要確認，避免誤觸）
+  toggle(sid, acc, stockName) {{
     if (!this.canEdit(acc)) return;
     const base = (this.accounts[acc] || []).map(r => r.sid);
     if (!this.overrides[acc]) this.overrides[acc] = {{add: [], remove: []}};
@@ -547,21 +608,26 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
     const inEffective = this.isInList(sid, acc);
 
     if (inEffective) {{
-      // 目前在 list 內 → 移除
+      // 反勾選 — 移除前要確認（避免手機/桌機誤觸）
+      const label = stockName ? `${{sid}} ${{stockName}}` : sid;
+      if (!confirm(`要從「${{acc}}」清單移除 ${{label}} 嗎？`)) return;
       if (base.includes(sid)) {{
         if (!ov.remove.includes(sid)) ov.remove.push(sid);
       }} else {{
         ov.add = ov.add.filter(s => s !== sid);
       }}
     }} else {{
-      // 目前不在 list 內 → 加入
+      // 加入 — 直接加，不需確認
       if (base.includes(sid)) {{
         ov.remove = ov.remove.filter(s => s !== sid);
       }} else {{
         if (!ov.add.includes(sid)) ov.add.push(sid);
       }}
     }}
+    // 寫回 localStorage
     localStorage.setItem(acc + "_overrides", JSON.stringify(ov));
+    // 強制 Alpine 重新渲染（reassign trigger reactivity）
+    this.overrides = {{...this.overrides, [acc]: {{...ov}}}};
   }},
 
   // 統計：list 大小（effective）
@@ -577,32 +643,30 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
     return (ov.add||[]).length + (ov.remove||[]).length > 0;
   }},
 
-  // 匯出變更為 JSON（給「事後回傳」用）
-  exportOverrides() {{
-    const out = {{}};
-    for (const acc of Object.keys(this.overrides)) {{
-      const ov = this.overrides[acc];
-      if (((ov.add||[]).length + (ov.remove||[]).length) > 0) {{
-        out[acc] = ov;
-      }}
-    }}
-    if (Object.keys(out).length === 0) {{
-      alert("目前沒有任何變更可匯出");
-      return;
-    }}
-    const txt = JSON.stringify(out, null, 2);
-    navigator.clipboard.writeText(txt).then(() => {{
-      alert("✅ 變更已複製到剪貼簿，可貼給管理員或 Email 出去：\\n\\n" + txt);
-    }}, () => {{
-      prompt("複製失敗，請手動 copy：", txt);
-    }});
-  }},
-
   // 清除本機變更
   clearOverrides(acc) {{
     if (!confirm("確定要清除「" + acc + "」的本機變更（恢復成 server 上的清單）？")) return;
     this.overrides[acc] = {{add: [], remove: []}};
     localStorage.removeItem(acc + "_overrides");
+    this.overrides = {{...this.overrides}};
+  }},
+
+  // 股票池分類資料（依 watchlists.yaml 註解 group 而成）
+  universeByCategory: {universe_by_cat_json},
+
+  // 取得某類別中符合搜尋條件的股票
+  filteredCategory(cat) {{
+    let rows = this.universeByCategory[cat] || [];
+    let q = this.search.trim().toLowerCase();
+    if (q) {{
+      rows = rows.filter(r => r.sid.includes(q) ||
+                              (r.name||"").toLowerCase().includes(q));
+    }}
+    return rows;
+  }},
+
+  categoryHasMatch(cat) {{
+    return this.filteredCategory(cat).length > 0;
   }}
 }}'>
 
@@ -638,10 +702,6 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
       <button @click="clearOverrides(acc)" style="margin-left: 0.3rem; padding: 0.1rem 0.4rem; font-size: 0.75rem;">清除</button>
     </span>
   </template>
-  <div style="margin-top: 0.4rem;">
-    <button @click="exportOverrides()" style="padding: 0.3rem 0.7rem; font-size: 0.85rem;">📤 匯出變更給管理員</button>
-    <small style="color: var(--pico-muted-color); margin-left: 0.5rem;">變更只存在您的瀏覽器；按上方按鈕複製 JSON 並回傳給管理員</small>
-  </div>
 </div>
 '''
 
@@ -649,10 +709,13 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
 """ + overrides_bar + """
 <input type="search" x-model="search" placeholder="🔍 搜尋代號或名稱（如 2330、台積電）">
 
+<!-- 共用：表格列 macro 用 template 渲染 -->
+<!-- ╔══ 我的清單 / Takeshi / Katie tab：單一表格（含 toggle 欄）══╗ -->
+<div x-show="current !== 'universe'">
 <table>
 <thead>
 <tr>
-  <th x-show="canEdit(current) || current === 'universe'" style="width:40px;">★</th>
+  <th x-show="canEdit(current)" style="width:40px;">★</th>
   <th @click="sort('sid')">股票<span x-text="arrow('sid')"></span></th>
   <th @click="sort('in_pos')">在倉<span x-text="arrow('in_pos')"></span></th>
   <th @click="sort('name')">名稱<span x-text="arrow('name')"></span></th>
@@ -668,17 +731,10 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
 <tbody>
 <template x-for="r in filtered()" :key="r.sid + '-' + current">
 <tr>
-  <td x-show="canEdit(current) || current === 'universe'">
-    <template x-if="canEdit(current) === false && current === 'universe'">
-      <span style="color:#bbb">·</span>
-    </template>
-    <template x-if="canEdit(current) || (current === 'universe' && editableAccount)">
-      <button class="toggle-btn"
-              @click.stop="toggle(r.sid, current === 'universe' ? editableAccount : current)"
-              :class="(current === 'universe' ? isInList(r.sid, editableAccount) : isInList(r.sid, current)) ? 'toggle-on' : 'toggle-off'"
-              :title="(current === 'universe' ? isInList(r.sid, editableAccount) : isInList(r.sid, current)) ? '已在清單中（點擊移除）' : '加入清單'"
-              x-text="(current === 'universe' ? isInList(r.sid, editableAccount) : isInList(r.sid, current)) ? '★' : '☆'"></button>
-    </template>
+  <td x-show="canEdit(current)">
+    <button class="toggle-btn toggle-on"
+            @click.stop="toggle(r.sid, current, r.name)"
+            title="點擊移除（會跳出確認）">★</button>
   </td>
   <td><a class="stock-link" :href="`stock/${r.sid}.html`" x-text="r.sid"></a></td>
   <td x-html="cellInPos(r.in_pos)"></td>
@@ -694,6 +750,63 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
 </template>
 </tbody>
 </table>
+</div>
+
+<!-- ╔══ 股票池 tab：依類別折疊卡片 ══╗ -->
+<div x-show="current === 'universe'">
+  <small style="color:var(--pico-muted-color); display:block; margin-bottom:0.6rem;">
+    <span x-show="editableAccount">點 ☆ 加入「<span x-text="editableAccount"></span>」清單，已在清單中的顯示 ★。移除請改回該清單 tab 操作。</span>
+    <span x-show="!editableAccount">管理員模式：請先切到「Takeshi」或「Katie」tab 上方的「+ 從股票池加入」按鈕</span>
+  </small>
+  <template x-for="cat in Object.keys(universeByCategory)" :key="cat">
+    <details :open="filteredCategory(cat).length > 0" x-show="categoryHasMatch(cat)" class="cat-card">
+      <summary>
+        <span x-text="cat"></span>
+        <small style="color:var(--pico-muted-color); margin-left:0.5rem;"
+               x-text="`(${filteredCategory(cat).length} 檔)`"></small>
+      </summary>
+      <div class="cat-body">
+      <table>
+      <thead>
+      <tr>
+        <th x-show="editableAccount" style="width:40px;">+</th>
+        <th>股票</th>
+        <th>名稱</th>
+        <th>收盤</th>
+        <th>動作</th>
+        <th>Tier</th>
+        <th>倉位</th>
+        <th>掛單</th>
+        <th>RSI</th>
+      </tr>
+      </thead>
+      <tbody>
+      <template x-for="r in filteredCategory(cat)" :key="r.sid + '-' + cat">
+      <tr>
+        <td x-show="editableAccount">
+          <button class="toggle-btn"
+                  @click.stop="toggle(r.sid, editableAccount, r.name)"
+                  :class="isInList(r.sid, editableAccount) ? 'toggle-on' : 'toggle-off'"
+                  :title="isInList(r.sid, editableAccount) ? '已在' + editableAccount + ' 清單' : '加入 ' + editableAccount + ' 清單'"
+                  x-text="isInList(r.sid, editableAccount) ? '★' : '☆'"></button>
+        </td>
+        <td><a class="stock-link" :href="`stock/${r.sid}.html`" x-text="r.sid"></a></td>
+        <td x-text="r.name"></td>
+        <td x-text="r.close"></td>
+        <td x-html="cellAction(r.action)"></td>
+        <td x-html="cellTier(r.tier)"></td>
+        <td x-text="r.pos"></td>
+        <td class="order-cell" x-html="cellOrder(r.order)"></td>
+        <td x-html="cellRsi(r.rsi)"></td>
+      </tr>
+      </template>
+      </tbody>
+      </table>
+      </div>
+    </details>
+  </template>
+</div>
+
 </div>
 
 <script>
@@ -936,6 +1049,65 @@ def render_stock_html(sid: str, name: str, rec: dict,
 
 
 # ===== 7. main ================================================================
+
+def _build_category_map_from_watchlists() -> dict:
+    """從 watchlists.yaml 解析「# XXX」或「# ── XXX ──」comment header，
+    對每檔股票標出所屬類別。
+
+    Rules：
+      - 只看 universe: section
+      - 接連的 stocks 屬於最近一個「真正類別」（非批次標頭）
+      - 批次標頭如「# ── 5/9 新增 50 檔...──」會被識別並跳過（用日期/「新增」字眼判斷）
+
+    Returns: {sid: category_name}
+    """
+    import re
+    path = os.path.join(BASE_DIR, "config", "watchlists.yaml")
+    sid_to_cat = {}
+    if not os.path.exists(path):
+        return sid_to_cat
+
+    DATE_PAT = re.compile(r"\d{4}-\d{2}-\d{2}|\d+\s*/\s*\d+\s")
+    BATCH_KEYWORDS = ("新增", "retrain", "從 Excel", "從 research_todo", "從 exception")
+
+    current_cat = "未分類"
+    in_universe = False
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            stripped = line.rstrip()
+            # Detect top-level YAML key: a non-indented line ending with `:`
+            m_key = re.match(r"^(\w[\w_]*?):\s*$", stripped)
+            if m_key:
+                in_universe = (m_key.group(1) == "universe")
+                current_cat = "未分類"
+                continue
+            if not in_universe:
+                continue
+
+            # Comment header: `# ── XXX ──` or `# XXX`
+            line2 = stripped.strip()
+            if line2.startswith("#"):
+                # Strip leading # and trailing/leading ──
+                text = re.sub(r"^#\s*[─━—\-]+\s*", "", line2)
+                text = re.sub(r"\s*[─━—\-]+\s*$", "", text)
+                text = re.sub(r"^#\s*", "", text).strip()
+                if not text:
+                    continue
+                # Skip batch-marker headers
+                if DATE_PAT.search(text) or any(kw in text for kw in BATCH_KEYWORDS):
+                    continue
+                # 移除括號內的補充說明（A-tier、tier=S 等）
+                text = re.sub(r"\s*[（(].*?[)）].*$", "", text).strip()
+                if text:
+                    current_cat = text
+                continue
+
+            # Stock entry: `- "1234"   # name`
+            m_sid = re.match(r'-\s*"([\w\d]+)"', line2)
+            if m_sid:
+                sid_to_cat[m_sid.group(1)] = current_cat
+    return sid_to_cat
+
 
 def _build_stock_names_from_watchlists() -> dict:
     """從 watchlists.yaml 註解解析人讀股名（最準），只保留股名本身。
