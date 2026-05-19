@@ -70,7 +70,7 @@ _最後更新：**2026-05-19**_
 | [3008](output/reports/per_stock/3008.md) | 大立光 | 3445.0 | HOLD | C | 15% | 80 | [多頭] | BULL |
 | [4938](output/reports/per_stock/4938.md) | 和碩 | 76.5 | HOLD | C | 15% | 37 | [多頭] | BULL |
 | [3231](output/reports/per_stock/3231.md) | 緯創 | 135.5 | HOLD | C | 15% | 45 | [多頭] | BULL |
-| [2474](output/reports/per_stock/2474.md) | 可成 | 185.0 | HOLD | C | 15% | 35 | [空頭] | BULL |
+| [2474](output/reports/per_stock/2474.md) | 可成 | 185.0 | 🟢 **BUY** | C | 15% | 35 | [空頭] | BULL |
 | [2376](output/reports/per_stock/2376.md) | 技嘉 | 326.5 | HOLD | C | 15% | 72 | [空頭] | BULL |
 | [2356](output/reports/per_stock/2356.md) | 英業達 | 52.2 | HOLD | C | 15% | 67 | [多頭] | BULL |
 | [2353](output/reports/per_stock/2353.md) | 宏碁 | 27.7 | HOLD | C | 15% | 49 | [空頭] | BULL |
@@ -102,7 +102,7 @@ _最後更新：**2026-05-19**_
 | [2891](output/reports/per_stock/2891.md) | 中信金 | 54.8 | HOLD | A | 50% | 55 | [多頭] | BULL |
 | [2892](output/reports/per_stock/2892.md) | 第一金 | 29.3 | HOLD | C | 15% | 57 | [空頭] | BULL |
 | [5880](output/reports/per_stock/5880.md) | 合庫金 | 22.9 | HOLD | F | — | 40 | [空頭] | BULL |
-| [5871](output/reports/per_stock/5871.md) | 中租-KY | 106.0 | HOLD | C | 15% | 35 | [空頭] | BULL |
+| [5871](output/reports/per_stock/5871.md) | 中租-KY | 106.0 | 🔴 **SELL** | C | 15% | 35 | [空頭] | BULL |
 | [1301](output/reports/per_stock/1301.md) | 台塑 | 45.7 | HOLD | A | 50% | 36 | [多頭] | BULL |
 | [1303](output/reports/per_stock/1303.md) | 南亞 | 85.3 | HOLD | A | 50% | 47 | [多頭] | BULL |
 | [1326](output/reports/per_stock/1326.md) | 台化 | 44.5 | HOLD | B | 30% | 38 | [多頭] | BULL |
@@ -141,10 +141,10 @@ _最後更新：**2026-05-19**_
 | [5269](output/reports/per_stock/5269.md) | 祥碩 | 1455.0 | HOLD | B | 30% | 61 | [空頭] | BULL |
 | [6116](output/reports/per_stock/6116.md) | 彩晶 | 10.2 | HOLD | C | 15% | 62 | [多頭] | BULL |
 | [6182](output/reports/per_stock/6182.md) | 合晶 | 56.9 | HOLD | B | 30% | 80 | [多頭] | BULL |
-| [6213](output/reports/per_stock/6213.md) | 聯茂 | 253.0 | HOLD | C | 15% | 49 | [多頭] | BULL |
+| [6213](output/reports/per_stock/6213.md) | 聯茂 | 253.0 | 🟢 **BUY** | C | 15% | 49 | [多頭] | BULL |
 | [6531](output/reports/per_stock/6531.md) | 愛普 | 1080.0 | HOLD | C | 15% | 77 | [多頭] | BULL |
 | [8069](output/reports/per_stock/8069.md) | 元太 | 162.0 | HOLD | C | 15% | 63 | [空頭] | BULL |
-| [8081](output/reports/per_stock/8081.md) | 致新 | 255.5 | HOLD | C | 15% | 53 | [多頭] | BULL |
+| [8081](output/reports/per_stock/8081.md) | 致新 | 255.5 | HOLD | C | 15% | 54 | [多頭] | BULL |
 | [1582](output/reports/per_stock/1582.md) | 信邦 | 99.4 | HOLD | C | 15% | 58 | [多頭] | BULL |
 | [2059](output/reports/per_stock/2059.md) | 川湖 | 4860.0 | HOLD | B | 30% | 61 | [多頭] | BULL |
 | [3596](output/reports/per_stock/3596.md) | 智易 | 183.5 | HOLD | C | 15% | 60 | [空頭] | BULL |
@@ -179,15 +179,15 @@ _最後更新：**2026-05-19**_
 | [1907](output/reports/per_stock/1907.md) | 永豐餘 | 25.0 | HOLD | C | 15% | 56 | [空頭] | BULL |
 | [2723](output/reports/per_stock/2723.md) | 美食-KY | 64.2 | HOLD | F | — | 38 | [空頭] | BULL |
 | [2727](output/reports/per_stock/2727.md) | 王品 | 236.5 | HOLD | C | 15% | 65 | [多頭] | BULL |
-| [9907](output/reports/per_stock/9907.md) | 統一實 | 16.1 | HOLD | B | 30% | 15 | [空頭] | BULL |
+| [9907](output/reports/per_stock/9907.md) | 統一實 | 16.1 | 🟢 **BUY** | B | 30% | 15 | [空頭] | BULL |
 | [2606](output/reports/per_stock/2606.md) | 裕民 | 62.8 | HOLD | D | 10% | 50 | [多頭] | BULL |
 | [2609](output/reports/per_stock/2609.md) | 陽明 | 48.0 | HOLD | C | 15% | 33 | [空頭] | BULL |
 | [4147](output/reports/per_stock/4147.md) | 中裕 | 49.7 | HOLD | A | 50% | 45 | [空頭] | BULL |
 | [3014](output/reports/per_stock/3014.md) | 聯陽 | 136.0 | HOLD | C | 15% | 64 | [空頭] | BULL |
 | [3036](output/reports/per_stock/3036.md) | 文曄 | 270.0 | HOLD | A | 50% | 69 | [多頭] | BULL |
-| [3044](output/reports/per_stock/3044.md) | 健鼎 | 477.5 | HOLD | C | 15% | 56 | [多頭] | BULL |
+| [3044](output/reports/per_stock/3044.md) | 健鼎 | 477.5 | HOLD | C | 15% | 53 | [多頭] | BULL |
 | [3105](output/reports/per_stock/3105.md) | 穩懋 | 495.5 | HOLD | D | 10% | 52 | [多頭] | BULL |
-| [3406](output/reports/per_stock/3406.md) | 玉晶光 | 588.0 | HOLD | C | 15% | 71 | [多頭] | BULL |
+| [3406](output/reports/per_stock/3406.md) | 玉晶光 | 588.0 | 🔴 **SELL** | C | 15% | 71 | [多頭] | BULL |
 | [3454](output/reports/per_stock/3454.md) | 晶睿 | 99.4 | HOLD | C | 15% | 64 | [多頭] | BULL |
 | [3533](output/reports/per_stock/3533.md) | 嘉澤 | 2330.0 | HOLD | D | 10% | 44 | [多頭] | BULL |
 | [3653](output/reports/per_stock/3653.md) | 健策 | 3465.0 | HOLD | B | 30% | 37 | [多頭] | BULL |
