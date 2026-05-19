@@ -427,12 +427,10 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin",
     accounts_json = json.dumps(accounts_data, ensure_ascii=False)
     universe_by_cat_json = json.dumps(universe_by_category or {}, ensure_ascii=False)
 
-    # 切換連結
+    # 切換連結（只有管理員看得到 → Katie 的連結；使用者頁面不顯示往管理員的連結）
     nav_link = ""
     if is_admin and "Katie" in accounts_data:
         nav_link = '<a href="katie.html" style="font-size:0.85rem; margin-left:1rem;">→ Katie 視角</a>'
-    elif not is_admin:
-        nav_link = '<a href="index.html" style="font-size:0.85rem; margin-left:1rem;">→ 管理員主頁</a>'
 
     body = f"""<header>
 <h1>{page_title}{nav_link}</h1>
