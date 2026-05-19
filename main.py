@@ -84,6 +84,13 @@ def _parse_stock_ids(args, source: str = "raw"):
         print(msg)
         return ids
 
+    # 偵測誤打的旗標（避免 --stocks 被當成 sid 寫進 stock_ipo.yaml）
+    unknown_flags = [a for a in args if a.startswith("--")]
+    if unknown_flags:
+        print(f"[錯誤] 不認識的旗標：{unknown_flags}")
+        print(f"       支援：--all / --list <名稱>，或直接列代號（不加 --）")
+        return []
+
     return args if args else None
 
 
