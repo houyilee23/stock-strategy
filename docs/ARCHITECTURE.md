@@ -14,6 +14,17 @@ D:\stock/
 │   ├── watchlists.yaml              # 個人觀察清單 (gitignored)
 │   └── per_stock_recommendations.yaml  # auto_iterate 產出的每檔最佳 template + tier
 │
+├── src/fetchers/                    # ★ 股價抓取（模組化 2026-05-19）
+│   ├── __init__.py                  #   公開 API re-export
+│   ├── metadata.py                  #   IPO 月份 + 市場別 YAML 管理
+│   ├── twse.py                      #   上市單月抓取（純）
+│   ├── tpex.py                      #   上櫃單月抓取（純，與 TWSE 平行）
+│   ├── storage.py                   #   raw CSV 寫入 + 缺漏月份計算
+│   └── coordinator.py               #   dispatch + auto-detect + batch pipeline
+│   # 加新市場（例：興櫃）→ 只動 coordinator.MARKETS dict + 新增一個 fetcher 模組
+│
+├── src/fetcher.py                   # backward-compat thin shim（35 行）
+│
 ├── src/strategy/
 │   ├── indicators/                  # 純技術指標
 │   │   ├── trend.py                 #   sma / ema / macd / adx
@@ -129,7 +140,15 @@ D:\stock/
 | 修改 README 自動生成 | `scripts/update_readme.py` |
 | 新增工具腳本 | `scripts/<name>.py` |
 | 新增技術指標 | `src/strategy/indicators/<category>.py` |
-| 修改 fetch 邏輯 | `src/data/fetcher*.py`（fetch / fetch-adjusted / fetch-revenue） |
+| 修改 TWSE 抓取 | `src/fetchers/twse.py`（單檔，~90 行）|
+| 修改 TPEX 抓取 | `src/fetchers/tpex.py`（單檔，~130 行）|
+| 新增市場（如興櫃）| 新增 `src/fetchers/<market>.py` + `coordinator.MARKETS` 加一行 |
+| 修改 IPO / 市場別記錄 | `src/fetchers/metadata.py` |
+| 修改 raw CSV 寫入邏輯 | `src/fetchers/storage.py` |
+| 修改 fetch 編排（dispatch / batch）| `src/fetchers/coordinator.py` |
+| 修改 FinMind 還原股價抓取 | `src/finmind_fetcher.py` |
+| 修改 FinMind 月營收抓取 | `src/strategy/auto_iterate/revenue_fetcher.py` |
+| 修改 FinMind 籌碼抓取 | `src/strategy/auto_iterate/chip_fetcher.py` |
 
 ---
 
