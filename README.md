@@ -28,6 +28,16 @@ _最後更新：**2026-05-19**_
 | [2369](output/reports/per_stock/2369.md) | 菱生 | 29.7 | 🟢 **BUY** | C | 15% | 46 | [多頭] | BULL |
 | [3189](output/reports/per_stock/3189.md) | 景碩 | 486.0 | HOLD | B | 30% | 55 | [多頭] | BULL |
 | [8046](output/reports/per_stock/8046.md) | 南電 | 786.0 | 🟢 **BUY** | C | 15% | 47 | [多頭] | BULL |
+| [2303](output/reports/per_stock/2303.md) | 聯電 | 110.0 | HOLD | A | 50% | 75 | [多頭] | BULL |
+| [2317](output/reports/per_stock/2317.md) | 鴻海 | 248.5 | HOLD | A | 50% | 66 | [空頭] | BULL |
+| [2344](output/reports/per_stock/2344.md) | 華邦電 | 129.5 | HOLD | B | 30% | 69 | [多頭] | BULL |
+| [2376](output/reports/per_stock/2376.md) | 技嘉 | 326.5 | HOLD | C | 15% | 72 | [空頭] | BULL |
+| [3034](output/reports/per_stock/3034.md) | 聯詠 | 466.5 | HOLD | C | 15% | 61 | [空頭] | BULL |
+| [3227](output/reports/per_stock/3227.md) | 原相 | 220.0 | HOLD | C | 15% | 58 | [空頭] | BULL |
+| [8069](output/reports/per_stock/8069.md) | 元太 | 162.0 | HOLD | C | 15% | 63 | [空頭] | BULL |
+| [2474](output/reports/per_stock/2474.md) | 可成 | 185.0 | 🟢 **BUY** | C | 15% | 35 | [空頭] | BULL |
+| [6213](output/reports/per_stock/6213.md) | 聯茂 | 253.0 | 🟢 **BUY** | C | 15% | 49 | [多頭] | BULL |
+| [9907](output/reports/per_stock/9907.md) | 統一實 | 16.1 | 🟢 **BUY** | B | 30% | 15 | [空頭] | BULL |
 
 ### Katie
 
