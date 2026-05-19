@@ -5,11 +5,11 @@
 # 程式自動偵測並寫入，也可手動設定。
 # ============================================================
 
-0056: twse
 006208: twse
 00878: twse
 00919: twse
 00940: twse
+00965: twse
 00981A: twse
 1101: twse
 1102: twse
@@ -52,13 +52,13 @@
 2317: twse
 2324: twse
 2327: twse
-2328: tpex
+2328: twse
 2330: twse
 2337: twse
 2344: twse
 2345: twse
 2347: twse
-2352: tpex
+2352: twse
 2353: twse
 2354: twse
 2356: twse
@@ -119,6 +119,7 @@
 3037: twse
 3044: twse
 3045: twse
+3105: tpex
 3189: twse
 3227: tpex
 3231: twse
@@ -144,6 +145,7 @@
 4958: twse
 4961: twse
 5269: twse
+5274: tpex
 5388: twse
 5522: twse
 5871: twse
@@ -165,6 +167,7 @@
 6669: twse
 6770: twse
 6781: twse
+7769: twse
 8016: twse
 8046: twse
 8081: twse
