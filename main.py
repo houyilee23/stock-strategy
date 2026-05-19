@@ -35,7 +35,8 @@ def get_watchlist(name: str) -> list:
         available = list(data.keys())
         print(f"[錯誤] 找不到清單 '{name}'，可用清單：{available}")
         return []
-    ids = [str(s) for s in data[name]]
+    # YAML 空 list（`Takeshi:` 後面留空）會被 parse 成 None，需 `or []` fallback
+    ids = [str(s) for s in (data[name] or [])]
     print(f"  --list {name}：共 {len(ids)} 支股票 {ids}")
     return ids
 
@@ -47,7 +48,9 @@ def _get_exception_ids() -> set:
         return set()
     with open(WATCHLISTS_PATH, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f) or {}
-    return {str(s) for s in data.get("exception", [])}
+    # YAML 中 `exception:` 後面留空時，data.get('exception') 會回傳 None
+    # 必須 `or []` fallback，否則迭代會 TypeError（2026-05-19 修）
+    return {str(s) for s in (data.get("exception") or [])}
 
 
 def _parse_stock_ids(args, source: str = "raw"):
