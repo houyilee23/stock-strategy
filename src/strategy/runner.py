@@ -78,7 +78,15 @@ def _resolve_params_ref(params_ref: str, base_dir: str = None) -> dict:
 
     格式：'<filename>.yaml#per_stock.<stock_id>'
     檔案位於 output/auto_iterate/<run_id>/<filename>.yaml
-    自動找 output/auto_iterate/ 底下最新的 run_id 子目錄。
+
+    搜尋邏輯（5/19 更新）：
+      個股的 params 可能在不同 run_id（多次分階段 retrain），單一 latest
+      dir 不夠。改成搜尋所有 run_dir：
+        1. 先試 base_dir（若指定）
+        2. 試 _find_latest_auto_iterate_dir() 找的 dir
+        3. 試所有 merged_* dir（新到舊）
+        4. 試所有 20260* run dir（新到舊）
+      第一個有該 sid 的 best_params 就回傳。
     若解析失敗回傳 {}。
     """
     if not params_ref or "#" not in params_ref:
@@ -89,17 +97,35 @@ def _resolve_params_ref(params_ref: str, base_dir: str = None) -> dict:
         return {}
     sid = parts[1]
 
-    if base_dir is None:
-        base_dir = _find_latest_auto_iterate_dir()
-        if base_dir is None:
-            return {}
+    # 建立搜尋順序：base_dir → latest → merged_* → 個別 run_dir
+    ai_dir = os.path.join(BASE_DIR, "output", "auto_iterate")
+    candidate_dirs = []
+    if base_dir is not None:
+        candidate_dirs.append(base_dir)
+    latest = _find_latest_auto_iterate_dir()
+    if latest and latest not in candidate_dirs:
+        candidate_dirs.append(latest)
+    if os.path.isdir(ai_dir):
+        for d in sorted(os.listdir(ai_dir), reverse=True):
+            full = os.path.join(ai_dir, d)
+            if not os.path.isdir(full):
+                continue
+            if d.startswith("merged_") and full not in candidate_dirs:
+                candidate_dirs.append(full)
+        for d in sorted(os.listdir(ai_dir), reverse=True):
+            full = os.path.join(ai_dir, d)
+            if not os.path.isdir(full):
+                continue
+            if d.startswith("2026") and not d.startswith("merged_") and full not in candidate_dirs:
+                candidate_dirs.append(full)
 
-    yaml_path = os.path.join(base_dir, filename)
-    cache_key = yaml_path
-    if cache_key not in _TEMPLATE_PARAMS_CACHE:
-        if not os.path.exists(yaml_path):
-            _TEMPLATE_PARAMS_CACHE[cache_key] = {}
-        else:
+    for cand in candidate_dirs:
+        yaml_path = os.path.join(cand, filename)
+        cache_key = yaml_path
+        if cache_key not in _TEMPLATE_PARAMS_CACHE:
+            if not os.path.exists(yaml_path):
+                _TEMPLATE_PARAMS_CACHE[cache_key] = {}
+                continue
             try:
                 with open(yaml_path, encoding="utf-8") as f:
                     _TEMPLATE_PARAMS_CACHE[cache_key] = yaml.safe_load(f) or {}
@@ -107,11 +133,13 @@ def _resolve_params_ref(params_ref: str, base_dir: str = None) -> dict:
                 from src.utils import log_error
                 log_error("runner", sid, f"讀 {filename} 失敗：{e}")
                 _TEMPLATE_PARAMS_CACHE[cache_key] = {}
-
-    data = _TEMPLATE_PARAMS_CACHE[cache_key]
-    per_stock = (data or {}).get("per_stock", {})
-    entry = per_stock.get(sid) or per_stock.get(str(sid)) or {}
-    return entry.get("best_params", {}) or {}
+        data = _TEMPLATE_PARAMS_CACHE[cache_key]
+        per_stock = (data or {}).get("per_stock", {})
+        entry = per_stock.get(sid) or per_stock.get(str(sid)) or {}
+        bp = entry.get("best_params") or {}
+        if bp:
+            return bp
+    return {}
 
 
 def _find_latest_auto_iterate_dir() -> str:
@@ -299,19 +327,35 @@ def _generate_for_stock(sid: str, df: pd.DataFrame, stock_regime: pd.Series,
 
 
 def _load_best_params(template: str, stock_id: str) -> dict:
-    """從 merged auto_iterate run 讀某檔某 template 的 best_params。"""
-    merged_dir = os.path.join(BASE_DIR, "output", "auto_iterate",
-                                "merged_20260426_120034")
-    yaml_path = os.path.join(merged_dir, f"{template}.yaml")
-    if not os.path.exists(yaml_path):
+    """從任何 auto_iterate run 讀某檔某 template 的 best_params。
+
+    搜尋順序：merged_* 先 → 所有 2026* run dir（新到舊），第一個 match 即回傳。
+    """
+    ai_dir = os.path.join(BASE_DIR, "output", "auto_iterate")
+    if not os.path.isdir(ai_dir):
         return {}
-    with open(yaml_path, encoding="utf-8") as f:
-        data = yaml.safe_load(f) or {}
-    per_stock = data.get("per_stock", {}) if isinstance(data, dict) else {}
-    rec = per_stock.get(stock_id)
-    if not isinstance(rec, dict):
-        return {}
-    return rec.get("best_params", {}) or {}
+    candidates = []
+    for d in sorted(os.listdir(ai_dir), reverse=True):
+        if d.startswith("merged_"):
+            candidates.append(d)
+    for d in sorted(os.listdir(ai_dir), reverse=True):
+        if d.startswith("2026") and not d.startswith("merged_"):
+            candidates.append(d)
+
+    for d in candidates:
+        yaml_path = os.path.join(ai_dir, d, f"{template}.yaml")
+        if not os.path.exists(yaml_path):
+            continue
+        try:
+            with open(yaml_path, encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {}
+        except Exception:
+            continue
+        per_stock = data.get("per_stock", {}) if isinstance(data, dict) else {}
+        rec = per_stock.get(stock_id) or per_stock.get(str(stock_id))
+        if isinstance(rec, dict) and rec.get("best_params"):
+            return rec["best_params"]
+    return {}
 
 
 def _load_real_positions(account_name: str) -> dict:
