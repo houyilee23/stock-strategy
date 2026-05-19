@@ -34,7 +34,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
 
 DEFAULT_EXCEL = r"D:\Users\houyi\OneDrive\文件\投資款.xlsx"
-DEFAULT_ACCOUNT = "Personal"
+# 5/19 改為 Takeshi（使用者實際帳戶），讓 signals --list Takeshi 在倉欄
+# 直接反映 Excel 持倉狀態。若需要分開記帳，可用 --account 指定。
+DEFAULT_ACCOUNT = "Takeshi"
 TRANSACTION_SHEET_INDEX = 1  # 交易紀錄 sheet
 
 

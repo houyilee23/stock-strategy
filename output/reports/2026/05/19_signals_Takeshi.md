@@ -2,29 +2,29 @@
 
 | 股票 | 名稱 | 在倉 | 收盤 | 動作 | Tier | 倉位上限 | Template | 掛單目標 | 建議買入 | 建議停損 | RSI | 個股趨勢 | 市場Regime | 說明 |
 |------|------|-----|------|------|------|---------|---------|---------|---------|---------|-----|---------|-----------|------|
-| 1301 | 台塑 | ✅ | 45.7 | HOLD | A | 50% | gap_continuation | — | — | — | 36 | [多頭] | BULL | (持200股 @46.68) |
-| 1326 | 台化 | ✅ | 44.5 | HOLD | B | 30% | low_vol_pullback | TP 50 / SL 38 | — | — | 38 | [多頭] | BULL | (持100股 @43.45，你的 TP 46.5) |
+| 1301 | 台塑 | — | 45.7 | HOLD | A | 50% | gap_continuation | — | — | — | 36 | [多頭] | BULL |  |
+| 1326 | 台化 | ✅ | 44.5 | HOLD | B | 30% | low_vol_pullback | TP 50 / SL 38 | — | — | 38 | [多頭] | BULL | (持50股 @48.14，你的 TP 51.5) |
 | 6505 | 台塑化 | — | 51.3 | HOLD | C | 15% | ema_cross | — | — | — | 42 | [多頭] | BULL |  |
-| 1303 | 南亞 | — | 85.3 | HOLD | A | 50% | gap_continuation | — | — | — | 47 | [多頭] | BULL |  |
+| 1303 | 南亞 | ✅ | 85.3 | HOLD | A | 50% | gap_continuation | — | — | — | 47 | [多頭] | BULL | (持20股 @98.85) |
 | 1809 | 中釉 | — | 38.6 | HOLD | B | 30% | vwap_revert | — | — | — | 71 | [多頭] | BULL |  |
 | 2002 | 中鋼 | — | 18.1 | HOLD | C | 15% | ensemble_oversold_vote | — | — | — | 32 | [空頭] | BULL |  |
-| 6271 | 同欣電 | ✅ | 177.0 | HOLD | C | 15% | narrow_range_breakout | TP 193 / SL 155 | — | — | 51 | [多頭] | BULL | (持10股 @179.90) |
+| 6271 | 同欣電 | ✅ | 177.0 | HOLD | C | 15% | narrow_range_breakout | TP 193 / SL 155 | — | — | 51 | [多頭] | BULL | (持15股 @184.13) |
 | 4958 | 臻鼎-KY | ✅ | 401.0 | HOLD | C | 15% | gap_continuation | — | — | — | 60 | [多頭] | BULL | (持4股 @415.50) |
-| 2382 | 廣達 | — | 306.0 | HOLD | C | 15% | low_vol_pullback | — | — | — | 41 | [多頭] | BULL |  |
-| 2337 | 旺宏 | — | 162.5 | HOLD | C | 15% | low_vol_pullback | — | — | — | 56 | [多頭] | BULL |  |
+| 2382 | 廣達 | ✅ | 306.0 | HOLD | C | 15% | low_vol_pullback | — | — | — | 41 | [多頭] | BULL | (持5股 @344.60，你的 TP 365.3) |
+| 2337 | 旺宏 | ✅ | 162.5 | HOLD | C | 15% | low_vol_pullback | — | — | — | 56 | [多頭] | BULL | (持10股 @159.60，你的 TP 175.6) |
 | 2408 | 南亞科 | — | 311.5 | HOLD | C | 15% | chip_momentum | — | — | — | 63 | [多頭] | BULL |  |
-| 6770 | 力積電 | — | 62.8 | HOLD | B | 30% | low_vol_pullback | TP 68 / SL 48 | — | — | 59 | [多頭] | BULL |  |
+| 6770 | 力積電 | ✅ | 62.8 | HOLD | B | 30% | low_vol_pullback | TP 68 / SL 48 | — | — | 59 | [多頭] | BULL | (持20股 @62.65，你的 TP 68.3) |
 | 00981A | 主動統一台股增長 | ✅ | 28.4 | HOLD | F | — | style1_pullback | — | — | — | 60 | [多頭] | BULL | (持50股 @22.64) |
-| 2369 | 菱生 | ✅ | 29.7 | BUY | C | 15% | low_vol_pullback | 買 30.2 | — | — | 46 | [多頭] | BULL | (持30股 @31.23，你的 TP 34.4) |
+| 2369 | 菱生 | ✅ | 29.7 | BUY | C | 15% | low_vol_pullback | 買 30.2 | — | — | 46 | [多頭] | BULL | (持30股 @28.77，你的 TP 31.6) |
 | 3189 | 景碩 | ✅ | 486.0 | HOLD | B | 30% | chip_momentum | — | — | — | 55 | [多頭] | BULL | (持2股 @533.50) |
-| 8046 | 南電 | ✅ | 786.0 | BUY | C | 15% | mean_reversion | 買 823.1 | — | — | 47 | [多頭] | BULL | (持1股 @970.00) |
+| 8046 | 南電 | ✅ | 786.0 | BUY | C | 15% | mean_reversion | 買 823.1 | — | — | 47 | [多頭] | BULL | (持2股 @874.00) |
 | 2303 | 聯電 | ✅ | 110.0 | HOLD | A | 50% | ensemble_dip_vote | — | — | — | 75 | [多頭] | BULL | (持20股 @81.35) |
-| 2317 | 鴻海 | — | 248.5 | HOLD | A | 50% | gap_continuation | — | — | — | 66 | [空頭] | BULL |  |
-| 2344 | 華邦電 | — | 129.5 | HOLD | B | 30% | narrow_range_breakout | — | — | — | 69 | [多頭] | BULL |  |
-| 2376 | 技嘉 | — | 326.5 | HOLD | C | 15% | momentum_hold | TP — / SL 262 | — | — | 72 | [空頭] | BULL |  |
-| 3034 | 聯詠 | — | 466.5 | HOLD | C | 15% | narrow_range_breakout | — | — | — | 61 | [空頭] | BULL |  |
-| 3227 | 原相 | — | 220.0 | HOLD | C | 15% | gap_continuation | — | — | — | 58 | [空頭] | BULL |  |
-| 8069 | 元太 | — | 162.0 | HOLD | C | 15% | failed_breakdown | — | — | — | 63 | [空頭] | BULL |  |
-| 2474 | 可成 | — | 185.0 | BUY | C | 15% | simple_dip_buy | 買 185.8 | — | — | 35 | [空頭] | BULL |  |
-| 6213 | 聯茂 | — | 253.0 | BUY | C | 15% | low_vol_pullback | 買 266.6 | — | — | 49 | [多頭] | BULL |  |
+| 2317 | 鴻海 | ✅ | 248.5 | HOLD | A | 50% | gap_continuation | — | — | — | 66 | [空頭] | BULL | (持10股 @253.90) |
+| 2344 | 華邦電 | ✅ | 129.5 | HOLD | B | 30% | narrow_range_breakout | — | — | — | 69 | [多頭] | BULL | (持5股 @114.20) |
+| 2376 | 技嘉 | ✅ | 326.5 | HOLD | C | 15% | momentum_hold | TP — / SL 262 | — | — | 72 | [空頭] | BULL | (持10股 @317.20) |
+| 3034 | 聯詠 | ✅ | 466.5 | HOLD | C | 15% | narrow_range_breakout | — | — | — | 61 | [空頭] | BULL | (持5股 @448.60) |
+| 3227 | 原相 | ✅ | 220.0 | HOLD | C | 15% | gap_continuation | — | — | — | 58 | [空頭] | BULL | (持10股 @228.10) |
+| 8069 | 元太 | ✅ | 162.0 | HOLD | C | 15% | failed_breakdown | — | — | — | 63 | [空頭] | BULL | (持10股 @211.60) |
+| 2474 | 可成 | ✅ | 185.0 | BUY | C | 15% | simple_dip_buy | 買 185.8 | — | — | 35 | [空頭] | BULL | (持6股 @185.67) |
+| 6213 | 聯茂 | ✅ | 253.0 | BUY | C | 15% | low_vol_pullback | 買 266.6 | — | — | 49 | [多頭] | BULL | (持4股 @242.75，你的 TP 267.0) |
 | 9907 | 統一實 | — | 16.1 | BUY | B | 30% | simple_dip_buy | 買 16.1 | — | — | 15 | [空頭] | BULL |  |

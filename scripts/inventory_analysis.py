@@ -37,7 +37,7 @@ if hasattr(sys.stdout, "reconfigure"):
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
 
-DEFAULT_ACCOUNT = "Personal"
+DEFAULT_ACCOUNT = "Takeshi"
 TRADING_NAV_DEFAULT = 1_000_000  # 假設總部位（用於相對倉位計算）
 
 

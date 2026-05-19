@@ -203,7 +203,7 @@ def cmd_inventory(args: list):
     """
     import subprocess
     args = list(args)
-    account = "Personal"
+    account = "Takeshi"  # 5/19 改：直接同步 Excel 到 Takeshi 帳戶（signals 用同一份）
     sync_only = False
     analyze_only = False
     if "--account" in args:
