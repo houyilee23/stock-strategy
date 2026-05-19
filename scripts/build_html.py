@@ -251,10 +251,55 @@ main {{ padding-top: 0; }}
 header h1 {{ margin-bottom: 0.2rem; font-size: 1.4rem; }}
 .subtitle {{ color: var(--pico-muted-color); margin-bottom: 1rem; font-size: 0.85rem; }}
 .banner {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;
-           padding: 0.7rem; border-radius: 8px; background: var(--pico-card-background-color);
-           border: 1px solid var(--pico-card-border-color); margin-bottom: 1rem; }}
-.banner div {{ text-align: center; font-size: 0.85rem; }}
-.banner div strong {{ display: block; font-size: 1.3rem; }}
+           margin-bottom: 1rem; }}
+.banner-card {{
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 8px;
+  background: var(--pico-card-background-color);
+  padding: 0;
+  margin: 0;
+}}
+.banner-card summary {{
+  text-align: center; font-size: 0.85rem;
+  padding: 0.7rem; cursor: pointer; user-select: none;
+  list-style: none;
+}}
+.banner-card summary::-webkit-details-marker {{ display: none; }}
+.banner-card summary::after {{
+  content: " ▼";
+  display: inline-block;
+  font-size: 0.6rem;
+  color: var(--pico-muted-color);
+  transition: transform 0.15s;
+  margin-left: 0.3rem;
+}}
+.banner-card[open] summary::after {{ transform: rotate(180deg); }}
+.banner-card summary strong {{ display: block; font-size: 1.3rem; }}
+.banner-card summary:hover {{ background: rgba(0,0,0,0.04); }}
+.banner-list {{
+  border-top: 1px solid var(--pico-card-border-color);
+  padding: 0.4rem;
+  max-height: 320px; overflow-y: auto;
+}}
+.banner-item {{
+  display: grid;
+  grid-template-columns: 50px 1fr 28px 60px 1fr;
+  gap: 0.3rem;
+  align-items: center;
+  padding: 0.35rem 0.4rem;
+  font-size: 0.78rem;
+  text-decoration: none;
+  color: var(--pico-color);
+  border-radius: 4px;
+}}
+.banner-item:hover {{ background: rgba(0,0,0,0.05); }}
+.banner-item .banner-sid {{ font-weight: 600; color: var(--pico-primary); }}
+.banner-item .banner-name {{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
+.banner-item .banner-tier {{ text-align: center; font-weight: 600; }}
+.banner-item .banner-close {{ text-align: right; font-variant-numeric: tabular-nums; }}
+.banner-item .banner-order, .banner-item .banner-rsi {{
+  text-align: right; font-size: 0.72rem; color: var(--pico-muted-color);
+}}
 .tabs {{ display: flex; gap: 0.3rem; margin-bottom: 0.8rem; flex-wrap: wrap; }}
 .tabs button {{ padding: 0.4rem 0.9rem; font-size: 0.9rem; }}
 .tabs button[aria-pressed=true] {{ background: var(--pico-primary); color: white; }}
@@ -413,15 +458,31 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin",
 
     accounts_data = {a: r for a, r in accounts_data.items() if a in visible_accounts}
 
-    # Banner 統計（跨 list sid 去重）
-    buy_sids, sell_sids, hot_sids = set(), set(), set()
+    # Banner 統計 + 個股清單（跨 list sid 去重；保留代表性 row）
+    buy_map: dict = {}    # sid -> row（代表性的那一筆）
+    sell_map: dict = {}
+    hot_map: dict = {}
     for acc, rows in accounts_data.items():
         for r in rows:
             sid = r["sid"]
-            if r["action"] == "BUY": buy_sids.add(sid)
-            if r["action"] == "SELL": sell_sids.add(sid)
-            if r["rsi"].isdigit() and int(r["rsi"]) >= 75: hot_sids.add(sid)
-    total_buy, total_sell, total_hot = len(buy_sids), len(sell_sids), len(hot_sids)
+            if r["action"] == "BUY" and sid not in buy_map:
+                buy_map[sid] = r
+            if r["action"] == "SELL" and sid not in sell_map:
+                sell_map[sid] = r
+            if r["rsi"].isdigit() and int(r["rsi"]) >= 75 and sid not in hot_map:
+                hot_map[sid] = r
+    # 排序：tier S/A/B/C/D/F → 再依 sid
+    tier_order = {"S": 0, "A": 1, "B": 2, "C": 3, "D": 4, "F": 9, "—": 8, "?": 8}
+    def _sort_key(r):
+        return (tier_order.get(r.get("tier", "?"), 9), r["sid"])
+    buy_list  = sorted(buy_map.values(),  key=_sort_key)
+    sell_list = sorted(sell_map.values(), key=_sort_key)
+    hot_list  = sorted(hot_map.values(),
+                       key=lambda r: -int(r["rsi"]) if r["rsi"].isdigit() else 0)
+    total_buy, total_sell, total_hot = len(buy_list), len(sell_list), len(hot_list)
+    buy_json  = json.dumps(buy_list,  ensure_ascii=False)
+    sell_json = json.dumps(sell_list, ensure_ascii=False)
+    hot_json  = json.dumps(hot_list,  ensure_ascii=False)
 
     # JSON 給 Alpine
     accounts_json = json.dumps(accounts_data, ensure_ascii=False)
@@ -437,10 +498,55 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin",
 <div class="subtitle">{page_subtitle}<br>最後更新：<strong>{TODAY}</strong> · 點任一檔股票看歷史回測</div>
 </header>
 
-<div class="banner">
-  <div><small>🔴 今日 BUY</small><strong>{total_buy}</strong></div>
-  <div><small>🟢 今日 SELL</small><strong>{total_sell}</strong></div>
-  <div><small>🔥 RSI 過熱 (≥75)</small><strong>{total_hot}</strong></div>
+<div class="banner" x-data='{{
+  buyList: {buy_json},
+  sellList: {sell_json},
+  hotList: {hot_json},
+}}'>
+  <details class="banner-card">
+    <summary><small>🔴 今日 BUY</small><strong>{total_buy}</strong></summary>
+    <div class="banner-list" x-show="buyList.length > 0">
+      <template x-for="r in buyList" :key="'buy-' + r.sid">
+        <a class="banner-item" :href="`stock/${{r.sid}}.html`">
+          <span class="banner-sid" x-text="r.sid"></span>
+          <span class="banner-name" x-text="r.name"></span>
+          <span class="banner-tier" :class="'tier-' + r.tier" x-text="r.tier"></span>
+          <span class="banner-close" x-text="r.close"></span>
+          <span class="banner-order" x-text="r.order && r.order !== '—' ? r.order : '市價買入'"></span>
+        </a>
+      </template>
+      <div x-show="buyList.length === 0" style="text-align:center;color:#999;padding:0.5rem">無</div>
+    </div>
+  </details>
+  <details class="banner-card">
+    <summary><small>🟢 今日 SELL</small><strong>{total_sell}</strong></summary>
+    <div class="banner-list" x-show="sellList.length > 0">
+      <template x-for="r in sellList" :key="'sell-' + r.sid">
+        <a class="banner-item" :href="`stock/${{r.sid}}.html`">
+          <span class="banner-sid" x-text="r.sid"></span>
+          <span class="banner-name" x-text="r.name"></span>
+          <span class="banner-tier" :class="'tier-' + r.tier" x-text="r.tier"></span>
+          <span class="banner-close" x-text="r.close"></span>
+          <span class="banner-order" x-text="r.order && r.order !== '—' ? r.order : '市價賣出'"></span>
+        </a>
+      </template>
+      <div x-show="sellList.length === 0" style="text-align:center;color:#999;padding:0.5rem">無</div>
+    </div>
+  </details>
+  <details class="banner-card">
+    <summary><small>🔥 RSI 過熱 (≥75)</small><strong>{total_hot}</strong></summary>
+    <div class="banner-list" x-show="hotList.length > 0">
+      <template x-for="r in hotList" :key="'hot-' + r.sid">
+        <a class="banner-item" :href="`stock/${{r.sid}}.html`">
+          <span class="banner-sid" x-text="r.sid"></span>
+          <span class="banner-name" x-text="r.name"></span>
+          <span class="banner-tier" :class="'tier-' + r.tier" x-text="r.tier"></span>
+          <span class="banner-close" x-text="r.close"></span>
+          <span class="banner-rsi" x-text="`RSI ${{r.rsi}}`"></span>
+        </a>
+      </template>
+    </div>
+  </details>
 </div>
 
 <div x-data='{{
@@ -540,7 +646,7 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin",
   <td x-html="cellAction(r.action)"></td>
   <td x-html="cellTier(r.tier)"></td>
   <td x-text="r.pos"></td>
-  <td class="order-cell" x-html="cellOrder(r.order)"></td>
+  <td class="order-cell" x-html="cellOrder(r.order, r.action)"></td>
   <td x-html="cellRsi(r.rsi)"></td>
   <td x-html="cellTrend(r.trend)"></td>
 </tr>
@@ -584,7 +690,7 @@ def render_index_html(accounts_data: dict, view_mode: str = "admin",
         <td x-html="cellAction(r.action)"></td>
         <td x-html="cellTier(r.tier)"></td>
         <td x-text="r.pos"></td>
-        <td class="order-cell" x-html="cellOrder(r.order)"></td>
+        <td class="order-cell" x-html="cellOrder(r.order, r.action)"></td>
         <td x-html="cellRsi(r.rsi)"></td>
         <td x-html="cellTrend(r.trend)"></td>
       </tr>
@@ -621,8 +727,13 @@ function cellInPos(p) {
   if (p === "yes") return '<span class="in-pos">✅</span>';
   return '<span style="color:#bbb">·</span>';
 }
-function cellOrder(o) {
-  if (!o || o === "—") return '<span style="color:#999">—</span>';
+function cellOrder(o, action) {
+  if (!o || o === "—") {
+    // 沒給目標價時，依 action 給合理回退（SELL 廣達等案例）
+    if (action === "SELL") return '<span class="action-sell">市價賣出</span>';
+    if (action === "BUY")  return '<span class="action-buy">市價買入</span>';
+    return '<span style="color:#999">—</span>';
+  }
   if (o.startsWith("買")) return '<span class="order-buy">' + o + '</span>';
   if (o.startsWith("TP")) return '<span class="order-hold">' + o + '</span>';
   return o;
