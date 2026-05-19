@@ -311,6 +311,14 @@ a.stock-link:hover {{ text-decoration: underline; }}
 .back-link {{ font-size: 0.9rem; margin-bottom: 0.7rem; display: inline-block; }}
 .pos-cagr {{ color: #d62828; }}    /* 正報酬 = 紅（台股配色）*/
 .neg-cagr {{ color: #2a9d3f; }}    /* 負報酬 = 綠 */
+/* 清單成員勾選按鈕 */
+.toggle-btn {{
+  background: none; border: none; padding: 0.1rem 0.3rem;
+  cursor: pointer; font-size: 1.2rem; line-height: 1;
+}}
+.toggle-on {{ color: #ffb800; }}    /* 已在清單：黃色實心星 */
+.toggle-off {{ color: #ccc; }}      /* 未在清單：灰色空心星 */
+.toggle-btn:hover {{ transform: scale(1.2); }}
 @media (max-width: 600px) {{
   .banner {{ grid-template-columns: 1fr; }}
   table {{ font-size: 0.75rem; }}
@@ -357,16 +365,45 @@ def cell_rsi(rsi_str: str) -> str:
         return rsi_str
 
 
-def render_index_html(accounts_data: dict) -> str:
-    """產 /index.html
+def render_index_html(accounts_data: dict, view_mode: str = "admin") -> str:
+    """產 /index.html (admin) 或 /<view_mode>.html (user)。
+
+    view_mode:
+      - "admin" → 完整檢視（全部 tab + 可編輯所有 list）
+      - "Katie" → 使用者檢視（只看 Katie + universe，只能編輯 Katie）
+      - 其他帳戶名稱同理。
+
+    Toggle 機制：
+      - 每筆股票一個 ★/☆ 按鈕（在 list 內 = ★ 紅色；在 pool 內 = ☆）
+      - 點擊切換成員資格
+      - 變更存到 localStorage：{accountName}_overrides = {add:[sids], remove:[sids]}
+      - 重新整理頁面時：effective_list = base_list ∪ adds \\ removes
+      - （之後再加：後端同步機制把 localStorage 的變更傳回更新 watchlists.yaml）
 
     accounts_data = {
-       "Takeshi":  [{"sid":"1301", "name":"台塑", "close":"51.5", "action":"HOLD",
-                    "tier":"F", "pos":"—", "rsi":"56", "trend":"[多頭]", "regime":"BULL"}, ...],
+       "Takeshi":  [{"sid":"1301", "name":"台塑", ...}, ...],
        "Katie":    [...],
        "universe": [...]
     }
     """
+    # ── view_mode 邏輯 ────────────────────────────────────────
+    is_admin = view_mode == "admin"
+    if is_admin:
+        visible_accounts = list(accounts_data.keys())
+        editable_account = None  # admin 可以編輯所有 list
+        page_title = "📊 台股策略訊號（管理員）"
+        page_subtitle = "Takeshi / Katie / universe 三個清單，每檔可勾選增刪"
+    else:
+        # User 檢視：只顯示自己的 list + universe pool
+        visible_accounts = [view_mode]
+        if "universe" in accounts_data:
+            visible_accounts.append("universe")
+        editable_account = view_mode  # 只能編輯自己的
+        page_title = f"📊 {view_mode} 的投資清單"
+        page_subtitle = f"我的清單 + 股票池 · 點 ☆/★ 可加入或移除"
+
+    accounts_data = {acc: rows for acc, rows in accounts_data.items() if acc in visible_accounts}
+
     # 各帳戶摘要：BUY/SELL 數、過熱數
     summaries = {}
     for acc, rows in accounts_data.items():
@@ -383,10 +420,25 @@ def render_index_html(accounts_data: dict) -> str:
 
     # 把 accounts_data 轉成 JSON 給 Alpine
     accounts_json = json.dumps(accounts_data, ensure_ascii=False)
+    universe_sids_json = json.dumps(
+        [r["sid"] for r in accounts_data.get("universe", [])],
+        ensure_ascii=False,
+    )
+    editable_json = json.dumps(editable_account, ensure_ascii=False)
+
+    # Admin-only: 提供一個切換到使用者頁面的連結
+    user_link_html = ""
+    if is_admin and "Katie" in accounts_data:
+        user_link_html = '<a href="katie.html" style="font-size:0.85rem; margin-left:1rem;">→ Katie 的清單</a>'
+
+    # User-only: 提供回到首頁的連結
+    back_link_html = ""
+    if not is_admin:
+        back_link_html = '<a href="index.html" style="font-size:0.85rem; margin-left:1rem;">→ 管理員主頁</a>'
 
     body = f"""<header>
-<h1>📊 台股策略訊號</h1>
-<div class="subtitle">最後更新：<strong>{TODAY}</strong> · 點任一檔股票看歷史回測</div>
+<h1>{page_title}{user_link_html}{back_link_html}</h1>
+<div class="subtitle">{page_subtitle}<br>最後更新：<strong>{TODAY}</strong></div>
 </header>
 
 <div class="banner">
@@ -397,12 +449,61 @@ def render_index_html(accounts_data: dict) -> str:
 
 <div x-data='{{
   accounts: {accounts_json},
+  universeSids: {universe_sids_json},
+  editableAccount: {editable_json},
   current: "{list(accounts_data.keys())[0]}",
   search: "",
   sortKey: "",
   sortDesc: false,
+  overrides: {{}},  // {{accountName: {{add: [sids], remove: [sids]}}}}
+
+  init() {{
+    // 從 localStorage 讀回 overrides
+    for (const acc of Object.keys(this.accounts)) {{
+      const raw = localStorage.getItem(acc + "_overrides");
+      if (raw) {{
+        try {{ this.overrides[acc] = JSON.parse(raw); }} catch (e) {{}}
+      }}
+    }}
+    // 確保各 acc 有預設結構
+    for (const acc of Object.keys(this.accounts)) {{
+      if (!this.overrides[acc]) this.overrides[acc] = {{add: [], remove: []}};
+    }}
+  }},
+
+  // 是否可編輯這個 tab（user 模式只能編輯自己的；admin 可編輯全部）
+  canEdit(acc) {{
+    if (this.editableAccount === null) return acc !== "universe";  // admin: 不直接編 universe
+    return acc === this.editableAccount;
+  }},
+
+  // 計算實際 list (base ∪ adds \\ removes)
+  effectiveSids(acc) {{
+    const base = (this.accounts[acc] || []).map(r => r.sid);
+    const ov = this.overrides[acc] || {{add: [], remove: []}};
+    const set = new Set(base);
+    for (const s of (ov.remove||[])) set.delete(s);
+    for (const s of (ov.add||[])) set.add(s);
+    return set;
+  }},
+
+  // 顯示時：tab 是 universe → 顯示所有；tab 是某 list → 顯示 effective list
   filtered() {{
-    let rows = this.accounts[this.current] || [];
+    let rows;
+    if (this.current === "universe") {{
+      rows = this.accounts["universe"] || [];
+    }} else {{
+      const sids = this.effectiveSids(this.current);
+      // 用 universe 作 base 找股票資訊（因為加入的可能不在原 list）
+      const uMap = {{}};
+      for (const r of (this.accounts["universe"]||[])) uMap[r.sid] = r;
+      // 也加上 list 內原本的（admin 可能直接看 list 而 list 在 universe 沒對應）
+      for (const r of (this.accounts[this.current]||[])) {{
+        if (!uMap[r.sid]) uMap[r.sid] = r;
+      }}
+      rows = Array.from(sids).map(s => uMap[s]).filter(Boolean);
+    }}
+
     let q = this.search.trim().toLowerCase();
     if (q) {{
       rows = rows.filter(r => r.sid.includes(q) ||
@@ -421,6 +522,7 @@ def render_index_html(accounts_data: dict) -> str:
     }}
     return rows;
   }},
+
   sort(k) {{
     if (this.sortKey === k) this.sortDesc = !this.sortDesc;
     else {{ this.sortKey = k; this.sortDesc = false; }}
@@ -428,24 +530,129 @@ def render_index_html(accounts_data: dict) -> str:
   arrow(k) {{
     if (this.sortKey !== k) return "";
     return this.sortDesc ? " ↓" : " ↑";
+  }},
+
+  // 是否在某 list 內（effective）
+  isInList(sid, acc) {{
+    return this.effectiveSids(acc).has(sid);
+  }},
+
+  // 切換 list 成員資格
+  toggle(sid, acc) {{
+    if (!this.canEdit(acc)) return;
+    const base = (this.accounts[acc] || []).map(r => r.sid);
+    if (!this.overrides[acc]) this.overrides[acc] = {{add: [], remove: []}};
+    const ov = this.overrides[acc];
+
+    const inEffective = this.isInList(sid, acc);
+
+    if (inEffective) {{
+      // 目前在 list 內 → 移除
+      if (base.includes(sid)) {{
+        if (!ov.remove.includes(sid)) ov.remove.push(sid);
+      }} else {{
+        ov.add = ov.add.filter(s => s !== sid);
+      }}
+    }} else {{
+      // 目前不在 list 內 → 加入
+      if (base.includes(sid)) {{
+        ov.remove = ov.remove.filter(s => s !== sid);
+      }} else {{
+        if (!ov.add.includes(sid)) ov.add.push(sid);
+      }}
+    }}
+    localStorage.setItem(acc + "_overrides", JSON.stringify(ov));
+  }},
+
+  // 統計：list 大小（effective）
+  listSize(acc) {{
+    if (acc === "universe") return (this.accounts[acc] || []).length;
+    return this.effectiveSids(acc).size;
+  }},
+
+  // 統計：本機是否有未同步變更
+  hasOverrides(acc) {{
+    const ov = this.overrides[acc];
+    if (!ov) return false;
+    return (ov.add||[]).length + (ov.remove||[]).length > 0;
+  }},
+
+  // 匯出變更為 JSON（給「事後回傳」用）
+  exportOverrides() {{
+    const out = {{}};
+    for (const acc of Object.keys(this.overrides)) {{
+      const ov = this.overrides[acc];
+      if (((ov.add||[]).length + (ov.remove||[]).length) > 0) {{
+        out[acc] = ov;
+      }}
+    }}
+    if (Object.keys(out).length === 0) {{
+      alert("目前沒有任何變更可匯出");
+      return;
+    }}
+    const txt = JSON.stringify(out, null, 2);
+    navigator.clipboard.writeText(txt).then(() => {{
+      alert("✅ 變更已複製到剪貼簿，可貼給管理員或 Email 出去：\\n\\n" + txt);
+    }}, () => {{
+      prompt("複製失敗，請手動 copy：", txt);
+    }});
+  }},
+
+  // 清除本機變更
+  clearOverrides(acc) {{
+    if (!confirm("確定要清除「" + acc + "」的本機變更（恢復成 server 上的清單）？")) return;
+    this.overrides[acc] = {{add: [], remove: []}};
+    localStorage.removeItem(acc + "_overrides");
   }}
 }}'>
 
 <div class="tabs">
 """
 
+    # 自訂 tab 標題：list 用「我的清單」，universe 用「股票池」（在 user view）
     for acc, summary in summaries.items():
+        if not is_admin and acc == view_mode:
+            label = "我的清單"
+        elif not is_admin and acc == "universe":
+            label = "股票池"
+        else:
+            label = acc
+        # tab 大小用 effective list size（會反映 overrides）
         body += (f'  <button @click="current=\'{acc}\'; sortKey=\'\'" '
                   f':aria-pressed="current===\'{acc}\'">'
-                  f'{acc} <small>({summary["n"]})</small></button>\n')
+                  f'{label} <small>(<span x-text="listSize(\'{acc}\')"></span>)</small>'
+                  f'<span x-show="hasOverrides(\'{acc}\')" style="color:#d62828; margin-left:0.3rem;" title="本機有未同步變更">●</span>'
+                  f'</button>\n')
+
+    # 變更管理列（只在有 overrides 時顯示）
+    overrides_bar = '''
+<div x-show="Object.values(overrides).some(o => (o.add||[]).length + (o.remove||[]).length > 0)"
+     style="margin: 0.5rem 0; padding: 0.6rem 0.9rem; background: rgba(214,40,40,0.08);
+            border-radius: 6px; border-left: 3px solid #d62828; font-size: 0.85rem;">
+  <strong>📝 您有未同步的本機變更</strong>
+  <template x-for="acc in Object.keys(overrides).filter(a => (overrides[a].add||[]).length + (overrides[a].remove||[]).length > 0)" :key="acc">
+    <span style="margin-left: 0.6rem;">
+      <span x-text="acc"></span>:
+      <span x-show="(overrides[acc].add||[]).length > 0">+<span x-text="(overrides[acc].add||[]).length"></span></span>
+      <span x-show="(overrides[acc].remove||[]).length > 0" style="margin-left: 0.3rem;">−<span x-text="(overrides[acc].remove||[]).length"></span></span>
+      <button @click="clearOverrides(acc)" style="margin-left: 0.3rem; padding: 0.1rem 0.4rem; font-size: 0.75rem;">清除</button>
+    </span>
+  </template>
+  <div style="margin-top: 0.4rem;">
+    <button @click="exportOverrides()" style="padding: 0.3rem 0.7rem; font-size: 0.85rem;">📤 匯出變更給管理員</button>
+    <small style="color: var(--pico-muted-color); margin-left: 0.5rem;">變更只存在您的瀏覽器；按上方按鈕複製 JSON 並回傳給管理員</small>
+  </div>
+</div>
+'''
 
     body += """</div>
-
+""" + overrides_bar + """
 <input type="search" x-model="search" placeholder="🔍 搜尋代號或名稱（如 2330、台積電）">
 
 <table>
 <thead>
 <tr>
+  <th x-show="canEdit(current) || current === 'universe'" style="width:40px;">★</th>
   <th @click="sort('sid')">股票<span x-text="arrow('sid')"></span></th>
   <th @click="sort('in_pos')">在倉<span x-text="arrow('in_pos')"></span></th>
   <th @click="sort('name')">名稱<span x-text="arrow('name')"></span></th>
@@ -461,6 +668,18 @@ def render_index_html(accounts_data: dict) -> str:
 <tbody>
 <template x-for="r in filtered()" :key="r.sid + '-' + current">
 <tr>
+  <td x-show="canEdit(current) || current === 'universe'">
+    <template x-if="canEdit(current) === false && current === 'universe'">
+      <span style="color:#bbb">·</span>
+    </template>
+    <template x-if="canEdit(current) || (current === 'universe' && editableAccount)">
+      <button class="toggle-btn"
+              @click.stop="toggle(r.sid, current === 'universe' ? editableAccount : current)"
+              :class="(current === 'universe' ? isInList(r.sid, editableAccount) : isInList(r.sid, current)) ? 'toggle-on' : 'toggle-off'"
+              :title="(current === 'universe' ? isInList(r.sid, editableAccount) : isInList(r.sid, current)) ? '已在清單中（點擊移除）' : '加入清單'"
+              x-text="(current === 'universe' ? isInList(r.sid, editableAccount) : isInList(r.sid, current)) ? '★' : '☆'"></button>
+    </template>
+  </td>
   <td><a class="stock-link" :href="`stock/${r.sid}.html`" x-text="r.sid"></a></td>
   <td x-html="cellInPos(r.in_pos)"></td>
   <td x-text="r.name"></td>
@@ -787,12 +1006,20 @@ def main():
             })
         accounts_data[acc] = std_rows
 
-    # 1. 寫首頁
-    print("產生首頁 /index.html ...")
-    idx_html = render_index_html(accounts_data)
+    # 1. 寫首頁（admin / Takeshi 完整檢視）
+    print("產生首頁 /index.html (admin) ...")
+    idx_html = render_index_html(accounts_data, view_mode="admin")
     with open(os.path.join(DOCS_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(idx_html)
     print(f"  ✓ /index.html ({len(idx_html)//1024} KB)")
+
+    # 1.5 寫使用者頁面（Katie 限制檢視 — 只有 Katie list + universe pool）
+    if "Katie" in accounts_data:
+        print("產生使用者頁 /katie.html (限 Katie 自己) ...")
+        katie_html = render_index_html(accounts_data, view_mode="Katie")
+        with open(os.path.join(DOCS_DIR, "katie.html"), "w", encoding="utf-8") as f:
+            f.write(katie_html)
+        print(f"  ✓ /katie.html ({len(katie_html)//1024} KB)")
 
     # 2. 收集所有需要產個股頁的股票
     if args.stocks:

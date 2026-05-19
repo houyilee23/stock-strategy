@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台股策略訊號</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+<style>
+:root { --pico-spacing: 0.8rem; --pico-font-size: 95%; }
+body { padding: 0.5rem 0.7rem; }
+main { padding-top: 0; }
+header h1 { margin-bottom: 0.2rem; font-size: 1.4rem; }
+.subtitle { color: var(--pico-muted-color); margin-bottom: 1rem; font-size: 0.85rem; }
+.banner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;
+           padding: 0.7rem; border-radius: 8px; background: var(--pico-card-background-color);
+           border: 1px solid var(--pico-card-border-color); margin-bottom: 1rem; }
+.banner div { text-align: center; font-size: 0.85rem; }
+.banner div strong { display: block; font-size: 1.3rem; }
+.tabs { display: flex; gap: 0.3rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+.tabs button { padding: 0.4rem 0.9rem; font-size: 0.9rem; }
+.tabs button[aria-pressed=true] { background: var(--pico-primary); color: white; }
+input[type=search] { margin-bottom: 0.6rem; }
+table { font-size: 0.85rem; }
+table th { cursor: pointer; user-select: none; white-space: nowrap; padding: 0.4rem 0.3rem !important; }
+table th:hover { background: var(--pico-secondary-background); }
+table td { padding: 0.4rem 0.3rem !important; vertical-align: middle; }
+/* 台股配色：紅漲綠跌（與美股相反）；Tier 抽離成藍/靛/橘以免混淆 */
+.action-buy { color: #d62828; font-weight: bold; white-space: nowrap; }     /* BUY = 看多 = 紅 */
+.action-sell { color: #2a9d3f; font-weight: bold; white-space: nowrap; }    /* SELL = 看空 = 綠 */
+.tier-S, .tier-A { color: #1a73e8; font-weight: bold; }                      /* 高信心 = 藍 */
+.tier-B { color: #6f4ab8; font-weight: bold; }                                /* 靛 */
+.tier-C { color: #ff8c00; }                                                    /* 橘 */
+.tier-F { color: #999; }                                                       /* 灰 */
+.rsi-hot { color: #ff8c00; font-weight: bold; }                              /* 過熱 = 警告橘（不用紅，避免與「漲」混淆）*/
+.rsi-cool { color: #1a73e8; }                                                  /* 過冷 = 藍（中性）*/
+.trend-bull { color: #d62828; font-weight: bold; white-space: nowrap; }     /* 多 = 紅 */
+.trend-bear { color: #2a9d3f; font-weight: bold; white-space: nowrap; }     /* 空 = 綠 */
+.order-cell { font-size: 0.78rem; white-space: nowrap; }
+.order-buy { color: #d62828; font-weight: bold; }
+.order-hold { color: #555; }
+.in-pos { font-size: 0.9rem; }
+details.legend { margin-top: 1.5rem; padding: 0.7rem 1rem;
+                   background: var(--pico-card-background-color);
+                   border: 1px solid var(--pico-card-border-color);
+                   border-radius: 8px; }
+details.legend summary { cursor: pointer; font-weight: 600;
+                           color: var(--pico-primary); list-style: none; }
+details.legend summary::-webkit-details-marker { display: none; }
+details.legend summary::before { content: "▶ "; transition: transform 0.2s; display: inline-block; }
+details.legend[open] summary::before { transform: rotate(90deg); }
+.legend-body { font-size: 0.85rem; margin-top: 0.5rem; }
+.legend-body p { margin-bottom: 0.3rem; margin-top: 0.7rem; }
+.legend-body ul { margin: 0; padding-left: 1.2rem; }
+.legend-body li { margin-bottom: 0.3rem; line-height: 1.6; }
+a.stock-link { color: var(--pico-primary); text-decoration: none; font-weight: 600; }
+a.stock-link:hover { text-decoration: underline; }
+.stock-card { padding: 1rem; border-radius: 8px;
+                background: var(--pico-card-background-color);
+                border: 1px solid var(--pico-card-border-color);
+                margin-bottom: 1rem; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                 gap: 0.5rem; }
+.metric { padding: 0.6rem; background: rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.08); border-radius: 6px; }
+.metric strong { display: block; font-size: 1.15rem; color: var(--pico-primary);
+                   font-weight: 700; margin-bottom: 0.2rem; }
+.metric small { color: #555; font-size: 0.78rem; }
+@media (prefers-color-scheme: dark) {
+  .metric { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+  .metric small { color: #aaa; }
+}
+.back-link { font-size: 0.9rem; margin-bottom: 0.7rem; display: inline-block; }
+.pos-cagr { color: #d62828; }    /* 正報酬 = 紅（台股配色）*/
+.neg-cagr { color: #2a9d3f; }    /* 負報酬 = 綠 */
+/* 清單成員勾選按鈕 */
+.toggle-btn {
+  background: none; border: none; padding: 0.1rem 0.3rem;
+  cursor: pointer; font-size: 1.2rem; line-height: 1;
+}
+.toggle-on { color: #ffb800; }    /* 已在清單：黃色實心星 */
+.toggle-off { color: #ccc; }      /* 未在清單：灰色空心星 */
+.toggle-btn:hover { transform: scale(1.2); }
+@media (max-width: 600px) {
+  .banner { grid-template-columns: 1fr; }
+  table { font-size: 0.75rem; }
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<main class="container">
+<header>
+<h1>📊 Katie 的投資清單<a href="index.html" style="font-size:0.85rem; margin-left:1rem;">→ 管理員主頁</a></h1>
+<div class="subtitle">我的清單 + 股票池 · 點 ☆/★ 可加入或移除<br>最後更新：<strong>2026-05-19</strong></div>
+</header>
+
+<div class="banner">
+  <div><small>🔴 今日 BUY</small><strong>5</strong></div>
+  <div><small>🟢 今日 SELL</small><strong>2</strong></div>
+  <div><small>🔥 RSI 過熱 (≥75)</small><strong>10</strong></div>
+</div>
+
+<div x-data='{
+  accounts: {"Katie": [{"sid": "2330", "name": "台積電", "in_pos": "no", "close": "2265.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "61", "trend": "多頭", "regime": "BULL"}, {"sid": "2303", "name": "聯電", "in_pos": "no", "close": "110.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "75", "trend": "多頭", "regime": "BULL"}, {"sid": "2426", "name": "鼎元", "in_pos": "no", "close": "61.9", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 82 / SL 61", "rsi": "55", "trend": "多頭", "regime": "BULL"}, {"sid": "1560", "name": "中砂", "in_pos": "no", "close": "642.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "68", "trend": "多頭", "regime": "BULL"}, {"sid": "9940", "name": "信義", "in_pos": "no", "close": "18.2", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "18", "trend": "空頭", "regime": "BULL"}, {"sid": "1227", "name": "佳格", "in_pos": "no", "close": "28.5", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "33", "trend": "空頭", "regime": "BULL"}, {"sid": "1301", "name": "台塑", "in_pos": "no", "close": "45.7", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "36", "trend": "多頭", "regime": "BULL"}, {"sid": "2324", "name": "仁寶", "in_pos": "no", "close": "28.6", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "43", "trend": "空頭", "regime": "BULL"}, {"sid": "2344", "name": "華邦電", "in_pos": "no", "close": "129.5", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "69", "trend": "多頭", "regime": "BULL"}], "universe": [{"sid": "2330", "name": "台積電", "in_pos": "no", "close": "2265.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "61", "trend": "多頭", "regime": "BULL"}, {"sid": "2454", "name": "聯發科", "in_pos": "no", "close": "3260.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "65", "trend": "多頭", "regime": "BULL"}, {"sid": "2317", "name": "鴻海", "in_pos": "no", "close": "248.5", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "66", "trend": "空頭", "regime": "BULL"}, {"sid": "2303", "name": "聯電", "in_pos": "no", "close": "110.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "75", "trend": "多頭", "regime": "BULL"}, {"sid": "2308", "name": "台達電", "in_pos": "no", "close": "2075.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 2486 / SL 2020", "rsi": "55", "trend": "多頭", "regime": "BULL"}, {"sid": "3711", "name": "日月光投控", "in_pos": "no", "close": "547.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "70", "trend": "多頭", "regime": "BULL"}, {"sid": "2383", "name": "台光電", "in_pos": "no", "close": "4615.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP — / SL 4267", "rsi": "60", "trend": "多頭", "regime": "BULL"}, {"sid": "2345", "name": "智邦", "in_pos": "no", "close": "2505.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 3050 / SL 2137", "rsi": "60", "trend": "多頭", "regime": "BULL"}, {"sid": "3037", "name": "欣興", "in_pos": "no", "close": "821.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 955 / SL 744", "rsi": "56", "trend": "多頭", "regime": "BULL"}, {"sid": "3017", "name": "奇鋐", "in_pos": "no", "close": "2455.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "49", "trend": "多頭", "regime": "BULL"}, {"sid": "6669", "name": "緯穎", "in_pos": "no", "close": "5115.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "59", "trend": "多頭", "regime": "BULL"}, {"sid": "2360", "name": "致茂", "in_pos": "no", "close": "2240.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 2806 / SL 2196", "rsi": "57", "trend": "多頭", "regime": "BULL"}, {"sid": "6515", "name": "穎崴", "in_pos": "no", "close": "9780.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "53", "trend": "多頭", "regime": "BULL"}, {"sid": "2327", "name": "國巨", "in_pos": "no", "close": "455.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "80", "trend": "多頭", "regime": "BULL"}, {"sid": "2379", "name": "瑞昱", "in_pos": "no", "close": "536.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "49", "trend": "空頭", "regime": "BULL"}, {"sid": "3034", "name": "聯詠", "in_pos": "no", "close": "466.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "61", "trend": "空頭", "regime": "BULL"}, {"sid": "3008", "name": "大立光", "in_pos": "no", "close": "3445.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "80", "trend": "多頭", "regime": "BULL"}, {"sid": "4938", "name": "和碩", "in_pos": "no", "close": "76.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "37", "trend": "多頭", "regime": "BULL"}, {"sid": "3231", "name": "緯創", "in_pos": "no", "close": "135.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "45", "trend": "多頭", "regime": "BULL"}, {"sid": "2474", "name": "可成", "in_pos": "no", "close": "185.0", "action": "BUY", "tier": "C", "pos": "15%", "order": "買 185.8", "rsi": "35", "trend": "空頭", "regime": "BULL"}, {"sid": "2376", "name": "技嘉", "in_pos": "no", "close": "326.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP — / SL 262", "rsi": "72", "trend": "空頭", "regime": "BULL"}, {"sid": "2356", "name": "英業達", "in_pos": "no", "close": "52.2", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "67", "trend": "多頭", "regime": "BULL"}, {"sid": "2353", "name": "宏碁", "in_pos": "no", "close": "27.7", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "49", "trend": "空頭", "regime": "BULL"}, {"sid": "3661", "name": "世芯-KY", "in_pos": "no", "close": "4605.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "59", "trend": "多頭", "regime": "BULL"}, {"sid": "2426", "name": "鼎元", "in_pos": "no", "close": "61.9", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 82 / SL 61", "rsi": "55", "trend": "多頭", "regime": "BULL"}, {"sid": "1560", "name": "中砂", "in_pos": "no", "close": "642.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "68", "trend": "多頭", "regime": "BULL"}, {"sid": "2324", "name": "仁寶", "in_pos": "no", "close": "28.6", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "43", "trend": "空頭", "regime": "BULL"}, {"sid": "2344", "name": "華邦電", "in_pos": "no", "close": "129.5", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "69", "trend": "多頭", "regime": "BULL"}, {"sid": "6271", "name": "同欣電", "in_pos": "no", "close": "177.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 193 / SL 155", "rsi": "51", "trend": "多頭", "regime": "BULL"}, {"sid": "4958", "name": "臻鼎-KY", "in_pos": "no", "close": "401.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "60", "trend": "多頭", "regime": "BULL"}, {"sid": "2382", "name": "廣達", "in_pos": "no", "close": "306.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "41", "trend": "多頭", "regime": "BULL"}, {"sid": "2337", "name": "旺宏", "in_pos": "no", "close": "162.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "56", "trend": "多頭", "regime": "BULL"}, {"sid": "2408", "name": "南亞科", "in_pos": "no", "close": "311.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "63", "trend": "多頭", "regime": "BULL"}, {"sid": "6770", "name": "力積電", "in_pos": "no", "close": "62.8", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 68 / SL 48", "rsi": "59", "trend": "多頭", "regime": "BULL"}, {"sid": "2369", "name": "菱生", "in_pos": "no", "close": "29.7", "action": "BUY", "tier": "C", "pos": "15%", "order": "買 30.2", "rsi": "46", "trend": "多頭", "regime": "BULL"}, {"sid": "3189", "name": "景碩", "in_pos": "no", "close": "486.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "55", "trend": "多頭", "regime": "BULL"}, {"sid": "8046", "name": "南電", "in_pos": "no", "close": "786.0", "action": "BUY", "tier": "C", "pos": "15%", "order": "買 823.1", "rsi": "47", "trend": "多頭", "regime": "BULL"}, {"sid": "5347", "name": "世界先進", "in_pos": "no", "close": "151.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "66", "trend": "多頭", "regime": "BULL"}, {"sid": "6488", "name": "環球晶", "in_pos": "no", "close": "606.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "62", "trend": "多頭", "regime": "BULL"}, {"sid": "2412", "name": "中華電", "in_pos": "no", "close": "138.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 164 / SL 130", "rsi": "62", "trend": "多頭", "regime": "BULL"}, {"sid": "3045", "name": "台灣大", "in_pos": "no", "close": "114.5", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "68", "trend": "多頭", "regime": "BULL"}, {"sid": "4904", "name": "遠傳", "in_pos": "no", "close": "98.3", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP — / SL 90", "rsi": "62", "trend": "多頭", "regime": "BULL"}, {"sid": "2881", "name": "富邦金", "in_pos": "no", "close": "96.1", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "67", "trend": "空頭", "regime": "BULL"}, {"sid": "2882", "name": "國泰金", "in_pos": "no", "close": "77.9", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "57", "trend": "多頭", "regime": "BULL"}, {"sid": "2883", "name": "開發金", "in_pos": "no", "close": "21.9", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "55", "trend": "多頭", "regime": "BULL"}, {"sid": "2884", "name": "玉山金", "in_pos": "no", "close": "31.9", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "46", "trend": "空頭", "regime": "BULL"}, {"sid": "2885", "name": "元大金", "in_pos": "no", "close": "54.8", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 67 / SL 53", "rsi": "63", "trend": "多頭", "regime": "BULL"}, {"sid": "2886", "name": "兆豐金", "in_pos": "no", "close": "39.4", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "49", "trend": "空頭", "regime": "BULL"}, {"sid": "2891", "name": "中信金", "in_pos": "no", "close": "54.8", "action": "HOLD", "tier": "A", "pos": "50%", "order": "TP 58 / SL 51", "rsi": "55", "trend": "多頭", "regime": "BULL"}, {"sid": "2892", "name": "第一金", "in_pos": "no", "close": "29.3", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "57", "trend": "空頭", "regime": "BULL"}, {"sid": "5880", "name": "合庫金", "in_pos": "no", "close": "22.9", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "40", "trend": "空頭", "regime": "BULL"}, {"sid": "5871", "name": "中租-KY", "in_pos": "no", "close": "106.0", "action": "SELL", "tier": "C", "pos": "15%", "order": "—", "rsi": "35", "trend": "空頭", "regime": "BULL"}, {"sid": "1301", "name": "台塑", "in_pos": "no", "close": "45.7", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "36", "trend": "多頭", "regime": "BULL"}, {"sid": "1303", "name": "南亞", "in_pos": "no", "close": "85.3", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "47", "trend": "多頭", "regime": "BULL"}, {"sid": "1326", "name": "台化", "in_pos": "no", "close": "44.5", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 50 / SL 38", "rsi": "38", "trend": "多頭", "regime": "BULL"}, {"sid": "6505", "name": "台塑化", "in_pos": "no", "close": "51.3", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "42", "trend": "多頭", "regime": "BULL"}, {"sid": "2002", "name": "中鋼", "in_pos": "no", "close": "18.1", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "32", "trend": "空頭", "regime": "BULL"}, {"sid": "1809", "name": "中釉", "in_pos": "no", "close": "38.6", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "71", "trend": "多頭", "regime": "BULL"}, {"sid": "1101", "name": "台泥", "in_pos": "no", "close": "24.1", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "43", "trend": "多頭", "regime": "BULL"}, {"sid": "1102", "name": "亞泥", "in_pos": "no", "close": "34.4", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "40", "trend": "空頭", "regime": "BULL"}, {"sid": "1227", "name": "佳格", "in_pos": "no", "close": "28.5", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "33", "trend": "空頭", "regime": "BULL"}, {"sid": "1216", "name": "統一", "in_pos": "no", "close": "75.7", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "66", "trend": "空頭", "regime": "BULL"}, {"sid": "9940", "name": "信義", "in_pos": "no", "close": "18.2", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "18", "trend": "空頭", "regime": "BULL"}, {"sid": "2207", "name": "和泰車", "in_pos": "no", "close": "468.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 555 / SL —", "rsi": "38", "trend": "空頭", "regime": "BULL"}, {"sid": "2105", "name": "正新", "in_pos": "no", "close": "32.4", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "57", "trend": "空頭", "regime": "BULL"}, {"sid": "9921", "name": "巨大", "in_pos": "no", "close": "75.9", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "62", "trend": "空頭", "regime": "BULL"}, {"sid": "9914", "name": "美利達", "in_pos": "no", "close": "70.1", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "72", "trend": "空頭", "regime": "BULL"}, {"sid": "2912", "name": "統一超", "in_pos": "no", "close": "227.5", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "51", "trend": "空頭", "regime": "BULL"}, {"sid": "1402", "name": "遠東新", "in_pos": "no", "close": "26.4", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "52", "trend": "空頭", "regime": "BULL"}, {"sid": "1605", "name": "華新", "in_pos": "no", "close": "34.9", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "58", "trend": "多頭", "regime": "BULL"}, {"sid": "2027", "name": "大成鋼", "in_pos": "no", "close": "39.9", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "61", "trend": "空頭", "regime": "BULL"}, {"sid": "1802", "name": "台玻", "in_pos": "no", "close": "65.0", "action": "HOLD", "tier": "S", "pos": "100%", "order": "—", "rsi": "48", "trend": "多頭", "regime": "BULL"}, {"sid": "2603", "name": "長榮", "in_pos": "no", "close": "200.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "42", "trend": "多頭", "regime": "BULL"}, {"sid": "2615", "name": "萬海", "in_pos": "no", "close": "74.2", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "43", "trend": "空頭", "regime": "BULL"}, {"sid": "2618", "name": "長榮航", "in_pos": "no", "close": "34.6", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "49", "trend": "空頭", "regime": "BULL"}, {"sid": "0050", "name": "元大台灣50", "in_pos": "no", "close": "95.4", "action": "HOLD", "tier": "—", "pos": "—", "order": "—", "rsi": "68", "trend": "多頭", "regime": "BULL"}, {"sid": "0056", "name": "元大高股息", "in_pos": "no", "close": "44.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "66", "trend": "多頭", "regime": "BULL"}, {"sid": "006208", "name": "富邦台50", "in_pos": "no", "close": "220.4", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "66", "trend": "多頭", "regime": "BULL"}, {"sid": "00878", "name": "國泰永續高股息", "in_pos": "no", "close": "27.9", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 29 / SL 23", "rsi": "77", "trend": "多頭", "regime": "BULL"}, {"sid": "00919", "name": "群益台灣精選高息", "in_pos": "no", "close": "25.8", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP — / SL 23", "rsi": "73", "trend": "多頭", "regime": "BULL"}, {"sid": "00940", "name": "元大台灣價值高息", "in_pos": "no", "close": "10.9", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "63", "trend": "多頭", "regime": "BULL"}, {"sid": "00981A", "name": "主動統一台股增長", "in_pos": "no", "close": "28.4", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "60", "trend": "多頭", "regime": "BULL"}, {"sid": "2458", "name": "義隆電", "in_pos": "no", "close": "142.5", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "53", "trend": "多頭", "regime": "BULL"}, {"sid": "3035", "name": "智原", "in_pos": "no", "close": "190.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "57", "trend": "空頭", "regime": "BULL"}, {"sid": "3081", "name": "聯亞光電", "in_pos": "no", "close": "2620.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "58", "trend": "多頭", "regime": "BULL"}, {"sid": "3443", "name": "創意", "in_pos": "no", "close": "4845.0", "action": "HOLD", "tier": "S", "pos": "100%", "order": "—", "rsi": "60", "trend": "多頭", "regime": "BULL"}, {"sid": "4961", "name": "天鈺", "in_pos": "no", "close": "169.0", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "59", "trend": "空頭", "regime": "BULL"}, {"sid": "5269", "name": "祥碩", "in_pos": "no", "close": "1455.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "61", "trend": "空頭", "regime": "BULL"}, {"sid": "6116", "name": "彩晶", "in_pos": "no", "close": "10.2", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "62", "trend": "多頭", "regime": "BULL"}, {"sid": "6182", "name": "合晶", "in_pos": "no", "close": "56.9", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "80", "trend": "多頭", "regime": "BULL"}, {"sid": "6213", "name": "聯茂", "in_pos": "no", "close": "253.0", "action": "BUY", "tier": "C", "pos": "15%", "order": "買 266.6", "rsi": "49", "trend": "多頭", "regime": "BULL"}, {"sid": "6531", "name": "愛普", "in_pos": "no", "close": "1080.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "77", "trend": "多頭", "regime": "BULL"}, {"sid": "8069", "name": "元太", "in_pos": "no", "close": "162.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "63", "trend": "空頭", "regime": "BULL"}, {"sid": "8081", "name": "致新", "in_pos": "no", "close": "255.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP — / SL 228", "rsi": "54", "trend": "多頭", "regime": "BULL"}, {"sid": "1582", "name": "信邦", "in_pos": "no", "close": "99.4", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "58", "trend": "多頭", "regime": "BULL"}, {"sid": "2059", "name": "川湖", "in_pos": "no", "close": "4860.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP — / SL 4697", "rsi": "61", "trend": "多頭", "regime": "BULL"}, {"sid": "3596", "name": "智易", "in_pos": "no", "close": "183.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "60", "trend": "空頭", "regime": "BULL"}, {"sid": "5388", "name": "中磊", "in_pos": "no", "close": "77.6", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "44", "trend": "空頭", "regime": "BULL"}, {"sid": "6121", "name": "新普", "in_pos": "no", "close": "390.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "70", "trend": "空頭", "regime": "BULL"}, {"sid": "6285", "name": "啟碁", "in_pos": "no", "close": "260.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "60", "trend": "多頭", "regime": "BULL"}, {"sid": "8454", "name": "富邦媒", "in_pos": "no", "close": "187.5", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "55", "trend": "空頭", "regime": "BULL"}, {"sid": "2409", "name": "友達", "in_pos": "no", "close": "19.1", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "55", "trend": "多頭", "regime": "BULL"}, {"sid": "3481", "name": "群創", "in_pos": "no", "close": "36.1", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "72", "trend": "多頭", "regime": "BULL"}, {"sid": "5314", "name": "世紀", "in_pos": "no", "close": "74.1", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "45", "trend": "空頭", "regime": "BULL"}, {"sid": "2812", "name": "台中銀", "in_pos": "no", "close": "18.8", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "18", "trend": "空頭", "regime": "BULL"}, {"sid": "2823", "name": "中壽", "in_pos": "no", "close": "30.6", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "53", "trend": "多頭", "regime": "BULL"}, {"sid": "2867", "name": "三商壽", "in_pos": "no", "close": "7.7", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "47", "trend": "多頭", "regime": "BULL"}, {"sid": "2887", "name": "台新金", "in_pos": "no", "close": "23.8", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "50", "trend": "多頭", "regime": "BULL"}, {"sid": "2888", "name": "新光金", "in_pos": "no", "close": "11.8", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "58", "trend": "空頭", "regime": "BULL"}, {"sid": "2890", "name": "永豐金", "in_pos": "no", "close": "30.2", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 34 / SL 28", "rsi": "35", "trend": "多頭", "regime": "BULL"}, {"sid": "5876", "name": "上海商銀", "in_pos": "no", "close": "40.1", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "59", "trend": "空頭", "regime": "BULL"}, {"sid": "1503", "name": "士電", "in_pos": "no", "close": "190.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 228 / SL 180", "rsi": "43", "trend": "多頭", "regime": "BULL"}, {"sid": "1504", "name": "東元", "in_pos": "no", "close": "69.4", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "55", "trend": "空頭", "regime": "BULL"}, {"sid": "1521", "name": "大億", "in_pos": "no", "close": "24.5", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "42", "trend": "空頭", "regime": "BULL"}, {"sid": "2049", "name": "上銀", "in_pos": "no", "close": "392.5", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "84", "trend": "多頭", "regime": "BULL"}, {"sid": "2371", "name": "大同", "in_pos": "no", "close": "29.1", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "35", "trend": "空頭", "regime": "BULL"}, {"sid": "9933", "name": "中鼎工程", "in_pos": "no", "close": "37.6", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "58", "trend": "多頭", "regime": "BULL"}, {"sid": "2009", "name": "第一銅", "in_pos": "no", "close": "38.9", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "46", "trend": "空頭", "regime": "BULL"}, {"sid": "2014", "name": "中鴻", "in_pos": "no", "close": "17.3", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 21 / SL 17", "rsi": "42", "trend": "多頭", "regime": "BULL"}, {"sid": "1736", "name": "喬山", "in_pos": "no", "close": "118.5", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "46", "trend": "空頭", "regime": "BULL"}, {"sid": "2227", "name": "裕隆", "in_pos": "no", "close": "49.0", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "32", "trend": "空頭", "regime": "BULL"}, {"sid": "1234", "name": "黑松", "in_pos": "no", "close": "33.8", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "17", "trend": "空頭", "regime": "BULL"}, {"sid": "1456", "name": "儒鴻", "in_pos": "no", "close": "13.2", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "42", "trend": "多頭", "regime": "BULL"}, {"sid": "1717", "name": "長興", "in_pos": "no", "close": "78.7", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "54", "trend": "多頭", "regime": "BULL"}, {"sid": "1722", "name": "台肥", "in_pos": "no", "close": "45.8", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "46", "trend": "空頭", "regime": "BULL"}, {"sid": "1907", "name": "永豐餘", "in_pos": "no", "close": "25.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "56", "trend": "空頭", "regime": "BULL"}, {"sid": "2723", "name": "美食-KY", "in_pos": "no", "close": "64.2", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "38", "trend": "空頭", "regime": "BULL"}, {"sid": "2727", "name": "王品", "in_pos": "no", "close": "236.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "65", "trend": "多頭", "regime": "BULL"}, {"sid": "9907", "name": "統一實", "in_pos": "no", "close": "16.1", "action": "BUY", "tier": "B", "pos": "30%", "order": "買 16.1", "rsi": "15", "trend": "空頭", "regime": "BULL"}, {"sid": "2606", "name": "裕民", "in_pos": "no", "close": "62.8", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "50", "trend": "多頭", "regime": "BULL"}, {"sid": "2609", "name": "陽明", "in_pos": "no", "close": "48.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 60 / SL —", "rsi": "33", "trend": "空頭", "regime": "BULL"}, {"sid": "4147", "name": "中裕", "in_pos": "no", "close": "49.7", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "45", "trend": "空頭", "regime": "BULL"}, {"sid": "3014", "name": "聯陽", "in_pos": "no", "close": "136.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "64", "trend": "空頭", "regime": "BULL"}, {"sid": "3036", "name": "文曄", "in_pos": "no", "close": "270.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "69", "trend": "多頭", "regime": "BULL"}, {"sid": "3044", "name": "健鼎", "in_pos": "no", "close": "477.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "53", "trend": "多頭", "regime": "BULL"}, {"sid": "3105", "name": "穩懋", "in_pos": "no", "close": "495.5", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "52", "trend": "多頭", "regime": "BULL"}, {"sid": "3406", "name": "玉晶光", "in_pos": "no", "close": "588.0", "action": "SELL", "tier": "C", "pos": "15%", "order": "—", "rsi": "71", "trend": "多頭", "regime": "BULL"}, {"sid": "3454", "name": "晶睿", "in_pos": "no", "close": "99.4", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "64", "trend": "多頭", "regime": "BULL"}, {"sid": "3533", "name": "嘉澤", "in_pos": "no", "close": "2330.0", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "44", "trend": "多頭", "regime": "BULL"}, {"sid": "3653", "name": "健策", "in_pos": "no", "close": "3465.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "37", "trend": "多頭", "regime": "BULL"}, {"sid": "3702", "name": "大聯大", "in_pos": "no", "close": "110.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "65", "trend": "多頭", "regime": "BULL"}, {"sid": "4915", "name": "致伸", "in_pos": "no", "close": "72.7", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "49", "trend": "空頭", "regime": "BULL"}, {"sid": "5483", "name": "中美晶", "in_pos": "no", "close": "148.5", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "59", "trend": "多頭", "regime": "BULL"}, {"sid": "6191", "name": "精成科", "in_pos": "no", "close": "90.8", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "36", "trend": "空頭", "regime": "BULL"}, {"sid": "6491", "name": "晶碩", "in_pos": "no", "close": "294.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "62", "trend": "空頭", "regime": "BULL"}, {"sid": "6533", "name": "晶心科", "in_pos": "no", "close": "227.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "50", "trend": "空頭", "regime": "BULL"}, {"sid": "6781", "name": "AES-KY", "in_pos": "no", "close": "1160.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "52", "trend": "空頭", "regime": "BULL"}, {"sid": "2354", "name": "鴻準", "in_pos": "no", "close": "59.4", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "58", "trend": "空頭", "regime": "BULL"}, {"sid": "2451", "name": "創見", "in_pos": "no", "close": "336.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "66", "trend": "多頭", "regime": "BULL"}, {"sid": "2820", "name": "華票", "in_pos": "no", "close": "16.7", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 18 / SL 16", "rsi": "41", "trend": "多頭", "regime": "BULL"}, {"sid": "2845", "name": "遠東銀", "in_pos": "no", "close": "12.1", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "27", "trend": "空頭", "regime": "BULL"}, {"sid": "1314", "name": "中石化", "in_pos": "no", "close": "6.7", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "41", "trend": "空頭", "regime": "BULL"}, {"sid": "1535", "name": "中宇", "in_pos": "no", "close": "49.2", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "30", "trend": "空頭", "regime": "BULL"}, {"sid": "1789", "name": "神隆", "in_pos": "no", "close": "19.1", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "34", "trend": "空頭", "regime": "BULL"}, {"sid": "2015", "name": "豐興", "in_pos": "no", "close": "62.6", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "49", "trend": "空頭", "regime": "BULL"}, {"sid": "4763", "name": "材料-KY", "in_pos": "no", "close": "41.6", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "42", "trend": "空頭", "regime": "BULL"}, {"sid": "4137", "name": "麗豐-KY", "in_pos": "no", "close": "104.0", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "40", "trend": "空頭", "regime": "BULL"}, {"sid": "4174", "name": "浩鼎", "in_pos": "no", "close": "32.7", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "38", "trend": "多頭", "regime": "BULL"}, {"sid": "6446", "name": "藥華藥", "in_pos": "no", "close": "826.0", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "78", "trend": "多頭", "regime": "BULL"}, {"sid": "2542", "name": "興富發", "in_pos": "no", "close": "43.8", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "76", "trend": "空頭", "regime": "BULL"}, {"sid": "2722", "name": "夏都", "in_pos": "no", "close": "23.1", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "41", "trend": "空頭", "regime": "BULL"}, {"sid": "2492", "name": "華新科", "in_pos": "no", "close": "206.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "72", "trend": "多頭", "regime": "BULL"}, {"sid": "2880", "name": "華南金", "in_pos": "no", "close": "32.4", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 40 / SL 30", "rsi": "38", "trend": "多頭", "regime": "BULL"}, {"sid": "2855", "name": "統一證", "in_pos": "no", "close": "40.8", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 47 / SL 36", "rsi": "65", "trend": "多頭", "regime": "BULL"}, {"sid": "2392", "name": "正崴", "in_pos": "no", "close": "33.8", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "49", "trend": "空頭", "regime": "BULL"}, {"sid": "2393", "name": "億光", "in_pos": "no", "close": "62.5", "action": "HOLD", "tier": "B", "pos": "30%", "order": "TP 76 / SL 61", "rsi": "30", "trend": "多頭", "regime": "BULL"}, {"sid": "2347", "name": "聯強", "in_pos": "no", "close": "82.4", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "51", "trend": "多頭", "regime": "BULL"}, {"sid": "5904", "name": "寶雅", "in_pos": "no", "close": "546.0", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "50", "trend": "多頭", "regime": "BULL"}, {"sid": "6804", "name": "大樹", "in_pos": "no", "close": "15.1", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "37", "trend": "空頭", "regime": "BULL"}, {"sid": "9941", "name": "裕融", "in_pos": "no", "close": "73.1", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "32", "trend": "空頭", "regime": "BULL"}, {"sid": "5522", "name": "遠雄", "in_pos": "no", "close": "70.7", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "53", "trend": "多頭", "regime": "BULL"}, {"sid": "6188", "name": "廣明", "in_pos": "no", "close": "84.3", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "45", "trend": "空頭", "regime": "BULL"}, {"sid": "1565", "name": "精華", "in_pos": "no", "close": "93.6", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "22", "trend": "空頭", "regime": "BULL"}, {"sid": "8016", "name": "矽創", "in_pos": "no", "close": "274.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "65", "trend": "多頭", "regime": "BULL"}, {"sid": "6510", "name": "精測", "in_pos": "no", "close": "3735.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "51", "trend": "多頭", "regime": "BULL"}, {"sid": "4148", "name": "全宇生技", "in_pos": "no", "close": "35.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 41 / SL —", "rsi": "36", "trend": "空頭", "regime": "BULL"}, {"sid": "3324", "name": "雙鴻", "in_pos": "no", "close": "995.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "41", "trend": "多頭", "regime": "BULL"}, {"sid": "6526", "name": "達發", "in_pos": "no", "close": "688.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "TP 858 / SL 630", "rsi": "63", "trend": "多頭", "regime": "BULL"}, {"sid": "8341", "name": "日友", "in_pos": "no", "close": "76.5", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "58", "trend": "空頭", "regime": "BULL"}, {"sid": "1909", "name": "榮成", "in_pos": "no", "close": "9.0", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "39", "trend": "空頭", "regime": "BULL"}, {"sid": "9904", "name": "寶成", "in_pos": "no", "close": "26.0", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "36", "trend": "空頭", "regime": "BULL"}, {"sid": "2367", "name": "燿華", "in_pos": "no", "close": "61.8", "action": "HOLD", "tier": "D", "pos": "10%", "order": "—", "rsi": "46", "trend": "多頭", "regime": "BULL"}, {"sid": "2455", "name": "全新", "in_pos": "no", "close": "358.5", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "58", "trend": "多頭", "regime": "BULL"}, {"sid": "6443", "name": "元晶", "in_pos": "no", "close": "38.2", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "46", "trend": "多頭", "regime": "BULL"}, {"sid": "3526", "name": "凡甲", "in_pos": "no", "close": "374.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "66", "trend": "多頭", "regime": "BULL"}, {"sid": "5536", "name": "聖暉", "in_pos": "no", "close": "1025.0", "action": "HOLD", "tier": "B", "pos": "30%", "order": "—", "rsi": "72", "trend": "多頭", "regime": "BULL"}, {"sid": "2328", "name": "廣宇", "in_pos": "no", "close": "50.9", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "54", "trend": "空頭", "regime": "BULL"}, {"sid": "2352", "name": "佳世達", "in_pos": "no", "close": "25.2", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "52", "trend": "空頭", "regime": "BULL"}, {"sid": "3227", "name": "原相", "in_pos": "no", "close": "220.0", "action": "HOLD", "tier": "C", "pos": "15%", "order": "—", "rsi": "58", "trend": "空頭", "regime": "BULL"}, {"sid": "3323", "name": "加百裕", "in_pos": "no", "close": "34.7", "action": "HOLD", "tier": "A", "pos": "50%", "order": "TP 38 / SL —", "rsi": "49", "trend": "空頭", "regime": "BULL"}, {"sid": "5274", "name": "信驊", "in_pos": "no", "close": "17195.0", "action": "HOLD", "tier": "S", "pos": "100%", "order": "—", "rsi": "60", "trend": "多頭", "regime": "BULL"}, {"sid": "7769", "name": "鴻勁", "in_pos": "no", "close": "6895.0", "action": "HOLD", "tier": "A", "pos": "50%", "order": "—", "rsi": "71", "trend": "多頭", "regime": "BULL"}, {"sid": "00965", "name": "個人持倉", "in_pos": "no", "close": "25.2", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "42", "trend": "多頭", "regime": "BULL"}, {"sid": "00981A", "name": "主動統一台股增長", "in_pos": "no", "close": "28.4", "action": "HOLD", "tier": "F", "pos": "—", "order": "—", "rsi": "60", "trend": "多頭", "regime": "BULL"}]},
+  universeSids: ["2330", "2454", "2317", "2303", "2308", "3711", "2383", "2345", "3037", "3017", "6669", "2360", "6515", "2327", "2379", "3034", "3008", "4938", "3231", "2474", "2376", "2356", "2353", "3661", "2426", "1560", "2324", "2344", "6271", "4958", "2382", "2337", "2408", "6770", "2369", "3189", "8046", "5347", "6488", "2412", "3045", "4904", "2881", "2882", "2883", "2884", "2885", "2886", "2891", "2892", "5880", "5871", "1301", "1303", "1326", "6505", "2002", "1809", "1101", "1102", "1227", "1216", "9940", "2207", "2105", "9921", "9914", "2912", "1402", "1605", "2027", "1802", "2603", "2615", "2618", "0050", "0056", "006208", "00878", "00919", "00940", "00981A", "2458", "3035", "3081", "3443", "4961", "5269", "6116", "6182", "6213", "6531", "8069", "8081", "1582", "2059", "3596", "5388", "6121", "6285", "8454", "2409", "3481", "5314", "2812", "2823", "2867", "2887", "2888", "2890", "5876", "1503", "1504", "1521", "2049", "2371", "9933", "2009", "2014", "1736", "2227", "1234", "1456", "1717", "1722", "1907", "2723", "2727", "9907", "2606", "2609", "4147", "3014", "3036", "3044", "3105", "3406", "3454", "3533", "3653", "3702", "4915", "5483", "6191", "6491", "6533", "6781", "2354", "2451", "2820", "2845", "1314", "1535", "1789", "2015", "4763", "4137", "4174", "6446", "2542", "2722", "2492", "2880", "2855", "2392", "2393", "2347", "5904", "6804", "9941", "5522", "6188", "1565", "8016", "6510", "4148", "3324", "6526", "8341", "1909", "9904", "2367", "2455", "6443", "3526", "5536", "2328", "2352", "3227", "3323", "5274", "7769", "00965", "00981A"],
+  editableAccount: "Katie",
+  current: "Katie",
+  search: "",
+  sortKey: "",
+  sortDesc: false,
+  overrides: {},  // {accountName: {add: [sids], remove: [sids]}}
+
+  init() {
+    // 從 localStorage 讀回 overrides
+    for (const acc of Object.keys(this.accounts)) {
+      const raw = localStorage.getItem(acc + "_overrides");
+      if (raw) {
+        try { this.overrides[acc] = JSON.parse(raw); } catch (e) {}
+      }
+    }
+    // 確保各 acc 有預設結構
+    for (const acc of Object.keys(this.accounts)) {
+      if (!this.overrides[acc]) this.overrides[acc] = {add: [], remove: []};
+    }
+  },
+
+  // 是否可編輯這個 tab（user 模式只能編輯自己的；admin 可編輯全部）
+  canEdit(acc) {
+    if (this.editableAccount === null) return acc !== "universe";  // admin: 不直接編 universe
+    return acc === this.editableAccount;
+  },
+
+  // 計算實際 list (base ∪ adds \ removes)
+  effectiveSids(acc) {
+    const base = (this.accounts[acc] || []).map(r => r.sid);
+    const ov = this.overrides[acc] || {add: [], remove: []};
+    const set = new Set(base);
+    for (const s of (ov.remove||[])) set.delete(s);
+    for (const s of (ov.add||[])) set.add(s);
+    return set;
+  },
+
+  // 顯示時：tab 是 universe → 顯示所有；tab 是某 list → 顯示 effective list
+  filtered() {
+    let rows;
+    if (this.current === "universe") {
+      rows = this.accounts["universe"] || [];
+    } else {
+      const sids = this.effectiveSids(this.current);
+      // 用 universe 作 base 找股票資訊（因為加入的可能不在原 list）
+      const uMap = {};
+      for (const r of (this.accounts["universe"]||[])) uMap[r.sid] = r;
+      // 也加上 list 內原本的（admin 可能直接看 list 而 list 在 universe 沒對應）
+      for (const r of (this.accounts[this.current]||[])) {
+        if (!uMap[r.sid]) uMap[r.sid] = r;
+      }
+      rows = Array.from(sids).map(s => uMap[s]).filter(Boolean);
+    }
+
+    let q = this.search.trim().toLowerCase();
+    if (q) {
+      rows = rows.filter(r => r.sid.includes(q) ||
+                              (r.name||"").toLowerCase().includes(q));
+    }
+    if (this.sortKey) {
+      const k = this.sortKey;
+      rows = [...rows].sort((a,b) => {
+        let va = a[k], vb = b[k];
+        const na = parseFloat(va), nb = parseFloat(vb);
+        if (!isNaN(na) && !isNaN(nb)) { va = na; vb = nb; }
+        if (va < vb) return this.sortDesc ? 1 : -1;
+        if (va > vb) return this.sortDesc ? -1 : 1;
+        return 0;
+      });
+    }
+    return rows;
+  },
+
+  sort(k) {
+    if (this.sortKey === k) this.sortDesc = !this.sortDesc;
+    else { this.sortKey = k; this.sortDesc = false; }
+  },
+  arrow(k) {
+    if (this.sortKey !== k) return "";
+    return this.sortDesc ? " ↓" : " ↑";
+  },
+
+  // 是否在某 list 內（effective）
+  isInList(sid, acc) {
+    return this.effectiveSids(acc).has(sid);
+  },
+
+  // 切換 list 成員資格
+  toggle(sid, acc) {
+    if (!this.canEdit(acc)) return;
+    const base = (this.accounts[acc] || []).map(r => r.sid);
+    if (!this.overrides[acc]) this.overrides[acc] = {add: [], remove: []};
+    const ov = this.overrides[acc];
+
+    const inEffective = this.isInList(sid, acc);
+
+    if (inEffective) {
+      // 目前在 list 內 → 移除
+      if (base.includes(sid)) {
+        if (!ov.remove.includes(sid)) ov.remove.push(sid);
+      } else {
+        ov.add = ov.add.filter(s => s !== sid);
+      }
+    } else {
+      // 目前不在 list 內 → 加入
+      if (base.includes(sid)) {
+        ov.remove = ov.remove.filter(s => s !== sid);
+      } else {
+        if (!ov.add.includes(sid)) ov.add.push(sid);
+      }
+    }
+    localStorage.setItem(acc + "_overrides", JSON.stringify(ov));
+  },
+
+  // 統計：list 大小（effective）
+  listSize(acc) {
+    if (acc === "universe") return (this.accounts[acc] || []).length;
+    return this.effectiveSids(acc).size;
+  },
+
+  // 統計：本機是否有未同步變更
+  hasOverrides(acc) {
+    const ov = this.overrides[acc];
+    if (!ov) return false;
+    return (ov.add||[]).length + (ov.remove||[]).length > 0;
+  },
+
+  // 匯出變更為 JSON（給「事後回傳」用）
+  exportOverrides() {
+    const out = {};
+    for (const acc of Object.keys(this.overrides)) {
+      const ov = this.overrides[acc];
+      if (((ov.add||[]).length + (ov.remove||[]).length) > 0) {
+        out[acc] = ov;
+      }
+    }
+    if (Object.keys(out).length === 0) {
+      alert("目前沒有任何變更可匯出");
+      return;
+    }
+    const txt = JSON.stringify(out, null, 2);
+    navigator.clipboard.writeText(txt).then(() => {
+      alert("✅ 變更已複製到剪貼簿，可貼給管理員或 Email 出去：\n\n" + txt);
+    }, () => {
+      prompt("複製失敗，請手動 copy：", txt);
+    });
+  },
+
+  // 清除本機變更
+  clearOverrides(acc) {
+    if (!confirm("確定要清除「" + acc + "」的本機變更（恢復成 server 上的清單）？")) return;
+    this.overrides[acc] = {add: [], remove: []};
+    localStorage.removeItem(acc + "_overrides");
+  }
+}'>
+
+<div class="tabs">
+  <button @click="current='Katie'; sortKey=''" :aria-pressed="current==='Katie'">我的清單 <small>(<span x-text="listSize('Katie')"></span>)</small><span x-show="hasOverrides('Katie')" style="color:#d62828; margin-left:0.3rem;" title="本機有未同步變更">●</span></button>
+  <button @click="current='universe'; sortKey=''" :aria-pressed="current==='universe'">股票池 <small>(<span x-text="listSize('universe')"></span>)</small><span x-show="hasOverrides('universe')" style="color:#d62828; margin-left:0.3rem;" title="本機有未同步變更">●</span></button>
+</div>
+
+<div x-show="Object.values(overrides).some(o => (o.add||[]).length + (o.remove||[]).length > 0)"
+     style="margin: 0.5rem 0; padding: 0.6rem 0.9rem; background: rgba(214,40,40,0.08);
+            border-radius: 6px; border-left: 3px solid #d62828; font-size: 0.85rem;">
+  <strong>📝 您有未同步的本機變更</strong>
+  <template x-for="acc in Object.keys(overrides).filter(a => (overrides[a].add||[]).length + (overrides[a].remove||[]).length > 0)" :key="acc">
+    <span style="margin-left: 0.6rem;">
+      <span x-text="acc"></span>:
+      <span x-show="(overrides[acc].add||[]).length > 0">+<span x-text="(overrides[acc].add||[]).length"></span></span>
+      <span x-show="(overrides[acc].remove||[]).length > 0" style="margin-left: 0.3rem;">−<span x-text="(overrides[acc].remove||[]).length"></span></span>
+      <button @click="clearOverrides(acc)" style="margin-left: 0.3rem; padding: 0.1rem 0.4rem; font-size: 0.75rem;">清除</button>
+    </span>
+  </template>
+  <div style="margin-top: 0.4rem;">
+    <button @click="exportOverrides()" style="padding: 0.3rem 0.7rem; font-size: 0.85rem;">📤 匯出變更給管理員</button>
+    <small style="color: var(--pico-muted-color); margin-left: 0.5rem;">變更只存在您的瀏覽器；按上方按鈕複製 JSON 並回傳給管理員</small>
+  </div>
+</div>
+
+<input type="search" x-model="search" placeholder="🔍 搜尋代號或名稱（如 2330、台積電）">
+
+<table>
+<thead>
+<tr>
+  <th x-show="canEdit(current) || current === 'universe'" style="width:40px;">★</th>
+  <th @click="sort('sid')">股票<span x-text="arrow('sid')"></span></th>
+  <th @click="sort('in_pos')">在倉<span x-text="arrow('in_pos')"></span></th>
+  <th @click="sort('name')">名稱<span x-text="arrow('name')"></span></th>
+  <th @click="sort('close')">收盤<span x-text="arrow('close')"></span></th>
+  <th @click="sort('action')">動作<span x-text="arrow('action')"></span></th>
+  <th @click="sort('tier')">Tier<span x-text="arrow('tier')"></span></th>
+  <th @click="sort('pos')">倉位<span x-text="arrow('pos')"></span></th>
+  <th>掛單</th>
+  <th @click="sort('rsi')">RSI<span x-text="arrow('rsi')"></span></th>
+  <th @click="sort('trend')">趨勢<span x-text="arrow('trend')"></span></th>
+</tr>
+</thead>
+<tbody>
+<template x-for="r in filtered()" :key="r.sid + '-' + current">
+<tr>
+  <td x-show="canEdit(current) || current === 'universe'">
+    <template x-if="canEdit(current) === false && current === 'universe'">
+      <span style="color:#bbb">·</span>
+    </template>
+    <template x-if="canEdit(current) || (current === 'universe' && editableAccount)">
+      <button class="toggle-btn"
+              @click.stop="toggle(r.sid, current === 'universe' ? editableAccount : current)"
+              :class="(current === 'universe' ? isInList(r.sid, editableAccount) : isInList(r.sid, current)) ? 'toggle-on' : 'toggle-off'"
+              :title="(current === 'universe' ? isInList(r.sid, editableAccount) : isInList(r.sid, current)) ? '已在清單中（點擊移除）' : '加入清單'"
+              x-text="(current === 'universe' ? isInList(r.sid, editableAccount) : isInList(r.sid, current)) ? '★' : '☆'"></button>
+    </template>
+  </td>
+  <td><a class="stock-link" :href="`stock/${r.sid}.html`" x-text="r.sid"></a></td>
+  <td x-html="cellInPos(r.in_pos)"></td>
+  <td x-text="r.name"></td>
+  <td x-text="r.close"></td>
+  <td x-html="cellAction(r.action)"></td>
+  <td x-html="cellTier(r.tier)"></td>
+  <td x-text="r.pos"></td>
+  <td class="order-cell" x-html="cellOrder(r.order)"></td>
+  <td x-html="cellRsi(r.rsi)"></td>
+  <td x-html="cellTrend(r.trend)"></td>
+</tr>
+</template>
+</tbody>
+</table>
+</div>
+
+<script>
+function cellAction(a) {
+  if (a === "BUY") return '<span class="action-buy">🔴 BUY</span>';
+  if (a === "SELL") return '<span class="action-sell">🟢 SELL</span>';
+  return a;
+}
+function cellTier(t) {
+  return `<span class="tier-${t}">${t}</span>`;
+}
+function cellRsi(r) {
+  const v = parseInt(r);
+  if (isNaN(v)) return r;
+  if (v >= 75) return `<span class="rsi-hot">${v} 🔥</span>`;
+  if (v <= 30) return `<span class="rsi-cool">${v} ❄️</span>`;
+  return v;
+}
+function cellTrend(t) {
+  if (t === "多頭") return '<span class="trend-bull">▲ 多</span>';
+  if (t === "空頭") return '<span class="trend-bear">▼ 空</span>';
+  return t || "—";
+}
+function cellInPos(p) {
+  if (p === "yes") return '<span class="in-pos">✅</span>';
+  return '<span style="color:#bbb">·</span>';
+}
+function cellOrder(o) {
+  if (!o || o === "—") return '<span style="color:#999">—</span>';
+  // BUY 訊號："買 X"
+  if (o.startsWith("買")) {
+    return '<span class="order-buy">' + o + '</span>';
+  }
+  // 在倉中的 TP / SL 顯示
+  if (o.startsWith("TP")) {
+    return '<span class="order-hold">' + o + '</span>';
+  }
+  return o;
+}
+</script>
+
+<details class="legend">
+<summary>📖 符號說明</summary>
+<div class="legend-body">
+<p><strong>動作</strong></p>
+<ul>
+  <li><span class="action-buy">🔴 BUY</span> — 進場訊號（台股配色：紅 = 多/漲）</li>
+  <li><span class="action-sell">🟢 SELL</span> — 出場訊號（綠 = 空/跌）</li>
+  <li>HOLD — 觀望，無進出建議</li>
+</ul>
+<p><strong>掛單</strong>（限價單機制 v0.1，目前 low_vol_pullback / mean_reversion 才有）</p>
+<ul>
+  <li>買 X → 隔日預掛限價買在 X 元，盤中觸及才成交</li>
+  <li>TP X / SL Y → 在倉建議：<b>TP</b>（Take Profit，停利）X 元觸及就賣；<b>SL</b>（Stop Loss，停損）Y 元跌破就賣</li>
+  <li>— → 該標的無限價單訊號（其他 template 預設 T+1 開盤市價成交）</li>
+</ul>
+<p><strong>Tier（策略信心等級）</strong></p>
+<ul>
+  <li><span class="tier-S">S</span> — 最高信心（倉位上限 100%）</li>
+  <li><span class="tier-A">A</span> — 高信心（倉位上限 50%）</li>
+  <li><span class="tier-B">B</span> — 中等信心（倉位上限 30%）</li>
+  <li><span class="tier-C">C</span> — 普通信心（倉位上限 15%）</li>
+  <li><span class="tier-F">F</span> — 策略無利可圖，不建議持有</li>
+  <li>BS / BA / BB → BNH_S/A/B 長持替代（tier=F 但長期買進長持有效）</li>
+  <li>* → 倉位來自 BNH 評估</li>
+</ul>
+<p><strong>趨勢與 RSI</strong></p>
+<ul>
+  <li><span class="trend-bull">▲ 多</span> — 多頭排列（Close > MA200 且 MA50 > MA200）</li>
+  <li><span class="trend-bear">▼ 空</span> — 空頭排列</li>
+  <li><span class="rsi-hot">RSI 🔥</span> — 過熱（≥75，警告超買）</li>
+  <li><span class="rsi-cool">RSI ❄️</span> — 過冷（≤30，可能反彈）</li>
+</ul>
+<p><strong>在倉狀態</strong></p>
+<ul>
+  <li><span class="in-pos">✅</span> — 真實持有（從 trades_帳戶.csv 推算）</li>
+  <li>· — 未持有 / 觀察中</li>
+</ul>
+<p><strong>Regime（大盤環境）</strong></p>
+<ul>
+  <li>BULL — 大盤多頭（0050 在 MA200 之上）</li>
+  <li>BEAR — 大盤空頭</li>
+  <li>NEUTRAL — 中性</li>
+</ul>
+</div>
+</details>
+
+<footer style="margin-top:1.5rem; text-align:center; color: var(--pico-muted-color); font-size:0.8rem;">
+  <p>策略由 auto_iterate 對每檔獨立優化 · Tier 越前面信心越高 · F-tier 不建議持有</p>
+</footer>
+</main>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+</html>
