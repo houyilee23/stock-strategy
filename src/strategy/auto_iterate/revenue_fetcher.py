@@ -58,6 +58,7 @@ def fetch_revenue_data(
     end_date: str | None = None,
     force: bool = False,
     timeout: int = 60,
+    refresh_if_stale_days: int = 30,
 ) -> pd.DataFrame:
     """Fetch monthly revenue from FinMind; cache to data/monthly_revenue/{sid}.csv.
 
@@ -65,8 +66,11 @@ def fetch_revenue_data(
       date, revenue_year, revenue_month, revenue,
       announcement_date, revenue_growth_yoy_pct
 
-    若 cache 已存在且 force=False，直接讀 cache。
+    若 cache 已存在且最新一筆 ≤ refresh_if_stale_days 天 → 直接讀 cache。
+    超過則重抓全範圍（月營收量少，重抓比增量簡單）。
     Empty FinMind response → 寫空檔（含 header）並回傳空 DataFrame。
+
+    refresh_if_stale_days 預設 30，配合月營收每月公布的節奏。
     """
     os.makedirs(REV_DIR, exist_ok=True)
     path = os.path.join(REV_DIR, f"{sid}.csv")
@@ -74,22 +78,46 @@ def fetch_revenue_data(
     if os.path.exists(path) and not force:
         try:
             df = pd.read_csv(path, parse_dates=["date", "announcement_date"])
-            return df
+            if df.empty:
+                return df  # 空 cache 也算 cached
+            last_dt = df["date"].max()
+            days_stale = (pd.Timestamp.today() - last_dt).days
+            if days_stale <= refresh_if_stale_days:
+                return df  # cache 夠新
+            # else fall through to refetch
         except Exception:
             pass  # 損毀 → 重抓
 
     if end_date is None:
         end_date = _dt.date.today().strftime("%Y-%m-%d")
 
-    r = requests.get(FINMIND_URL, params={
-        "dataset":    "TaiwanStockMonthRevenue",
-        "data_id":    str(sid),
-        "start_date": start_date,
-        "end_date":   end_date,
-    }, timeout=timeout)
-    r.raise_for_status()
+    # 載入既有 cache 作為 rate-limit fallback
+    existing_df = None
+    if os.path.exists(path):
+        try:
+            existing_df = pd.read_csv(path, parse_dates=["date", "announcement_date"])
+            if existing_df.empty:
+                existing_df = None
+        except Exception:
+            pass
+
+    try:
+        r = requests.get(FINMIND_URL, params={
+            "dataset":    "TaiwanStockMonthRevenue",
+            "data_id":    str(sid),
+            "start_date": start_date,
+            "end_date":   end_date,
+        }, timeout=timeout)
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        # FinMind 限速（402/403/429）→ 用既有 cache 撐過去
+        if existing_df is not None and r.status_code in (402, 403, 429):
+            return existing_df
+        raise
     j = r.json()
     if j.get("status") != 200:
+        if existing_df is not None:
+            return existing_df
         raise RuntimeError(
             f"{sid} FinMind status={j.get('status')}: {j.get('msg', '')}")
 
