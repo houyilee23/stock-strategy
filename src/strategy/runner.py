@@ -314,8 +314,25 @@ def _generate_for_stock(sid: str, df: pd.DataFrame, stock_regime: pd.Series,
         return signals, "style1_pullback", tier, pos_max, True
 
     try:
-        # chip_momentum 需 chip_data，目前訊號模式不載入 → 視同無 chip 信號
-        signals = gen_fn(df, best_params, regime=stock_regime, chip_data=None)
+        # 動態載入 chip/revenue 資料（如果 generator 簽章需要）
+        # 之前這裡 hardcode chip_data=None 導致 chip_momentum/chip_streak/
+        # monthly_revenue_event 11 檔（含 5274 tier S）永遠收不到訊號 (2026-05-19 修)
+        import inspect
+        sig_params = inspect.signature(gen_fn).parameters
+        gen_kwargs = {"regime": stock_regime}
+        if "chip_data" in sig_params:
+            try:
+                from src.strategy.auto_iterate.chip_fetcher import load_chip_data
+                gen_kwargs["chip_data"] = load_chip_data(sid)
+            except Exception:
+                gen_kwargs["chip_data"] = None
+        if "revenue_data" in sig_params:
+            try:
+                from src.strategy.auto_iterate.revenue_fetcher import load_revenue_data
+                gen_kwargs["revenue_data"] = load_revenue_data(sid)
+            except Exception:
+                gen_kwargs["revenue_data"] = None
+        signals = gen_fn(df, best_params, **gen_kwargs)
     except Exception as e:
         from src.utils import log_error
         log_error("signals", sid,

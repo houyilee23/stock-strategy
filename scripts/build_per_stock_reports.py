@@ -93,7 +93,26 @@ def run_backtest_one(stock_id: str, template: str, params: dict,
     gen_fn = TEMPLATE_GENERATORS.get(template)
     if gen_fn is None:
         return None
-    sig_df = gen_fn(df_adj, params)
+
+    # chip / revenue 類模板需要額外資料，否則 generator 會回 all-HOLD
+    # 動態判斷 generator 簽章決定要不要載入（與 auto_iterate.backtest_one 一致）
+    import inspect
+    sig_params = inspect.signature(gen_fn).parameters
+    gen_kwargs = {}
+    if "chip_data" in sig_params:
+        try:
+            from src.strategy.auto_iterate.chip_fetcher import load_chip_data
+            gen_kwargs["chip_data"] = load_chip_data(stock_id)
+        except Exception:
+            gen_kwargs["chip_data"] = None
+    if "revenue_data" in sig_params:
+        try:
+            from src.strategy.auto_iterate.revenue_fetcher import load_revenue_data
+            gen_kwargs["revenue_data"] = load_revenue_data(stock_id)
+        except Exception:
+            gen_kwargs["revenue_data"] = None
+
+    sig_df = gen_fn(df_adj, params, **gen_kwargs)
 
     cfg = _load_strategy_cfg()
     bt_cfg = BacktestConfig(
