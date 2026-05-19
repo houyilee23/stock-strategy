@@ -12,10 +12,55 @@ main { padding-top: 0; }
 header h1 { margin-bottom: 0.2rem; font-size: 1.4rem; }
 .subtitle { color: var(--pico-muted-color); margin-bottom: 1rem; font-size: 0.85rem; }
 .banner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;
-           padding: 0.7rem; border-radius: 8px; background: var(--pico-card-background-color);
-           border: 1px solid var(--pico-card-border-color); margin-bottom: 1rem; }
-.banner div { text-align: center; font-size: 0.85rem; }
-.banner div strong { display: block; font-size: 1.3rem; }
+           margin-bottom: 1rem; }
+.banner-card {
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 8px;
+  background: var(--pico-card-background-color);
+  padding: 0;
+  margin: 0;
+}
+.banner-card summary {
+  text-align: center; font-size: 0.85rem;
+  padding: 0.7rem; cursor: pointer; user-select: none;
+  list-style: none;
+}
+.banner-card summary::-webkit-details-marker { display: none; }
+.banner-card summary::after {
+  content: " ▼";
+  display: inline-block;
+  font-size: 0.6rem;
+  color: var(--pico-muted-color);
+  transition: transform 0.15s;
+  margin-left: 0.3rem;
+}
+.banner-card[open] summary::after { transform: rotate(180deg); }
+.banner-card summary strong { display: block; font-size: 1.3rem; }
+.banner-card summary:hover { background: rgba(0,0,0,0.04); }
+.banner-list {
+  border-top: 1px solid var(--pico-card-border-color);
+  padding: 0.4rem;
+  max-height: 320px; overflow-y: auto;
+}
+.banner-item {
+  display: grid;
+  grid-template-columns: 50px 1fr 28px 60px 1fr;
+  gap: 0.3rem;
+  align-items: center;
+  padding: 0.35rem 0.4rem;
+  font-size: 0.78rem;
+  text-decoration: none;
+  color: var(--pico-color);
+  border-radius: 4px;
+}
+.banner-item:hover { background: rgba(0,0,0,0.05); }
+.banner-item .banner-sid { font-weight: 600; color: var(--pico-primary); }
+.banner-item .banner-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.banner-item .banner-tier { text-align: center; font-weight: 600; }
+.banner-item .banner-close { text-align: right; font-variant-numeric: tabular-nums; }
+.banner-item .banner-order, .banner-item .banner-rsi {
+  text-align: right; font-size: 0.72rem; color: var(--pico-muted-color);
+}
 .tabs { display: flex; gap: 0.3rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
 .tabs button { padding: 0.4rem 0.9rem; font-size: 0.9rem; }
 .tabs button[aria-pressed=true] { background: var(--pico-primary); color: white; }
