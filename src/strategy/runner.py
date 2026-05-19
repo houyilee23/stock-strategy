@@ -203,7 +203,7 @@ def _load_ohlcv(stock_id: str) -> pd.DataFrame:
         return None
     try:
         df = pd.read_csv(path, dtype={"date": str})
-        df["date"] = pd.to_datetime(df["date"], format="%Y%m%d")
+        df["date"] = pd.to_datetime(df["date"], format="mixed")
         df = df.sort_values("date").set_index("date")
         # 確保有必要欄位
         for col in ["open", "high", "low", "close", "volume"]:
@@ -238,7 +238,7 @@ def _load_adj_ohlcv(stock_id: str) -> pd.DataFrame:
         return _load_ohlcv(stock_id)
     try:
         df = pd.read_csv(path, dtype={"date": str})
-        df["date"] = pd.to_datetime(df["date"], format="%Y%m%d")
+        df["date"] = pd.to_datetime(df["date"], format="mixed")
         df = df.sort_values("date").set_index("date")
         if "close_adj" not in df.columns:
             log_error("runner", stock_id, "adjusted CSV 缺少 close_adj 欄位，改用 raw")
@@ -859,7 +859,7 @@ def _calc_benchmark_cagr(market_df: pd.DataFrame, bt_cfg: "BacktestConfig",
     if os.path.exists(adj_path):
         try:
             df_adj = pd.read_csv(adj_path, dtype={"date": str})
-            df_adj["date"] = pd.to_datetime(df_adj["date"], format="%Y%m%d")
+            df_adj["date"] = pd.to_datetime(df_adj["date"], format="mixed")
             df_adj = df_adj.sort_values("date").set_index("date")
             if "close_adj" in df_adj.columns:
                 df_sub_adj = df_adj[(df_adj.index >= start) & (df_adj.index <= end)]

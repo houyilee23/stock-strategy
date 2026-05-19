@@ -74,12 +74,10 @@ def fetch_one(sid: str, log) -> tuple[bool, str]:
             return False, "raw is empty"
 
         # 建 adjusted（先 unadjusted = raw，欄位用 close_adj 與下游一致）
+        # date 保持 YYYYMMDD 字串（與 fetcher 寫的 raw 格式一致），避免 ISO 衝突
         adj_path = os.path.join(BASE_DIR, "data", "adjusted", f"{sid}.csv")
         adj = df.copy()
-        adj["date"] = pd.to_datetime(adj["date"], format="%Y%m%d")
-        adj = adj.rename(columns={})  # keep column names
         adj["close_adj"] = adj["close"]  # 未調整版（後續可補除權息事件再算）
-        # 留下標準欄位
         keep = ["date", "open", "high", "low", "close", "volume",
                 "turnover", "transactions", "price_change", "close_adj"]
         keep = [c for c in keep if c in adj.columns]
