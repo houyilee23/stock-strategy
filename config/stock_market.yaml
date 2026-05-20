@@ -19,6 +19,7 @@
 1216: twse
 1227: twse
 1229: twse
+1231: twse
 1234: twse
 1301: twse
 1303: twse
@@ -60,6 +61,7 @@
 2009: twse
 2014: twse
 2015: twse
+2023: twse
 2027: twse
 2049: twse
 2059: twse
@@ -127,10 +129,12 @@
 2467: twse
 2472: twse
 2474: twse
+2476: twse
 2481: twse
 2486: twse
 2492: twse
 2498: twse
+2501: twse
 2504: twse
 2539: twse
 2540: twse
@@ -240,7 +244,9 @@
 4583: twse
 4585: twse
 46: twse
+4722: tpex
 4763: twse
+4764: twse
 4766: twse
 4904: twse
 4915: twse
@@ -358,3 +364,4 @@
 9940: twse
 9941: twse
 9945: twse
+9958: twse
