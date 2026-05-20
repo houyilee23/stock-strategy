@@ -14,6 +14,7 @@
 1101: twse
 1102: twse
 1210: twse
+1215: twse
 1216: twse
 1227: twse
 1229: twse
@@ -59,11 +60,13 @@
 2105: twse
 2206: twse
 2207: twse
+2211: twse
 2227: twse
 2258: twse
 2301: twse
 2303: twse
 2308: twse
+2312: twse
 2313: twse
 2317: twse
 2324: twse
@@ -90,6 +93,7 @@
 2382: twse
 2383: twse
 2385: twse
+2388: twse
 2392: twse
 2393: twse
 2395: twse
@@ -97,6 +101,7 @@
 2408: twse
 2409: twse
 2412: twse
+2421: twse
 2426: twse
 2441: twse
 2449: twse
@@ -105,13 +110,17 @@
 2455: twse
 2458: twse
 2467: twse
+2472: twse
 2474: twse
 2481: twse
 2486: twse
 2492: twse
+2498: twse
+2504: twse
 2539: twse
 2540: twse
 2542: twse
+2548: twse
 2597: twse
 2603: twse
 2606: twse
@@ -134,6 +143,7 @@
 2834: twse
 2838: twse
 2845: twse
+2850: twse
 2855: twse
 2867: twse
 2880: twse
@@ -156,6 +166,7 @@
 3008: twse
 3014: twse
 3017: twse
+3019: twse
 3023: twse
 3026: twse
 3030: twse
@@ -167,6 +178,7 @@
 3044: twse
 3045: twse
 3081: tpex
+3090: twse
 3105: tpex
 3167: twse
 3189: twse
@@ -174,6 +186,7 @@
 3231: twse
 3323: tpex
 3324: tpex
+3376: twse
 3406: twse
 3443: twse
 3450: twse
@@ -208,12 +221,14 @@
 4938: twse
 4958: twse
 4961: twse
+5234: twse
 5269: twse
 5274: tpex
 5314: tpex
 5347: tpex
 5388: twse
 5434: twse
+5469: twse
 5483: tpex
 5522: twse
 5536: tpex
@@ -256,13 +271,16 @@
 6533: twse
 6592: twse
 6669: twse
+6670: twse
 6691: twse
 6770: twse
 6781: twse
 6789: twse
 6804: tpex
 6805: twse
+6830: twse
 6831: twse
+6890: twse
 6919: twse
 6944: twse
 6949: twse
@@ -274,6 +292,7 @@
 8016: twse
 8021: twse
 8028: twse
+8039: twse
 8046: twse
 8069: tpex
 8081: twse
@@ -284,6 +303,7 @@
 8341: twse
 8454: twse
 8464: twse
+8926: twse
 8996: tpex
 9103: twse
 910322: twse
