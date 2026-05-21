@@ -1,1 +1,2 @@
-﻿
+﻿date,stock_id,ClosingPriceonTheLastTradingDay,PostReductionReferencePrice,LimitUp,LimitDown,OpeningReferencePrice,ExrightReferencePrice,ReasonforCapitalReduction
+2026-02-03,4174,27.6,55.2,60.7,49.7,55.2,0.0,彌補虧損
