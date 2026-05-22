@@ -15,10 +15,20 @@
 | 改 signals 輸出 | `src/strategy/runner.py` + `main.py.cmd_signals()` |
 | 改 web UI | `scripts/build_html.py` |
 | 改 markdown 報告 | `scripts/build_per_stock_reports.py` |
-| 新 fetcher | `scripts/fetch_*.py`（看現有的當範本） |
+| 改 TWSE 抓取 | `src/fetchers/twse.py`（~90 行） |
+| 改 TPEX 抓取 | `src/fetchers/tpex.py`（~130 行，2026-05 改新 endpoint） |
+| 新增市場（如興櫃）| 新增 `src/fetchers/<market>.py` + `coordinator.MARKETS` 加一行 |
+| 改 IPO / 市場別記錄 | `src/fetchers/metadata.py` |
+| 改 fetch 編排 | `src/fetchers/coordinator.py` |
+| 改 FinMind 籌碼 / 月營收 | `src/strategy/auto_iterate/chip_fetcher.py` / `revenue_fetcher.py` |
 | Tier 規則改後重評現有 results | `scripts/retier_run_dir.py <run_id>` |
 | 改 Excel 同步邏輯 | `scripts/sync_positions_from_excel.py` |
 | 改庫存進出建議規則 | `scripts/inventory_analysis.py` |
+| 抓 top-300 市值清單 | `scripts/fetch_top300_marketcap.py` |
+| 全自動 top-300 pipeline | `scripts/auto_pipeline_top300.py`（每 20 檔 push 一次）|
+| 啟動擴大歷史 retrain | `scripts/retrain_extended_history.py` 或 `.bat` |
+| 24-hr heavy retrain (A/B/C) | `scripts/heavy_retrain_24hr.py` + `walk_forward_analysis.py` + `phase_c_coupling.py` |
+| 看訓練紀錄索引 | `output/auto_iterate/INDEX.csv` 或 `INDEX.md`（`scripts/build_run_index.py` 產出）|
 
 詳細工作流見 `docs/ARCHITECTURE.md`。
 
@@ -101,6 +111,18 @@ python main.py screen | fetch | fetch-adjusted | fetch-revenue | update
 - `scripts/rebuild_per_stock_best.py <run_id>` — 多 process 共用 dir 時，從 template yaml 重建 PSB
 - `scripts/refresh_bnh_evaluations.py` — 重算所有 F-tier 個股的 BNH (買進長持) 替代評估
 
+### 工具腳本（5/19-5/21 新增）
+- `src/fetchers/` — 股價抓取模組化套件（取代原 540 行 `src/fetcher.py`）
+  - `twse.py` / `tpex.py` / `metadata.py` / `storage.py` / `coordinator.py`
+  - 加新市場只需新增一個 fetcher 模組 + `coordinator.MARKETS` 加一行
+- `scripts/fetch_top300_marketcap.py` — 抓 TWSE + TPEX 官方 OpenAPI 計算市值，輸出 top 300
+- `scripts/auto_pipeline_top300.py` — 全自動 pipeline：抓 raw → 加入 watchlist → 每 20 檔 build_html + push
+- `scripts/retrain_extended_history.py` + `.bat` — 用 2010-2020 train 跑擴大歷史 retrain
+- `scripts/heavy_retrain_24hr.py` — 24-hr Phase A→B→C controller
+- `scripts/walk_forward_analysis.py` — Phase B 結束跨 fold robustness 報告
+- `scripts/phase_c_coupling.py` — Phase C 多策略耦合 (top3_vote / equal_weight / pf_weighted / cascade)
+- `scripts/build_run_index.py` — 掃 `output/auto_iterate/` 全部 run，產 `INDEX.csv` + `INDEX.md`
+
 ### 策略系統（src/strategy/auto_iterate/templates/ package，65 個 templates，5/18 拆分）
 - `core_t1_t9.py` (9 funcs)         — T1-T9 原始模板
 - `reversal_dips.py` (23 funcs)     — mean-reversion / dip / oversold
@@ -127,6 +149,11 @@ python main.py screen | fetch | fetch-adjusted | fetch-revenue | update
 4. **錯誤落** `output/errors/{date}.csv`（用 `src/utils.log_error()`），不要 silent fail
 5. **CSV 編碼** 一律 `utf-8-sig`
 6. **敏感資料 gitignore**：`watchlists.yaml`、`trades_*.csv`、`positions_snapshot_*.csv` 已被 .gitignore 排除，**不要嘗試把它們加進 git**
+7. **股價來源**（2026-05-19 起確認）：
+   - TWSE 上市 → `openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY`
+   - TPEX 上櫃 → `www.tpex.org.tw/www/zh-tw/afterTrading/tradingStock`（舊 endpoint `st43_result.php` 已 404，2026-05-19 改新版）
+   - **絕對不用 FinMind 抓股價**。FinMind 只用於：除權息/拆分/減資/籌碼/月營收 事件資料
+   - 新市場（興櫃...）→ 新增 `src/fetchers/<market>.py` 並在 `coordinator.MARKETS` 註冊一行
 
 ## 報告輸出結構
 
