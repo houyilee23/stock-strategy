@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-05-22**_
+_最後更新：**2026-05-23**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -224,7 +224,7 @@ _最後更新：**2026-05-22**_
 | [2722](output/reports/per_stock/2722.md) | 夏都 | 22.6 | HOLD | F | — | 40 | [空頭] | BULL |
 | [2492](output/reports/per_stock/2492.md) | 華新科 | 292.5 | HOLD | A | 50% | 85 | [多頭] | BULL |
 | [2880](output/reports/per_stock/2880.md) | 華南金 | 31.9 | HOLD | C | 15% | 37 | [多頭] | BULL |
-| [2855](output/reports/per_stock/2855.md) | 統一證 | 40.2 | HOLD | C | 15% | 61 | [多頭] | BULL |
+| [2855](output/reports/per_stock/2855.md) | 統一證 | 40.8 | HOLD | C | 15% | 63 | [多頭] | BULL |
 | [2392](output/reports/per_stock/2392.md) | 正崴 | 38.0 | HOLD | F | — | 53 | [空頭] | BULL |
 | [2393](output/reports/per_stock/2393.md) | 億光 | 65.2 | HOLD | B | 30% | 41 | [多頭] | BULL |
 | [2347](output/reports/per_stock/2347.md) | 聯強 | 84.1 | HOLD | A | 50% | 56 | [多頭] | BULL |
@@ -425,7 +425,7 @@ _最後更新：**2026-05-22**_
 
 ## 歷史報告
 
-- [2026/05](output/reports/2026/05/) — 54 份
+- [2026/05](output/reports/2026/05/) — 57 份
 - [2026/04](output/reports/2026/04/) — 10 份
 
 ---
