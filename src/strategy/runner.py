@@ -610,6 +610,17 @@ def run_signals(stock_ids: list, account_name: str, cfg: dict = None) -> None:
     path = save_daily_signals_md(result_df, account_name, stock_names=stock_names)
     print(f"\n  報表已儲存：{path}")
 
+    # Journal：落帳 BUY/SELL 訊號（HOLD/N/A/ERROR 自動過濾）。
+    # 不要因為 journal 失敗影響 signals 主流程 → 包 try/except 並只 log_error。
+    try:
+        from src.journal import log_signals
+        stat = log_signals(result_df, account_name, stock_names=stock_names)
+        if stat["inserted"] or stat["skipped"]:
+            print(f"  Journal：新增 {stat['inserted']} 筆，已存在 skip {stat['skipped']} 筆")
+    except Exception as e:
+        from src.utils import log_error
+        log_error("journal", account_name, f"log_signals 失敗：{e}")
+
 
 def _print_signals_table(df: pd.DataFrame, account_name: str) -> None:
     today_str = date.today().strftime("%Y-%m-%d")

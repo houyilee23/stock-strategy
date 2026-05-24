@@ -24,6 +24,10 @@
 | Tier 規則改後重評現有 results | `scripts/retier_run_dir.py <run_id>` |
 | 改 Excel 同步邏輯 | `scripts/sync_positions_from_excel.py` |
 | 改庫存進出建議規則 | `scripts/inventory_analysis.py` |
+| 改訊號日誌欄位 / status | `src/journal/schema.py`（單檔，~70 行） |
+| 改 journal 驗證規則（fill 邏輯） | `src/journal/validator.py` |
+| 改 journal 績效報表格式 | `src/journal/reporter.py` |
+| 新增 journal CLI 子指令 | `main.py.cmd_journal()` |
 | 抓 top-300 市值清單 | `scripts/fetch_top300_marketcap.py` |
 | 全自動 top-300 pipeline | `scripts/auto_pipeline_top300.py`（每 20 檔 push 一次）|
 | 啟動擴大歷史 retrain | `scripts/retrain_extended_history.py` 或 `.bat` |
@@ -70,11 +74,13 @@ python main.py screen | fetch | fetch-adjusted | fetch-revenue | update
 ```
 [1] git pull                            ← Phase B 才啟用
 [2] update --all                        ← fetch raw + adjusted
-[3] signals --list Takeshi/Katie/universe
-[4] build_per_stock_reports.py          ← 產 output/reports/per_stock/{sid}.md
-[5] update_readme.py                    ← 產 README.md（手機 GitHub App 入口）
-[6] build_html.py                       ← 產 docs/index.html + docs/stock/*.html（GitHub Pages 手機 web UI）
-[7] git add commit push                 ← Phase B 才啟用
+[3] journal validate                    ← 用今日 OHLC 驗證昨日掛單是否成交
+[4] signals --list Takeshi/Katie/universe   ← 跑完自動 log 到 journal
+[5] build_per_stock_reports.py          ← 產 output/reports/per_stock/{sid}.md
+[6] update_readme.py                    ← 產 README.md（手機 GitHub App 入口）
+[7] build_html.py                       ← 產 docs/index.html + docs/stock/*.html（GitHub Pages 手機 web UI）
+[8] inventory sync                      ← 從 Excel 同步個人持倉
+[9] git add commit push                 ← Phase B 才啟用
 ```
 
 **Phase A vs Phase B 的差異**：
@@ -97,6 +103,7 @@ python main.py screen | fetch | fetch-adjusted | fetch-revenue | update
 - `docs/TODO_RETRAIN.md` — **待辦**：重訓 auto_iterate 用 2010+ 完整資料，重評 Tier
 - `docs/TODO_AUDIT_TEMPLATES.md` — **待辦（先做這個）**：限價單機制下 audit 其他 templates 是否反勝目前 best
 - `docs/LIMIT_ORDER_V0_1.md` — 限價單機制設計與實作（5/4 完成 7 templates）
+- `docs/SIGNAL_JOURNAL.md` — 訊號日誌模組（5/24 新增）：每日訊號落帳 + 事後驗證 + 績效報表
 
 ### 配置
 - `config/strategy.yaml` — 所有策略參數（不要 hardcode 數值）

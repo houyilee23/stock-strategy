@@ -330,6 +330,64 @@ def cmd_update(args: list):
               token="", skip_existing=False)
 
 
+def cmd_journal(sub: str, args: list):
+    """訊號日誌：落帳 / 驗證 / 績效報表。
+
+    sub:
+      log       重新對最新 signals 結果落帳（一般 signals 跑完會自動落，這個是補跑用）
+      validate  對所有 pending 訊號驗證假定成交（讀下一交易日 OHLC）
+      report    產出績效報表 Markdown
+    """
+    if sub == "log":
+        # 補跑：拿目前最新訊號重跑一次 log（用 watchlist 全部帳戶）
+        # 一般不會用，除非 journal 檔損毀或漏跑
+        print("[提示] journal log 通常由 signals 自動觸發；")
+        print("       若要補跑，請直接執行：python main.py signals --list <account>")
+        return
+
+    if sub == "validate":
+        from src.journal import validate_all
+        results = validate_all()
+        if not results:
+            print("  尚無 journal 檔可驗證。")
+            return
+        print(f"\n  訊號驗證結果（共 {len(results)} 個月份檔案）")
+        print(f"  {'-'*70}")
+        print(f"  {'月份':<10} {'驗證':>5} {'成交':>5} {'未成交':>6} {'過期':>5} "
+              f"{'無資料':>6} {'仍 pending':>10}")
+        for r in results:
+            print(f"  {r['partition']:<10} {r['validated']:>5} {r['filled']:>5} "
+                  f"{r['not_filled']:>6} {r['expired']:>5} {r['no_data']:>6} "
+                  f"{r.get('still_pending', 0):>10}")
+        print()
+        return
+
+    if sub == "report":
+        from src.journal import write_report, print_console_summary
+        args = list(args)
+        start = None
+        end = None
+        account = None
+        for flag in ("--start", "--end", "--account"):
+            if flag in args:
+                idx = args.index(flag)
+                if idx + 1 < len(args):
+                    val = args[idx + 1]
+                    if   flag == "--start":   start = val
+                    elif flag == "--end":     end = val
+                    elif flag == "--account": account = val
+                    args.pop(idx + 1)
+                    args.pop(idx)
+        print_console_summary(start, end, account)
+        path = write_report(start, end, account)
+        print(f"  Markdown 報表：{path}\n")
+        return
+
+    print(f"未知子指令：{sub}")
+    print("  用法：python main.py journal {log|validate|report} [--start YYYY-MM] "
+          "[--end YYYY-MM] [--account Takeshi]")
+
+
 def cmd_evaluate(args: list):
     """重算指標、產 Markdown 報表。"""
     from src.strategy.runner import run_evaluate
@@ -514,6 +572,13 @@ USAGE = """
 
   輸出：output/reports/inventory_advice_<account>.md / .csv
 
+  ── 訊號日誌（事後驗證 + 績效檢討）─────────────────────
+  signals 跑完自動落帳到 output/signal_journal/{YYYY-MM}.csv
+  python main.py journal validate                   驗證所有 pending 訊號（讀下一交易日 OHLC）
+  python main.py journal report                     產整體績效 markdown 報表
+  python main.py journal report --account Takeshi   只看 Takeshi 帳戶
+  python main.py journal report --start 2026-05 --end 2026-05    指定月份
+
   ── 清單管理 ──────────────────────────────────────────
   清單設定檔：config/watchlists.yaml
   排除清單：exception（--all 時絕對排除）
@@ -554,6 +619,11 @@ if __name__ == "__main__":
         cmd_auto_iterate(args[1:])
     elif args[0] == "inventory":
         cmd_inventory(args[1:])
+    elif args[0] == "journal":
+        if len(args) < 2:
+            print("用法：python main.py journal <log|validate|report> [參數]")
+        else:
+            cmd_journal(sub=args[1], args=args[2:])
     else:
         print(f"未知指令：{args[0]}")
         print(USAGE)
