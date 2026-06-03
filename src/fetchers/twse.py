@@ -61,21 +61,30 @@ def _parse_response(data: dict) -> pd.DataFrame:
 
 
 def fetch_monthly(stock_id: str, year: int, month: int,
-                  retries: int = 3) -> pd.DataFrame:
+                  retries: int = 2) -> pd.DataFrame:
     """抓 TWSE 單月日線資料。
 
-    嘗試該月前 10 天的日期作 query date（TWSE 任一存在日期都會回傳整月）。
+    嘗試該月前 5 天的日期作 query date（TWSE 任一存在日期都會回傳整月）。
     全部失敗回空 DataFrame。
+
+    韌性策略（2026-06-04 加入，避免 TWSE 慢時拖死整個 pipeline）：
+      - timeout 30s → 8s（正常回應 <1s；超過 8s 視同 TWSE 異常）
+      - retries 3 → 2
+      - day 範圍 10 → 5
+      - 連續 2 天 query 全 timeout → 放棄該月，不再蠻幹
     """
-    for day in range(1, 11):
+    consecutive_timeout_days = 0
+    for day in range(1, 6):
         date_param = f"{year}{month:02d}{day:02d}"
         params = {"response": "json", "date": date_param, "stockNo": stock_id}
+        day_all_failed = True  # 該 day 是否每次嘗試都因 exception 失敗
         for attempt in range(1, retries + 1):
             try:
                 resp = requests.get(TWSE_HISTORY_URL, params=params,
-                                    timeout=30, verify=False)
+                                    timeout=8, verify=False)
                 resp.raise_for_status()
                 df = _parse_response(resp.json())
+                day_all_failed = False
                 if not df.empty:
                     return df
                 break  # 該日期 query 沒資料 → 試下一個 day
@@ -83,5 +92,13 @@ def fetch_monthly(stock_id: str, year: int, month: int,
                 logger.warning(f"  [{stock_id}] TWSE {year}/{month:02d}/{day:02d} "
                                f"第{attempt}次失敗：{e}")
                 if attempt < retries:
-                    time.sleep(5)
+                    time.sleep(2)
+        if day_all_failed:
+            consecutive_timeout_days += 1
+            if consecutive_timeout_days >= 2:
+                logger.warning(f"  [{stock_id}] TWSE {year}/{month:02d} "
+                               f"連續 {consecutive_timeout_days} 天全 timeout，放棄此月")
+                return pd.DataFrame()
+        else:
+            consecutive_timeout_days = 0
     return pd.DataFrame()

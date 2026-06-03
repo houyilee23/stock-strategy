@@ -127,17 +127,22 @@ def _parse_response(data: dict) -> pd.DataFrame:
 
 
 def fetch_monthly(stock_id: str, year: int, month: int,
-                  retries: int = 3) -> pd.DataFrame:
+                  retries: int = 2) -> pd.DataFrame:
     """抓 TPEX 單月日線資料。
 
     用 POST，date 帶 AD 格式 YYYY/MM/01。
+
+    韌性策略（2026-06-04 同步 twse.py）：
+      - timeout 30s → 8s
+      - retries 3 → 2
+      - sleep 5 → 2
     """
     data = None
     payload = {"code": str(stock_id), "date": f"{year}/{month:02d}/01"}
     for attempt in range(1, retries + 1):
         try:
             resp = requests.post(TPEX_STOCK_URL, data=payload,
-                                 headers=HEADERS, timeout=30, verify=False)
+                                 headers=HEADERS, timeout=8, verify=False)
             resp.raise_for_status()
             data = resp.json()
             break
@@ -145,7 +150,7 @@ def fetch_monthly(stock_id: str, year: int, month: int,
             logger.warning(f"  [{stock_id}] TPEX {year}/{month:02d} "
                            f"第{attempt}次失敗：{e}")
             if attempt < retries:
-                time.sleep(5)
+                time.sleep(2)
     if not data:
         return pd.DataFrame()
     return _parse_response(data)
