@@ -1,5 +1,4 @@
 ﻿date,stock_id,year,StockEarningsDistribution,StockStatutorySurplus,StockExDividendTradingDate,TotalEmployeeStockDividend,TotalEmployeeStockDividendAmount,RatioOfEmployeeStockDividendOfTotal,RatioOfEmployeeStockDividend,CashEarningsDistribution,CashStatutorySurplus,CashExDividendTradingDate,CashDividendPaymentDate,TotalEmployeeCashDividend,TotalNumberOfCashCapitalIncrease,CashIncreaseSubscriptionRate,CashIncreaseSubscriptionpRrice,RemunerationOfDirectorsAndSupervisors,ParticipateDistributionOfTotalShares,AnnouncementDate,AnnouncementTime
-2010-06-15,8070,98年,0.0,0.0,,0.0,0.0,0.0,0.0,6.0,0.0,2010-06-09,,42643619.0,0.0,0.0,0.0,5400000.0,0.0,2010-05-24,09:49:34
 2011-07-22,8070,99年,0.3,0.0,2011-07-14,0.0,0.0,0.0,0.0,9.7,0.0,2011-07-14,,86486252.0,0.0,0.0,0.0,5752000.0,0.0,2011-06-30,08:45:30
 2012-08-03,8070,100年,0.29,0.0,2012-07-26,0.0,0.0,0.0,0.0,0.6,0.0,2012-07-26,,1827913.0,0.0,0.0,0.0,1401332.0,0.0,2012-07-10,17:50:27
 2012-10-28,8070,101年,0.0,0.0,2012-10-22,0.0,0.0,0.0,0.0,0.0,0.0,,,0.0,7500000.0,8.687622561,80.0,1401332.0,0.0,2012-10-12,14:12:07
