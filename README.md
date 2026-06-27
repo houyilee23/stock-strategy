@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-06-26**_
+_最後更新：**2026-06-27**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -209,7 +209,7 @@ _最後更新：**2026-06-26**_
 | [6533](output/reports/per_stock/6533.md) | 晶心科 | 192.0 | HOLD | C | 15% | 37 | [空頭] | BULL |
 | [6781](output/reports/per_stock/6781.md) | AES-KY | 1105.0 | HOLD | A | 50% | 45 | [空頭] | BULL |
 | [2354](output/reports/per_stock/2354.md) | 鴻準 | 54.9 | HOLD | C | 15% | 41 | [空頭] | BULL |
-| [2451](output/reports/per_stock/2451.md) | 創見 | 288.0 | HOLD | B | 30% | 40 | [多頭] | BULL |
+| [2451](output/reports/per_stock/2451.md) | 創見 | 278.5 | HOLD | B | 30% | 37 | [多頭] | BULL |
 | [2820](output/reports/per_stock/2820.md) | 華票 | 17.8 | HOLD | C | 15% | 66 | [多頭] | BULL |
 | [2845](output/reports/per_stock/2845.md) | 遠東銀 | 13.0 | HOLD | D | 10% | 59 | [空頭] | BULL |
 | [1314](output/reports/per_stock/1314.md) | 中石化 | 8.0 | HOLD | C | 15% | 57 | [空頭] | BULL |
@@ -425,7 +425,7 @@ _最後更新：**2026-06-26**_
 
 ## 歷史報告
 
-- [2026/06](output/reports/2026/06/) — 69 份
+- [2026/06](output/reports/2026/06/) — 72 份
 - [2026/05](output/reports/2026/05/) — 81 份
 - [2026/04](output/reports/2026/04/) — 10 份
 
