@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-07-17**_
+_最後更新：**2026-07-18**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -239,7 +239,7 @@ _最後更新：**2026-07-17**_
 | [4148](output/reports/per_stock/4148.md) | 全宇生技 | 30.1 | HOLD | C | 15% | 43 | [空頭] | BULL |
 | [3324](output/reports/per_stock/3324.md) | 雙鴻 | 913.0 | HOLD | C | 15% | 40 | [空頭] | BULL |
 | [6526](output/reports/per_stock/6526.md) | 達發 | 563.0 | HOLD | C | 15% | 34 | [多頭] | BULL |
-| [8341](output/reports/per_stock/8341.md) | 日友 | 77.1 | HOLD | C | 15% | 50 | [空頭] | BULL |
+| [8341](output/reports/per_stock/8341.md) | 日友 | 76.1 | HOLD | C | 15% | 44 | [空頭] | BULL |
 | [1909](output/reports/per_stock/1909.md) | 榮成 | 10.1 | HOLD | F | — | 52 | [空頭] | BULL |
 | [9904](output/reports/per_stock/9904.md) | 寶成 | 24.6 | HOLD | F | — | 41 | [空頭] | BULL |
 | [2367](output/reports/per_stock/2367.md) | 燿華 | 44.8 | HOLD | D | 10% | 31 | [空頭] | BULL |
@@ -359,7 +359,7 @@ _最後更新：**2026-07-17**_
 | [2312](output/reports/per_stock/2312.md) | 金寶 | 31.3 | HOLD | — | — | 40 | [多頭] | BULL |
 | [3090](output/reports/per_stock/3090.md) | 日電貿 | 194.5 | HOLD | — | — | 33 | [多頭] | BULL |
 | [2388](output/reports/per_stock/2388.md) | 威盛 | 65.9 | HOLD | — | — | 41 | [多頭] | BULL |
-| [8926](output/reports/per_stock/8926.md) | 台汽電 | 67.0 | HOLD | — | — | 40 | [多頭] | BULL |
+| [8926](output/reports/per_stock/8926.md) | 台汽電 | 65.5 | HOLD | — | — | 38 | [多頭] | BULL |
 | [1215](output/reports/per_stock/1215.md) | 卜蜂 | 110.5 | HOLD | — | — | 35 | [空頭] | BULL |
 | [5234](output/reports/per_stock/5234.md) | 達興材料 | 344.0 | HOLD | — | — | 33 | [空頭] | BULL |
 | [3019](output/reports/per_stock/3019.md) | 亞光 | 131.0 | HOLD | — | — | 36 | [空頭] | BULL |
@@ -383,7 +383,7 @@ _最後更新：**2026-07-17**_
 | [6412](output/reports/per_stock/6412.md) | 群電 | 78.9 | HOLD | — | — | 31 | [空頭] | BULL |
 | [6274](output/reports/per_stock/6274.md) | 台燿 | 1170.0 | HOLD | — | — | 33 | [多頭] | BULL |
 | [6715](output/reports/per_stock/6715.md) | 嘉基 | 391.0 | HOLD | — | — | 44 | [多頭] | BULL |
-| [910861](output/reports/per_stock/910861.md) | 神州-DR | 4.1 | HOLD | — | — | 29 | [空頭] | BULL |
+| [910861](output/reports/per_stock/910861.md) | 神州-DR | 4.1 | HOLD | — | — | 28 | [空頭] | BULL |
 | [6214](output/reports/per_stock/6214.md) | 精誠 | 46.1 | HOLD | — | — | 59 | [空頭] | BULL |
 | [2072](output/reports/per_stock/2072.md) | 世紀風電 | 139.5 | HOLD | — | — | 31 | — | BULL |
 | [2351](output/reports/per_stock/2351.md) | 順德 | 172.5 | HOLD | — | — | 41 | [多頭] | BULL |
@@ -425,7 +425,7 @@ _最後更新：**2026-07-17**_
 
 ## 歷史報告
 
-- [2026/07](output/reports/2026/07/) — 45 份
+- [2026/07](output/reports/2026/07/) — 48 份
 - [2026/06](output/reports/2026/06/) — 81 份
 - [2026/05](output/reports/2026/05/) — 81 份
 - [2026/04](output/reports/2026/04/) — 10 份
