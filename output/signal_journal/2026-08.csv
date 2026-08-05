@@ -1,0 +1,12 @@
+﻿journal_id,signal_date,logged_at,account,sid,name,template,tier,action,ref_close,limit_price,stop_loss,take_profit,position_pct_max,market_regime,in_position,real_entry,real_shares,reason,status,validated_at,fill_date,fill_price,bars_to_fill,exit_date,exit_price,exit_reason,realized_return,hold_days
+2026-08-05_6271_Takeshi_BUY,2026-08-05,2026-08-05T21:52:20,Takeshi,6271,同欣電,narrow_range_breakout,C,BUY,190.0,191.0,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_2317_Takeshi_BUY,2026-08-05,2026-08-05T21:52:20,Takeshi,2317,鴻海,gap_continuation,A,BUY,258.5,,,,0.5,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_2330_Katie_BUY,2026-08-05,2026-08-05T21:52:27,Katie,2330,台積電,gap_continuation,C,BUY,2405.0,,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_2330_universe_BUY,2026-08-05,2026-08-05T21:55:41,universe,2330,台積電,gap_continuation,C,BUY,2405.0,,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_2317_universe_BUY,2026-08-05,2026-08-05T21:55:41,universe,2317,鴻海,gap_continuation,A,BUY,258.5,,,,0.5,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_6271_universe_BUY,2026-08-05,2026-08-05T21:55:41,universe,6271,同欣電,narrow_range_breakout,C,BUY,190.0,191.0,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_3596_universe_BUY,2026-08-05,2026-08-05T21:55:41,universe,3596,智易,gap_continuation,C,BUY,187.5,,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_3014_universe_SELL,2026-08-05,2026-08-05T21:55:41,universe,3014,聯陽,chip_momentum,C,SELL,130.0,,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_3036_universe_SELL,2026-08-05,2026-08-05T21:55:41,universe,3036,文曄,ensemble_oversold_vote,A,SELL,225.0,,,,0.5,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_6781_universe_SELL,2026-08-05,2026-08-05T21:55:41,universe,6781,AES-KY,simple_dip_buy,A,SELL,1065.0,,,,0.5,BULL,False,,0,,pending,,,,,,,,,
+2026-08-05_2354_universe_SELL,2026-08-05,2026-08-05T21:55:42,universe,2354,鴻準,three_day_reversal,C,SELL,55.5,,,,0.15,BULL,False,,0,,pending,,,,,,,,,
