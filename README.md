@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-08-14**_
+_最後更新：**2026-08-15**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -71,7 +71,7 @@ _最後更新：**2026-08-14**_
 | [2345](output/reports/per_stock/2345.md) | 智邦 | 2300.0 | HOLD | B | 30% | 52 | [多頭] | BULL |
 | [3037](output/reports/per_stock/3037.md) | 欣興 | 1020.0 | HOLD | C | 15% | 61 | [多頭] | BULL |
 | [3017](output/reports/per_stock/3017.md) | 奇鋐 | 3235.0 | 🔴 **SELL** | A | 50% | 71 | [多頭] | BULL |
-| [6669](output/reports/per_stock/6669.md) | 緯穎 | 6070.0 | HOLD | B | 30% | 61 | [多頭] | BULL |
+| [6669](output/reports/per_stock/6669.md) | 緯穎 | 6435.0 | HOLD | B | 30% | 66 | [多頭] | BULL |
 | [2360](output/reports/per_stock/2360.md) | 致茂 | 2300.0 | HOLD | B | 30% | 62 | [多頭] | BULL |
 | [6515](output/reports/per_stock/6515.md) | 穎崴 | 6750.0 | HOLD | B | 30% | 48 | [多頭] | BULL |
 | [2327](output/reports/per_stock/2327.md) | 國巨 | 622.0 | HOLD | C | 15% | 47 | [多頭] | BULL |
@@ -351,7 +351,7 @@ _最後更新：**2026-08-14**_
 | [2206](output/reports/per_stock/2206.md) | 三陽工業 | 60.9 | HOLD | — | — | 44 | [多頭] | BULL |
 | [2539](output/reports/per_stock/2539.md) | 櫻花建 | 41.3 | HOLD | — | — | 49 | [空頭] | BULL |
 | [4766](output/reports/per_stock/4766.md) | 南寶 | 338.0 | HOLD | — | — | 54 | [空頭] | BULL |
-| [6592](output/reports/per_stock/6592.md) | 和潤企業 | 61.7 | HOLD | — | — | 55 | [空頭] | BULL |
+| [6592](output/reports/per_stock/6592.md) | 和潤企業 | 61.4 | HOLD | — | — | 53 | [空頭] | BULL |
 | [6949](output/reports/per_stock/6949.md) | 沛爾生醫-創 | 1070.0 | HOLD | — | — | 64 | [多頭] | BULL |
 | [6282](output/reports/per_stock/6282.md) | 康舒 | 47.8 | HOLD | — | — | 47 | [空頭] | BULL |
 | [2634](output/reports/per_stock/2634.md) | 漢翔 | 70.6 | HOLD | — | — | 65 | [多頭] | BULL |
@@ -425,7 +425,7 @@ _最後更新：**2026-08-14**_
 
 ## 歷史報告
 
-- [2026/08](output/reports/2026/08/) — 27 份
+- [2026/08](output/reports/2026/08/) — 30 份
 - [2026/07](output/reports/2026/07/) — 69 份
 - [2026/06](output/reports/2026/06/) — 81 份
 - [2026/05](output/reports/2026/05/) — 81 份
