@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-08-21**_
+_最後更新：**2026-08-22**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -109,7 +109,7 @@ _最後更新：**2026-08-21**_
 | [2884](output/reports/per_stock/2884.md) | 玉山金 | 38.0 | HOLD | C | 15% | 59 | [多頭] | BULL |
 | [2885](output/reports/per_stock/2885.md) | 元大金 | 64.0 | HOLD | C | 15% | 44 | [多頭] | BULL |
 | [2886](output/reports/per_stock/2886.md) | 兆豐金 | 47.0 | HOLD | D | 10% | 45 | [多頭] | BULL |
-| [2891](output/reports/per_stock/2891.md) | 中信金 | 63.4 | HOLD | A | 50% | 41 | [多頭] | BULL |
+| [2891](output/reports/per_stock/2891.md) | 中信金 | 65.0 | HOLD | A | 50% | 49 | [多頭] | BULL |
 | [2892](output/reports/per_stock/2892.md) | 第一金 | 33.6 | HOLD | C | 15% | 48 | [多頭] | BULL |
 | [5880](output/reports/per_stock/5880.md) | 合庫金 | 25.1 | HOLD | F | — | 48 | [多頭] | BULL |
 | [5871](output/reports/per_stock/5871.md) | 中租-KY | 115.5 | HOLD | C | 15% | 54 | [多頭] | BULL |
@@ -146,7 +146,7 @@ _最後更新：**2026-08-21**_
 | [2458](output/reports/per_stock/2458.md) | 義隆電 | 140.5 | HOLD | D | 10% | 37 | [多頭] | BULL |
 | [3035](output/reports/per_stock/3035.md) | 智原 | 172.0 | HOLD | A | 50% | 44 | [空頭] | BULL |
 | [3081](output/reports/per_stock/3081.md) | 聯亞光電 | 2920.0 | HOLD | B | 30% | 66 | [多頭] | BULL |
-| [3443](output/reports/per_stock/3443.md) | 創意 | 5630.0 | HOLD | S | 100% | 64 | [多頭] | BULL |
+| [3443](output/reports/per_stock/3443.md) | 創意 | 5600.0 | HOLD | S | 100% | 63 | [多頭] | BULL |
 | [4961](output/reports/per_stock/4961.md) | 天鈺 | 166.0 | HOLD | F | — | 52 | [多頭] | BULL |
 | [5269](output/reports/per_stock/5269.md) | 祥碩 | 1415.0 | HOLD | B | 30% | 50 | [多頭] | BULL |
 | [6116](output/reports/per_stock/6116.md) | 彩晶 | 13.8 | HOLD | C | 15% | 46 | [多頭] | BULL |
@@ -325,7 +325,7 @@ _最後更新：**2026-08-21**_
 | [2540](output/reports/per_stock/2540.md) | 愛山林 | 47.5 | HOLD | — | — | 41 | [空頭] | BULL |
 | [9105](output/reports/per_stock/9105.md) | 泰金寶-DR | 8.4 | HOLD | — | — | 50 | [多頭] | BULL |
 | [7822](output/reports/per_stock/7822.md) | 倍利科 | 918.0 | HOLD | — | — | 52 | — | BULL |
-| [2889](output/reports/per_stock/2889.md) | 國票金 | 15.7 | HOLD | — | — | 56 | [空頭] | BULL |
+| [2889](output/reports/per_stock/2889.md) | 國票金 | 15.8 | HOLD | — | — | 59 | [空頭] | BULL |
 | [1477](output/reports/per_stock/1477.md) | 聚陽 | 203.0 | HOLD | — | — | 39 | [空頭] | BULL |
 | [2597](output/reports/per_stock/2597.md) | 潤弘 | 169.5 | HOLD | — | — | 57 | [多頭] | BULL |
 | [3042](output/reports/per_stock/3042.md) | 晶技 | 190.0 | HOLD | — | — | 55 | [多頭] | BULL |
@@ -377,7 +377,7 @@ _最後更新：**2026-08-21**_
 | [6670](output/reports/per_stock/6670.md) | 復盛應用 | 268.5 | HOLD | — | — | 55 | [多頭] | BULL |
 | [4585](output/reports/per_stock/4585.md) | 達明 | 295.5 | HOLD | — | — | 45 | [空頭] | BULL |
 | [9939](output/reports/per_stock/9939.md) | 宏全 | 134.0 | HOLD | — | — | 54 | [多頭] | BULL |
-| [2923](output/reports/per_stock/2923.md) | 鼎固-KY | 25.1 | HOLD | — | — | 42 | [多頭] | BULL |
+| [2923](output/reports/per_stock/2923.md) | 鼎固-KY | 25.2 | HOLD | — | — | 42 | [多頭] | BULL |
 | [3413](output/reports/per_stock/3413.md) | 京鼎 | 284.5 | HOLD | — | — | 36 | [空頭] | BULL |
 | [2329](output/reports/per_stock/2329.md) | 華泰 | 43.1 | HOLD | — | — | 43 | [空頭] | BULL |
 | [6412](output/reports/per_stock/6412.md) | 群電 | 78.0 | HOLD | — | — | 42 | [空頭] | BULL |
@@ -425,7 +425,7 @@ _最後更新：**2026-08-21**_
 
 ## 歷史報告
 
-- [2026/08](output/reports/2026/08/) — 48 份
+- [2026/08](output/reports/2026/08/) — 51 份
 - [2026/07](output/reports/2026/07/) — 69 份
 - [2026/06](output/reports/2026/06/) — 81 份
 - [2026/05](output/reports/2026/05/) — 81 份
