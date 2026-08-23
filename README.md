@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-08-22**_
+_最後更新：**2026-08-23**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -144,7 +144,7 @@ _最後更新：**2026-08-22**_
 | [00940](output/reports/per_stock/00940.md) | 元大台灣價值高息 | 12.5 | HOLD | C | 15% | 56 | [多頭] | BULL |
 | [00981A](output/reports/per_stock/00981A.md) | 主動統一台股增長 | 28.7 | HOLD | F | — | 50 | [多頭] | BULL |
 | [2458](output/reports/per_stock/2458.md) | 義隆電 | 140.5 | HOLD | D | 10% | 37 | [多頭] | BULL |
-| [3035](output/reports/per_stock/3035.md) | 智原 | 172.0 | HOLD | A | 50% | 44 | [空頭] | BULL |
+| [3035](output/reports/per_stock/3035.md) | 智原 | 169.5 | HOLD | A | 50% | 42 | [空頭] | BULL |
 | [3081](output/reports/per_stock/3081.md) | 聯亞光電 | 2920.0 | HOLD | B | 30% | 66 | [多頭] | BULL |
 | [3443](output/reports/per_stock/3443.md) | 創意 | 5600.0 | HOLD | S | 100% | 63 | [多頭] | BULL |
 | [4961](output/reports/per_stock/4961.md) | 天鈺 | 166.0 | HOLD | F | — | 52 | [多頭] | BULL |
@@ -194,7 +194,7 @@ _最後更新：**2026-08-22**_
 | [2609](output/reports/per_stock/2609.md) | 陽明 | 64.0 | HOLD | C | 15% | 84 | [空頭] | BULL |
 | [4147](output/reports/per_stock/4147.md) | 中裕 | 63.1 | HOLD | A | 50% | 54 | [多頭] | BULL |
 | [3014](output/reports/per_stock/3014.md) | 聯陽 | 130.0 | HOLD | C | 15% | 44 | [多頭] | BULL |
-| [3036](output/reports/per_stock/3036.md) | 文曄 | 205.5 | HOLD | A | 50% | 47 | [多頭] | BULL |
+| [3036](output/reports/per_stock/3036.md) | 文曄 | 206.0 | HOLD | A | 50% | 48 | [多頭] | BULL |
 | [3044](output/reports/per_stock/3044.md) | 健鼎 | 459.0 | HOLD | C | 15% | 36 | [多頭] | BULL |
 | [3105](output/reports/per_stock/3105.md) | 穩懋 | 373.0 | HOLD | D | 10% | 50 | [多頭] | BULL |
 | [3406](output/reports/per_stock/3406.md) | 玉晶光 | 652.0 | HOLD | C | 15% | 62 | [多頭] | BULL |
@@ -298,7 +298,7 @@ _最後更新：**2026-08-22**_
 | [1513](output/reports/per_stock/1513.md) | 中興電 | 166.0 | HOLD | — | — | 53 | [多頭] | BULL |
 | [3583](output/reports/per_stock/3583.md) | 辛耘 | 704.0 | HOLD | — | — | 46 | [多頭] | BULL |
 | [6944](output/reports/per_stock/6944.md) | 兆聯實業 | 708.0 | HOLD | — | — | 36 | [空頭] | BULL |
-| [3023](output/reports/per_stock/3023.md) | 信邦 | 319.0 | HOLD | — | — | 55 | [多頭] | BULL |
+| [3023](output/reports/per_stock/3023.md) | 信邦 | 318.5 | HOLD | — | — | 55 | [多頭] | BULL |
 | [1229](output/reports/per_stock/1229.md) | 聯華 | 42.4 | HOLD | — | — | 60 | [空頭] | BULL |
 | [9910](output/reports/per_stock/9910.md) | 豐泰 | 70.4 | HOLD | — | — | 53 | [空頭] | BULL |
 | [9945](output/reports/per_stock/9945.md) | 潤泰新 | 29.4 | HOLD | — | — | 66 | [空頭] | BULL |
@@ -425,7 +425,7 @@ _最後更新：**2026-08-22**_
 
 ## 歷史報告
 
-- [2026/08](output/reports/2026/08/) — 51 份
+- [2026/08](output/reports/2026/08/) — 54 份
 - [2026/07](output/reports/2026/07/) — 69 份
 - [2026/06](output/reports/2026/06/) — 81 份
 - [2026/05](output/reports/2026/05/) — 81 份
