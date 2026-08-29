@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-08-28**_
+_最後更新：**2026-08-29**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -211,7 +211,7 @@ _最後更新：**2026-08-28**_
 | [2354](output/reports/per_stock/2354.md) | 鴻準 | 63.9 | HOLD | C | 15% | 65 | [空頭] | BULL |
 | [2451](output/reports/per_stock/2451.md) | 創見 | 294.0 | HOLD | B | 30% | 53 | [多頭] | BULL |
 | [2820](output/reports/per_stock/2820.md) | 華票 | 16.6 | HOLD | C | 15% | 56 | [空頭] | BULL |
-| [2845](output/reports/per_stock/2845.md) | 遠東銀 | 13.4 | HOLD | D | 10% | 54 | [多頭] | BULL |
+| [2845](output/reports/per_stock/2845.md) | 遠東銀 | 13.4 | HOLD | D | 10% | 52 | [多頭] | BULL |
 | [1314](output/reports/per_stock/1314.md) | 中石化 | 8.1 | HOLD | C | 15% | 52 | [多頭] | BULL |
 | [1535](output/reports/per_stock/1535.md) | 中宇 | 46.0 | HOLD | D | 10% | 42 | [空頭] | BULL |
 | [1789](output/reports/per_stock/1789.md) | 神隆 | 19.1 | HOLD | C | 15% | 48 | [空頭] | BULL |
@@ -355,7 +355,7 @@ _最後更新：**2026-08-28**_
 | [6949](output/reports/per_stock/6949.md) | 沛爾生醫-創 | 1490.0 | HOLD | — | — | 84 | [多頭] | BULL |
 | [6282](output/reports/per_stock/6282.md) | 康舒 | 45.3 | HOLD | — | — | 44 | [空頭] | BULL |
 | [2634](output/reports/per_stock/2634.md) | 漢翔 | 67.8 | HOLD | — | — | 54 | [多頭] | BULL |
-| [2850](output/reports/per_stock/2850.md) | 新產 | 163.5 | HOLD | — | — | 57 | [多頭] | BULL |
+| [2850](output/reports/per_stock/2850.md) | 新產 | 160.5 | HOLD | — | — | 52 | [多頭] | BULL |
 | [2312](output/reports/per_stock/2312.md) | 金寶 | 31.8 | HOLD | — | — | 48 | [多頭] | BULL |
 | [3090](output/reports/per_stock/3090.md) | 日電貿 | 174.0 | HOLD | — | — | 50 | [多頭] | BULL |
 | [2388](output/reports/per_stock/2388.md) | 威盛 | 73.3 | HOLD | — | — | 48 | [多頭] | BULL |
@@ -425,7 +425,7 @@ _最後更新：**2026-08-28**_
 
 ## 歷史報告
 
-- [2026/08](output/reports/2026/08/) — 69 份
+- [2026/08](output/reports/2026/08/) — 72 份
 - [2026/07](output/reports/2026/07/) — 69 份
 - [2026/06](output/reports/2026/06/) — 81 份
 - [2026/05](output/reports/2026/05/) — 81 份
