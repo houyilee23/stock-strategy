@@ -1,0 +1,6 @@
+﻿journal_id,signal_date,logged_at,account,sid,name,template,tier,action,ref_close,limit_price,stop_loss,take_profit,position_pct_max,market_regime,in_position,real_entry,real_shares,reason,status,validated_at,fill_date,fill_price,bars_to_fill,exit_date,exit_price,exit_reason,realized_return,hold_days
+2026-09-01_6271_Takeshi_SELL,2026-09-01,2026-09-01T22:20:29,Takeshi,6271,同欣電,narrow_range_breakout,C,SELL,231.0,,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-09-01_3231_universe_SELL,2026-09-01,2026-09-01T22:23:40,universe,3231,緯創,three_day_reversal,C,SELL,182.0,,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-09-01_6271_universe_SELL,2026-09-01,2026-09-01T22:23:40,universe,6271,同欣電,narrow_range_breakout,C,SELL,231.0,,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-09-01_6531_universe_SELL,2026-09-01,2026-09-01T22:23:41,universe,6531,愛普,low_vol_pullback,C,SELL,958.0,,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-09-01_5274_universe_BUY,2026-09-01,2026-09-01T22:23:41,universe,5274,信驊,chip_momentum,S,BUY,17120.0,,,,1.0,BULL,False,,0,,pending,,,,,,,,,
