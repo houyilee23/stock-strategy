@@ -2,12 +2,12 @@
 
 | 股票 | 名稱 | 在倉 | 收盤 | 動作 | Tier | 倉位上限 | Template | 掛單目標 | 建議買入 | 建議停損 | RSI | 個股趨勢 | 市場Regime | 說明 |
 |------|------|-----|------|------|------|---------|---------|---------|---------|---------|-----|---------|-----------|------|
-| 2330 | 台積電 | — | 2385.0 | HOLD | C | 15% | gap_continuation | — | — | — | 49 | [多頭] | BULL |  |
-| 2303 | 聯電 | — | 126.0 | HOLD | A | 50% | ensemble_dip_vote | TP 151 / SL — | — | — | 50 | [多頭] | BULL |  |
-| 2426 | 鼎元 | — | 104.5 | HOLD | B | 30% | double_pullback | TP 108 / SL 80 | — | — | 72 | [多頭] | BULL |  |
-| 1560 | 中砂 | — | 704.0 | HOLD | C | 15% | mean_reversion | — | — | — | 52 | [多頭] | BULL |  |
-| 9940 | 信義 | — | 20.2 | HOLD | F | — | style1_pullback | — | — | — | 45 | [空頭] | BULL |  |
-| 1227 | 佳格 | — | 28.6 | HOLD | F | — | style1_pullback | — | — | — | 44 | [空頭] | BULL |  |
-| 1301 | 台塑 | — | 66.8 | HOLD | A | 50% | gap_continuation | — | — | — | 66 | [多頭] | BULL |  |
-| 2324 | 仁寶 | — | 39.7 | HOLD | C | 15% | simple_dip_buy | — | — | — | 53 | [多頭] | BULL |  |
-| 2344 | 華邦電 | — | 179.0 | HOLD | B | 30% | narrow_range_breakout | TP 206 / SL 146 | — | — | 53 | [多頭] | BULL |  |
+| 2330 | 台積電 | — | 2390.0 | HOLD | C | 15% | gap_continuation | — | — | — | 50 | [多頭] | BULL |  |
+| 2303 | 聯電 | — | 125.0 | HOLD | A | 50% | ensemble_dip_vote | TP 151 / SL — | — | — | 49 | [多頭] | BULL |  |
+| 2426 | 鼎元 | — | 95.0 | HOLD | B | 30% | double_pullback | TP 108 / SL 80 | — | — | 61 | [多頭] | BULL |  |
+| 1560 | 中砂 | — | 711.0 | HOLD | C | 15% | mean_reversion | — | — | — | 53 | [多頭] | BULL |  |
+| 9940 | 信義 | — | 20.3 | HOLD | F | — | style1_pullback | — | — | — | 46 | [空頭] | BULL |  |
+| 1227 | 佳格 | — | 28.6 | HOLD | F | — | style1_pullback | — | — | — | 43 | [空頭] | BULL |  |
+| 1301 | 台塑 | — | 65.7 | HOLD | A | 50% | gap_continuation | — | — | — | 63 | [多頭] | BULL |  |
+| 2324 | 仁寶 | — | 38.8 | HOLD | C | 15% | simple_dip_buy | — | — | — | 49 | [多頭] | BULL |  |
+| 2344 | 華邦電 | — | 169.0 | HOLD | B | 30% | narrow_range_breakout | TP 206 / SL 146 | — | — | 47 | [多頭] | BULL |  |
