@@ -1,1 +1,2 @@
-﻿
+﻿date,stock_id,ClosingPriceonTheLastTradingDay,PostReductionReferencePrice,LimitUp,LimitDown,OpeningReferencePrice,ExrightReferencePrice,ReasonforCapitalReduction
+2026-08-24,6176,81.3,105.06,115.5,94.6,105.0,-1.0,Cash refund
