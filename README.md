@@ -1,6 +1,6 @@
 # 台股個股策略系統
 
-_最後更新：**2026-09-18**_
+_最後更新：**2026-09-19**_
 
 📱 在手機 GitHub App 上開啟此頁，可直接查看當日訊號 + 點任一檔股票看歷史回測。
 
@@ -199,7 +199,7 @@ _最後更新：**2026-09-18**_
 | [3105](output/reports/per_stock/3105.md) | 穩懋 | 500.0 | HOLD | D | 10% | 65 | [多頭] | BULL |
 | [3406](output/reports/per_stock/3406.md) | 玉晶光 | 972.0 | HOLD | C | 15% | 57 | [多頭] | BULL |
 | [3454](output/reports/per_stock/3454.md) | 晶睿 | 99.4 | HOLD | C | 15% | 64 | [多頭] | BULL |
-| [3533](output/reports/per_stock/3533.md) | 嘉澤 | 1555.0 | HOLD | D | 10% | 38 | [空頭] | BULL |
+| [3533](output/reports/per_stock/3533.md) | 嘉澤 | 1585.0 | HOLD | D | 10% | 42 | [空頭] | BULL |
 | [3653](output/reports/per_stock/3653.md) | 健策 | 5525.0 | HOLD | B | 30% | 55 | [多頭] | BULL |
 | [3702](output/reports/per_stock/3702.md) | 大聯大 | 114.5 | HOLD | B | 30% | 61 | [多頭] | BULL |
 | [4915](output/reports/per_stock/4915.md) | 致伸 | 65.5 | HOLD | B | 30% | 64 | [空頭] | BULL |
@@ -290,7 +290,7 @@ _最後更新：**2026-09-18**_
 | [3030](output/reports/per_stock/3030.md) | 德律 | 267.0 | HOLD | — | — | 41 | [空頭] | BULL |
 | [6196](output/reports/per_stock/6196.md) | 帆宣 | 540.0 | HOLD | — | — | 59 | [多頭] | BULL |
 | [1476](output/reports/per_stock/1476.md) | 儒鴻 | 282.0 | HOLD | — | — | 23 | [空頭] | BULL |
-| [3532](output/reports/per_stock/3532.md) | 台勝科 | 441.5 | HOLD | — | — | 63 | [多頭] | BULL |
+| [3532](output/reports/per_stock/3532.md) | 台勝科 | 447.5 | HOLD | — | — | 64 | [多頭] | BULL |
 | [9103](output/reports/per_stock/9103.md) | 美德醫療-DR | 5.0 | HOLD | — | — | 42 | [空頭] | BULL |
 | [5434](output/reports/per_stock/5434.md) | 崇越 | 540.0 | HOLD | — | — | 54 | [多頭] | BULL |
 | [6691](output/reports/per_stock/6691.md) | 洋基工程 | 650.0 | HOLD | — | — | 54 | [多頭] | BULL |
@@ -425,7 +425,7 @@ _最後更新：**2026-09-18**_
 
 ## 歷史報告
 
-- [2026/09](output/reports/2026/09/) — 39 份
+- [2026/09](output/reports/2026/09/) — 42 份
 - [2026/08](output/reports/2026/08/) — 78 份
 - [2026/07](output/reports/2026/07/) — 69 份
 - [2026/06](output/reports/2026/06/) — 81 份
