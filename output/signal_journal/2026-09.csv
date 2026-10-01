@@ -72,4 +72,4 @@
 2026-09-29_3653_universe_SELL,2026-09-29,2026-09-29T21:34:51,universe,3653,健策,gap_continuation,B,SELL,6895.0,,,,0.3,BULL,False,,0,,filled,2026-09-30T20:54:53,2026-09-30,6980.0,1.0,,,,,
 2026-09-29_2542_universe_BUY,2026-09-29,2026-09-29T21:34:51,universe,2542,興富發,simple_dip_buy,C,BUY,38.6,39.38472,,,0.15,BULL,False,,0,,filled,2026-09-30T20:54:53,2026-09-30,38.5,1.0,,,,,
 2026-09-29_1590_universe_SELL,2026-09-29,2026-09-29T21:34:51,universe,1590,亞德客-KY,style1_pullback,—,SELL,1210.0,,,,0.0,BULL,False,,0,趨勢破壞 連2日<MA200,filled,2026-09-30T20:54:53,2026-09-30,1220.0,1.0,,,,,
-2026-09-30_2360_universe_SELL,2026-09-30,2026-09-30T20:58:25,universe,2360,致茂,ensemble_dual_momentum,B,SELL,2135.0,,,,0.3,BULL,False,,0,,pending,,,,,,,,,
+2026-09-30_2360_universe_SELL,2026-09-30,2026-09-30T20:58:25,universe,2360,致茂,ensemble_dual_momentum,B,SELL,2135.0,,,,0.3,BULL,False,,0,,filled,2026-10-01T21:55:01,2026-10-01,2125.0,1,,,,,
