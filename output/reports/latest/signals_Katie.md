@@ -1,13 +1,13 @@
-# 今日訊號 — Katie (2026-10-13)
+# 今日訊號 — Katie (2026-10-14)
 
 | 股票 | 名稱 | 在倉 | 收盤 | 動作 | Tier | 倉位上限 | Template | 掛單目標 | 建議買入 | 建議停損 | RSI | 個股趨勢 | 市場Regime | 說明 |
 |------|------|-----|------|------|------|---------|---------|---------|---------|---------|-----|---------|-----------|------|
 | 2330 | 台積電 | — | 2490.0 | HOLD | C | 15% | gap_continuation | — | — | — | 51 | [多頭] | BULL |  |
-| 2303 | 聯電 | — | 141.5 | HOLD | A | 50% | ensemble_dip_vote | TP 153 / SL — | — | — | 45 | [多頭] | BULL |  |
-| 2426 | 鼎元 | — | 94.2 | HOLD | B | 30% | double_pullback | — | — | — | 46 | [多頭] | BULL |  |
-| 1560 | 中砂 | — | 950.0 | HOLD | C | 15% | mean_reversion | — | — | — | 59 | [多頭] | BULL |  |
-| 9940 | 信義 | — | 20.1 | HOLD | F | — | style1_pullback | — | — | — | 46 | [空頭] | BULL |  |
-| 1227 | 佳格 | — | 28.1 | HOLD | F | — | style1_pullback | — | — | — | 49 | [空頭] | BULL |  |
-| 1301 | 台塑 | — | 80.9 | HOLD | A | 50% | gap_continuation | — | — | — | 78 | [多頭] | BULL |  |
-| 2324 | 仁寶 | — | 35.8 | HOLD | C | 15% | simple_dip_buy | — | — | — | 42 | [多頭] | BULL |  |
-| 2344 | 華邦電 | — | 161.5 | HOLD | B | 30% | narrow_range_breakout | TP 202 / SL 157 | — | — | 39 | [多頭] | BULL |  |
+| 2303 | 聯電 | — | 142.0 | HOLD | A | 50% | ensemble_dip_vote | TP 153 / SL — | — | — | 46 | [多頭] | BULL |  |
+| 2426 | 鼎元 | — | 98.5 | BUY | B | 30% | double_pullback | 買 98.5 | — | — | 51 | [多頭] | BULL |  |
+| 1560 | 中砂 | — | 948.0 | HOLD | C | 15% | mean_reversion | — | — | — | 58 | [多頭] | BULL |  |
+| 9940 | 信義 | — | 20.1 | HOLD | F | — | style1_pullback | — | — | — | 48 | [空頭] | BULL |  |
+| 1227 | 佳格 | — | 28.2 | HOLD | F | — | style1_pullback | — | — | — | 51 | [空頭] | BULL |  |
+| 1301 | 台塑 | — | 88.9 | HOLD | A | 50% | gap_continuation | — | — | — | 84 | [多頭] | BULL |  |
+| 2324 | 仁寶 | — | 37.0 | HOLD | C | 15% | simple_dip_buy | — | — | — | 50 | [多頭] | BULL |  |
+| 2344 | 華邦電 | — | 165.0 | HOLD | B | 30% | narrow_range_breakout | TP 202 / SL 157 | — | — | 42 | [多頭] | BULL |  |
