@@ -1,13 +1,13 @@
-# 今日訊號 — Katie (2026-10-28)
+# 今日訊號 — Katie (2026-10-29)
 
 | 股票 | 名稱 | 在倉 | 收盤 | 動作 | Tier | 倉位上限 | Template | 掛單目標 | 建議買入 | 建議停損 | RSI | 個股趨勢 | 市場Regime | 說明 |
 |------|------|-----|------|------|------|---------|---------|---------|---------|---------|-----|---------|-----------|------|
-| 2330 | 台積電 | — | 2425.0 | HOLD | C | 15% | gap_continuation | — | — | — | 45 | [多頭] | BULL |  |
-| 2303 | 聯電 | — | 128.0 | HOLD | A | 50% | ensemble_dip_vote | TP 153 / SL — | — | — | 39 | [多頭] | BULL |  |
-| 2426 | 鼎元 | — | 91.2 | HOLD | B | 30% | double_pullback | TP 106 / SL 78 | — | — | 47 | [多頭] | BULL |  |
-| 1560 | 中砂 | — | 914.0 | HOLD | C | 15% | mean_reversion | TP 1010 / SL 693 | — | — | 54 | [多頭] | BULL |  |
-| 9940 | 信義 | — | 19.5 | HOLD | F | — | style1_pullback | — | — | — | 34 | [空頭] | BULL |  |
-| 1227 | 佳格 | — | 27.6 | HOLD | F | — | style1_pullback | — | — | — | 38 | [空頭] | BULL |  |
-| 1301 | 台塑 | — | 75.4 | HOLD | A | 50% | gap_continuation | — | — | — | 54 | [多頭] | BULL |  |
-| 2324 | 仁寶 | — | 38.0 | HOLD | C | 15% | simple_dip_buy | — | — | — | 55 | [多頭] | BULL |  |
-| 2344 | 華邦電 | — | 172.0 | HOLD | B | 30% | narrow_range_breakout | — | — | — | 53 | [多頭] | BULL |  |
+| 2330 | 台積電 | — | 2415.0 | HOLD | C | 15% | gap_continuation | — | — | — | 44 | [多頭] | BULL |  |
+| 2303 | 聯電 | — | 115.5 | HOLD | A | 50% | ensemble_dip_vote | TP 153 / SL — | — | — | 30 | [多頭] | BULL |  |
+| 2426 | 鼎元 | — | 97.0 | HOLD | B | 30% | double_pullback | TP 106 / SL 78 | — | — | 52 | [多頭] | BULL |  |
+| 1560 | 中砂 | — | 888.0 | HOLD | C | 15% | mean_reversion | TP 1005 / SL 695 | — | — | 50 | [多頭] | BULL |  |
+| 9940 | 信義 | — | 19.8 | HOLD | F | — | style1_pullback | — | — | — | 43 | [空頭] | BULL |  |
+| 1227 | 佳格 | — | 27.8 | HOLD | F | — | style1_pullback | — | — | — | 43 | [空頭] | BULL |  |
+| 1301 | 台塑 | — | 73.9 | HOLD | A | 50% | gap_continuation | — | — | — | 51 | [多頭] | BULL |  |
+| 2324 | 仁寶 | — | 36.6 | HOLD | C | 15% | simple_dip_buy | — | — | — | 47 | [多頭] | BULL |  |
+| 2344 | 華邦電 | — | 170.5 | HOLD | B | 30% | narrow_range_breakout | — | — | — | 52 | [多頭] | BULL |  |
