@@ -1,0 +1,4 @@
+﻿journal_id,signal_date,logged_at,account,sid,name,template,tier,action,ref_close,limit_price,stop_loss,take_profit,position_pct_max,market_regime,in_position,real_entry,real_shares,reason,status,validated_at,fill_date,fill_price,bars_to_fill,exit_date,exit_price,exit_reason,realized_return,hold_days
+2026-11-02_3406_universe_BUY,2026-11-02,2026-11-02T21:57:17,universe,3406,玉晶光,narrow_range_breakout,C,BUY,1035.0,1065.0,,,0.15,BULL,False,,0,,pending,,,,,,,,,
+2026-11-02_2301_universe_BUY,2026-11-02,2026-11-02T21:57:17,universe,2301,光寶科,style1_pullback,—,BUY,243.5,,,,0.0,BULL,False,,0,回檔進場 RSI=34.5,pending,,,,,,,,,
+2026-11-02_3016_universe_BUY,2026-11-02,2026-11-02T21:57:17,universe,3016,嘉晶,style1_pullback,—,BUY,127.5,,,,0.0,BULL,False,,0,回檔進場 RSI=37.8,pending,,,,,,,,,
