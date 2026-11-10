@@ -1,13 +1,13 @@
-# 今日訊號 — Katie (2026-11-09)
+# 今日訊號 — Katie (2026-11-10)
 
 | 股票 | 名稱 | 在倉 | 收盤 | 動作 | Tier | 倉位上限 | Template | 掛單目標 | 建議買入 | 建議停損 | RSI | 個股趨勢 | 市場Regime | 說明 |
 |------|------|-----|------|------|------|---------|---------|---------|---------|---------|-----|---------|-----------|------|
-| 2330 | 台積電 | — | 2235.0 | HOLD | C | 15% | gap_continuation | — | — | — | 35 | [多頭] | BULL |  |
-| 2303 | 聯電 | — | 96.7 | HOLD | A | 50% | ensemble_dip_vote | TP 153 / SL — | — | — | 27 | [空頭] | BULL |  |
-| 2426 | 鼎元 | — | 74.9 | HOLD | B | 30% | double_pullback | — | — | — | 39 | [多頭] | BULL |  |
-| 1560 | 中砂 | — | 735.0 | HOLD | C | 15% | mean_reversion | — | — | — | 38 | [多頭] | BULL |  |
-| 9940 | 信義 | — | 18.4 | HOLD | F | — | style1_pullback | — | — | — | 25 | [空頭] | BULL |  |
-| 1227 | 佳格 | — | 26.2 | HOLD | F | — | style1_pullback | — | — | — | 25 | [空頭] | BULL |  |
-| 1301 | 台塑 | — | 68.9 | BUY | A | 50% | gap_continuation | — | — | — | 47 | [多頭] | BULL |  |
-| 2324 | 仁寶 | — | 32.8 | HOLD | C | 15% | simple_dip_buy | — | — | — | 36 | [空頭] | BULL |  |
-| 2344 | 華邦電 | — | 132.5 | HOLD | B | 30% | narrow_range_breakout | — | — | — | 36 | [空頭] | BULL |  |
+| 2330 | 台積電 | — | 2285.0 | HOLD | C | 15% | gap_continuation | — | — | — | 42 | [多頭] | BULL |  |
+| 2303 | 聯電 | — | 100.5 | HOLD | A | 50% | ensemble_dip_vote | TP 153 / SL — | — | — | 32 | [空頭] | BULL |  |
+| 2426 | 鼎元 | — | 82.3 | BUY | B | 30% | double_pullback | 買 82.3 | — | — | 46 | [多頭] | BULL |  |
+| 1560 | 中砂 | — | 755.0 | HOLD | C | 15% | mean_reversion | — | — | — | 41 | [多頭] | BULL |  |
+| 9940 | 信義 | — | 18.5 | HOLD | F | — | style1_pullback | — | — | — | 27 | [空頭] | BULL |  |
+| 1227 | 佳格 | — | 26.1 | HOLD | F | — | style1_pullback | — | — | — | 24 | [空頭] | BULL |  |
+| 1301 | 台塑 | — | 69.9 | HOLD | A | 50% | gap_continuation | — | — | — | 48 | [多頭] | BULL |  |
+| 2324 | 仁寶 | — | 32.6 | HOLD | C | 15% | simple_dip_buy | — | — | — | 36 | [空頭] | BULL |  |
+| 2344 | 華邦電 | — | 135.0 | HOLD | B | 30% | narrow_range_breakout | — | — | — | 38 | [空頭] | BULL |  |
