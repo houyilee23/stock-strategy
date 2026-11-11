@@ -1,0 +1,20 @@
+# GitHub Pages only needs the generated static site in the repository root and
+# stock/.  Keeping data, reports, logs, and development sources out of the
+# Pages artifact makes deployments small and avoids deployment-sync timeouts.
+exclude:
+  - .claude
+  - _xlsx_scripts
+  - archive
+  - config
+  - data
+  - docs
+  - logs
+  - output
+  - scripts
+  - src
+  - tests
+  - trash
+  - CLAUDE.md
+  - README.md
+  - main.py
+  - requirements.txt
