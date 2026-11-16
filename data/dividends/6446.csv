@@ -1,1 +1,7 @@
-﻿
+﻿date,stock_id,year,StockEarningsDistribution,StockStatutorySurplus,StockExDividendTradingDate,TotalEmployeeStockDividend,TotalEmployeeStockDividendAmount,RatioOfEmployeeStockDividendOfTotal,RatioOfEmployeeStockDividend,CashEarningsDistribution,CashStatutorySurplus,CashExDividendTradingDate,CashDividendPaymentDate,TotalEmployeeCashDividend,TotalNumberOfCashCapitalIncrease,CashIncreaseSubscriptionRate,CashIncreaseSubscriptionpRrice,RemunerationOfDirectorsAndSupervisors,ParticipateDistributionOfTotalShares,AnnouncementDate,AnnouncementTime
+2016-02-06,6446,104年,0.0,0.0,2016-01-30,0.0,0.0,0.0,0.0,0.0,0.0,,,0.0,5000000.0,2.362089099,150.0,0.0,0.0,2016-01-20,15:17:25
+2020-07-25,6446,不適用,0.0,0.0,2020-07-17,0.0,0.0,0.0,0.0,0.0,0.0,,,0.0,22000000.0,7.296754066,102.0,0.0,241203141.0,2020-07-10,17:13:00
+2022-10-02,6446,不適用,0.0,0.0,2022-09-26,0.0,0.0,0.0,0.0,0.0,0.0,,,0.0,16700000.0,4.397025749,408.0,0.0,284851641.0,2022-09-20,12:50:48
+2025-08-17,6446,113年,0.0,0.0,,0.0,0.0,0.0,0.0,1.09838566,0.0,2025-08-11,2025-09-05,0.0,0.0,0.0,0.0,0.0,333371641.0,2025-07-25,17:10:31
+2025-09-17,6446,113年,1.0973093234,0.0,2025-09-11,0.0,0.0,0.0,0.0,0.0,0.0,,,0.0,0.0,0.0,0.0,0.0,333698641.0,2025-08-27,16:48:25
+2026-07-15,6446,114年,1.0927783862,0.0,2026-07-09,0.0,0.0,0.0,0.0,1.49015235,0.0,2026-07-09,2026-08-06,0.0,0.0,0.0,0.0,0.0,373606703.0,2026-06-25,17:37:52
